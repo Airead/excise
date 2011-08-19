@@ -1,0 +1,85 @@
+(show-paren-mode 1)
+(global-linum-mode 1)
+(global-set-key [(f5)] 'gud-go)
+(add-hook 'gdb-mode-hook '(lambda ()
+			    (define-key c-mode-base-map [(f5)] 'gud-go)
+                            (define-key c-mode-base-map [(f7)] 'gud-step)
+                            (define-key c-mode-base-map [(f8)] 'gud-next)))
+
+(defun linux-c-mode ()
+  "C mode with adjusted defaults for use with the Linux kernel."
+  (interactive)
+  (c-mode)
+  (c-set-style "K&R")
+  (setq tab-width 8)
+  (setq indent-tabs-mode t)
+  (setq c-basic-offset 8))
+(add-to-list 'auto-mode-alist '("\.c$" . linux-c-mode))
+
+(add-to-list 'load-path "/usr/share/emacs/extension" t)
+(require 'smart-compile)
+(global-set-key (kbd "<f9>") 'smart-compile)
+(put 'dired-find-alternate-file 'disabled nil)
+
+(require 'color-theme)
+(color-theme-gnome2)
+
+
+
+(add-to-list 'load-path "/home/airead/cedet/common" t)
+;;CEDET相关
+(require 'cedet)
+(require 'semantic-ia)
+(semantic-load-enable-minimum-features)
+(semantic-load-enable-code-helpers)
+(semantic-load-enable-guady-code-helpers)
+(semantic-load-enable-excessive-code-helpers)
+(semantic-load-enable-semantic-debugging-helpers)
+(global-set-key [f12] 'semantic-ia-fast-jump)
+(global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)
+(require 'semantic-tag-folding nil 'noerror)
+(global-semantic-tag-folding-mode 1)
+(global-set-key (kbd "C-?") 'global-semantic-tag-folding-mode)
+  (define-key semantic-tag-folding-mode-map (kbd "C-c , -") 'semantic-tag-folding-fold-block)
+  (define-key semantic-tag-folding-mode-map (kbd "C-c , +") 'semantic-tag-folding-show-block)
+  (define-key semantic-tag-folding-mode-map (kbd "C-_") 'semantic-tag-folding-fold-all)
+  (define-key semantic-tag-folding-mode-map (kbd "C-+") 'semantic-tag-folding-show-all)
+
+
+;; orgmode
+(add-to-list 'load-path "/home/airead/org") 
+ (require 'org)                                   
+ (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+ (add-hook 'org-mode-hook 'turn-on-font-lock);;ont need when global-font-lock-mode is on
+ (define-key global-map "\C-cl" 'org-store-link)
+ (define-key global-map "\C-ca" 'org-agenda)
+ (define-key global-map "\C-cb" 'org-iswitchb)
+ (setq org-log-done t) 
+;;自动换行
+(add-hook 'org-mode-hook
+    (lambda () (setq truncate-lines nil)))
+
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(org-agenda-files nil))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+
+
+;;latex pdf
+
+(require 'org-latex)
+(unless (boundp 'org-export-latex-classes)
+  (setq org-export-latex-classes nil))
+(add-to-list 'org-export-latex-classes
+             '("article"
+               "\\documentclass{article}"
+               ("\\section{%s}" . "\\section*{%s}")))  
