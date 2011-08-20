@@ -30,10 +30,10 @@
 ;;CEDET相关
 (require 'cedet)
 (require 'semantic-ia)
-(semantic-load-enable-minimum-features)
+;;(semantic-load-enable-minimum-features)
 (semantic-load-enable-code-helpers)
-(semantic-load-enable-guady-code-helpers)
-(semantic-load-enable-excessive-code-helpers)
+;;(semantic-load-enable-guady-code-helpers)
+;;(semantic-load-enable-excessive-code-helpers)
 (semantic-load-enable-semantic-debugging-helpers)
 (global-set-key [f12] 'semantic-ia-fast-jump)
 (global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)
@@ -83,3 +83,55 @@
              '("article"
                "\\documentclass{article}"
                ("\\section{%s}" . "\\section*{%s}")))  
+
+(require 'recentf)
+(recentf-mode 1)
+; 启用最近文件列表
+
+(mouse-avoidance-mode 'animate);光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线。很好玩阿，这个功能
+(setq mouse-yank-at-point t);支持中键粘贴
+(transient-mark-mode t);这个忘了，郁闷！
+(setq x-select-enable-clipboard t);支持emacs和外部程序的粘贴
+(setq frame-title-format "Lear@%b");在标题栏提示你目前在什么位置。你要把zhan改成自己的用户名
+(setq frame-title-format;设置标题栏显示文件的完整路径名
+'("%S" (buffer-file-name "%f"
+(dired-directory dired-directory "%b"))))
+
+
+;;tabbar
+(require 'tabbar)
+(tabbar-mode)
+(global-set-key (kbd "") 'tabbar-backward-group)
+(global-set-key (kbd "") 'tabbar-forward-group)
+(global-set-key [M-left] 'tabbar-backward)
+(global-set-key [M-right] 'tabbar-forward)
+
+(require 'session)
+  (add-hook 'after-init-hook 'session-initialize)
+
+(load "desktop") 
+(desktop-load-default) 
+(desktop-read)
+
+(require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(setq hippie-expand-try-functions-list 
+      '(try-expand-dabbrev
+    try-expand-dabbrev-visible
+    try-expand-dabbrev-all-buffers
+    try-expand-dabbrev-from-kill
+    try-complete-file-name-partially
+    try-complete-file-name
+    try-expand-all-abbrevs
+    try-expand-list
+    try-expand-line
+    try-complete-lisp-symbol-partially
+    try-complete-lisp-symbol))
+
+(require 'ctypes)
+(ctypes-auto-parse-mode 1)
+
+(setq inhibit-startup-message t)
+
+(setq default-fill-column 80);默认显示 80列就换行
