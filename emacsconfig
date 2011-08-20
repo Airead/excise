@@ -1,8 +1,130 @@
-(show-paren-mode 1)
-(global-linum-mode 1)
+;;color theme
+(require 'color-theme)
+(color-theme-gnome2)
+
+;;session
+;;(add-to-list 'load-path "/usr/share/emacs/extension/")
+(require 'session)
+  (add-hook 'after-init-hook 'session-initialize)
+
+(load "desktop") 
+(desktop-load-default) 
+(desktop-read)
+
+(require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(require 'ido)
+(ido-mode t)
+
+;;swbuff
+(add-to-list 'load-path "/usr/share/emacs/extension/")
+(require 'swbuff)
+(global-set-key (kbd "") 'swbuff-switch-to-previous-buffer)
+(global-set-key (kbd "") 'swbuff-switch-to-next-buffer)
+(setq swbuff-exclude-buffer-regexps 
+     '("^ " "\\*.*\\*"))
+(setq swbuff-status-window-layout 'scroll)
+(setq swbuff-clear-delay 1)
+(setq swbuff-separator "|")
+(setq swbuff-window-min-text-height 1)
+
+(require 'tabbar)
+(tabbar-mode)
+(global-set-key [M-up] 'tabbar-backward-group)
+(global-set-key [M-down] 'tabbar-forward-group)
+(global-set-key [M-left] 'tabbar-backward)
+(global-set-key [M-right] 'tabbar-forward)
+
+(global-set-key (kbd "<f6>") 'speedbar)
+
+(require 'recentf)
+(recentf-mode 1)
+(defun recentf-open-files-compl ()
+  (interactive)
+  (let* ((all-files recentf-list)
+     (tocpl (mapcar (function 
+	     (lambda (x) (cons (file-name-nondirectory x) x))) all-files))
+     (prompt (append '("File name: ") tocpl))
+     (fname (completing-read (car prompt) (cdr prompt) nil nil)))
+    (find-file (cdr (assoc-ignore-representation fname tocpl))))) 
+(global-set-key [(control x)(control r)] 'recentf-open-files-compl)
+
+(global-set-key [(meta ?/)] 'hippie-expand)
+(setq hippie-expand-try-functions-list 
+      '(try-expand-dabbrev
+    try-expand-dabbrev-visible
+    try-expand-dabbrev-all-buffers
+    try-expand-dabbrev-from-kill
+    try-complete-file-name-partially
+    try-complete-file-name
+    try-expand-all-abbrevs
+    try-expand-list
+    try-expand-line
+    try-complete-lisp-symbol-partially
+    try-complete-lisp-symbol))
+
+;;mark
+(global-set-key [(control ?\.)] 'ska-point-to-register)
+(global-set-key [(control ?\,)] 'ska-jump-to-register)
+(defun ska-point-to-register()
+  "Store cursorposition _fast_ in a register. 
+Use ska-jump-to-register to jump back to the stored 
+position."
+  (interactive)
+  (setq zmacs-region-stays t)
+  (point-to-register 8))
+
+(defun ska-jump-to-register()
+  "Switches between current cursorposition and position
+that was stored with ska-point-to-register."
+  (interactive)
+  (setq zmacs-region-stays t)
+  (let ((tmp (point-marker)))
+        (jump-to-register 8)
+	(set-register 8 tmp)))
+
+(defun wy-go-to-char (n char)
+  "Move forward to Nth occurence of CHAR.
+Typing `wy-go-to-char-key' again will move forwad to the next Nth
+occurence of CHAR."
+  (interactive "p\ncGo to char: ")
+  (search-forward (string char) nil nil n)
+  (while (char-equal (read-char)
+	     char)
+    (search-forward (string char) nil nil n))
+  (setq unread-command-events (list last-input-event)))
+(define-key global-map (kbd "C-c a") 'wy-go-to-char)
+
+(require 'ctypes)
+(ctypes-auto-parse-mode 1)
+
+;;simple happy config
+(setq visible-bell t)
+(setq inhibit-startup-message t)
+(setq column-number-mode t) 
+(setq mouse-yank-at-point t)
+(setq kill-ring-max 200)
+(setq default-fill-column 80)
+(setq scroll-margin 3
+      scroll-conservatively 10000)
+(show-paren-mode t)
+(setq show-paren-style 'parentheses)
+(mouse-avoidance-mode 'animate)
+(setq frame-title-format "emacs@%b")
+(auto-image-file-mode)
+(global-font-lock-mode t)
+(put 'set-goal-column 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'LaTeX-hide-environment 'disabled nil)
+(setq user-full-name "Airead Fan")
+(setq user-mail-address "fgh1987168@gmail.com")
+
 (global-set-key [(f5)] 'gud-go)
 (add-hook 'gdb-mode-hook '(lambda ()
-			    (define-key c-mode-base-map [(f5)] 'gud-go)
+	        (define-key c-mode-base-map [(f5)] 'gud-go)
                             (define-key c-mode-base-map [(f7)] 'gud-step)
                             (define-key c-mode-base-map [(f8)] 'gud-next)))
 
@@ -21,31 +143,6 @@
 (global-set-key (kbd "<f9>") 'smart-compile)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(require 'color-theme)
-(color-theme-gnome2)
-
-
-
-(add-to-list 'load-path "/home/airead/cedet/common" t)
-;;CEDET相关
-(require 'cedet)
-(require 'semantic-ia)
-;;(semantic-load-enable-minimum-features)
-(semantic-load-enable-code-helpers)
-;;(semantic-load-enable-guady-code-helpers)
-;;(semantic-load-enable-excessive-code-helpers)
-(semantic-load-enable-semantic-debugging-helpers)
-(global-set-key [f12] 'semantic-ia-fast-jump)
-(global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)
-(require 'semantic-tag-folding nil 'noerror)
-(global-semantic-tag-folding-mode 1)
-(global-set-key (kbd "C-?") 'global-semantic-tag-folding-mode)
-  (define-key semantic-tag-folding-mode-map (kbd "C-c , -") 'semantic-tag-folding-fold-block)
-  (define-key semantic-tag-folding-mode-map (kbd "C-c , +") 'semantic-tag-folding-show-block)
-  (define-key semantic-tag-folding-mode-map (kbd "C-_") 'semantic-tag-folding-fold-all)
-  (define-key semantic-tag-folding-mode-map (kbd "C-+") 'semantic-tag-folding-show-all)
-
-
 ;; orgmode
 (add-to-list 'load-path "/home/airead/org") 
  (require 'org)                                   
@@ -59,79 +156,10 @@
 (add-hook 'org-mode-hook
     (lambda () (setq truncate-lines nil)))
 
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(org-agenda-files nil))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
-
-
-;;latex pdf
-
-(require 'org-latex)
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-             '("article"
-               "\\documentclass{article}"
-               ("\\section{%s}" . "\\section*{%s}")))  
-
-(require 'recentf)
-(recentf-mode 1)
-; 启用最近文件列表
-
-(mouse-avoidance-mode 'animate);光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线。很好玩阿，这个功能
-(setq mouse-yank-at-point t);支持中键粘贴
-(transient-mark-mode t);这个忘了，郁闷！
-(setq x-select-enable-clipboard t);支持emacs和外部程序的粘贴
-(setq frame-title-format "Lear@%b");在标题栏提示你目前在什么位置。你要把zhan改成自己的用户名
-(setq frame-title-format;设置标题栏显示文件的完整路径名
-'("%S" (buffer-file-name "%f"
-(dired-directory dired-directory "%b"))))
-
-
-;;tabbar
-(require 'tabbar)
-(tabbar-mode)
-(global-set-key (kbd "") 'tabbar-backward-group)
-(global-set-key (kbd "") 'tabbar-forward-group)
-(global-set-key [M-left] 'tabbar-backward)
-(global-set-key [M-right] 'tabbar-forward)
-
-(require 'session)
-  (add-hook 'after-init-hook 'session-initialize)
-
-(load "desktop") 
-(desktop-load-default) 
-(desktop-read)
-
-(require 'ibuffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-(setq hippie-expand-try-functions-list 
-      '(try-expand-dabbrev
-    try-expand-dabbrev-visible
-    try-expand-dabbrev-all-buffers
-    try-expand-dabbrev-from-kill
-    try-complete-file-name-partially
-    try-complete-file-name
-    try-expand-all-abbrevs
-    try-expand-list
-    try-expand-line
-    try-complete-lisp-symbol-partially
-    try-complete-lisp-symbol))
-
-(require 'ctypes)
-(ctypes-auto-parse-mode 1)
-
-(setq inhibit-startup-message t)
-
-(setq default-fill-column 80);默认显示 80列就换行
+;;CEDET
+(add-to-list 'load-path "/home/airead/cedet/common" t)
+(require 'cedet)
+(require 'semantic-ia)
+(semantic-load-enable-code-helpers)
+(semantic-load-enable-semantic-debugging-helpers)
+(global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)
