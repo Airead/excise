@@ -181,3 +181,22 @@ occurence of CHAR."
 (global-set-key (kbd "C-c m") 'insert-main)
 
 (global-set-key (kbd "M-]") 'delete-blank-lines)
+
+(defun insert-author ()
+  "Insert author and date"
+  (interactive)
+  (insert "/********************************************************\n")
+  (insert " * @author  Airead Fan <fgh1987168@gmail.com>\t\t*\n")
+  (insert " * @date    ")
+  (insert (format-time-string "%Y%b %d %H:%M:%S %Z\t\t\t*" (current-time)))
+  (insert "\n")
+  (insert " ********************************************************\n")
+  (insert " *\t\tafter studying C ")
+  (insert (format "%d " (- (time-to-days (current-time)) (time-to-days (encode-time 0 0 0 18 7 2011 +0800)))))
+  (insert "days\t\t*\n")
+  (insert " *\t\tafter studying APUE ")
+  (insert (format "%d " (- (time-to-days (current-time)) (time-to-days (encode-time 0 0 0 22 8 2011 +0800)))))
+  (insert "days\t\t*\n")
+  (insert " ********************************************************/\n")
+  )
+(global-set-key (kbd "C-c c") 'insert-author)
