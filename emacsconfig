@@ -1,3 +1,5 @@
+(global-linum-mode 1)
+
 ;;color theme
 (require 'color-theme)
 (color-theme-gnome2)
@@ -31,10 +33,10 @@
 
 (require 'tabbar)
 (tabbar-mode)
-(global-set-key [M-up] 'tabbar-backward-group)
-(global-set-key [M-down] 'tabbar-forward-group)
-(global-set-key [M-left] 'tabbar-backward)
-(global-set-key [M-right] 'tabbar-forward)
+(global-set-key [s-up] 'tabbar-backward-group)
+(global-set-key [s-down] 'tabbar-forward-group)
+(global-set-key [s-left] 'tabbar-backward)
+(global-set-key [s-right] 'tabbar-forward)
 
 (global-set-key (kbd "<f6>") 'speedbar)
 
@@ -94,7 +96,7 @@ occurence of CHAR."
 	     char)
     (search-forward (string char) nil nil n))
   (setq unread-command-events (list last-input-event)))
-(define-key global-map (kbd "C-c a") 'wy-go-to-char)
+(define-key global-map (kbd "C-c f") 'wy-go-to-char)
 
 (require 'ctypes)
 (ctypes-auto-parse-mode 1)
@@ -163,3 +165,19 @@ occurence of CHAR."
 (semantic-load-enable-code-helpers)
 (semantic-load-enable-semantic-debugging-helpers)
 (global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)
+
+(setq comment-style 'multi-line)
+
+
+(defun insert-main ()
+  "Insert head and main"
+  (interactive)
+  (insert "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>
+#include <errno.h>\n#include <fcntl.h>\n#include <unistd.h>
+#include <sys/types.h>\n#include <sys/stat.h>\n\nint main(int argc, char *argv[])
+{\n\n}")
+  (backward-char 2)
+)
+(global-set-key (kbd "C-c m") 'insert-main)
+
+(global-set-key (kbd "M-]") 'delete-blank-lines)
