@@ -1,0 +1,229 @@
+#+OPTIONS: ^:{}
+
+* UNIX basic 
+** deal error
+   [[file:strerror.c][strerror() and perror()]]
+** UNIX standard and limit
+   [[file:sysconf.c][sysconf()]]
+* File I/O 
+** create a file
+*** [[file:creatfile.c]]
+** 操作文件描述符
+*** Atomic Operations
+    - it is different between lseek(fd, 0, SEEK_END) and O_APPEND
+*** DONE fcntl()
+    CLOSED: [2011-08-23 二 21:48]
+    [[file:fcntl.c]]
+*** DONE 描述符的复制问题
+    CLOSED: [2011-08-23 二 23:14]
+*** 使用nfcntl(f_dupfd)
+    - 得到的描述符不小于传入的arg参数(结果大于或等于arg参数的可用描述符)
+    - [[file:fgetfl.c]]
+*** DONE copy file descriptor
+    CLOSED: [2011-08-23 二 22:28]
+    - if oldfd lseek, affact newfd or not
+    - if newfd write operation, affact oldfd or not
+    - if newfd read operation, affact oldfd or not
+    - [[file:dupfd.c]]
+*** dup() / dup2()
+    - dup() 得到的描述符是顺序分配的，可用的最小的描述符，跟open的分配机制相同
+    - dup2() 得到的是指定的描述符(很有用,在重定向上,不显示密码)
+    - [[file:dup.c][fcntl(f_dupfd), dup(), dups()]]
+    - 标准输出接管 [[file:redirec.c][redirect.c]], 接管后如何还原?DONE
+*** TODO 输入密码不显示 [[file:hidepwd.c]]
+    method error, how to?
+    关闭回显就行了
+
+*** fork()实现描述符的复制
+    - 在子进程中，得到的与父进程值相等的描述符
+** ioctl()
+   - get window size
+** 共享问题(important)
+*** File Descriptor flags 不共享
+*** File satus flags 共享，本质是复制的fd 指向同一个fd
+*** (File offset, position) 在复制的文件描述符之间是共享的
+** 管理信号(Managing signals)
+** mmap() [了解它]
+   - 访问内存方式访问文件
+   - 实现共享内存 POSIX(IPC or user | kenerl) 
+*** TODO mmap怎么用 
+    - [[file:mmap.c]]
+** I/O 模型比较
+
+** Linux System Programing - file and directory
+** stat() / fstat() / lstat()
+*** 规律
+    - stat()也就是不是以f或者l开头的函数，使用的是文件名作为第一个参数，传入符号连接，处理的是最终符号连接的文件
+    - fstat()也就是以f开头，使用的是文件描述符
+    - lstat()也就是以l开头，处理的是符号连接本身
+    - [[file:stat.c]]
+** file permisson check(important！)
+*** TODO 完全理解 file permisson
+*** chmod() / chown()
+    - chmod() 条件
+      - [ ] 使用有效组ID能不能chmod
+	[[file:chmod_test.c]] (进制转换 strtol(3))
+    - chown() 条件
+      - 只有特权进程才可以改变文件的owner，通常来说是root
+      - 文件的owner所启动的进程可以改变文件的组所有者关系，将文件的组所有者在owner所属的组之间改变。
+
+*** TODO 实现一个mv命令
+*** TODO 实现一个rm命令
+*** TODO 实现一个ls命令
+*** 
+* 其它
+** 变量命名
+*** 作用域_单元名_变量用途
+    - int gobal_net_xxx
+    - 局部作用域的变量可以短一些
+    - 如果局部变量使用范围喊声越多个％％％的时候，也不能太短
+** TODO ldd <filename> 查看链接哪个库
+   找binutils
+   - 了解链接的一些过程
+   - 了解静态库、共享库的情况
+   - 了解如何我作静态库
+   - 了解如何我作共享库
+   - 了解如何链接静态库
+   - 了解如何链接共享库
+   - 了解如何动态的加载共享库，并调用共享库存的函数
+   - 了解共享库的路径文件
+     - 配置文件 /etc/ld.so.conf
+     - ldconfig命令
+** DONE string library study
+   CLOSED: [2011-08-26 五 23:01]
+    - 环境变量LD_LIBRARY_PATH
+   - file:strncat.c 
+     include `strncpy' funciton
+   - file:strchr.c
+     include `strrchr' function
+   - file:strcmp.c
+     include `strncmp' function
+   - strcoll
+     according to method of current country
+   - file:strspn.c
+     include strcspn
+   - file:strerror.c
+   - file:strftime.c
+   - file:strpbrk.c
+   - file:strstr.c
+   - [[file:strtol.c]]
+     include `strtod' `strtof' `strtoul' etc...
+*** TODO file:strtok.c
+    这个还没有完成， 不太好用啊！
+** TODO 自己分区
+***  fdisk mkfs e2label dumpe2fs debugfs fsck
+** DONE 如何持续高亮
+   CLOSED: [2011-08-25 四 20:46]
+   google highlight-symbol.el
+* Excise
+** Files and Directories
+*** Introduction
+    We'll start with the stat functions and go through each member of the stat structure, looking at all the attributes of a file.
+*** stat, fstat, and lstat Functions
+    - [[file:excise/stat.c]]
+    - [[file:excise/fstat.c]]
+    - [[file:excise/lstat.c]]
+*** File Types
+    The type of a file is encoded in the `st_mode' member of the `stat' structure;
+**** File type macros in <sys/stat.h>
+     | Macro         | Type of file           | Example                   |
+     |---------------+------------------------+---------------------------|
+     | S_ISREG()     | regular file           | hello.c                   |
+     | S_ISDIR()     | directoryfile          | /                         |
+     | S_ISCHR()     | character special file | stdin/stdout              |
+     | S_ISBLK()     | block special file     | disk drives               |
+     | S_ISFIFO()    | pipe or FIFO           | named pipe                |
+     | S_ISLNK()     | symbolic link          | create by "$ ln -s"       |
+     | S_ISSOCK      | socket                 | for network communication |
+     | S_TYPEISMQ()  | message queue          |                           |
+     | S_TYPEISSEM() | semaphore              |                           |
+     | S_TYPEISSHM   | shared memory object   |                           |
+     
+     - [[file:excise/print_file_type.c]]
+
+*** Set-User-ID and Set-Group-ID
+    Every process has six or more IDs associated with it.
+    |                         | User IDs and group IDs associated with each process |
+    |-------------------------+-----------------------------------------------------|
+    | real user ID            | who we really are                                   |
+    | real group ID           |                                                     |
+    |-------------------------+-----------------------------------------------------|
+    | effective user ID       | used for file access permission checks              |
+    | effective group ID      |                                                     |
+    | supplementary group IDs |                                                     |
+    |-------------------------+-----------------------------------------------------|
+    | saved set-user-ID       | saved by `exec' function                            |
+    | saved set-group-ID      |                                                     | 
+
+*** File Access Permission
+    The `st_mode' value also encodes the access permission bits for the file. for example, its value is 0100755. 0755 means rwxr-xr-x.
+    It's most important to understand that the kernel how to check permission!
+
+*** Ownership of New Files and Directories
+    
+*** access Function
+    the access function bases its tests on the real user and group IDs.
+    | mode | Description                 |
+    | R_OK | test for read permission    |
+    | W_OK | test for write permission   |
+    | X_OK | test for execute permission |
+    | F_OK | test for existence of file  | 
+    - [[file:excise/access.c]]
+
+*** umask Function
+    The file mode creation mask(umask) is used whenever the process creates a new file or a new directory.
+    - [[file:excise/umask.c]]  
+      this umask test function can't work well. 
+    - [[file:excise/umask1.c]]
+      this umask test function can work well.
+    - [[file:excise/umask2.c]]
+      this umask test function can work well. why doesn't the fisrt work well? beause the brackets is at wrong positon. it takes my one more hours to find it, I am very unhappy!
+*** chmod and fchmod Functions
+    These two functions allow us to change the file access permission for an existing file.
+    - [[file:excise/chmod.c]]
+    - [[file:excise/fchmod.c]]
+    NOTE: 
+    - To change the permission bits of a file, the effective user ID of the process must be equal to the owner ID of the file, or the process must have superuser permissions.
+    - The `chmod' function automatically clear two of the permission bits under the following conditions.
+*** Sticky Bit
+    example: /tmp
+*** chown, fchown, and lchown Functions
+    - [[file:excise/chown.c]]
+    - `fchown' and `lchown' to refer to `fstat.c' and `lstat.c'.
+    NOTE: 
+    - Only a superuser process can change the user ID of the file.
+    - A nonsuperuser process can change the group ID of the file if the process owns the file(the effective user ID equals the user ID of the file), owner is specified as -1 or equals the user ID of the file, and group equals either the effective group ID of the process or one of the process's supplementary group IDs.
+*** File Size
+    The `st_size' member of the stat structure contains the size of the file in bytes. This field is meaningful only for regular files, directories, and symbolic links.
+**** Holes in a File
+*** File Truncation
+    - [[file:excise/truncate.c]]
+    - `ftruncate' to refer to `fstat.c'
+*** File Systems
+*** link, unlink, remove, and rename Functions
+    - [[file:excise/link.c]]
+    - [[file:excise/unlink.c]]
+    - [[file:excise/remove.c]]
+    - file:excise/rename.c
+*** Symbolic Link
+*** symlink and readlink Functions
+    - file:excise/symlink.c
+    - file:excise/readlink.c
+*** File Times
+    | Field    | Description              | Example | ls(1) option |
+    |----------+--------------------------+---------+--------------|
+    | st_atime | last-access              | read    | -u           |
+    | st_mtime | last-modification        | write   | default      |
+    | st_ctime | last-change inode status |         |              |
+    - file:excise/get_file_time.c
+
+*** utime Function
+    The access time and the modification time of a file can be changed with the function.
+    - file:excise/utime.c
+
+*** mkdir and rmdir Function
+    - file:excise/mkdir.c
+    - file:excise/rmdir.c
+
+*** Reading Directories
+    - 
