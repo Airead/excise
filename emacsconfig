@@ -35,8 +35,8 @@
 (tabbar-mode)
 (global-set-key [s-up] 'tabbar-backward-group)
 (global-set-key [s-down] 'tabbar-forward-group)
-(global-set-key [s-left] 'tabbar-backward)
-(global-set-key [s-right] 'tabbar-forward)
+(global-set-key (kbd "C-:") 'tabbar-backward)
+(global-set-key (kbd "C-\"") 'tabbar-forward)
 
 (global-set-key (kbd "<f6>") 'speedbar)
 
@@ -130,6 +130,7 @@ occurence of CHAR."
                             (define-key c-mode-base-map [(f7)] 'gud-step)
                             (define-key c-mode-base-map [(f8)] 'gud-next)))
 
+;;linux kernel style
 (defun linux-c-mode ()
   "C mode with adjusted defaults for use with the Linux kernel."
   (interactive)
@@ -139,6 +140,7 @@ occurence of CHAR."
   (setq indent-tabs-mode t)
   (setq c-basic-offset 8))
 (add-to-list 'auto-mode-alist '("\.c$" . linux-c-mode))
+(add-to-list 'auto-mode-alist '("\.h$" . linux-c-mode))
 
 (add-to-list 'load-path "/usr/share/emacs/extension" t)
 (require 'smart-compile)
@@ -162,8 +164,12 @@ occurence of CHAR."
 (add-to-list 'load-path "/home/airead/cedet/common" t)
 (require 'cedet)
 (require 'semantic-ia)
+(semantic-load-enable-minimum-features)
 (semantic-load-enable-code-helpers)
-(semantic-load-enable-semantic-debugging-helpers)
+;;(semantic-load-enable-semantic-debugging-helpers)
+;;(semantic-load-enable-guady-code-helpers)
+;;(semantic-load-enable-excessive-code-helpers)
+
 (global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)
 
 (setq comment-style 'multi-line)
@@ -255,3 +261,17 @@ occurence of CHAR."
    '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;;Highlight end
+
+;;player mp3
+(add-to-list 'load-path "/usr/share/emacs/extension/emms/lisp/")
+(require 'emms-setup)
+(emms-standard)
+(emms-default-players)
+
+(add-to-list 'load-path "/usr/share/emacs/extension/" t)
+(require 'silentcomp)
+;;ECB
+(add-to-list 'load-path "/usr/share/emacs/extension/ecb/" t)
+(require 'ecb-autoloads)
+(require 'ecb)
