@@ -29,5 +29,7 @@ int main(void)
 	//int strncmp(const char *s1, const char *s2, size_t n);
 	fprintf(stdout, "strcmp result: %d\n", strncmp(str1, str2, 2));
 
+	//!fprintf(stdout, "strcmp NULL: %d\n", strcmp(NULL, str1));  SIGSEGV error
+
 	return 0;
 }

@@ -1,14 +1,14 @@
 /********************************************************
  * @author  Airead Fan <fgh1987168@gmail.com>		*
- * @date    2011 8月 27 11:48:03 CST			*
+ * @date    2011 9月 06 11:56:52 CST			*
  ********************************************************
- *		after studying C 40 days		*
- *		after studying APUE 5 days		*
+ *		after studying C 50 days		*
+ *		after studying APUE 15 days		*
  ********************************************************/
 
 /*
  * This program demonstrates function
- * long sysconf(int name);
+ * int execl(const char *path, const char *arg, ...);
  */
 
 #include <stdio.h>
@@ -20,15 +20,18 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-void print_config(char *sname,int iname);
-
 int main(int argc, char *argv[])
 {
-	print_config("LINE_MAX", _SC_LINE_MAX);
-	print_config("CLK_TCK", _SC_CLK_TCK);
-}
+	if(argc < 2){
+		fprintf(stderr, "usage: %s <elfname>\n", argv[0]);
+		exit(1);
+	}
+	
+	//int execl(const char *path, const char *arg, ...);
+	if(execl(argv[1], argv[1], "-l", NULL) < 0){
+		fprintf(stdout, "execl %s failed: %s\n", argv[1], strerror(errno));
+		exit(1);
+	}
 
-void print_config(char *sname, int iname)
-{
-	fprintf(stdout, "%s: %ld\n", sname, sysconf(iname));
+	return 0;
 }

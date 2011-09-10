@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 
 	size = BUFSIZE - 1 - strlen(dest);
 	//char *strncat(char *dest, const char *src, size_t n);
+	//!strncat(dest, src, -1); in fact, -1 is 0xffffffff(INT_MAX)
 	strncat(dest, src, size);
 	
 	fprintf(stdout, "src string: %s\n", src);

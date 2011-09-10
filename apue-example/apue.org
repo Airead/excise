@@ -30,6 +30,7 @@
     - dup2() 得到的是指定的描述符(很有用,在重定向上,不显示密码)
     - [[file:dup.c][fcntl(f_dupfd), dup(), dups()]]
     - 标准输出接管 [[file:redirec.c][redirect.c]], 接管后如何还原?DONE
+    - 标准输入接管 file:redirectin.c
 *** TODO 输入密码不显示 [[file:hidepwd.c]]
     method error, how to?
     关闭回显就行了
@@ -68,9 +69,28 @@
       - 文件的owner所启动的进程可以改变文件的组所有者关系，将文件的组所有者在owner所属的组之间改变。
 
 *** TODO 实现一个mv命令
+    - file:mv.c
+      - 出现`Device or resource busy'错误
+      - file:mv1.c 看为什么会出现那个EBUSY错误
 *** TODO 实现一个rm命令
-*** TODO 实现一个ls命令
+    利用getopt, getopt_long, gengetopt等
+*** DONE 实现一个ls命令
+    CLOSED: [2011-08-27 六 19:32]
+     - file:ls.c
 *** 
+* Linux系统编程-进程
+** 进程介绍
+** 进程环境
+*** 环境表/环境变量(important)
+    gatenv/putenv/setenv function
+** 进程控制
+** 子进程从父进程继承的信息(important)
+** 
+** 
+** 
+** 
+* 线程
+** 两大文档
 * 其它
 ** 变量命名
 *** 作用域_单元名_变量用途
@@ -92,22 +112,23 @@
 ** DONE string library study
    CLOSED: [2011-08-26 五 23:01]
     - 环境变量LD_LIBRARY_PATH
-   - file:strncat.c 
-     include `strncpy' funciton
-   - file:strchr.c
-     include `strrchr' function
-   - file:strcmp.c
-     include `strncmp' function
-   - strcoll
-     according to method of current country
-   - file:strspn.c
-     include strcspn
-   - file:strerror.c
-   - file:strftime.c
-   - file:strpbrk.c
-   - file:strstr.c
-   - [[file:strtol.c]]
-     include `strtod' `strtof' `strtoul' etc...
+    - file:strncat.c 
+      include `strncpy' funciton
+    - 
+    - file:strchr.c
+      include `strrchr' function
+    - file:strcmp.c
+      include `strncmp' function
+    - strcoll
+      according to method of current country
+    - file:strspn.c
+      include strcspn
+    - file:strerror.c
+    - file:strftime.c
+    - file:strpbrk.c
+    - file:strstr.c
+    - [[file:strtol.c]]  file:ipo.c
+      include `strtod' `strtof' `strtoul' etc...
 *** TODO file:strtok.c
     这个还没有完成， 不太好用啊！
 ** TODO 自己分区
@@ -115,6 +136,15 @@
 ** DONE 如何持续高亮
    CLOSED: [2011-08-25 四 20:46]
    google highlight-symbol.el
+** TODO 状态机编程思想
+** TODO CGI(Common G Interface)
+** TODO 国际化和本地化
+** TODO 学习GDB
+** TODO 函数栈桢(stack frame)
+** TODO va_start
+** TODO 离散数学
+** TODO 红黑树
+** TODO 并行编程
 * Excise
 ** Files and Directories
 *** Introduction
@@ -226,4 +256,174 @@
     - file:excise/rmdir.c
 
 *** Reading Directories
-    - 
+    - file:excise/readdir.c
+    - file:excise/readdir_r.c
+
+*** chdir, fchdir, and getcwd Function
+    - file:excise/chdir.c
+      include `getcwd'
+*** Device Special Files
+    - file:excise/print_dev.c
+    come from APUE, and it can not work in my system(Linux <username> 2.6.32-33-generic #70-Ubuntu SMP Thu Jul 7 21:09:46 UTC 2011 i686 GNU/Linux)
+    
+** System Data Files and Information
+*** Introduction
+    The portable interfaces to these data files are the subject of this chapter. We also cover the system identification functions and the time and date functions.
+*** Password File
+    | Description                  | struct passwd member |
+    |------------------------------+----------------------|
+    | user name                    | char *pw_name        |
+    | encrypted password           | char *pw_passwd      |
+    | numerical user ID            | uid_t pw_uid         |
+    | numerical group ID           | gid_t pw_gid         |
+    | comment field                | char *pw_gecos       |
+    | initial working directory    | char *pw_dir         |
+    | inital shell(user program    | char *pw_shell       |
+    | user access class            | char *pw_class       |
+    | next time to change password | time_t pw_change     |
+    | account expiratoin time      | time_t pw_expire     |
+
+    - for example:
+      root:x:0:0:root:/root:/bin/bash
+      squid:x:23:23::/var/spool/squid:/dev/null
+      nobody:x:65534:65534:Nobody:/home:/bin/sh
+      sar:x:205:105:Stephen Rago:/home/sar:/bin/bash
+    - file:excise/getpwuid.c
+    - file:excise/getpwnam.c
+    - file:excise/getpwent.c
+*** Shadow Passwords
+    | Description                              | struct spwd member |
+    | user login name                          | char *sp_namp      |
+    | encrypted password                       | char *sp_pwdp      |
+    | days since Epoch of last password change | int sp_lstchg      |
+    | days until change allowed                | int sp_max         |
+    |                                          |                    |
+*** Group File
+*** Supplenmentary Group IDs
+*** Implementation Differences
+*** Other Data Files
+*** Login Accounting
+*** System Identification
+*** Time and Date Routines
+*** Summary
+** Process Environment
+*** Introduction
+   We finish the chapter by examining the resource limits of a process
+*** main Function
+    file:excise/printallargv.c
+*** Process Termination
+    There are eight ways for a process to terminate.
+    file:excise/exit.c
+    file:excise/atexit.c
+**** Normal termination occurs in five ways:
+     1. Return from main
+     2. Calling exit
+     3. Calling _exit or _Exit
+     4. Return of the last thread from its start routine
+     5. Calling pthread_exit from the last thread
+**** Abnormal termination occurs in three ways:
+     1. Calling abort
+     2. Receipt of a signal
+     3. Response of the last thread to a cancellation request
+*** Command-Line Arguments
+    file:excise/showarg.c
+*** Environment List
+    file:excise/showenv.c
+*** Memory Layout of a C program
+*** Shared Libraries
+*** Memory Allocation
+    file:excise/malloc.c
+    include `calloc', `realloc' and `free' functions 
+*** Environment Variables
+*** setjmp and longjmp Functions
+*** getrlimit and setrlimit Functions
+*** Summary
+** Process Control
+*** Introduction
+    We conclude the chapter by looking at the process accounting provied by most UNIX systemsl.
+*** Process Identifiers
+    file:excise/getallpid.c
+*** fork Function
+    file:excise/fork.c
+*** vfork Function
+    file:excise/vfork.c
+*** exit Functions
+*** wait and waitpid Functions
+    file:excise/wait.c
+    file:excise/waitpid.c
+    file:excise/avoidzombie.c
+*** waited Function
+*** wait3 and wait4 Functions
+*** Race Conditions
+    file:excise/withrace.c
+    file:excise/avoidrace.c
+*** exec Functions
+    file:excise/execl.c
+    file:excise/execv.c
+    file:excise/execve.c
+    execve printargenv file:excise/printargenv.c 
+*** Changing User IDs and Group IDs
+    file:excise/setuid.c
+*** Interpreter Files
+    file:excise/execinterpreter.c
+*** system Function
+    file:excise/system.c
+*** Process Accounting
+*** User Identification
+*** Process Times
+    file:excise/time.c
+*** Summary
+** Process Relationships
+*** Introduction
+*** Terminal Logins
+*** Network Logins
+*** Process Groups
+*** Sessions
+*** Controlling Terminal
+*** tcgetpgrp, tcsetpgrp, and tcgetsid Functions
+*** Job Control
+*** Shell Execution of Programs
+*** Orphaned Process Groups
+*** FreeBSD Implementation
+*** Summary
+** Signals
+*** Introduction
+*** Signal Concepts
+*** signal Funciton
+    file:excise/signal.c
+*** Unreliable Signals
+*** Interupted System Calls
+*** Reentrant Funciton
+    file:excise/nonreentrant.c
+*** Reliable-Signal Terminology and Semantics
+*** SIGCLD Semantics
+    file:excise/sigcld.c
+*** kill and raise Functions
+*** alarm and pause Functions
+*** Signal Sets
+*** sigprocmask Function
+*** sigpending Function
+*** sigsuspend Function
+*** abort Function
+*** system Function
+*** sleep Function
+*** Job-Control Signals
+*** Additional Features
+*** Summary
+** Interprocess Communication
+*** Introduction
+*** Pipes
+    file:excise/pipe.c
+*** Popen and pclose Functions
+*** Coprocesses
+*** FIFOs
+*** XSI IPC
+*** Message Queues
+*** Semapphores
+*** Shared Memory
+*** Client-Server Properties
+*** Summary
+*** TODO 实现一个Shell
+    file:shell.c
+    file:splitenv.c
+    file:redirectexec.c
