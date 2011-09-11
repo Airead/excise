@@ -385,8 +385,8 @@ int mutifork(char *args[])
 				}
 			}else if(i == count - 1){ /* the last child */
 				for(j = 0; j < i - 1; j++){ /* close unuse pipefd */
-					close(pipefd[i][1]);
-					close(pipefd[i][0]);
+					close(pipefd[j][1]);
+					close(pipefd[j][0]);
 				}
 				close(pipefd[j][1]); /* close prev process end of write */
 				close(pipefd[i][0]); /* close curr process end of read */
@@ -397,8 +397,8 @@ int mutifork(char *args[])
 				}
 			}else{
 				for(j = 0; j < i - 1; j++){ /* close unuse pipefd */
-					close(pipefd[i][1]);
-					close(pipefd[i][0]);
+					close(pipefd[j][1]);
+					close(pipefd[j][0]);
 				}
 				close(pipefd[j][1]); /* close prev process end of write */
 				close(pipefd[i][0]); /* close curr process end of read */
