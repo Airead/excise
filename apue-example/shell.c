@@ -403,7 +403,7 @@ int mutifork(char *args[])
 				close(pipefd[j][1]); /* close prev process end of write */
 				close(pipefd[i][0]); /* close curr process end of read */
 
-				if(dup2(pipefd[j][0], STDOUT_FILENO) < 0){
+				if(dup2(pipefd[j][0], STDIN_FILENO) < 0){
 					perror("dup2 failed");
 					return -1;
 				}
@@ -419,7 +419,7 @@ int mutifork(char *args[])
 
 				exit(1);
 			}
-			
+
 			exit(0);
 		
 			/* child process exit */
