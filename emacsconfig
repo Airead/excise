@@ -1,8 +1,8 @@
 (global-linum-mode 1)
 
 ;;color theme
-(require 'color-theme)
-(color-theme-gnome2)
+;;(require 'color-theme)
+;;(color-theme-gnome2)
 
 ;;session
 ;;(add-to-list 'load-path "/usr/share/emacs/extension/")
@@ -38,8 +38,6 @@
 (global-set-key (kbd "C-:") 'tabbar-backward)
 (global-set-key (kbd "C-\"") 'tabbar-forward)
 
-(global-set-key (kbd "<f6>") 'speedbar)
-
 (require 'recentf)
 (recentf-mode 1)
 (defun recentf-open-files-compl ()
@@ -67,8 +65,8 @@
     try-complete-lisp-symbol))
 
 ;;mark
-(global-set-key [(control ?\.)] 'ska-point-to-register)
-(global-set-key [(control ?\,)] 'ska-jump-to-register)
+(global-set-key (kbd "M-.") 'ska-point-to-register)
+(global-set-key (kbd "M-,") 'ska-jump-to-register)
 (defun ska-point-to-register()
   "Store cursorposition _fast_ in a register. 
 Use ska-jump-to-register to jump back to the stored 
@@ -208,8 +206,7 @@ occurence of CHAR."
   (insert "days\t\t*\n")
 
   (insert " ********************************************************/\n")
-  (insert "\n/*\n * This program demonstrates \n")
-  (insert " *\n")
+  (insert "\n/*\n")
   (insert " * This program is free software; you can redistribute it and/or modify\n")
   (insert " * it under the terms of the GNU General Public License as published by\n")
   (insert " * the Free Software Foundation; either version 2 of the License, or\n")
@@ -234,12 +231,12 @@ occurence of CHAR."
 (global-set-key (kbd "s-j") 'highlight-symbol-prev)
 (global-set-key (kbd "s-k") 'highlight-symbol-next)
 
-(custom-set-faces
+;;(custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "darkslategrey" :foreground "wheat" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 143 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+ ;;'(default ((t (:inherit nil :stipple nil :background "darkslategrey" :foreground "wheat" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 143 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
 
 ;;Highlight #if 0 to #endif
 (defun my-c-mode-font-lock-if0 (limit)
@@ -285,12 +282,47 @@ occurence of CHAR."
 (add-to-list 'load-path "/usr/share/emacs/extension/ecb/" t)
 (require 'ecb-autoloads)
 
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1)))
 
 ;;xcscope
 (require 'xcscope)
+(define-key global-map [(control f3)]  'cscope-set-initial-directory)
+(define-key global-map [(control f4)]  'cscope-unset-initial-directory)
+(define-key global-map [(control f5)]  'cscope-find-this-symbol)
+(define-key global-map [(control f6)]  'cscope-find-global-definition)
+(define-key global-map [(control f7)]  'cscope-find-global-definition-no-prompting)
+(define-key global-map [(control f8)]  'cscope-pop-mark)
+;;	(define-key global-map [(control f9)]  'cscope-next-symbol)
+;;	(define-key global-map [(control f10)] 'cscope-next-file)
+;;	(define-key global-map [(control f11)] 'cscope-prev-symbol)
+;;	(define-key global-map [(control f12)] 'cscope-prev-file)
+;;      (define-key global-map [(meta f9)]  'cscope-display-buffer)
+;;      (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
+
+;;docbook
+;;; set outline mode
+(setq outline-minor-mode-prefix [(control o)])
+(setq outline-minor-mode-prefix [(kbd "C-o")])
+(require 'docbook-xml-mode)
+(add-hook 'docbook-xml-mode-hook 
+	  (function (lambda ()
+		      (setq outline-regexp "^.*<!\\-\\-\\*+") 
+		      (outline-minor-mode)
+		      (hide-body))))
+
+(defun format-screen-code (start end)
+  "Replace “<” to “&lt;” and other chars in HTML.
+This works on the current region."
+  (interactive "r")
+  (save-restriction 
+    (narrow-to-region start end)
+    (goto-char (point-min))
+    (while (search-forward "&" nil t) (replace-match "&amp;" nil t))
+    (goto-char (point-min))
+    (while (search-forward "<" nil t) (replace-match "&lt;" nil t))
+    (goto-char (point-min))
+    (while (search-forward ">" nil t) (replace-match "&gt;" nil t))
+;    (goto-char (point-min))
+;   (while (search-forward-regexp "^ *[^0-9A-Za-z\\\*]" nil t) (replace-match "" nil t))
+    )
+  )
+(global-set-key (kbd "C-c t") 'format-screen-code)
