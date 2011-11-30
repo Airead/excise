@@ -140,6 +140,18 @@ occurence of CHAR."
 (add-to-list 'auto-mode-alist '("\.c$" . linux-c-mode))
 (add-to-list 'auto-mode-alist '("\.h$" . linux-c-mode))
 
+;; C++ mode
+(defun linux-cpp-mode ()
+  "C++ mode with adjusted defaults for use with the Linux kernel."
+  (interactive)
+  (c++-mode)
+  (c-set-style "K&R")
+  (setq tab-width 8)
+  (setq indent-tabs-mode t)
+  (setq c++-basic-offset 8))
+(add-to-list 'auto-mode-alist '("\.cpp$" . linux-cpp-mode))
+
+;; smart compile
 (add-to-list 'load-path "/usr/share/emacs/extension" t)
 (require 'smart-compile)
 (global-set-key (kbd "<f9>") 'smart-compile)
