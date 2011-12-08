@@ -1,0 +1,132 @@
+learning D-Bus
+* What is D-Bus
+  D-Bus is a system for interprocess communication(IPC). It has several layers:
+    - A library.
+    - A message bus daemon executable, built on libdbus, that multiple applications can connect to.
+    - Wrapper libraries or bindings based on particular application frameworks.
+
+  Libdbus only supports one-to-one connections, just like a raw network socket. However, rather than sending byte streams over the connection, you sen messages. Messages have a header identifying the kind of message, and a body containing a data payload. libdbus also abstracts the exact transport used(sockets vs. whatever else), and handles details such as authentication.
+
+      The message bus daemon forms the hub of a whell. Each spoke of the whell is a one-to -one connection to an application using libdbus. A application sends a message to the bus daemon over its spoke, and the bus daemon forwards the message to other connected applications as appropriate. Think of the demon as a router.
+
+      The bus daemon has multiple instances on a typical computer. The first instance is a machine-global sigleton, that is, a system daemon similar to sendmail or Apache. This instance has heavy security restrictions on what messages it will accept, and is used for systemwide communication. The other instances are created one per user login session. These instances allow applications in the user's session to communicate with one another.
+
+      The systemwide and per-user daemons are separate. Normal within-session IPC does not involve the systemwide message bus process and vice versa.
+
+** D-Bus applications
+   D-Bus is designed for two specific cases:
+     - Communication between desktop applications in the same desktop session; to allow intgration of the desktop session as a whole, and address isssues of process lifecycle (when do desktop components start and stop running).
+     - Communication between the desktop session and the operationg system, where the operating system would typically include the kernel and any system daemons or processes.
+
+   D-Bus may or may not be appropriate for other applications; the FAQ has some comparisons to other IPC systems.
+
+   D-Bus may happen to be useful for purposes other than the one it was designed for. Its general properties that distinguish it from other forms of IPC are:
+     - Binary protocol designed to be used asynchronously (similar in spirit to the X Window System protocol).
+     - Stateful, reliable connections held open over time.
+     - The message bus is a daemon, not a "swarm" or distributed architecture.
+     - Many implementation and deployment issues are specified rather than left ambiguous/configurable/pluggable.
+     - Semantics are similar to the existing DCOP system, allowing KDE to adopt it more easily.
+     - Security features to support the systemwide mode of the message bus.
+* Concepts
+  Some basic concepts apply no matter what application framework you're using to write a D-Bus application.
+** Native Objects and Object Paths
+   Your programming framework probably defines what an "object" is like; usually with a base class. Let's call this a native object.
+
+   The low-levvel D-Bus protocol, and corresponding libdbus API, does not care about native objects. However, it provides a concept called an object path. The idea of an object path is that higher-level bindings can name native object instances, and allow remote application to refer to them.
+
+   The object path looks like a filesystem path, for example an object could be named /org/kde/dspread/sheets/3/cells/4/5. Human-readable path are nice, but you are free to create an object named /com/mycompany/ca14123fadf if it makes sense for you application.
+
+   Namespaceing object paths is smart, by starting them with the components of a domain name you own(e.g. /org/kde). This keeps different code modules in the same process from stepping on one another's toes.
+** Methods and Signals
+   Each object has members; the two kinds of member are methods and signals. Methods are operations that can be invoked on an object, with optional input (aka arguments or "in parameters") and output (aka return values or "out parameters"). Signals are broadcasts from the object to any interested observers of the object; signals may contain a data payload.
+
+   Both methods and signals are referred to by name, such as "Frobate" or "OnClicked".
+
+** Interfaces
+   Each object supports one or more interfaces. Think of an interface as a named group of methods and signals, just as it is in GLib or Qt or Java. Interfaces define the type of an object instance.
+
+   DBus identifies interfaces with a simple namespaced string, something like org.freedesktop.Introspectable. Most bindings will map these interface names directly to the appropriate programming language construct, for example to Java interfaces or C++ pure virtual classes.
+
+** Proxies
+   A proxy object is a convenient native object created to represent a remote object in another process. The low-level DBus API involves manually creating a method call message, sending it, then manually receiving and processing the method reply message. Higher-level bindings provide proxies as an alternative. Proxies look like a normal native object; but when you invoke a method on the proxy object, the binding converts it into a DBus method call message, waits for the reply message, unpacks the return value, and returns it from the native method.
+
+** Bus Names
+   When each application connects to the bus daemon, the daemon immediately assigns it a name, called the unique connection name. A unique name begins with a ':'(colon) character. These names are never reused during the lifetime of the bus daemon - that is, you know a given name will always refer to the same apllication. An example of a unique anem might be :34-907. The numbers after the colon have no meaning other than their uinqueness.
+
+   When a name is mapped to a particular application's connection, that application is said to own that name.
+
+   Applications may ask to own additional well-known names. For example, you could write a specification to define a name called com.mycompany.TexEditor. Your definition could specify that to own this name, an application should have an object at the path /com/mycompany/TextFileManager supporting the interface org.freedesktop.FileHandler.
+
+   Applications could then send messages to this bus name, object, and interface to execute method calls.
+
+   You could think of the unique names as IP addresses, and the well-known names as domain names. So com.mycompany.TextEditor might map to something like :34:907 just as mycompany.com maps to something like 192.168.0.5.
+
+   Names have a second important use, other than routing messages. They are used to track lifecycle. When an application exits (or crashes), its connection to the message bus will be closed by the operating system kernel. The message bus then sends out notification messages telling remaining applications that the application's names have lost their owner. By tracking these notifications, your application can reliably monitor the lifetime of other applications.
+
+   Bus names can also be used to coordinate single-instance applications. If you want to be sure only one com.mycompany.TextEditor application is running for example, have the text editor application exit if the bus name already has an owner.
+** Addresses
+   Applications using D-Bus are either servers or clients. A server listens for incoming connections; a client connects to a server. Once the connection is established, it is a symmetric flow of messages; the client-server distinction only matters when setting up the conection.
+
+   If you're using the bus daemon, as you probably are, you application will be a client of the bus daemon. That is, the bus daemon listens for connections and your application initiates a connecton to the bus daemon.
+
+   A D-Bus address specifies where a server will listen, and where a client will connect.
+
+   When using D-Bus with a message bus daemon, libdbus automaticlly discovers the address of the per-session bus daemon by reading an environment variable. It discovers the systemwide bus daemon by checking a well-know UNIX domain socket path (though you can override this address with an environment variable).
+
+   If you're using D-Bus without a bus daemon, it's up to you to define which application will be the server and which will be the client, and specify a mechanism for them to agree on the server's address. This is an unusualcase.
+
+** Big Conceptual Picture
+   Pulling all these concepts together, to specify a particular method call on a particular object instance, a number of nested components have to be named:
+   
+       Address -> [Bus Name] -> Path -> Interface -> Method
+
+   The bus name is in brackets to indicate that it's optional -- you only provide a name to route the method call to the right application when using the bus daemon. If you have a direct connection to another application, bus names aren't used; there's no bus daemon.
+
+   The interface is also optional, primarily for historical reasons;
+** Messages - Behind the Scenes
+   D-Bus works by sending messages between processes. If you're using a sufficiently high-level binding, you may never work with messages directly. There are 4 message types:
+     - Method call messages ask to invoke a method on an object.
+     - Method return messages return the result of invoking a method.
+     - Error messages return an exception caused by invoking a method.
+     - Signal messages are notifications that a given signal has been emitted (that an event has occurred). You could also think of these as "event" message.
+
+   A method call maps very simply to messages: you send a method call message, and receive either a method return message or an error message in reply.
+
+   Each message has a header, including fields, and a body, including arguments. You can think of the header as the routing information for the message, and the body as the payload. Header fields might include the sender bus name, destination bus name, method or signal name, and so forth. One of the header fields is a type signature describing the values found in the body. For example, the letter "i" means "32-bit integer" so the signature "ii" means the payload has two 32-bit intergers.
+
+** Emitting a Signal - Behind the Scenes
+   A signal in DBus consists of a single message, sent by one process to any number of other processes. That is, a  signal is unidirectional broadcast. The signal may contain arguments (a data payload), but because it is a broadcast, it never has a "return value." Contrast this with a method call where the method call cmessage has a matching method reply message.
+
+   The emitter (aka sender) of a signal has no knowledge of the signal recipients. Recipients register with the bus daemon to receive signals based on "match rules" - these rules would typeically include the sender and the signal name. The bus daemon sends each signal only to recipients who have expressed interest in that signal.
+
+   A signal in DBus happens as follows:
+     - A signal message is created and sent to the bus 
+      
+** Introspection
+* GLib API: Using Remote Objects
+** D-Bus - GLib type mappings
+** A sample program
+   file:demo/asampleprog.c
+** Program initialization
+** Understanding method invocation
+** Connection to object signals
+** Error handling and remote exceptions
+** More examples of method invocation
+** Generated Bindings
+* GLib API: Implementing Objects
+** Server-side Annotations
+** Python API
+* Examples
+** a few example uses of D-BUS code
+   dbus-ping-send.c sends a signal over the session bus every seconsd with the string "Ping!" as an argument. I'm using GLib to manage the bus so that I don't need to deal with the details of the bus connection myself.
+
+   file:demo/dbus-ping-send.c
+
+   The main function creates a GLib event loop, gets a connection to the session bus, and integrates the D-BUS event handling into the Glib event loop. Then it creates a one-second timer that calls send_ping, and starts the event loop.
+
+   send_ping constructs a new Ping signal, coming from the object path /com/burtonini/dbus/ping and interface com.burtonini.dbus.Signal. Then the string "Ping!" is added as an argument to the signal and sent across the bus. A message is printed on standard output to let the user know a signal was sent.
+
+   Of course, it is not good to fire signals down the bus if there is nothing listening to them... which brings us to:
+
+   file:demo/dbus-ping-listen.c
+* Reference
