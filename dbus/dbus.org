@@ -129,4 +129,50 @@ learning D-Bus
    Of course, it is not good to fire signals down the bus if there is nothing listening to them... which brings us to:
 
    file:demo/dbus-ping-listen.c
+** 利用python脚本调用ListActivativableNames
+   file:demo/dls.py
+** 用dbus-glib做一个dbus接口，并写一个客户程序
+   首先编写接口描述文件。我们要实现的连接的公共名是"org.freesmartphone.ogsmd"，接口描述文件如下：
+   file:demo/smss.xml
+** hellodbus-0.1
+   解压hello-dbus-0.1.tar.gz后执行clean.sh,得到源码树如下
+
+   .
+   ├── autogen.sh
+   ├── clean.sh
+   ├── configure.ac
+   ├── Makefile.am
+   └── src
+       ├── example-signal-emitter.c
+       ├── example-signal-emitter-glue.h
+       ├── example-signal-emitter.xml
+       ├── example-signal-recipient.c
+       └── Makefile.am
+  
+   我们首先尝试编译运行。
+
+**  基础小例子（同步和异步）
+*** 同步的例子
+    同步即程序发出method call消息，等待method_return消息。下面是一个小例子，如果我们用dbus-send命令，可以使用：
+
+    dbus-send --session --print-reply --type=method_call --dest=org.freedesktop.Notifications / org.freedesktop.DBus.Introspectable.Introspect
+
+    file:demo/synsendm.c
+
+*** 异步的例子
+    异步中，程序将不等返回消息，继续执行，等有返回消息的时候，触发一个回调函数。下面是同样的操作，但是用异步的方式来实现：
+    file:demo/asynsendm.c
+
+** Signal的收发小例子
+*** 发送方的小程序
+    file:demo/signalsend.c
+*** 希望接收该信号的小程序例子
+    file:demo/signalrecv.c
+** Method的收发小例子
+*** 监听Method call消息，并返回Method reply消息
+    Method的监听和signal的监听的处理时一样，介是信号是不需要答复，而Method需要。 在下面的例子中，我们将学习如何在消息中加入多个参数的情况。
+    file:demo/methodrecv.c
+*** 发送Method call消息，并等待Method reply消息
+    file:demo/methodsend.c
+* Write by myself
 * Reference
