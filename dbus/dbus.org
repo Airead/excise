@@ -174,5 +174,88 @@ learning D-Bus
     file:demo/methodrecv.c
 *** 发送Method call消息，并等待Method reply消息
     file:demo/methodsend.c
+** 编写自己的接口
+   dbus-glib是dbus底层接口的一个封装。我们用dbus-glib做一个dus接口，并写一个客户程序。
+   首先编写接口描述文件。
+   file:demo/interface/smss.xml
+   我们要在连接"org.freesmartphone.ogsmd"中实现对象"/org/freesmartphone/GSM/Device"。这个对象有接口"org.freesmartphone.GSM.SMS"。这个接口有一个SendMessage方法和一个IncomingMessage信号。
+
+   SendMessage方法和IncomingMessage信号除了两个字符串参数外，还有一个a{sv}参数，这是一个哈希表，即python的字典。键-值对的键类型是字符串，值类型是VARIANT。这个接口是openmoko fso接口的一部分。但为简单起见，本例在哈希表部分，只用三个键值。
+     - 键"alphabet"对应的值类型是字符串。
+     - 键"csm_num"对应的值类型是INT32。
+     - 键"csm_seq"对应的值类型是INT32。
+       
+   请注意方法和信号名应采用单词连写，首字母大写的格式。
+
+   由接口描述文件生成绑定文件
+
+   有一个叫dbus-binding-tool的工具，它读入接口描述文件，产生一个绑定文件。这个文件包含了dbus对象的接口信息。在主程序中我们通过dbus_g_object_type_install_info函数向dbus-glib登记对象信息（DBusGObjectInfo结构）。
+   命令如下：
+   dbus-binding-tool --prefix=gsm_sms --mode=glib-server --output=smss-glue.h smss.xml
+   
+   "--prefix"参数定义了对象前缀。设对象前缀是$(prefix)，则生成的DBusGObjectInfo结构变量名就是dbus_glib_$(prefix)_object_info。绑定文件会为接口方法定义回调函数。回调函数的名称是这样的：首先将xml中的方法名称转换到全部小写，下划线分隔的格式，然后增加前缀"$(prefix)_"。例如：如果xml中有方法SendMessage，绑定文件就会引用一个名称为$(prefix)_send_message的函数。
+   绑定文件还会为接口方法生成用于散集（Unmarshaling）的函数。在dbus消息中，方法参数是以流格式存在的。该函数将方法参数由数据流还原到glib的数据格式，并传入方法的回调函数。本例中，dbus-binding-tool生成以下的smss-glue.h：
+   file:demo/interface/smss-glue.h
+
+   在包含绑定文件前，我们必须声明绑定文件要引用的回调函数。
+
+   对象：对象定义
+   
+   dbus-glib用GObject实现dbus对象。所以我们首先要实现一个对象。在本例中，我们实现一个GsmSms对象，它继承了GObject：
+   file:demo/interface/gsm_sms.h
+ 
+   GObject的对象定义虽然繁琐，但有固定的套路。依样画葫芦，画多了就习惯了。我们在gsm_sms.h中声明了gsm_sms_send_message函数。 gsm_sms_send_message函数是在gsm_sms.c中实现的，在绑定文件smss-glue.h中用到。因为主程序要使用绑定文件中的对象信息，所以应由主程序包含绑定文件。主程序只要在包含绑定文件前包含gsm_sms.h，编译器就不会抱怨gsm_sms_send_message函数未声明。
+   
+   信号的列集函数
+
+   列集（Marshaling）是将数据从某种格式存为流格式的操作；散集（Unmarshaling）则是列集的反操作，将信息从流格式中还原出来。在绑定文件中，dbus-binding-tool自动生成函数将方法参数从dbus消息中还原出来，即实现了散集。那么我们怎么把信号参数由glib的数据结构转换到消息中的数据流呢？
+
+   因为GsmSms对象有一个信号，所以在对象类初始化函数gsm_sms_class_init中，我们要调用g_signal_new创建信号。 g_signal_new要求我们提供一个列集函数。
+
+   glib有一些标准的列集函数，在gmarshal.h中定义。例如g_cclosure_marshal_VOID__STRING，这个函数适合只有一个字符串参数的信号。如果gmarshal.h没有提供适合的列集函数，我们可以用一个叫glib-genmarshal的工具自动生成列集函数。后面我们会看到，无论是标准列集函数还是生成的列集函数都是既可以用于列集也可以用于散集，这些函数通常都被称作列集函数。
+
+   使用glib-genmarshal前，我们同样要准备一个输入文件：
+   file:demo/interface/sms-marshal.list
+   我们需要的函数返回类型是VOID，参数是STRING,STRING,BOXED
+   
+   glib-genmarshal --header sms-marshal.list --prefix=sms_marshal > sms-marshal.h
+
+   glib-genmarshal --body sms-marshal.list --prefix=sms_marshal > sms-marshal.c
+
+   file:demo/interface/sms-marshal.h
+   file:demo/interface/sms-marshal.c
+
+   对像实现
+   
+   准备好列集函数后，我们来实现GsmSms
+   file:demo/interface/gsm_sms.c
+
+   在主程序中登记对象信息时，对象信息把SendMessage方法和gsm_sms_send_message函数以及自动生成的散集函数联系起来。当客户程序调用SendMessage方法时，dbus-glib会通过对象信息表格找到回调函数和散集函数，用散集函数从method_call消息中取出参数传入回调函数gsm_sms_send_message。 gsm_sms_send_message调用sms_show_features函数处理a{sv}参数。 sms_show_features也在sms_features模块定义，后面会介绍。
+
+   gsm_sms模块提供了一个gsm_sms_emit_incoming_message函数供外部模块调用。调用这个函数可以发射一个信号。在真实环境中，只有外部事件发生后才会发射信号。本例中会有测试代码发射信号。
+
+   主程序
+
+   登记dbus服务服务器
+   file:demo/interface/smss.c
+
+   IO Channel
+
+   我想增加一个敲键测试信号发射。但我又必须在glib主循环里等待dbus消息。怎样才能既等待dbus消息，又等待敲键呢？这种情况可以使用glib的IO Channels。glib的IO Channels允许我们在glib主循环等待指定的文件或socket句柄。
+
+   要使用IO Channels，首先包含"glib/giochannel.h"。用句柄0（即标准输入）创建一个GIOChannel。 为我们创建的GIOChannel登记回调函数。我们在回调函数channel_cb中处理敲键，发射信号。
 * Write by myself
+** send a struct with dbus for C/S
+   第一步：定义一个通用的API xml接口描述，暂为dbus_general.xml
+   file:demo/sendstruct/dbus_general.xml
+   第二步：用dbus的工具函数生成stub/proxy头文件，这一步写到Makefile脚本中，以后不用修改了;
+   dbus-binding-tool --mode=glib-server --prefix=your_module_name dbus_general.xml > general_stub.h
+   dbus-binding-tool --mode=glib-client --prefix=your_module_name dbus_general.xml > general_proxy.h
+   
+   第三步：实现client侧，主要是调用general_proxy.h的接口函数client_request()，用GArray传入你的数组（可以携带任何你自己定义的数据结构）
+   file:demo/sendstruct/client.c
+   
+   第四步：实现Server侧，主要是实现general_stub.h中的函数__client_request_cb();
+   file:demo/sendstruct/server.c
+
 * Reference

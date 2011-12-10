@@ -1,0 +1,5 @@
+learning dbus-glib
+* Owning Bus Names - Simple API for owning bus names
+** Description
+   Convenience API for owning bus names
+   - example 8. Simple application owning a name

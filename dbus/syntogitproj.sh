@@ -6,5 +6,7 @@
 #
 
 rsync -vcar  --include="*.c" --include="Makefile" --include="README" \
-	--include="*.org" --include="*.sh" --include="demo" --exclude="*" \
+	--include="*.org" --include="*.sh" --include="demo" \
+	--include="demo/interface" --include="demo/sendstruct" \
+        --exclude="*" \
 	../dbus/* ~/study/git-proj/excise/dbus

@@ -4,6 +4,7 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus.h>
 #include <unistd.h>
+#include "datastruct.h"
 
 DBusConnection *connect_dbus()
 {
@@ -44,6 +45,7 @@ void send_a_method_call(DBusConnection *connection, char *param)
     DBusPendingCall *pending;
     dbus_bool_t *stat;
     dbus_uint32_t *level;
+    struct ifs data; // = {123, 1.23, "ijimu"};
 
     dbus_error_init(&err);
 
@@ -106,8 +108,22 @@ void send_a_method_call(DBusConnection *connection, char *param)
         dbus_message_iter_get_basic (&arg, &level);
     }
     printf("Got Reply: %d, %d\n", (int)stat, (int)level);
+
+#if 0
+    /* receive struct */
+    if (!dbus_message_iter_next(&arg)) {
+        fprintf(stderr, "Message has too few arguments!\n");
+    } else if ( dbus_message_iter_get_arg_type (&arg) != DBUS_TYPE_STRUCT ) {
+        fprintf(stderr, "Argument is not struct!\n");
+    } else {
+        dbus_message_iter_get_basic (&arg, &data);
+    }
+    printf("Got struct: %d, %f, %s\n", data.i, data.f, data.s);
+#endif
+
     dbus_message_unref(msg);
 }
+
 
 int main(int argc, char *argv[])
 {

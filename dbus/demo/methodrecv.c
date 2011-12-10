@@ -4,6 +4,7 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus.h>
 #include <unistd.h>
+#include "datastruct.h"
 
 void reply_to_method_call(DBusMessage *msg, DBusConnection *conn)
 {
@@ -13,6 +14,7 @@ void reply_to_method_call(DBusMessage *msg, DBusConnection *conn)
     dbus_bool_t stat = TRUE;
     dbus_uint32_t level = 2010;
     dbus_uint32_t serial = 0;
+    struct ifs data = {123, 1.23, "ijimu"};
 
     /* read para from message */
     if (!dbus_message_iter_init(msg, &arg)) {
@@ -38,7 +40,14 @@ void reply_to_method_call(DBusMessage *msg, DBusConnection *conn)
         printf("out of memory!\n");
         exit(1);
     }
-    
+
+#if 0                           /* append struct */
+    if (!dbus_message_iter_append_basic(&arg, DBUS_TYPE_ARRAY, &data)) {
+        printf("out of memory!\n");
+        exit(1);
+    }
+#endif    
+
     /* send reply message */
     if (!dbus_connection_send(conn, reply, &serial)) {
         printf("out of memory\n");
@@ -108,7 +117,6 @@ void listen_dbus()
         } else if (dbus_message_is_method_call(msg, "test.method.Type", "Method")) {
             /* XXX: at first, we should compare path */
             if (strcmp(dbus_message_get_path(msg), "/test/method/Object") == 0) {
-                sleep(5);
                 reply_to_method_call(msg, connection);
             }
         }
