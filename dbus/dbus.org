@@ -269,5 +269,22 @@ learning D-Bus
    file:demo/sendstruct/server.c
 
 ** simple send struct
-   file:demo/simplestruct/simplec.c
+   首先定义函数接口
+   file:demo/simplestruct/sr_stream.xml
+   
+   生成头文件
+   dbus-binding-tool --prefix=webpad --mode=glib-server sr_stream.xml > sr_stream_server.h
+   
+   定义与实现对象
+   头文件: file:demo/simplestruct/webpad.h
+   .c文件: file:demo/simplestruct/webpad.c
+
+   定义通用结构体
+   file:demo/simplestruct/server.h
+
+   服务器端
+   file:demo/simplestruct/server.c
+
+   客户端
+   file:demo/simplestruct/client.c
 * Reference
