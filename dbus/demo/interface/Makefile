@@ -11,15 +11,15 @@ LDFLAGS = $(shell pkg-config --libs dbus-glib-1 \
 			)	
 
 BIN = smss
-OBJECT = smss.o gsm_sms.o sms_features.o 
+SOURCE = gsm_sms.c sms_features.c sms-marshal.c
 
-%.o: %.c
-	gcc $(CFLAGS) $(INCLUDE) $< -o $@ $(LDFLAGS)
-
-$(BIN): $(OBJECT)
+smss: smss.c $(SOURCE)
 	gcc $(CFLAGS) $(INCLUDE) $^ -o $@ $(LDFLAGS)
 
-.PHONY: clean
+.PHONY: clean smsc
+
+smsc: smsc.c $(SOURCE)
+	gcc $(CFLAGS) $(INCLUDE) $^ -o $@ $(LDFLAGS)
 
 clean:
-	rm -f $(BIN) *~ *# *.o
+	rm -f smss smsc *~ *# *.o

@@ -244,6 +244,9 @@ learning D-Bus
    我想增加一个敲键测试信号发射。但我又必须在glib主循环里等待dbus消息。怎样才能既等待dbus消息，又等待敲键呢？这种情况可以使用glib的IO Channels。glib的IO Channels允许我们在glib主循环等待指定的文件或socket句柄。
 
    要使用IO Channels，首先包含"glib/giochannel.h"。用句柄0（即标准输入）创建一个GIOChannel。 为我们创建的GIOChannel登记回调函数。我们在回调函数channel_cb中处理敲键，发射信号。
+
+   CLIENT
+   file:demo/interface/smsc.c
 * Write by myself
 ** send a struct with dbus for C/S
    第一步：定义一个通用的API xml接口描述，暂为dbus_general.xml
@@ -252,10 +255,19 @@ learning D-Bus
    dbus-binding-tool --mode=glib-server --prefix=your_module_name dbus_general.xml > general_stub.h
    dbus-binding-tool --mode=glib-client --prefix=your_module_name dbus_general.xml > general_proxy.h
    
+   file:demo/sendstruct/general_proxy.h
+   file:demo/sendstruct/general_stub.h
+   
+
+   第二点五步，定义对象，实现接口
+   file:demo/sendstruct/gen_marshal.list
+   file:demo/sendstruct/gen-marshal.h
    第三步：实现client侧，主要是调用general_proxy.h的接口函数client_request()，用GArray传入你的数组（可以携带任何你自己定义的数据结构）
    file:demo/sendstruct/client.c
    
    第四步：实现Server侧，主要是实现general_stub.h中的函数__client_request_cb();
    file:demo/sendstruct/server.c
 
+** simple send struct
+   file:demo/simplestruct/simplec.c
 * Reference

@@ -1,6 +1,7 @@
 #include <dbus/dbus-glib.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <glib/giochannel.h>
 #include "gsm_sms.h"
 #include "smss-glue.h"
@@ -26,6 +27,49 @@ static void lose_gerror(const char *prefix, GError *error)
     } else {
         lose("%s", prefix);
     }
+}
+
+void emit_signal(GsmSms *obj)
+{
+    GHashTable *features = sms_create_features("ucs2", 3, 1);
+
+    gsm_sms_emit_incoming_message(obj, "12345678901", "hello signal!", features);
+
+    sms_release_features(features);
+}
+
+#define STDIN_BUF_SIZE 1024
+static gboolean channel_cb(GIOChannel *source, GIOCondition condition, gpointer data)
+{
+    int rc;
+    char buf[STDIN_BUF_SIZE + 1];
+    GsmSms *obj = (GsmSms *)data;
+
+    if (condition != G_IO_IN) {
+        return TRUE;
+    }
+    
+    /* we've received something on stdin */
+    printf("# ");
+    rc = fscanf(stdin, "%s", buf);
+    if (rc <= 0) {
+        printf("NULL\n");
+        return TRUE;
+    }
+
+    if (!strcmp(buf, "h")) {
+        printf("shell_help()\n");
+    } else if (!strcmp(buf, "?")) {
+        printf("shell_help()\n");
+    } else if (!strcmp(buf, "s")) {
+        emit_signal(obj);
+    } else if (!strcmp(buf, "q")) {
+        exit(0);
+    } else {
+        printf("Unknown command `%s'\n", buf);
+    }
+
+    return TRUE;    
 }
 
 int main(int argc, char *argv[])
@@ -76,7 +120,7 @@ int main(int argc, char *argv[])
     //                            GError **error,
     //                            GType first_arg_type,
     //                            ...);
-    if (!dbus_g_proxy_call(bus_proxy, "RequesetName", &error,
+    if (!dbus_g_proxy_call(bus_proxy, "RequestName", &error,
                            G_TYPE_STRING, "org.freesmartphone.ogsmd",
                            G_TYPE_UINT, 0,
                            G_TYPE_INVALID,
@@ -97,9 +141,9 @@ int main(int argc, char *argv[])
     
     printf("service is running\n");
 
-    //chan = g_io_channel_unix_new(0);
+    chan = g_io_channel_unix_new(0);
+    g_io_add_watch(chan, G_IO_IN, channel_cb, obj);
     
-
     g_main_loop_run(mainloop);
 
     return 0;

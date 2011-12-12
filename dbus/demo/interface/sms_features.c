@@ -1,8 +1,9 @@
-#includle "sms_features.h"
+#include "sms_features.h"
+#include <dbus/dbus-glib.h>
 
 static void release_val(gpointer data)
 {
-    GValue *val = (Gvalue *)data;
+    GValue *val = (GValue *)data;
     g_value_unset(val);
     g_free(val);
 }
@@ -34,7 +35,7 @@ GHashTable *sms_create_features(const char *alphabet, int csm_num, int csm_seq)
 
 GType sms_get_features_type(void)
 {
-    return dbus_g_type_get_map("GHashTable", GTYPE_STRING, G_TYPE_VALUE);
+    return dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE);
 }
 
 void sms_show_features(GHashTable *features)

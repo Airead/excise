@@ -1,29 +1,24 @@
-CC	= gcc
+CC = gcc
 
-CFLAGS	= -Wall -g
-CFLAGS += $(shell pkg-config --cflags glib-2.0 )
-CFLAGS += $(shell pkg-config --cflags dbus-glib-1)
-#CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
+CFLAGS = -Wall -g
 
-LDFLAGS	= 
-LDFLAGS += $(shell pkg-config --libs glib-2.0)
-LDFLAGS += $(shell pkg-config --libs dbus-glib-1)
-#LDFLAGS += $(shell pkg-config --libs gtk+-2.0)
 
-SOURCE =  $(wildcard *.c)
-TARGETS	= $(patsubst %.c, %, $(SOURCE))
+INCLUDE = $(shell pkg-config --cflags dbus-glib-1 \
+				glib-2.0 \
+			)
+LDFLAGS = $(shell pkg-config --libs dbus-glib-1 \
+	 			glib-2.0 \
+			)	
 
-%: %.c
-	@$(CC) $< $(CFLAGS) -o $@ $(LDFLAGS)
+SOURCE = sms-marshal.c
 
-.PHONY: all clean test
+.PHONY: clean smsc
 
-all: $(TARGETS)
+client: client.c $(SOURCE)
+	gcc $(CFLAGS) $(INCLUDE) $^ -o $@ $(LDFLAGS)
+
+server: server.c $(SOURCE)
+	gcc $(CFLAGS) $(INCLUDE) $^ -o $@ $(LDFLAGS)
 
 clean:
-	rm -f *~ a.out *.o $(TARGETS) core.*
-
-test:
-	@echo TARGETS: $(TARGETS)
-
-
+	rm -f client server *~ *# *.o

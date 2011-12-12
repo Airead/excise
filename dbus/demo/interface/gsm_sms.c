@@ -6,7 +6,8 @@
 #include "sms-marshal.h"
 #include "sms_features.h"
 
-enum {
+enum 
+{
     INCOMING_MESSAGE,
     LAST_SIGNAL
 };
@@ -46,7 +47,7 @@ static void gsm_sms_class_init(GsmSmsClass *class)
    
     signals[INCOMING_MESSAGE] = g_signal_new (
         "incoming_message",
-        G_OBJECT_CLASS_TYPE(klass), /* return class id */
+        G_OBJECT_CLASS_TYPE(class), /* return class id */
         G_SIGNAL_RUN_LAST | G_SIGNAL_DETAILED,
         0,
         NULL, NULL,
@@ -64,4 +65,10 @@ gboolean gsm_sms_send_message(GsmSms *obj, const char *number, const char *conte
     sms_show_features(featuremap);
     *ret = strlen(contents);
     return TRUE;
+}
+
+void gsm_sms_emit_incoming_message(GsmSms *obj, const char * address, 
+    const char * contents, GHashTable *hash)
+{
+    g_signal_emit (obj, signals[INCOMING_MESSAGE], 0, address, contents, hash);
 }

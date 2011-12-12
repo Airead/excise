@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <glib.h>
-//#include <dbus/dbus.h>
 #include "datastruct.h"
 #include "general_proxy.h"
 
