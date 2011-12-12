@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<node name="/com/ijimu/webpad/send_recv">
+  <interface name="com.ijimu.webpad.stream">
+    <method name="SendStream">
+      <arg name="input_stream" type="ay" direction="in" />
+      <arg name="input_len" type="u" direction="in" />
+      <arg name="output_stream" type="ay" direction="out" />
+      <arg name="output_len" type="u" direction="out" />
+    </method>
+  </interface>
+</node>

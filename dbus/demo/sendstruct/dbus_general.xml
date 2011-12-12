@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<node name="/org/freedesktop/DBus/General_api">
+  <interface name="org.freedesktop.DBus.general_api">
+    <method name="client_request">
+      <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="__client_request_cb"/>
+      <arg type="i" name="action_id" direction="in" />   
+      <arg type="i" name="input_int" direction="in" />   
+      <arg type="ay" name="input_garray" direction="in" /> 
+      <arg type="i" name="outut_int" direction="out" />    
+      <arg type="ay" name="output_garray" direction="out" /> 
+      <arg type="i" name="result" direction="out" />
+    </method>
+  </interface>
+</node>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<node name="/org/freesmartphone/GSM/Device">
+  <interface name="org.freesmartphone.GSM.SMS">
+    <method name="SendMessage">
+       <arg name="number" type="s"/>
+       <arg name="contents" type="s"/>
+       <arg name="featuremap" type="a{sv}"/>
+       <arg type="i" direction="out"/>
+    </method>
+    <signal name="IncomingMessage">
+       <arg name="address" type="s"/>
+       <arg name="contents" type="s"/>
+       <arg name="features" type="a{sv}"/>
+    </signal>
+  </interface>
+</node>
