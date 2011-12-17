@@ -1,0 +1,82 @@
+Learning pygtk
+* 00 PyGTK简介
+  PyGTK是一套GTK＋ GUI库的Python封装。
+  英文版：http://www.zetcode.com/tutorials/pygtktutorial/
+
+* 01 PyGTK的第一步
+** Simple example
+   file:demo/center.py
+** Icon
+   显示程序的图标
+   file:demo/icon.py
+** Button
+   file:demo/buttons.py
+** Tooltip
+   file:demo/tooltips.py
+
+* 02 PyGTK中的布局管理
+  当我们设计程序的 GUI 界面时,我们决定哪些部件我们将会使用,和我们将怎样在程序中组织那些部件。为了组织我们的部件,我们会使用专门的不可见部件,其被称为布局容器(layout containers)。在这章中,我们将提到 Alignment, Fixed, VBox 和 Table 这四种布局容器(layout containers)。
+** Fixed
+   file:demo/fixed.py
+** Alignment
+   file:demo/alignment.py
+** Table
+   file:demo/calculator.py
+** Windows
+   file:demo/windows.py
+
+* 03 PyGTK中的菜单
+** Simple menu
+   file:demo/simplemenu.py
+** Image Menu
+   file:demo/imagemenu.py
+** CheckMenuItem
+   file:demo/checkmenuitem.py
+** SubMenu
+   file:demo/submenu.py
+
+* 04 PyGTK中的工具栏
+** Simple toolbar
+   file:demo/Toolbar.py
+** Toolbars
+   file:demo/Toolbars.py
+** Undo redo
+   file:demo/undoredo.py
+
+* 05 PyGTK 中的信号和事件
+** Simple example
+   file:demo/quitbutton.py
+** Create a custom signal
+   file:demo/customsignal.py
+** Predefined signal handlers
+   file:demo/move.py
+** Signals of a button
+   file:demo/buttonsignals.py
+** Blocking an event handler
+   file:demo/block.py
+
+* PyGTK中的部件
+** Lable
+   file:demo/label.py
+** CheckButton
+   file:demo/checkbutton.py
+** CommboBox
+   file:demo/combobox.py
+** Image
+   file:demo/image.py
+
+* PyGTK中的部件II
+** Entry
+   file:demo/entry.py
+** HScale
+   file:demo/hscale.py
+** ToggleButton
+   file:demo/togglebuttons.py
+** Calendar
+   file:demo/calendar.py
+
+* 08 PyGTK中的高级部件
+** IconView
+   file:demo/iconview.py
+** ListView
+   file:demo/listview.py
