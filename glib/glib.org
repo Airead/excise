@@ -1,0 +1,181 @@
+learning glib
+* Glib Data Types
+** Hash Tables
+   Hash Tables - associations between keys and values so that given a key the value can be found quickly.
+
+*** Description
+    A GHashTable provides associations between keys and values which is optimized so that given a key, the associated value can be found very quickly.
+
+    Note that neither key nor values are copied when inserted into the GHashTable, so they must exist for the lifetime of the GHashTable. This means that the use of static strings is OK, but temporary string (i.e. those create in buffers and those returned by GTK+ widgets) should be copied with g_strdup() before being inserted.
+
+    If keys or values are dynamically allocated, you must be careful to ensure that they are freed when they are removed from the GHashTable, and also when they are overwritten by new insertions into the GHashTable. It is also not advisable to mix static string and dynamically-allocated string in a GHashTable, beause it then becomes difficult to determine whether the string should be freed.
+
+    To create a GHashTable, use g_hash_table_new().
+
+    To insert a key and value into a GHashTable, use g_hash_table_insert().
+    
+    To lookup a value corresponding to a given key, use g_hash_table_lookup() and g_hash_table_lookup_extended().
+
+    g_hash_table_lookup_extended() can also be used to simply check if a key is present in the hash table.
+
+    To remove a key and value, use g_hash_table_remove().
+
+    To call a function for each key and value pair use g_hash_table_foreach() or use a iterator to iterate over the dey/value pairs in the hash table, see GHashTableIter.
+
+    To destroy a GHashTable use g_hash_table_destroy().
+
+*** Example 19. Using a GHashTables as a set
+    A common use-case for hash tables is to store information abot a set of keys, without associating any particular value with each key. GHashTable optimizes one way of doing so: If you store only key-value pairs where key == value, then GHashTable does not allocate memory to store the values, which can be a considerable space saving, if your set is large.
+    file:demo/set.c
+
+*** Details
+**** GHashTable
+     typedef struct _GHashTable GHashTable;
+     
+     The GHashTable struct is an opaque data structure to represent a Hash Table. It should only be accessed via the following functions.
+
+**** g_hash_table_new()
+     Creates a new GHashTable with a reference vount of 1.
+     file:demo/g_hash_table_new.c
+
+**** g_hash_table_new_full()
+     Creates a new GHashTable like g_hash_table_new() with a reference count of 1 and allows to specify function to free the memory allocated for the key and value that get called when removing the entry from the GHashTable.
+     file:demo/g_hash_table_new_full.c
+
+**** GHashFunc()
+     guint (*GHashFunc) (gconstpinter key);
+
+     Specifies the type of the hash function which is passed to g_hash_table_new() when a GHashTable is created.
+
+     The function is passed a key and should return a guint hash value. The functions g_direct_shash(), g_int_hash() and g_str_hash() provide hash functions which can be used when the key is a gpointer, gint, and gchar* respectively.
+
+**** GEqualFunc()
+     guint (*GHashFunc) (gconstpointer a, gconstpointer b);
+
+     Specifies the type of a function used to test two values for equality. The function should return TRUE if both values are equal and FALSE otherwise.
+
+**** g_hash_table_insert()
+     Inserts a new key and value into a GHashTable.
+     
+     If the key already exists in the GHashTable its current value is replaced with the new value. If you supplied a value_destroy_func when creating the GHashTable, the old value is freed using that function. If you supplied a key_destroy_func when creating the GHashTable, the pass key is freed using that function.
+     file:demo/g_hash_table_insert.c
+     
+**** g_hash_table_replace()
+     Insert a new key and value into a GHashTable similar to g_hash_table_insert(). The diference is that the key already exists in the GHashTable, it gets replaced by the new key. If you supplied a value_destroy_func when creating the GHashTable, the old value is freed using that function. If you supplied a key_destroy_func when creating the GHashTable, the old key is freed using that function.
+     file:demo/g_hash_table_replace.c
+
+**** g_hash_table_size()
+     Returns the number of elements contained in the GHashTable.
+     file:demo/g_hash_table_size.c
+
+**** g_hash_table_lookup()
+     Looks up a key in a GHashTable. Note that this function cannot distinguish between a key that is not present and one which is present and has the value NULL. If you need this distnction, use g_hash_table_lookup_extended().
+     file:demo/g_hash_table_lookup.c
+
+**** g_hash_table_lookup_extended()
+     Looks up a key int the GHashTable, returning the original key and the associated value and a gboolean which is TRUE if the key was found. This is useful if you need to free the memory allocated for the original key, for example before calling g_hash_table_remove().
+
+     You can actually pass NULL for lookup_key to test whether the NULL key exists, provided the hash and equal functions of hash_table are NULL-safe.
+     file:demo/g_hash_table_lookup_extended.c
+
+**** g_hash_table_foreach()
+     Calls the given function for each of the key/value pairs in the GHashTable. The function is passed the key and value of each pair, and the given user_data parameter. The hash table may not be modified while iterating over it (you can't add/remove items). To remove all items matching a predicate, use g_hash_table_foreach_remove().
+
+     See g_hash_table_find() for performace caveats for linear order searches in contrast to g_hash_table_lookup().
+     file:demo/g_hash_table_foreach.c learning with GHFunc(), a callback funciton
+
+**** g_hash_table_find()
+     Calls the given function for key/value pairs in the GHashTable until predicate return TRUE. The function is passed the key and value of each pair, and the given user_data parameter. The hash table may not be modified while iterating over it (you can't add/remove items).
+
+     Note, that hash tables are really only optimized for forward lookups, i.e. g_hash_table_lookup(). So code that frequently issues g_hash_table_find() or g_hash_table_foreach() (e.g. in the order of once per every entry in hash table) should probably be reworked to use additional or different data structures for reverse lookups (keep in mind that an O(n) find/foreach operation issued for all n values in a hash table ends up needing O(n*n) operations).
+     file:demo/g_hash_table_find.c learning with GHRFunc(), it's a callback funciton.
+
+**** g_hash_table_remove()
+     Removes a key and its associated value from a GHashTable.
+
+     If the GHashTable was created using g_hash_table_new_full(), the key and value are freed using the supplied destroy functions, otherwise you have to make sure that any dynamically allocated values are freed yourself.
+     file:demo/g_hash_table_remove.c
+
+**** g_hash_table_steal()
+     Removes a key and its associated value from a GHashTable without calling the key and value destroy functions.
+
+**** g_hash_table_foreach_remove()
+     Calls the given function for each key/value pair in the GHashTable. If the function returns TRUE, then the key/value pair is removed from the GHashTable. If you supplied key or value destroy functions when creating the GHashTable, the are used to free the memory allocated for the removed keys and values.
+
+     See GHashTableIter for an alternative way to loop over the key/value pairs in the hash table.
+
+**** g_hash_table_foreach_steal()
+     Calls the given function for each key/value pair in the GHashTable. If the function returns TRUE, then the key/value pair is removed from the GHashTable, bu no key or value destroy functions are called.
+
+     See GHashTableIter for an alternative way to loop over the key/value pairs in the hash table.
+
+**** g_hash_table_remove_all()
+     Removes all keys and their associated values from a GHashTable.
+
+     If the GHashTable was created using g_hash_table_new_full(), the keys and values are freed using the supplied destroy functions, otherwise you have to make sure that any dynamically allocated values are freed yourself.
+     file:demo/g_hash_table_remove_all.c
+
+**** g_hash_table_steal_all()
+     Removes all keys and their associated values from a GHashTable without calling the key and value destroy funcions.
+
+**** g_hash_table_get_keys()
+     Retrieves every key inside hash_table. The returned data is valid until hash_table is modified.
+     file:demo/g_hash_table_get_keys.c
+
+**** g_hash_table_get_values()
+     Retrieves every value inside hash_table. The returned data is valid until hash_table is modified.
+     file:demo/g_hash_table_get_values.c
+
+**** g_hash_table_destroy()
+     Destroys all keys and values in the GHashTable and decrements its reference count by 1. if keys and/or values are dynamically allocated, you should either free them first or create th GHashTable with destroy notifiers using g_hash_table_new_full(). In the latter case the destroy functions you supplied will be called on all keys and values during the destruction phase.
+     
+**** g_hash_table_ref()
+     Atomically increments the reference count of hash_table by one. This function is MT-safe and may be called from any thread.
+
+**** g_hash_table_unref()
+     Atomically decrements the reference count of hash_table by one. If the reference count drops to 0, all keys and values will be estroyed, and all memory allocated by the hash table is released. This function is MT-safe and may be called from any thread.
+
+**** struct GHashTableIter
+
+**** g_hash_table_iter_init()
+
+**** g_hash_table_iter_next()
+
+**** g_hash_table_iter_get_hash_table()
+
+**** g_hash_table_iter_replace()
+
+**** g_hash_table_iter_remove()
+
+**** g_hash_table_iter_steal()
+
+**** g_direct_equal()
+
+**** ...
+** Doubly-Linked Lists
+   Doubly-Linked Lists - linked lists containing integer values or pointers to data, with the ability to iterate over the list in both directions
+   
+*** Description
+    The GList structure and its associated functions provide a standard doubly-linked list data structure.
+
+    Each element in the list contains a piece of data, together with pointers which link to the previous and next elements in the list. Using these pointers it is possible to move through the list in both directions (unlike the Singly-Linked Lists which only allows movement through the list in the forward direction).
+
+    The data contained in each element can be either interger values, by using one of the Type Conversion Macros, or simply pionters to any type of data.
+
+    List elements are allocated from the slice allocator, which is more effcient than allocating elements individually.
+
+    Note that most of the GList functions expect to be passed a pointer to the first element in the list. The functions which insert elements return the new start of the list, which may have changed.
+
+    There is no function to create a GList. NULL is considered to be the empty list so you simply set a GList* to NULL.
+
+    To add elements, use g_list_append(), g_list_prepend(), g_list_insert() and g_list_insert_sorted().
+
+    To remove elements, use g_lisst_remove().
+
+    To find elements in the list use g_list_first(), g_list_last(), g_list_next(), g_list_previous(), g_list_nth(), g_list_nth_data(), g_list_find() and g_list_find_custom().
+
+    To find the index of an element use g_list_position() and g_list_index().
+
+    To call a function for each element in the list use g_list_foreach().
+
+    To free the entire list, use g_list_free().
