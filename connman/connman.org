@@ -1,0 +1,49 @@
+learning connman 
+* overview-api.txt
+** Service basics
+   The basic idea is that Connection Manager maintains a single flat and sorted list of all available, preferred or previously used services.
+
+   This list of service is sorted by Connection Manager and there is no need for the user interface to implement its own sorting.
+
+** Service order
+
+** Service tweaks
+   The inter faces of Connection Manager will always export all services that are currently known.
+
+** Service naming
+   Every service will have a name property that allows the user interface to display them directly. All names will be already converted into UTF-8.
+
+   In case of WiFi this will be the SSID value. The SSID is a binary array and will be converted into printable form.
+
+** Service states
+   Every service can have multiple states that indicate what is currently going on with it.
+
+** Application basics
+   - All applications should use D-Bus to commuicate with Connection Manager. The main entry point is the manager object. Currently the manager object is located at "/", but this might change to allow full namespaceing of the API in the future. 
+
+   - The manager interface is documented in manager-api.txt and contains a set of global properties and methods.
+     file:demo/get_global_properties.py
+
+   - The manager object contains refences to profiles, devices, services and connections. All these references represent other interfaces that allow detailed control of Connection Manager.
+
+   - Every local Ethernet card will show up as exactly one service.
+
+   - This create a simple list that can be directly displayed to the users since these are the exact details users should care about.
+     file:demo/get_services.py
+
+   - The ervice interface is documented in service-api.txt and contains common properties valid for all services. 
+
+   - It also contains method to connect or disconnect a specific a specific service. This allows users to select a specific service.
+
+   - Connecting (or disconnecting) a specific service manually is as simple as just telling it to actually connect:
+     service.Connect() or service.Disconnect()
+
+   - Application should be able to handle such errors and will alsobe notified of changes via signals.
+
+   - to monitor the current status of service the state property can be used. It gives detailed information about the current progress.
+     properties = service.GetProperties()
+     print properties["state"]
+
+   - All state changes are also sent via the PropertyChanged signal on the service interface. This allows asynchronous monitoring without having to poll Connection Manager for changes.
+* client
+  file:demo/connman-client.py

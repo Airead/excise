@@ -27,7 +27,7 @@ static void gsm_sms_class_init(GsmSmsClass *class)
     guint g_signal_new (const gchar *signal_name, //the name for the signal
 
                         GType itype, //the type this signal pertains to. it will also pertain to type which are derived from this type.
-
+                       
                         GSignalFlags signal_flags, //You should at least specify G_SIGNAL_RUN_FIRST/LAST
 
                         guint class_offset, //The offset of the function pointer in the class structure for this type. Pass 0 to not associate a class method slot with this signal.
