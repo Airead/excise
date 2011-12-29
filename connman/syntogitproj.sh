@@ -10,6 +10,6 @@ PROJ=connman
 rsync -vcar  --include="*.c" --include="Makefile" --include="README" \
 	--include="*.org" --include="*.sh" --include="demo" \
 	--include="*.py" --include="simplestruct" \
-	--include="demo/interface" --include="demo/sendstruct" \
+	--include="demo/interface" --include="demo/backend" \
         --exclude="*" \
 	../$PROJ/* ~/study/git-proj/excise/$PROJ
