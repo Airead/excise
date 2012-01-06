@@ -7,6 +7,79 @@
 #include "connman-manager.h"
 #include "error.h"
 
+static void
+on_properties_changed (GDBusProxy          *proxy,
+                       GVariant            *changed_properties,
+                       const gchar* const  *invalidated_properties,
+                       gpointer             user_data)
+{
+    /* Note that we are guaranteed that changed_properties and
+     * invalidated_properties are never NULL
+     */
+
+    if (g_variant_n_children (changed_properties) > 0)
+    {
+        GVariantIter *iter;
+        const gchar *key;
+        GVariant *value;
+
+        g_print (" *** Properties Changed:\n");
+        g_variant_get (changed_properties,
+                       "a{sv}",
+                       &iter);
+        while (g_variant_iter_loop (iter, "{&sv}", &key, &value))
+        {
+            gchar *value_str;
+            value_str = g_variant_print (value, TRUE);
+            g_print ("      %s -> %s\n", key, value_str);
+            g_free (value_str);
+        }
+        g_variant_iter_free (iter);
+    }
+
+    if (g_strv_length ((GStrv) invalidated_properties) > 0)
+    {
+        guint n;
+        g_print (" *** Properties Invalidated:\n");
+        for (n = 0; invalidated_properties[n] != NULL; n++)
+        {
+            const gchar *key = invalidated_properties[n];
+            g_print ("      %s\n", key);
+        }
+    }
+}
+
+static void
+on_signal (GDBusProxy *proxy,
+           gchar      *sender_name,
+           gchar      *signal_name,
+           GVariant   *parameters,
+           gpointer    user_data)
+{
+    gchar *parameters_str;
+
+    parameters_str = g_variant_print (parameters, TRUE);
+    g_print (" *** Received Signal: %s: %s\n",
+             signal_name,
+             parameters_str);
+    g_free (parameters_str);
+}
+
+static void
+print_proxy (GDBusProxy *proxy)
+{
+    g_print("owner changed\n");
+}
+
+static void
+on_name_owner_notify (GObject    *object,
+                      GParamSpec *pspec,
+                      gpointer    user_data)
+{
+    GDBusProxy *proxy = G_DBUS_PROXY (object);
+    print_proxy (proxy);
+}
+
 int conn_manager_init(struct connman_manager *self)
 {
     self->loop = g_main_loop_new(NULL, FALSE);
@@ -74,7 +147,7 @@ static void get_properties_cb(GObject *source_object, GAsyncResult *res, gpointe
 
     while (g_variant_iter_next(&dict_iter, "{sv}", &name, &variant)) {
         g_print("key: %s,\t", name);
-        g_print("%s\n",g_variant_print(variant, FALSE));
+        g_print("%s\n",g_variant_print(variant, TRUE));
 
         g_free(name);
     }
@@ -130,6 +203,20 @@ void create_proxy_cb(GObject *source_object, GAsyncResult *res,
         PRINTERR("Failed to get connman proxy, but no errors");
         return;
     }
+
+    /* register signal */
+    g_signal_connect (proxy,
+                      "g-properties-changed",
+                      G_CALLBACK (on_properties_changed),
+                      NULL);
+    g_signal_connect (proxy,
+                      "g-signal",
+                      G_CALLBACK (on_signal),
+                      NULL);
+    g_signal_connect (proxy,
+                      "notify::g-name-owner",
+                      G_CALLBACK (on_name_owner_notify),
+                      NULL);
 
     self->proxy = proxy;
 }

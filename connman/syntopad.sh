@@ -8,7 +8,7 @@
 rsync -vcar -e "ssh"  --include="*.c" --include="Makefile" --include="README" \
 	--include="*.org" --include="*.sh" --include="demo" \
 	--include="*.py" --include="*.xml" --include="python" \
-	--include="*.h" \
+	--include="*.h" --include="demo/*"\
 	--include="pygtk" --include="demo/sendstruct" \
         --exclude="*" \
-	../connman/* ijimu@192.168.0.201:/home/ijimu/study/connman
+	../connman/* ijimu@192.168.0.242:/home/ijimu/study/connman

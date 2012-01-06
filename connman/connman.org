@@ -47,3 +47,6 @@ learning connman
    - All state changes are also sent via the PropertyChanged signal on the service interface. This allows asynchronous monitoring without having to poll Connection Manager for changes.
 * client
   file:demo/connman-client.py
+* hacking connman
+** GOptionContext
+   file:demo/goptioncontext.c

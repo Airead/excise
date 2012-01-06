@@ -8,6 +8,8 @@
 #include "connman-manager.h"
 
 
+
+
 #define STDIN_BUF_SIZE    1024
 static gboolean channel_cb(GIOChannel *source, GIOCondition condition, gpointer data)
 {
