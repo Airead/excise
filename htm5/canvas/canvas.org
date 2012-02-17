@@ -1,0 +1,32 @@
+learning htm5 Canvas
+* Chapter 1 Introduction to HTML5 Canvas
+** The Basic HTML Page
+   A basic HTML page is divided into sections, commonly <head> and <body>. The new HTML5 specification adds a few new sections, such as <nav>, <article>, <header>, and <footer>.
+   Basic HTML for a page might look like
+** A Simple HTML5 Page
+   file:demo/CH1EX1.html
+** Basic HTML We Will Use in This Book
+*** <div>
+    This is the main HTML tag that we will use in this book. We will use it to position <canvas> on the HTML page.
+    file:demo/CH1EX2.html
+** The document object model (DOM) and Canvas
+   The Document Object Model represents all the objects on an HTML page.
+** JavaScript and Canvas
+   JavaScript, the programming language we will use to create Canvas applications, can be run inside nearly any web browser in existence.
+** JavaScript Frameworks and Libraries
+   There are many popular javaScript frameworks that developers use to help get their JavaScript off the ground, including libraries such as jQuery, Processing.js, and others.
+** Where Does JavaScript Go and Why?
+** HTML5 Canvas "Hello World!"
+** Encapsulating Your JavaScript Code for Canvas
+   file:demo/CH1EX3.html
+** The 2D Context and the Current State
+** The HTML5 Canvas Object
+** Another Example: Guess The Letter
+   file:demo/CH1EX4.html
+
+* Drawing on the Canvas
+** The Basic File Setup for This Chapter
+   file:demo/baicfilesetup.html
+** The Basic Rectangle Shape
+   file:demo/basic_rectangles.html
+   file:demo/basic_rectangles.js
