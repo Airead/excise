@@ -180,6 +180,15 @@ learning glib
 
     To free the entire list, use g_list_free().
 
+* GObject
+** Generic values
+   Generic values — A polymorphic type that can hold values of any other type.
+*** Description
+    The GValue structure is basically a variable container that consists of a type identifier and a specific value of that type. The type identifier within a GValue structure always determines the type of the associated value. To create a undefined GValue structure, simply create a zero-filled Gvalue structure. To initialize the GValue, use the g_value_init() function. A GValue cannot be used until it is initialized. The basic type operations (such as freeing and copying) are determined by the GTypeValueTable associated with the type ID stored in the GValue. Other GValue operations (such as converting values between types) are provided by this interface.
+
+    The code in the example program below demonstrates GValue's features.
+
+    file:demo/GValue_example.c
 * GIO
 ** GDBusProxy
    GDBusProxy - Client-side D-Bus interface proxy
@@ -294,3 +303,7 @@ learning glib
 
 **** The "g-interface-info" property
      Ensure that interactions with this proxy conform to the given interface. For example, when completing a method call, if the type signautre of the message isn't what's expected, the given GError is set. Signals that have a type signature mismatch are simply dropped.
+
+* Test Example
+** GHashTable store GValue(with string) and print table
+   file:demo/GHashTableStoreGValue.c

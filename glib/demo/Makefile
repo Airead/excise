@@ -13,7 +13,7 @@ LDFLAGS += $(shell pkg-config --libs gio-2.0)
 #LDFLAGS += $(shell pkg-config --libs gtk+-2.0)
 
 SOURCE =  $(wildcard *.c)
-TARGETS	= $(patsubst %.c, %, $(SOURCE))
+TARGETS	:= $(patsubst %.c, %, $(SOURCE))
 
 %: %.c
 	@echo $(CC) $< -o $@
