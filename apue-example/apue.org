@@ -258,6 +258,7 @@
 *** Reading Directories
     - file:excise/readdir.c
     - file:excise/readdir_r.c
+    - file:excise/recursively_readdir.c
 
 *** chdir, fchdir, and getcwd Function
     - file:excise/chdir.c

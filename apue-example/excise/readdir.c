@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	errno = 0;
 	//struct dirent *readdir(DIR *dirp);
 	while((de = readdir(dirp)) != NULL){
-		fprintf(stdout, "%s\n", de->d_name);
+		fprintf(stdout, "%s, type: %u\n", de->d_name, de->d_type);
 	}
 	if(errno != 0){
 		fprintf(stderr, "readdir %s failed: %s\n", argv[1], strerror(errno));
