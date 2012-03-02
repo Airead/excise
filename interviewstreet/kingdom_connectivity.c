@@ -23,6 +23,8 @@ struct road {
     int times;
 };
 
+int city_num, road_num;
+
 /**
  * @brief get road list from stdin
  * @param road_num : the number of road
@@ -86,6 +88,7 @@ int *get_city_from_list(int city, struct road *road_list)
         if (road->to == city) {
             *tmp_list++ = road->from;
             road->times++;
+            DBG("\n%d --> %d: times: %d\n", road->from, road->to, road->times);
         }
         road++;
     }
@@ -106,24 +109,37 @@ int get_path_number(int city_start, int city_to, struct road *road_list, int roa
     int num, *city_from_list, tmp_num;
     int *pcity;
     struct road *road;
+    static int target_from;            /*
+                                        * if target city call
+                                        * get_city_from_list, target_from set 1,
+                                        * and don't call again
+                                        */
 
     DBG("->%d", city_to);
 
     num = 0;
 
+    if (city_to == city_num) {
+        if (target_from == 0) {
+            target_from = 1;
+        } else {
+            return 0;
+        }
+    }
+
     city_from_list = get_city_from_list(city_to, road_list);
+    if (city_from_list == NULL) {
+        return 0;
+    }
 
     /* check infinite*/
     road = road_list;
     while (road->to != 0) {
         if (road->times >= road_num) {
+            DBG("%d --> %d: times: %d\n", road->from, road->to, road->times);
             return -1;
         }
         road++;
-    }
-    
-    if (city_from_list == NULL) {
-        return 0;
     }
 
     pcity = city_from_list;
@@ -146,7 +162,7 @@ int get_path_number(int city_start, int city_to, struct road *road_list, int roa
 
 int main(int argc, char *argv[])
 {
-    int i, city_num, road_num, path_num;
+    int i, path_num;
     struct road *road_list;
     
     scanf("%d %d", &city_num, &road_num);
