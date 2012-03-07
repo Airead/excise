@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#define _DEBUG_
+#define _DEBUG_
 
 #ifdef _DEBUG_
 #define DBG(fmt, args...) printf(fmt, ##args)
@@ -143,6 +143,7 @@ int is_cyclic(struct point *point_list, int city_num)
 {
     int i;
     struct point *p;
+    struct edge *e;
 
     for (i = 0; i < city_num; i++) {
         point_list[i].status = 0;
@@ -151,9 +152,10 @@ int is_cyclic(struct point *point_list, int city_num)
     i = 0;
     while ((p = find_point_from_indeg(0, point_list, city_num)) != NULL) {
         p->status = 1;
-        while (p->edge != NULL) {
-            point_list[p->edge->end - 1].indeg--;
-            p->edge = p->edge->next;
+        e = p->edge;
+        while (e != NULL) {
+            point_list[e->end - 1].indeg--;
+            e = e->next;
         }
         i++;
     }
@@ -174,23 +176,28 @@ int is_cyclic(struct point *point_list, int city_num)
  *
  * check the second parameter point 
  */
-int check_target(struct point *point_list, int city, int city_num, int *path_num)
+int check_target(struct point *point_list, int city, int city_num, int *path_num, char *trace)
 {
     struct edge *tmpedge;
+    char buf[32];
 
-    DBG("%d->", city);
+    snprintf(buf, 32, "%d->", city);
+    strcat(trace, buf);
 
     if (city == city_num) {
-        DBG("++");
+        DBG("%s\n", trace);
         (*path_num)++;
+        trace[strlen(trace) - 3] = '\0';
         return 0;
     }
 
     tmpedge = point_list[city - 1].edge;
     while (tmpedge != NULL) {
-        check_target(point_list, tmpedge->end, city_num, path_num);
+        check_target(point_list, tmpedge->end, city_num, path_num, trace);
         tmpedge = tmpedge->next;
     }
+
+    trace[strlen(trace) - 3] = '\0';
 
     return 0;
 }
@@ -205,9 +212,11 @@ int check_target(struct point *point_list, int city, int city_num, int *path_num
 int get_path_number(struct point *point_list, int city_num, int edge_num)
 {
     int path_num;
+    char trace[1024];
 
+    memset(trace, 0, sizeof(trace));
     path_num = 0;
-    check_target(point_list, 1, city_num, &path_num);
+    check_target(point_list, 1, city_num, &path_num, trace);
     
     return path_num;
 }
@@ -239,11 +248,15 @@ int debug_point_list(struct point *point_list, int city_num)
  * @param edge_num
  * @return on success returns 0, otherwise returns -1
  */
-int point_list_reset(struct point *point_list, struct edge *edge_list, int edge_num)
+int point_list_reset(struct point *point_list, struct edge *edge_list, int city_num, int edge_num)
 {
     int i;
 
     for (i = 0; i < edge_num; i++) {
+        if (edge_list[i].begin == city_num) {
+            DBG("ignore %d --> %d\n", edge_list[i].begin, edge_list[i].end);
+            continue;
+        }
         if (point_list_insert_edge(point_list, edge_list[i].begin, edge_list[i].end) < 0) {
             fprintf(stderr, "inset edge failed\n");
             return -1;
@@ -273,26 +286,22 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    if (point_list_reset(point_list, edge_list, edge_num) < 0) {
+    if (point_list_reset(point_list, edge_list, city_num, edge_num) < 0) {
         fprintf(stderr, "point list reset failed\n");
         exit(1);
     }
 
-//    debug_point_list(point_list, city_num);
+    debug_point_list(point_list, city_num);
  
     if (is_cyclic(point_list, city_num) != 0) {
         fprintf(stdout, "INFINITE PATHS");
         return 0;
     }
 
-    if (point_list_reset(point_list, edge_list, edge_num) < 0) {
-        fprintf(stderr, "point list reset failed\n");
-        exit(1);
-    }
-
     path_num = get_path_number(point_list, city_num, edge_num);
 
     fprintf(stdout, "%d", path_num);
-    
+    DBG("\n");
+
     return 0;
 }
