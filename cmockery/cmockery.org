@@ -19,12 +19,12 @@ learning cmockery
    file:demo/assert_module.c
    file:demo/assert_module_test.c
 
-*** Assert Macros
-    Cmockery provides an assortment of assert macros that tests applications should use use in preference to the C standard library's assert macro. On an assertion failure a Cmockery assert macro will write the failure to the standard error stream and signal a test failure. Due to limitations of the C language the general C standard library assert() and Cmockery's assert_true() and assert_false() macros can only display the expression that caused the assert failure. Cmockery's type specific assert macros, assert{type}equal() and assert{type}not_equal(), display the data that caused the assertion failure which increases data visibility aiding  debugging of failing test cases.
+** Assert Macros
+   Cmockery provides an assortment of assert macros that tests applications should use use in preference to the C standard library's assert macro. On an assertion failure a Cmockery assert macro will write the failure to the standard error stream and signal a test failure. Due to limitations of the C language the general C standard library assert() and Cmockery's assert_true() and assert_false() macros can only display the expression that caused the assert failure. Cmockery's type specific assert macros, assert{type}equal() and assert{type}not_equal(), display the data that caused the assertion failure which increases data visibility aiding  debugging of failing test cases.
 
-    Using assert{type}equal() macros
-    file:demo/assert_macro.c
-    file:demo/assert_macro_test.c
+   Using assert{type}equal() macros
+   file:demo/assert_macro.c
+   file:demo/assert_macro_test.c
 
 ** Exception Handling
   Before a test function is executed by run_tests(), exception / signal handlers are overridden with a handler that simply displays an error and exits a test function if an exception occurs. If an exception occurs outside of a test function, for example in Cmockery itself, the application aborts execution and returns an error code.
