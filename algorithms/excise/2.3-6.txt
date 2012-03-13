@@ -1,0 +1,34 @@
+P:        观察一下2.1节中给出的 INSERTION-SORT 过程，在第5～7行的 while 循环中，采用了一种线性查找策略，在已排序的数组A[1..j-1]中（反向）扫描。是否可以改用二分查找策略（（见练习2.3-5），来将插入排序的总休最坏情况运行时间改善至O(nlgn)
+
+INSERTION-SORT(A)
+for j <- 2 to length[A]                                       n
+    do key <- A[j]                                            n-1
+        //Insert A[j] into the sorted sequence A[1..j-1].     0
+        i <- j-1                                              n-1
+        while i>0 and A[i]>key                                (n-1)(n+2)/2
+            do A[i+1] <- A[i]                                 (n-1)(n+2)/2
+            i <- i-1                                          (n-1)(n+2)/2
+        A[i+1] <- key                                         n-1
+
+T(n) = O(n^2)
+
+采用二分查找
+INSERTION-SORT(A) 
+for j <- 2 to n                                 n
+    do key <- A[j]                              n-1
+       r <- BS(A, 1, j-1)                       lgn
+       for i <- j to r+1                        2+3+...+n
+           do A[j] <- A[j-1]                    1+2+...+(n-1)
+       A[r] <- key                              n-1
+
+BS(A, p, q)
+
+用数组不行，用链表可以
+
+INSERTION-SORT(A) 
+for j <- 2 to n                                 n
+    do key <- A[j]                              n-1
+       r <- BS(A, 1, j-1)                       (n-1)lgn
+       插入到位置r                                1
+
+T(n) = O(nlgn)

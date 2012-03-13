@@ -1,0 +1,32 @@
+P:    请给出一个运行时间为O(nlgn)的算法，使之能在给定一个由n个整数构成的集合S和另一个整数x时，判断出S中是否存在有两个其和等于x的元素。
+
+ISHAVE(A, x)
+for j <- 1 to n-1                 n
+do v = x-A[j]                     n-1
+   if BINARY_SEARCH(A, v)         (n-1)lgn
+      then return true
+      else return false
+
+T(n) = O(nlgn)
+
+笨一点的：
+for j <- 1 to n-1                           n
+    do i = j+1                              n-1
+       for i to n                           (n-1)(n-1)/2
+           do if i+j = x                    (n-1)(n-1)/2
+                 then return true
+                 else return false
+T(n) = O(n^2)
+
+或者
+
+for j <- 1 to n-1                           n
+    do v = x-A[j]                           n-1
+       for i <- j+1 to n                    (n-1)(n-1)/2
+           do if A[i] = v                   (n-1)(n-1)/2
+                 then return true
+                 else return false
+
+T(n) = O(n^2)
+
+所以说，时间都节约在二分法查找上了

@@ -1,0 +1,49 @@
+P:    改写 MERGE 过程，使之不使用哨兵元素，而是在一旦数组L或R中的所有元素都被复制回数组A后，就立即停止，再将另一个数组中余下的元素复制回数组A中。
+
+有哨兵：
+MERGE(A, p, q, r)
+n1 <- q-p+1
+n2 <- r-q
+create arrays L[1..n1+1] and R[1..n2+1]
+for i <- 1 to n1
+    do L[i] <- A[p+i-1]
+for j <- 1 to n2
+    do R[j] <- A[q+j]
+L[n1+1] <- max       //max 代表无穷大
+R[n2+1] <- max
+i <- 1
+j <- 1
+for k <- p to r
+    do if L[i]<=R[i]
+          then A[k] <- L[i]
+               i <- i+1
+          else
+               A[k] <- R[i]
+               j <- j+1
+
+无哨兵：
+MERGE(A, p, q, r)
+n1 <- q-p+1
+n2 <- r-q
+create arrays L[1..n1] and R[1..n2]
+for i <- 1 to n1
+    do L[i] <- A[p+i-1]
+for j <- 1 to n2
+    do R[j] <- A[q+j]
+i <- 1
+j <- 1
+for k <- p to r
+    do if i>n1 || j>n2
+          then break;
+       if L[i]<=R[i]
+          then A[k] <- L[i]
+               i <- i+1
+          else
+               A[k] <- R[i]
+               j <- j+1
+for i to n1
+    do A[k] <- L[i]
+       k <- k+1
+for j to n2
+    do A[k] <- R[j]
+       k <- k+1
