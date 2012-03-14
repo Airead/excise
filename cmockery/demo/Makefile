@@ -1,7 +1,7 @@
 CC = gcc
 
 CFLAGS	= -Wall -g
-#CFLAGS += -D_DEBUG_COLOR
+CFLAGS += -DUNIT_TESTING=1
 #CFLAGS += $(shell pkg-config --cflags glib-2.0 )
 
 LDFLAGS	= 
@@ -12,7 +12,7 @@ INCLUDE =
 INCLUDE += -I../include
 
 BIN = assert_module_test.out assert_macro_test.out customer_database_test.out \
-	key_value_test.out
+	key_value_test.out calculator_test.out
 
 %.o: %.c
 	@echo CC -c $< -o $@

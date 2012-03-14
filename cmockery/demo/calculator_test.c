@@ -139,7 +139,7 @@ void test_find_operator_function_by_string_null_string(void **state) {
 /* Ensure find_operator_function_by_string() returns NULL when a NULL pointer
  * is specified as the table to search when the table size is 0. */
 void test_find_operator_function_by_string_valid_null_functions(void **state) {
-    assert_int_equal(find_operator_function_by_string(0, NULL, "test"), NULL);
+    assert_int_equal((int)find_operator_function_by_string(0, NULL, "test"), (int)NULL);
 }
 
 /* Ensure find_operator_function_by_string() returns NULL when searching for
@@ -150,9 +150,9 @@ void test_find_operator_function_by_string_not_found(void **state) {
 		{"-", binary_operator},
 		{"/", binary_operator},
 	};
-	assert_int_equal(find_operator_function_by_string(
+	assert_int_equal((int)find_operator_function_by_string(
                          array_length(operator_functions), operator_functions, "test"),
-                     NULL);
+                     (int)NULL);
 }
 
 /* Ensure find_operator_function_by_string() returns the correct function when
@@ -163,7 +163,7 @@ void test_find_operator_function_by_string_found(void **state) {
 		{"-", (BinaryOperator)0xDEADBEEF},
 		{"/", (BinaryOperator)0xABADCAFE},
 	};
-	assert_int_equal(find_operator_function_by_string(
+	assert_int_equal((int)find_operator_function_by_string(
                          array_length(operator_functions), operator_functions, "-"),
                      0xDEADBEEF);
 }

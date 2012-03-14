@@ -95,24 +95,27 @@ int get_known_sum(struct test_case *c, int *known_num)
  */
 int get_possible_num_for(int limit, int cy_num, int p_num, int *pos_num)
 {
-    int i, j;
+    int i;
 
     for (i = 0; i <= limit; i++) {
-        for (j = 0; j < cy_num; j++) {
-            DBG("  =");
-        }
         DBG("limit: %d, i: %d\n", limit, i);
         if (i == p_num) {
             break;
         }
-
+/*
         if (limit - i == 0) {
             DBG("++\n");
             (*pos_num)++;
-            return 0;
+            break;
         }
-        if (cy_num - 1 > 0) {
+*/  
+      if (cy_num - 1 > 0) {
             get_possible_num_for(limit - i, cy_num - 1, p_num, pos_num);
+        } else {
+            if (limit < p_num) {
+                (*pos_num)++;
+            }
+            break;
         }
     }
 
@@ -177,3 +180,5 @@ int main(int argc, char *argv[])
     
     return 0;
 }
+
+
