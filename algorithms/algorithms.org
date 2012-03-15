@@ -1,5 +1,5 @@
 Introduction to Algorithms Second Edition
-* 第二章
+* 第二章 算法入门
 ** 2.1 插入排序
 *** 2.1-2 
     重写过程 INSERTION-SORT，使之按非升序（而不是按非降序）排序。
@@ -40,3 +40,26 @@ Introduction to Algorithms Second Edition
     请给出一个运行时间为O(nlgn)的算法，使之能在给定一个由n个整数构成的集合S和另一个整数x时，判断出S中是否存在有两个其和等于x的元素。
     file:excise/2.3-7.txt
    
+* 第六章 堆排序
+** 6.2 保持堆的性质
+*** 6.2-2 
+    由过程MAX-HEAPIFY开始，写出进行对应的最小堆操作的 MIN-HEAPIFY(A, i) 过程的伪代码，并比较 MIN-HEAPIFY 与 MAX-HEAPIFY 的运行时间。
+    file:excise/6.2-2.txt
+*** 6.2-5
+    MAX-HEAPIFY 的代码效率较高，但第10行中的递归调用可能例外，它可使某些编译程序产生出低效的代码。请用迭代的控制结构（循环）取代递归结构，从而写一个更为高效的 MAX-HEAPIFY。
+    file:excise/6.2-5.txt
+*** 6.2-6
+    证明：对一个大小为n的堆， MAX-HEAPIFY 的最坏运行时间为Ω(lgn)。
+    file:excise/6.2-6.txt
+** 6.5 优先级队列
+*** 6.5-3
+    使用最小堆实现最小优先级队列，用伪代码写出 HEAP-MINIMUM, HEAP-EXTRACT-MIN, HEAP-DECREASE-KEY 和 MIN-HEAP-INSERT 过程。
+*** 6.5-5
+    使用以下的循环不变式来论证 HEAP-INCREASE-KEY 的正确性：
+    在第4～6行while循环的每次迭找之初，数组 A[1..heap-size[A]] 满足最大堆性质，除了一个可能的例外： A[i]可能大于 A[PARENT(i)]。
+*** 6.5-6
+    说明使用优先级队列来实现一个先进先出队列，另请说明如何用优先级队列来实现栈。
+*** 6.5-7
+    HEAP－DELEETE(A, i)操作将结点i中的项从堆A中删去。对含n个元素的最大堆，请给出时间为O(lgn)的 HEAP-DELETE 的实现。
+*** 6.5.8
+    请给出一个时间为O(nlgk)、用来将k个已排序链表合并为一个排序链表的算法。此处n为所有输入链表中元素的总数。（提示：用一个最小堆来做k路合并）
