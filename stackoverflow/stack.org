@@ -1,0 +1,20 @@
+stack overflow
+* C Language
+** press key quit loop
+   If I had a while loop that I wanted to stop only if the q key is pressed how would I do that. However, I do NOT want it to quite the program.
+   file:answer/press_key_quit_loop.c
+** run script in config file
+   I have a c program running. I want to make the program sleep for certain period say 5 sec. I want this sleep to be induced from a text file containing command "sleep(5)". I want to pass this file through redirection operator (<) while executing the program
+
+   say ./a.out < samplefile.txt
+
+   This samplefile.txt contains sleep(5) command in it. I tried the above scenario but the c program is reading it as stream of characters like s,l,e,e,p which is not our intention.
+   file:answer/run_script_in_config.c
+** first 2 digits
+   My program asks the user for a year like 2056. So in main, I use scanf.
+
+   However, I have a function which requires the first 2 digits of this value only.
+
+   I've tried using another scanf inside the function itself scanf("%2d"...) but then I can't have the other scanf in main for my other functions.
+   file:answer/first_2_digits.c
+   

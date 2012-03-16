@@ -1,0 +1,15 @@
+P:    MAX-HEAPIFY 的代码效率较高，但第10行中的递归调用可能例外，它可使某些编译程序产生出低效的代码。请用迭代的控制结构（循环）取代递归结构，从而写一个更为高效的 MAX-HEAPIFY。
+
+MAX-HEAPIFY(A, i)    
+while i < heap-size[A]
+do l <- LEFT(i)
+   r <- RIGHT(i)
+   if l <= heap-size[A] and A[l] > A[i]
+      then largest <- l
+      else largest <- r
+   if r <= heap-size[A] and A[r] > A[i]
+      then largest <- r
+   if largest != i
+      then A[i] ↔ A[largest]
+           i = largest
+      else break;

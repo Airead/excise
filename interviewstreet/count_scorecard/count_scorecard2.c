@@ -86,14 +86,15 @@ int get_known_sum(struct test_case *c, int *known_num)
     return sum;
 }
 
-unsigned long T(unsigned long *matrix, int fix_earse, int people, int score, int earse)
+unsigned long T(unsigned long *matrix, int fix_score, int fix_earse, int people, int score, int earse)
 {
     unsigned long t[3];
+    int cor, x_cor;             /* symmetrical about the x-axis */
+    int line;
 
     if (score < 0) {
         return 0;
     }
-
 
     if (score == 0 || earse == 0) {
         return matrix[(score * fix_earse) + earse];
@@ -103,14 +104,27 @@ unsigned long T(unsigned long *matrix, int fix_earse, int people, int score, int
         return matrix[(score * fix_earse) + earse];
     }
 
+    t[0] = T(matrix, fix_score, fix_earse, people, score - 1, earse);
+    t[1] = T(matrix, fix_score, fix_earse, people, score, earse -1);
+    t[2] = T(matrix, fix_score, fix_earse, people, score - people, earse -1);
 
-    t[0] = T(matrix, fix_earse, people, score - 1, earse);
-    t[1] = T(matrix, fix_earse, people, score, earse -1);
-    t[2] = T(matrix, fix_earse, people, score - people, earse -1);
+    cor = score * fix_earse + earse;
+    matrix[cor] = (t[0] + t[1] - t[2]) % 1000000007;
 
-    matrix[(score * fix_earse) + earse] = t[0] + t[1] - t[2];
+    /*
+     * (people - 1) * earse - score > (people-1) * earse / 2
+     * 2 * (people-1) * earse - 2 * i > (people-1) * earse / 2
+     * (p-1)*e > 2*i
+     */
+    if ((people - 1) * (earse + 1) > 2 * score) {
+        line = (people - 1) * (earse + 1) - score;
+        if (line <= fix_score) {
+            x_cor = line * fix_earse + earse;
+            matrix[x_cor] = matrix[cor];
+        }
+    }
 
-    return matrix[(score * fix_earse) + earse];
+    return matrix[cor];
 }
 
 unsigned long solve_with_matrix(int people, int score, int earse)
@@ -148,7 +162,7 @@ unsigned long solve_with_matrix(int people, int score, int earse)
     printf("==================\n");
 #endif
 
-    ret = T(matrix, earse, people, score, earse - 1);
+    ret = T(matrix, score, earse, people, score, earse - 1);
 
 #ifdef _DEBUG_
     for (i = 0; i <= score; i++) {
@@ -182,7 +196,7 @@ unsigned long get_possible_num(struct test_case *c)
 
     total_socre = (c->num * (c->num -1)) / 2;
     known_sum = get_known_sum(c, &known_num);
-    if (total_socre < known_num) {
+    if (total_socre < known_sum) {
         return 0;
     }
 
@@ -228,7 +242,7 @@ int main(int argc, char *argv[])
 
     for (i = 0; i < case_num; i++) {
         pos_num = get_possible_num(&cases[i]);
-        fprintf(stdout, "%lu\n", pos_num % 10000000);
+        fprintf(stdout, "%lu\n", pos_num);
     }
     
     return 0;

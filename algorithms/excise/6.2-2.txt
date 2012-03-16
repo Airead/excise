@@ -1,0 +1,26 @@
+P:    由过程MAX-HEAPIFY开始，写出进行对应的最小堆操作的 MIN-HEAPIFY(A, i) 过程的伪代码，并比较 MIN-HEAPIFY 与 MAX-HEAPIFY 的运行时间。
+
+MAX-HEAPIFY(A, i)                                 T(n)
+l <- LEFT(i)
+r <- RIGHT(i)
+if l <= heap-size[A] and A[l] > A[i]            
+   then largest <- l
+   else largest <- i
+if r <= heap-size[A] and A[r] > A[largest]
+   then largest <- r
+if largest != i
+   then exchange A[i] ↔ A[largest]
+        MAX-HEAPIFY(A, largest)                   T(2n/3)
+==================================================================
+
+MIN-HEAPIFY(A, i)                                 T(n)
+l <- LEFT(i)
+r <- RIGHT(i)
+if l <= heap-size[A] and A[l] < A[i]
+   then minimum <- l
+   else minimum <- i
+if r <= heap-size[A] and A[r] < A[minimum]
+   then minimum <- r
+if minimum != i
+   then exchange A[i] ↔ A[minimum]
+        MIN-HEAPIFY(A, minimum)                   T(2n/3)
