@@ -265,7 +265,7 @@ learning D-Bus
 
     第二点五步，定义对象，实现接口
     file:demo/sendstruct/gen_marshal.list
-    file:demo/sendstruct/gen-marshal.h
+    file:demo/sendstruct/gen_marshal.h
     第三步：实现client侧，主要是调用general_proxy.h的接口函数client_request()，用GArray传入你的数组（可以携带任何你自己定义的数据结构）
     file:demo/sendstruct/client.c
     
@@ -304,4 +304,16 @@ learning D-Bus
    file:demo/echo_dict_service.py
    file:demo/echo_dict_client.py
    file:demo/echo_dict_client.c
+** All Basic Data type deliver
+   file:demo/all_basic_data_deliver_service.py
+   file:demo/all_basic_data_deliver_client.py
+   file:demo/all_basic_data_deliver_test.sh
+   file:demo/all_basic_data_deliver_client.c
+   file:demo/all_basic_data_deliver_server.xml
+   dbus-binding-tool --prefix=airead_fan --mode=glib-server all_basic_data_deliver_server.xml > all_basic_data_deliver_server.h
+   file:demo/all_basic_data_deliver_server.h
+   file:demo/basic_data.h
+   file:demo/basic_data.c
+   file:demo/all_basic_data_deliver_service.c
+** Advanced Data type deliver
 * Reference

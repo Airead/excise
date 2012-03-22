@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<node name="/airead/fan/BasicDataType">
+  <interface name="airead.fan.BasicDataType">
+    <method name="SignaturePrint">
+      <arg direction="in"  type="g" name="signature" />
+      <arg direction="out" type="g" />
+    </method>
+    <method name="Int32Print">
+      <arg direction="in"  type="i" name="int32" />
+      <arg direction="out" type="i" />
+    </method>
+    <method name="BytePrint">
+      <arg direction="in"  type="y" name="byte" />
+      <arg direction="out" type="y" />
+    </method>
+    <method name="StringPrint">
+      <arg direction="in"  type="s" name="string" />
+      <arg direction="out" type="s" />
+    </method>
+    <method name="Uint16Print">
+      <arg direction="in"  type="q" name="uint16" />
+      <arg direction="out" type="q" />
+    </method>
+    <method name="DoublePrint">
+      <arg direction="in"  type="d" name="double" />
+      <arg direction="out" type="d" />
+    </method>
+    <method name="Int64Print">
+      <arg direction="in"  type="x" name="int64" />
+      <arg direction="out" type="x" />
+    </method>
+    <method name="Int16Print">
+      <arg direction="in"  type="n" name="int16" />
+      <arg direction="out" type="n" />
+    </method>
+    <method name="ObjectpathPrint">
+      <arg direction="in"  type="o" name="objectpath" /> 
+      <arg direction="out" type="o" /> 
+    </method>
+    <method name="BooleanPrint">
+      <arg direction="in"  type="b" name="boolean" />
+      <arg direction="out" type="b" />
+    </method>
+    <method name="Uint64Print">
+      <arg direction="in"  type="t" name="uint64" />
+      <arg direction="out" type="t" />
+    </method>
+    <method name="Uint32Print">
+      <arg direction="in"  type="u" name="uint32" />
+      <arg direction="out" type="u" />
+    </method>
+  </interface>
+</node>

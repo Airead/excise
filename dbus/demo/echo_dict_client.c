@@ -190,7 +190,7 @@ int send_dict_string_value(DBusGProxy *proxy)
         g_error_free(error);
         return -1;
     }
-
+    
     return 0;
 }
 

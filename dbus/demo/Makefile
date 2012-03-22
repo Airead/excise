@@ -12,19 +12,21 @@ LDFLAGS += $(shell pkg-config --libs dbus-glib-1)
 
 SOURCE =  $(wildcard *.c)
 TARGETS	:= $(patsubst %.c, %, $(SOURCE))
-TARGETS := $(filter-out common_marshaler, $(TARGETS))
+TARGETS_OUT = common_marshaler basic_data
+TARGETS := $(filter-out $(TARGETS_OUT), $(TARGETS))
 
 %: %.c
 	@echo CC $< -o $@
-	@$(CC) $< common_marshaler.c $(CFLAGS) -o $@ $(LDFLAGS)
+	@$(CC) $< common_marshaler.c basic_data.c $(CFLAGS) -o $@ $(LDFLAGS)
 
 .PHONY: all clean test marshaler
 
 all: $(TARGETS) 
 
-marshaler: common_marshaler.list
+marshaler: 
 	glib-genmarshal --prefix _common_marshal --header common_marshaler.list > common_marshaler.h
 	glib-genmarshal --prefix _common_marshal --body common_marshaler.list > common_marshaler.c
+	dbus-binding-tool --prefix=airead_fan --mode=glib-server all_basic_data_deliver_server.xml > all_basic_data_deliver_server.h
 
 clean:
 	rm -f *~ a.out *.o $(TARGETS) core.*
