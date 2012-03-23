@@ -215,9 +215,10 @@ learning glib
 **** struct GHashTableIter
 
 **** g_hash_table_iter_init()
-
+     Initializes a key/value pair iterator and associates it with hash_table. Modifying the hash table after calling this function invalidates the returned iterator.
+     file:demo/g_hash_table_iter_init.c
 **** g_hash_table_iter_next()
-
+     file:demo/g_hash_table_iter_next.c
 **** g_hash_table_iter_get_hash_table()
 
 **** g_hash_table_iter_replace()
@@ -257,6 +258,24 @@ learning glib
 
     To free the entire list, use g_list_free().
 
+** Arrays
+   Arrays - arrays of arbitrary elements which grow automatically as elements are added
+*** Description
+    Arrays are similar to standard C arrays, except that they grow automatically as elements are added.
+
+    Array elements can be of any size (though all elements of one array are the same size), and the array can be automatically cleared to '0's and zero-terminated.
+
+    To create a new array use g_array_new().
+
+    To add elements to an array, use g_array_append_val(), g_array_append_vals(), g_array_prepend_val(), and g_array_prepend_vals().
+
+    To access an element of an array, use g_array_index().
+
+    To set the size of an array, use g_array_set_size().
+
+    To free an array, use g_array_free().
+
+    file:demo/array_example.c
 * Glib Utilities
 ** Key-value file parser
    Key-value file parser - parse .ini-like config files

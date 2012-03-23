@@ -48,6 +48,11 @@ int main(int argc, char *argv[])
     g_hash_table_insert(table, "three", &num3);
     g_print("table size: %u\n", g_hash_table_size(table));
 
+    num = 5;
+    g_hash_table_replace(table, "four", &num);
+    g_print("table size: %u\n", g_hash_table_size(table));
+    
+    
     g_print("====g_hash_table_foreach====\n");
     g_hash_table_foreach(table, table_info, NULL);
 
