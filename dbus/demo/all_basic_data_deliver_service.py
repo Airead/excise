@@ -6,7 +6,7 @@ import dbus
 import dbus.service
 import dbus.mainloop.glib
 
-class DictEcho(dbus.service.Object):
+class BasicData(dbus.service.Object):
     def __init__(self, bus, object_path):
         dbus.service.Object.__init__(self, bus, object_path)
         self._last_input = None
@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     session_bus = dbus.SessionBus()
     name = dbus.service.BusName("airead.fan.BasicDataType", session_bus)
-    object = DictEcho(session_bus, '/airead/fan/BasicDataType')
+    object = BasicData(session_bus, '/airead/fan/BasicDataType')
 
     mainloop = gobject.MainLoop()
     print "Running example service."
