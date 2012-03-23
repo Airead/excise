@@ -148,52 +148,6 @@ int send_recv_struct(DBusGProxy *proxy)
     return 0;
 }
 
-#if 0
-#define DBUS_STRUCT_STRING_INT_DOUBLE_BOOLEAN ( \
-        dbus_g_type_get_struct ( "GValueArray", G_TYPE_STRING, G_TYPE_INT, \
-                                 G_TYPE_DOUBLE, G_TYPE_BOOLEAN, G_TYPE_INVALID))
-
-int send_recv_struct(DBusGProxy *proxy)
-{
-    char *method;
-    GError *error;
-//    GValue ret = G_VALUE_INIT;
-    GValueArray *ret;
-    GValue *gval;
-    int i;
-
-    method = "StructPrint";
-    if (!dbus_g_proxy_call(proxy, method, &error,
-                           G_TYPE_INVALID,
-                           DBUS_STRUCT_STRING_INT_DOUBLE_BOOLEAN, &ret,
-                           G_TYPE_INVALID)) {
-        g_printerr("call %s failed: %s\n", method, error->message);
-        g_error_free(error);
-        error = NULL;
-        return -1;
-    }
-
-    g_print("receive struct:\n");
-    for (i = 0; i < ret->n_values; i++) {
-        gval = g_value_array_get_nth(ret, i);
-        if (G_VALUE_TYPE(gval) == G_TYPE_STRING) {
-            g_print("%s\n", g_value_get_string(gval));
-        } else if (G_VALUE_TYPE(gval) == G_TYPE_DOUBLE) {
-            g_print("%f\n", g_value_get_double(gval));
-        } else if (G_VALUE_TYPE(gval) == G_TYPE_INT) {
-            g_print("%d\n", g_value_get_int(gval));
-        } else if (G_VALUE_TYPE(gval) == G_TYPE_BOOLEAN) {
-            g_print("%d\n", g_value_get_boolean(gval));
-        }
-    }
-    
-
-    g_print("\n=================================\n\n");
-    
-    return 0;
-}
-#endif
-
 int main(int argc, char *argv[])
 {
     DBusGConnection *connection;

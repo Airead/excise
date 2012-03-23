@@ -14,8 +14,9 @@ SOURCE =  $(wildcard *.c)
 TARGETS	:= $(patsubst %.c, %, $(SOURCE))
 TARGETS_OUT = common_marshaler basic_data
 TARGETS := $(filter-out $(TARGETS_OUT), $(TARGETS))
+TARGETS := $(addsuffix .out, $(TARGETS))
 
-%: %.c
+%.out: %.c
 	@echo CC $< -o $@
 	@$(CC) $< common_marshaler.c basic_data.c $(CFLAGS) -o $@ $(LDFLAGS)
 

@@ -319,4 +319,8 @@ learning D-Bus
    file:demo/advanced_data_deliver_service.py
    file:demo/advanced_data_deliver_test_py.py
    file:demo/advanced_data_deliver_test_c.c
+** More Advanced Data Type deliver
+   file:demo/more_advanced_data_deliver_service.py
+   file:demo/more_advanced_data_deliver_test_py.py
+   file:demo/more_advanced_data_deliver_test_c.c
 * Reference
