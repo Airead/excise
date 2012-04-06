@@ -62,7 +62,7 @@ int send_recv_int_array(DBusGProxy *proxy)
     GError *error;
     GArray *garray, *ret;
     gint i, j;
-
+    
     garray = g_array_new (FALSE, FALSE, sizeof (gint));
     for (i = 0; i < 6; i++) {
         j = i + 1;
@@ -90,8 +90,8 @@ int send_recv_int_array(DBusGProxy *proxy)
     return 0;
 }
 
-#define DBUS_STRUCT_STRING_INT_DOUBLE_BOOLEAN ( \
-        dbus_g_type_get_struct ( "GValueArray", G_TYPE_STRING, G_TYPE_INT,   \
+#define DBUS_STRUCT_STRING_INT_DOUBLE_BOOLEAN (                         \
+        dbus_g_type_get_struct ( "GValueArray", G_TYPE_STRING, G_TYPE_INT, \
                                  G_TYPE_DOUBLE, G_TYPE_BOOLEAN, G_TYPE_INVALID))
 
 int send_recv_struct(DBusGProxy *proxy)
@@ -129,7 +129,7 @@ int send_recv_struct(DBusGProxy *proxy)
         return -1;
     }
 
-    g_print("receive int array:\n");
+    g_print("receive struct:\n");
     for (i = 0; i < ret->n_values; i++) {
         gval = g_value_array_get_nth(ret, i);
         if (G_VALUE_TYPE(gval) == G_TYPE_STRING) {
@@ -145,6 +145,102 @@ int send_recv_struct(DBusGProxy *proxy)
 
     g_print("\n=================================\n\n");
     
+    return 0;
+}
+
+int send_recv_variant_int_array(DBusGProxy *proxy, char *method)
+{
+    GError *error = NULL;
+    GValue gval = G_VALUE_INIT;
+    GValue ret = G_VALUE_INIT;
+    GHashTable *table;
+    GHashTableIter iter;
+    gpointer key, value;
+    GArray *garray;
+    gint i, j;
+    
+    g_value_init(&gval, DBUS_TYPE_G_INT_ARRAY);
+    g_value_take_boxed(&gval, dbus_g_type_specialized_construct(DBUS_TYPE_G_INT_ARRAY));
+    garray = g_value_get_boxed(&gval);
+    for (i = 0; i < 6; i++) {
+        j = i + 1;
+        g_array_append_val(garray, j);
+    }
+
+    if (!dbus_g_proxy_call(proxy, method, &error,
+                           G_TYPE_VALUE, &gval,
+                           G_TYPE_INVALID,
+                           G_TYPE_VALUE, &ret,
+                           G_TYPE_INVALID)) {
+        g_printerr("call %s failed: %s\n", method, error->message);
+        g_error_free(error);
+        error = NULL;
+        return -1;
+    }
+
+    g_print("receive variant:\n");
+    table = g_value_get_boxed(&ret);
+    
+    g_hash_table_iter_init(&iter, table);
+    while (g_hash_table_iter_next(&iter, &key, &value)) {
+        g_print("key: %s, %s\n", (char *)key, (char *)value);
+    }
+   
+    g_print("\n=================================\n\n");
+
+    return 0;
+}
+
+int send_recv_variant_struct(DBusGProxy *proxy, char *method)
+{
+    GError *error = NULL;
+    GValue gval = G_VALUE_INIT;
+    GValue ret = G_VALUE_INIT;
+    GHashTable *table;
+    GHashTableIter iter;
+    gpointer key, value;
+    
+    g_value_init(&gval, DBUS_STRUCT_STRING_INT_DOUBLE_BOOLEAN);
+    g_value_take_boxed(&gval, dbus_g_type_specialized_construct(DBUS_STRUCT_STRING_INT_DOUBLE_BOOLEAN));
+    
+    dbus_g_type_struct_set(&gval, 0, "fan",
+                           1, 24,
+                           2, 70.1,
+                           3, FALSE, G_MAXUINT);
+
+    if (!dbus_g_proxy_call(proxy, method, &error,
+                           G_TYPE_VALUE, &gval,
+                           G_TYPE_INVALID,
+                           G_TYPE_VALUE, &ret,
+                           G_TYPE_INVALID)) {
+        g_printerr("call %s failed: %s\n", method, error->message);
+        g_error_free(error);
+        error = NULL;
+        return -1;
+    }
+
+    g_print("receive variant:\n");
+    table = g_value_get_boxed(&ret);
+    
+    g_hash_table_iter_init(&iter, table);
+    while (g_hash_table_iter_next(&iter, &key, &value)) {
+        g_print("key: %s, %s\n", (char *)key, (char *)value);
+    }
+   
+    g_print("\n=================================\n\n");
+
+    return 0;
+}
+
+int send_recv_variant(DBusGProxy *proxy)
+{
+    char *method;
+  
+    method = "VariantPrint";
+    
+    send_recv_variant_int_array(proxy, method);
+    send_recv_variant_struct(proxy, method);
+
     return 0;
 }
 
@@ -170,9 +266,10 @@ int main(int argc, char *argv[])
                                       "/airead/fan/AdvancedDataType",
                                       "airead.fan.AdvancedDataType");
     
-    /* send_recv_dict(proxy);
-     * send_recv_int_array(proxy); */
+    send_recv_dict(proxy);
+    send_recv_int_array(proxy);
     send_recv_struct(proxy);
+    send_recv_variant(proxy);
 
     return 0;
 }

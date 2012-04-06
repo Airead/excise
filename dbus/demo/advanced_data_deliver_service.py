@@ -28,12 +28,6 @@ class AdvancedData(dbus.service.Object):
         print '=' * 33
         return ('Li', 24, 55.1, False)
 
-    @dbus.service.method('airead.fan.AdvancedDataType', in_signature='v', out_signature='v')
-    def VariantPrint(self, variant):
-        print "receive variant:", variant
-        print '=' * 33
-        return variant
-
     @dbus.service.method('airead.fan.AdvancedDataType', in_signature='a{ss}', out_signature='a{ss}')
     def DictPrint(self, dict):
         print "receive dict:", dict
@@ -42,6 +36,11 @@ class AdvancedData(dbus.service.Object):
         print '=' * 33
         return {'fan': "male", 'li': "female"}
 
+    @dbus.service.method('airead.fan.AdvancedDataType', in_signature='v', out_signature='v')
+    def VariantPrint(self, variant):
+        print "receive variant:", variant
+        print '=' * 33
+        return {'fan': "male", 'li': "female"}
 
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)

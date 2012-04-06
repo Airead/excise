@@ -292,6 +292,9 @@ learning D-Bus
     客户端
     file:demo/simplestruct/client.c
 * python dbus
+** 1+1=2
+   file:demo/oneonetwo_service.py
+   file:demo/oneonetwo_client.py
 ** example
    file:demo/list-system-services.py
    file:demo/example-service.py
@@ -307,7 +310,8 @@ learning D-Bus
 ** All Basic Data type deliver
    file:demo/all_basic_data_deliver_service.py
    file:demo/all_basic_data_deliver_client.py
-   file:demo/all_basic_data_deliver_test.sh
+   file:demo/all_basic_data_deliver_test_py.sh
+   file:demo/all_basic_data_deliver_test_c.sh
    file:demo/all_basic_data_deliver_client.c
    file:demo/all_basic_data_deliver_server.xml
    dbus-binding-tool --prefix=airead_fan --mode=glib-server all_basic_data_deliver_server.xml > all_basic_data_deliver_server.h

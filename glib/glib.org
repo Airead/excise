@@ -276,6 +276,24 @@ learning glib
     To free an array, use g_array_free().
 
     file:demo/array_example.c
+** GVariant
+   GVariant — strongly typed value datatype
+*** Description
+    GVariant is a variant datatype; it stores a value along with information about the type of that value. The range of possible values is determined by the type. The type system used by GVariant is GVariantType.
+
+GVariant instances always have a type and a value (which are given at construction time). The type and value of a GVariant instance can never change other than by the GVariant itself being destroyed. A GVariant cannot contain a pointer.
+
+GVariant is reference counted using g_variant_ref() and g_variant_unref(). GVariant also has floating reference counts -- see g_variant_ref_sink().
+
+GVariant is completely threadsafe. A GVariant instance can be concurrently accessed in any way from any number of threads without problems.
+
+GVariant is heavily optimised for dealing with data in serialised form. It works particularly well with data located in memory-mapped files. It can perform nearly all deserialisation operations in a small constant time, usually touching only a single memory page. Serialised GVariant data can also be sent over the network.
+
+GVariant is largely compatible with D-Bus. Almost all types of GVariant instances can be sent over D-Bus. See GVariantType for exceptions.
+
+For convenience to C programmers, GVariant features powerful varargs-based value construction and destruction. This feature is designed to be embedded in other libraries.
+
+There is a Python-inspired text language for describing GVariant values. GVariant includes a printer for this language and a parser with type inferencing.
 * Glib Utilities
 ** Key-value file parser
    Key-value file parser - parse .ini-like config files

@@ -81,5 +81,3 @@ if __name__ == '__main__':
     mainloop = gobject.MainLoop()
     print "Running example service."
     mainloop.run()
-
-

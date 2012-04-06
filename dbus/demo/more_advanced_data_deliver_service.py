@@ -16,8 +16,8 @@ class AdvancedData(dbus.service.Object):
         print "receive struct array:"
         for st in struct_array:
             for value in st:
-                print value
-            print '-' * 28
+                print value, ",",
+            print '\n' + '-' * 28
         print '=' * 33
         ret = [('li', 21), ('wen', 22), ('feng', 23)]
         return ret
