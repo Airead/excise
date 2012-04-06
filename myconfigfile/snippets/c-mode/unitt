@@ -1,0 +1,5 @@
+# name #def UINT_TESTING
+# --
+#ifdef UNIT_TESTING
+#include "test/`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`_test.h"
+#endif  /* UNNT_TESTING */

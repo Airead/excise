@@ -1,0 +1,3 @@
+# name : #de $1 mock_$1
+# --
+#define ${1:example_function} mock_$1

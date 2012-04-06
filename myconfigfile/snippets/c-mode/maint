@@ -1,0 +1,13 @@
+# name : main UnitTest{}
+# --
+void $1(void **state) 
+{
+	
+}
+
+int main(int argc, char* argv[]) {
+	UnitTest tests[] = {
+		unit_test(${1:example_test_function}),
+	};
+	return run_tests(tests);
+}
