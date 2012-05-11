@@ -152,8 +152,8 @@ occurence of CHAR."
 (add-to-list 'auto-mode-alist '("\.cpp$" . linux-cpp-mode))
 
 ;; smart compile
-(add-to-list 'load-path "/usr/share/emacs/extension" t)
-(require 'smart-compile)
+(add-to-list 'load-path "~/.emacs.d/extension" t)
+(require 'smart-compile+)
 (global-set-key (kbd "<f9>") 'smart-compile)
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -172,7 +172,7 @@ occurence of CHAR."
 (setq default-input-method "TeX")
 
 ;;CEDET
-(add-to-list 'load-path "~/.emacs.d/cedet/common" t)
+(add-to-list 'load-path "~/.emacs.d/cedet-1.0.1/common" t)
 (require 'cedet)
 (require 'semantic-ia)
 (semantic-load-enable-minimum-features)
@@ -266,8 +266,11 @@ occurence of CHAR."
  )
 (global-set-key (kbd "C-c f") 'insert-function-describe)
 
+;; highlight
 (add-to-list 'load-path "~/.emacs.d/extension")
 (require 'highlight-symbol)
+;; highlight
+(load-file "~/.emacs.d/extension/highlight-symbol.el")
 (global-set-key (kbd "C-'") 'highlight-symbol-at-point)
 (global-set-key (kbd "C-M-'") 'highlight-symbol-remove-all)
 (global-set-key (kbd "C-,") 'highlight-symbol-prev)
@@ -316,7 +319,7 @@ occurence of CHAR."
 ;(add-to-list 'load-path "/usr/share/emacs/extension/" t)
 ;(require 'silentcomp)
 ;;ECB
-(add-to-list 'load-path "~/.emacs.d/ecb" t)
+(add-to-list 'load-path "~/.emacs.d/ecb-2.40" t)
 (require 'ecb-autoloads)
 
 
@@ -335,35 +338,35 @@ occurence of CHAR."
 ;;      (define-key global-map [(meta f9)]  'cscope-display-buffer)
 ;;      (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
 
-;;docbook
-;;; set outline mode
-(setq outline-minor-mode-prefix [(control o)])
-(setq outline-minor-mode-prefix [(kbd "C-o")])
-(require 'docbook-xml-mode)
-(add-hook 'docbook-xml-mode-hook 
-	  (function (lambda ()
-		      (setq outline-regexp "^.*<!\\-\\-\\*+") 
-		      (outline-minor-mode)
- 		      (hide-body))))
-
-(defun format-screen-code (start end)
-  "Replace “<” to “&lt;” and other chars in HTML.
-This works on the current region."
-  (interactive "r")
-  (save-restriction 
-    (narrow-to-region start end)
-    (goto-char (point-min))
-    (while (search-forward "&" nil t) (replace-match "&amp;" nil t))
-    (goto-char (point-min))
-    (while (search-forward "<" nil t) (replace-match "&lt;" nil t))
-    (goto-char (point-min))
-    (while (search-forward ">" nil t) (replace-match "&gt;" nil t))
-;    (goto-char (point-min))
-;   (while (search-forward-regexp "^ *[^0-9A-Za-z\\\*]" nil t) (replace-match "" nil t))
-    )
-  )
-(global-set-key (kbd "C-c t") 'format-screen-code)
-
+;;;  ;;docbook
+;;;  ;;; set outline mode
+;;;  (setq outline-minor-mode-prefix [(control o)])
+;;;  (setq outline-minor-mode-prefix [(kbd "C-o")])
+;;;  (require 'docbook-xml-mode)
+;;;  (add-hook 'docbook-xml-mode-hook 
+;;;  	  (function (lambda ()
+;;;  		      (setq outline-regexp "^.*<!\\-\\-\\*+") 
+;;;  		      (outline-minor-mode)
+;;;   		      (hide-body))))
+;;;  
+;;;  (defun format-screen-code (start end)
+;;;    "Replace “<” to “&lt;” and other chars in HTML.
+;;;  This works on the current region."
+;;;    (interactive "r")
+;;;    (save-restriction 
+;;;      (narrow-to-region start end)
+;;;      (goto-char (point-min))
+;;;      (while (search-forward "&" nil t) (replace-match "&amp;" nil t))
+;;;      (goto-char (point-min))
+;;;      (while (search-forward "<" nil t) (replace-match "&lt;" nil t))
+;;;      (goto-char (point-min))
+;;;      (while (search-forward ">" nil t) (replace-match "&gt;" nil t))
+;;;  ;    (goto-char (point-min))
+;;;  ;   (while (search-forward-regexp "^ *[^0-9A-Za-z\\\*]" nil t) (replace-match "" nil t))
+;;;      )
+;;;    )
+;;;  (global-set-key (kbd "C-c t") 'format-screen-code)
+;;;  
 (add-to-list 'load-path "/usr/share/auto-complete")
 ; Load the default configuration
 (require 'auto-complete-config)
@@ -376,51 +379,6 @@ This works on the current region."
 (setq ac-auto-start 2)
 ; case sensitivity is important when finding matches
 (setq ac-ignore-case nil)
-
-;; Emacs-wiki
-(add-to-list 'load-path "~/.emacs.d/emacs-wiki-2.72/")
-(require 'emacs-wiki)
-
-(add-hook 'emacs-wiki-mode-hook
-	  (lambda ()
-	    (define-key emacs-wiki-mode-map (kbd "C-c C-h") 'emacs-wiki-preview-html)
-	    (define-key emacs-wiki-mode-map (kbd "C-c C-c") 'emacs-wiki-preview-source)
-	    (define-key emacs-wiki-mode-map (kbd "C-c C-v") 'emacs-wiki-change-project)
-
-	    ))
-
-;; (setq emacs-wiki-grep-command "glimpse -nyi \"%W\"")
-
-(setq emacs-wiki-directories '("~/study/wiki/source/DefaultWiki"))
-(setq emacs-wiki-meta-charset "utf8")
-;(setq emacs-wiki-publishing-directory "../../publish/DefaultWiki")
-(setq emacs-wiki-default-page "DefaultWelcomePage")
-(setq emacs-wiki-style-sheet
-      "")
-(setq emacs-wiki-maintainer "mailto:fgh1987168@gmail.com")
-(setq emacs-wiki-pretty-changelogs t)
-(setq emacs-wiki-inline-relative-to 'emacs-wiki-publishing-directory)
-
-(defun emacs-wiki-preview-source ()
-  (interactive)
-  (emacs-wiki-publish-this-page)
-  (find-file (emacs-wiki-published-file)))
-
-(defun emacs-wiki-preview-html ()
-  (interactive)
-  (emacs-wiki-publish-this-page)
-  (browse-url (emacs-wiki-published-file)))
-
-(setq emacs-wiki-projects
-      `(("DefaultWiki" . ((emacs-wiki-directories . ("~/study/wiki/source/DefaultWiki"))
-			  (emacs-wiki-publishing-directory . "../../publish/DefaultWiki")
-			  (emacs-wiki-default-page . "DefaultWelcomePage")))
-	("WorkWiki" . ((emacs-wiki-directories . ("~/study/wiki/source/WorkWiki"))
-		       (emacs-wiki-publishing-directory . "../../publish/WorkWiki")
-		       (emacs-wiki-default-page . "WorkWelcomePage")))
-	)
-      )
-
 
 ;; Emacs muse
 (require 'muse-mode)

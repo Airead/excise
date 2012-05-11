@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# google-chrome --proxy-server="http=http://127.0.0.1:83;"
+google-chrome --proxy-server="http=http://124.193.165.108:80"
