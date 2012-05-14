@@ -1,0 +1,3 @@
+learning some linux mechanism
+* epoll
+  file:demo/epoll_echo.c
