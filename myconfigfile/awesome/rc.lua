@@ -382,4 +382,6 @@ local r = require("runonce")
 r.run("xchat")
 r.run("thunderbird")
 r.run("nm-applet")
+r.run("gnome-sound-applet")
+r.run("gnome-settings-daemon")
 -- }}}
