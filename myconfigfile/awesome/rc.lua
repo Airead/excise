@@ -10,6 +10,8 @@ require("naughty")
 -- Load Debian menu entries
 require("debian.menu")
 
+require("wicked")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -142,6 +144,74 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
+memwidget = widget({
+    type = 'textbox',
+    name = 'memwidget'
+})
+
+wicked.register(memwidget, wicked.widgets.mem,
+    ' <span color="white">Mem:</span> $1%  ')
+
+cpuwidget = widget({
+    type = 'textbox',
+    name = 'cpuwidget'
+})
+
+wicked.register(cpuwidget, wicked.widgets.cpu,
+    ' <span color="white">CPU:</span> $1% ')
+
+batteries = 1
+
+-- Function to extract charge percentage
+function read_battery_life(number)
+   return function(format)
+             local fh = io.popen('acpi')
+             local output = fh:read("*a")
+             fh:close()
+
+             count = 0
+             for s in string.gmatch(output, "(%d+)%%") do
+                if number == count then
+                   return {s}
+                end
+                count = count + 1
+             end
+          end
+end
+
+-- Display one vertical progressbar per battery
+for battery=0, batteries-1 do
+   batterygraphwidget = widget({ type = 'progressbar',
+                                 name = 'batterygraphwidget',
+                                 align = 'right' })
+   batterygraphwidget.height = 0.85
+   batterygraphwidget.width = 10
+   batterygraphwidget.bg = '#333333'
+   batterygraphwidget.border_color = '#0a0a0a'
+   batterygraphwidget.vertical = true
+   batterygraphwidget:bar_properties_set('battery',
+--                                         { fg = '#AEC6D8',
+                                         { fg = '#ee0000',
+                                           fg_center = '#00ee00',
+                                           fg_end = '#00ee00',
+                                           fg_off = '#222222',
+                                           vertical_gradient = false,
+                                           horizontal_gradient = false,
+                                           ticks_count = 0,
+                                           ticks_gap = 0 })
+
+   wicked.register(batterygraphwidget, read_battery_life(battery), '$1', 1, 'battery')
+end
+
+netwidget = widget({
+           type = 'textbox',
+           name = 'netwidget'
+       })
+
+       wicked.register(netwidget, wicked.widgets.net,
+           ' <span color="white">NET</span>: ${wlan0 down} / ${wlan0 up} ')
+
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
@@ -174,6 +244,10 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
+        batterygraphwidget,
+        memwidget,
+        cpuwidget,
+        netwidget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -385,3 +459,18 @@ r.run("nm-applet")
 r.run("gnome-sound-applet")
 r.run("gnome-settings-daemon")
 -- }}}
+
+
+-- random change wallpaper
+-- setup the timer
+mytimer = timer { timeout = 60 }
+mytimer:add_signal("timeout", function()
+
+  -- tell awsetbg to randomly choose a wallpaper from your wallpaper directory
+  os.execute("awsetbg -T -r /home/airead/share/wallpaper/girls &")
+--  os.execute("awsetbg -T -r /home/airead/share/wallpaper/game/eva &")
+
+end)
+
+-- initial start when rc.lua is first run
+mytimer:start()
