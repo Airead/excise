@@ -191,9 +191,9 @@ for battery=0, batteries-1 do
    batterygraphwidget.vertical = true
    batterygraphwidget:bar_properties_set('battery',
 --                                         { fg = '#AEC6D8',
-                                         { fg = '#ee0000',
-                                           fg_center = '#00ee00',
-                                           fg_end = '#00ee00',
+                                         { fg = '#ff0000',
+                                           fg_center = '#00ff00',
+                                           fg_end = '#00ff00',
                                            fg_off = '#222222',
                                            vertical_gradient = false,
                                            horizontal_gradient = false,
@@ -203,14 +203,14 @@ for battery=0, batteries-1 do
    wicked.register(batterygraphwidget, read_battery_life(battery), '$1', 1, 'battery')
 end
 
-netwidget = widget({
-           type = 'textbox',
-           name = 'netwidget'
-       })
-
-       wicked.register(netwidget, wicked.widgets.net,
-           ' <span color="white">NET</span>: ${wlan0 down} / ${wlan0 up} ')
-
+-- netwidget = widget({
+--            type = 'textbox',
+--            name = 'netwidget'
+--        })
+-- 
+--        wicked.register(netwidget, wicked.widgets.net,
+--            ' <span color="white">NET</span>: ${wlan0 down} / ${wlan0 up} ')
+-- 
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
@@ -247,7 +247,7 @@ for s = 1, screen.count() do
         batterygraphwidget,
         memwidget,
         cpuwidget,
-        netwidget,
+--        netwidget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -467,8 +467,8 @@ mytimer = timer { timeout = 60 }
 mytimer:add_signal("timeout", function()
 
   -- tell awsetbg to randomly choose a wallpaper from your wallpaper directory
-  os.execute("awsetbg -T -r /home/airead/share/wallpaper/girls &")
---  os.execute("awsetbg -T -r /home/airead/share/wallpaper/game/eva &")
+  os.execute("awsetbg -F -r /home/airead/share/wallpaper/girls &")
+--  os.execute("awsetbg -F -r /home/airead/share/wallpaper/game/eva &")
 
 end)
 
