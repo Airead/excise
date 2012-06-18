@@ -1,0 +1,6 @@
+#!/bin/sh
+
+FILE=$1
+FILE=${FILE:-"1.png"}
+
+scrot -s $FILE -e 'mv $f /tmp/'

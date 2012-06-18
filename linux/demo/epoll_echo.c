@@ -237,7 +237,7 @@ int main(int argc, char **argv)
         
         /* wait for events to happen */
         int fds = epoll_wait(g_epollFd, events, MAX_EVENTS, 1000);
-        if (fds < 0) {
+        if (fds < 0) 
             printf("epoll_wait error, exit\n");
             break;
         }
