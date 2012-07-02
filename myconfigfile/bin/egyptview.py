@@ -43,7 +43,7 @@ def rl_add(func_name, direct):
     return True
 
 def rl_del(func_name, direct):
-
+    global result_set
     tmp_sets = sets.Set()
 
     if direct == 'a':
