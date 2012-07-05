@@ -1,3 +1,7 @@
 learning some linux mechanism
 * epoll
   file:demo/epoll_echo.c
+* module
+** hello world
+   file:demo/module/hello/Makefile
+   file:demo/module/hello/hello.
