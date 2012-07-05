@@ -1,0 +1,7 @@
+learning python basic
+
+* python file io
+  file:demo/writefile1.py
+  file:demo/readfile1.py
+* python set
+  file:demo/set1.py
