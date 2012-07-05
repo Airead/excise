@@ -1,0 +1,16 @@
+digraph R {
+    rankdir=LR;
+    node [ shape=record ];
+    backend [ label="{<f0>  mms\ daemon|<f1>  webinterface\ for\ sp|<f2>  webinterface\ fbr\ website|<f3>  spbot}"];
+    web [ label="website"];
+    sp  [ label="9500"];
+    user [ label="user"];
+
+    user -> sp [ label="0x01" ];
+    sp ->   backend:f1 [ label="0x02" ];
+    backend:f1   ->  backend:f3 [ label="0x03" ];
+    backend:f3   ->  user [ label="0x04" ];
+    user    ->  web [ label="0x05" ];
+    web     ->  backend:f2 [ label="0x06" ];
+    web     ->  user [ label="0x07"];
+}

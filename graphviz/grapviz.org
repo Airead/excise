@@ -1,0 +1,15 @@
+learning grapviz
+
+* some example
+** file:demo/exmaple.dot
+** file:demo/example2.dot
+
+* nginx
+** file:demo/ngx_conf.dot
+  
+** nginx queue
+   file:demo/nginx_queue_init.dot
+   file:demo/nginx_queue_insert_head.dot
+* gprof
+** example
+   file:demo/gprof_e1.c

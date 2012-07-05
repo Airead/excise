@@ -1,0 +1,11 @@
+digraph ngx_queue_insert_head {
+	rankdir=LR;
+	node [shape=record];
+	"#define ngx_queue_insert_head(h, x)\\\n(x)->next = (h)->next;\\\n (x)->next->prev = x;\\\n (x)->prev = h;\\\n (h)->next = x"
+	h [label="<prev> prev | <nd> h | <next> next"];
+	x [label="<prev> prev | <nd> x | <next> next"];
+	x:next -> h:nd;
+	h:prev -> x:nd;
+	x:prev -> h:nd;
+	h:next -> x:nd;
+}

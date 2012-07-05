@@ -1,0 +1,8 @@
+digraph ngx_queue_init {
+	rankdir=LR;
+	node [shape=record];
+	"#define ngx_queue_init(q) \\\n(q)->prev = q;\\\n (q)->next = q"
+	init [label="<prev> prev | <init> q | <next> next"];
+	init:prev -> init:<init>
+	init:next -> init:<init>
+}
