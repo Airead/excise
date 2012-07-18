@@ -7,6 +7,18 @@ learning netfilter
 * log upd packets
   file:demo/log_udp/log_udp.c
   file:demo/log_udp/Makefile
+* ip dump
+  file:demo/ip_dump/ip_dump.c
+  file:demo/ip_dump/Makefile
+* log http
+  file:demo/log_http/log_http.c
+  file:demo/log_http/Makefile
+* modify package
+  file:demo/modify_package/modify_package.c
+  file:demo/modify_package/Makefile
+* simple DNAT
+  file:demo/dnat/dnat.c
+  file:demo/dnat/Makefile
 * simple IP address match
 ** header file
    file:demo/linux_netfilter_xt_ipaddr.h

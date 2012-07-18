@@ -4,4 +4,7 @@ learning some linux mechanism
 * module
 ** hello world
    file:demo/module/hello/Makefile
-   file:demo/module/hello/hello.
+   file:demo/module/hello/hello.c
+** package generate
+   file:demo/module/fpktgen/Makefile
+   file:demo/module/fpktgen/fpktgen.c
