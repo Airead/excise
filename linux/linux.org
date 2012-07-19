@@ -8,3 +8,6 @@ learning some linux mechanism
 ** package generate
    file:demo/module/fpktgen/Makefile
    file:demo/module/fpktgen/fpktgen.c
+** string generate
+   file:demo/module/strgen/Makefile
+   file:demo/module/strgen/strgen.c
