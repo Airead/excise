@@ -2,5 +2,8 @@ learning tcp/ip
 
 * ip checksum
   file:demo/ip_header_checksum.c
+* udp checksum
+  file:demo/udp_checksum.c
+  file:demo/udp_checksum2.c
 * http test
   file:demo/http_test.c
