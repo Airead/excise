@@ -13,6 +13,12 @@ learning netfilter
 * log http
   file:demo/log_http/log_http.c
   file:demo/log_http/Makefile
+* play checksum
+  file:demo/play_checksum/play_checksum.c
+  file:demo/play_checksum/Makefile
+* genpkt
+  file:demo/genpkt/genpkt.c
+  file:demo/genpkt/Makefile
 * modify package
   file:demo/modify_package/modify_package.c
   file:demo/modify_package/Makefile
