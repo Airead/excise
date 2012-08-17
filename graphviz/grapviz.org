@@ -13,3 +13,13 @@ learning grapviz
 * gprof
 ** example
    file:demo/gprof_e1.c
+* network environment
+  file:demo/network_en.dot
+* flow chart
+  file:demo/raycaster.dot
+  dot -Tpng raycaster.dot -o raycaster.png 
+* big example
+  file:demo/bige.dot
+* struct
+  file:demo/st2.dot
+

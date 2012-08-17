@@ -1,0 +1,28 @@
+digraph G {
+	node[shape=box];
+	callback_function;
+	req_host_t [shape="record", label="{<head>req_host_t | next | saddr | daddr | sport | dport | host}"];
+	rule_t [shape="record", label="{<head>rule_t | pre | next | last | timeout | ip | port}"];
+
+	判断包类型[shape=diamond];
+	提取rule[shape=diamond];
+	
+	callback_function -> 判断包类型;
+	判断包类型 -> 提取host [label="GET"];
+	提取host -> 存入db_host;
+	存入db_host -> req_host_t [shape="box"];
+	存入db_host -> 接收新包;
+
+	判断包类型 -> 提取rule [label="HTTP"];
+	存入db_host -> 提取rule [style=dotted, label="依赖"];
+
+	提取rule -> 存入db_rule [label="成功"];
+	提取rule -> 放行 [label="失败"];
+	存入db_rule -> 启用rule;
+	存入db_rule -> rule_t [shape="box"];
+	启用rule -> 清理无用db_host;
+	清理无用db_host -> 清理过期rule;
+	清理过期rule -> 放行;
+
+	放行 -> 接收新包;
+}

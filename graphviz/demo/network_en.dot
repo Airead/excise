@@ -1,0 +1,8 @@
+digraph R {
+    node [ shape=record ];
+    client [ label= "{ client | eth0:192.168.1.12 | wlan0: 192.168.2.12 }" ]
+    cent62 [ label = "{ cent62 | eth0:192.168.1.245 | eth1:192.168.100.2 | eth2:192.168.101.2 }" ]
+    thor [ label = "{ thor | eth0:124.193.165.109 | eth1:192.168.1.13 | eth2:192.168.100.1 | eth3:192.168.101.1 }" ]
+//    backend [ label="{<f0>  mms\ daemon|<f1>  webinterface\ for\ sp|<f2>  webinterface\ fbr\ website|<f3>  spbot}"];
+//    backend:f1   ->  backend:f3 [ label="0x03" ];
+}

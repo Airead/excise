@@ -1,0 +1,31 @@
+digraph G {
+        node[shape=box,width=2];
+        subgraph cluster_0 {
+                style=filled;
+                node [style=filled,color=white,fontcolor=blue];
+                label="红蓝3D";
+                color=lightgray;
+                左眼视角 -> 生成FBOLeft -> 右眼视角 -> 生成FBORight -> 合成两个FBO[color=red];
+        }
+        subgraph cluster_1 {
+                启用FBO-> 设置投影模式 -> 设置缩放与旋转矩阵 -> 绘制包围盒背面 -> 光线投射;
+                label="非红蓝3D";
+                color=black;
+        }
+        开始 -> 是否红蓝3D;
+        FBOFinal -> 结束;
+
+        是否红蓝3D -> 左眼视角;
+        是否红蓝3D -> 启用FBO;
+        合成两个FBO -> FBOFinal;
+        光线投射 -> FBOFinal;
+
+        生成FBOLeft -> 启用FBO[style=dotted];
+        生成FBORight -> 启用FBO[style=dotted];
+        光线投射 -> 生成FBOLeft[style=dotted];
+        光线投射 -> 生成FBORight[style=dotted];
+
+        是否红蓝3D[shape=diamond];
+        开始[shape=circle,width=1];
+        结束[shape=circle,width=1];
+}
