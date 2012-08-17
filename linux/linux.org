@@ -1,4 +1,7 @@
 learning some linux mechanism
+* util
+** getopt
+   file:demo/getopt.c
 * epoll
   file:demo/epoll_echo.c
 * module
