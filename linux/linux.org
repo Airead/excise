@@ -14,3 +14,9 @@ learning some linux mechanism
 ** string generate
    file:demo/module/strgen/Makefile
    file:demo/module/strgen/strgen.c
+* SOCK_RAW
+  file:demo/sock_raw.txt  #SOCK_RAW document
+  file:demo/ipproto_raw_receiver.c
+  file:demo/ipproto_raw_sender.c
+  file:demo/ipproto_tcp_receiver.c
+
