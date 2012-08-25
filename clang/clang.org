@@ -4,3 +4,6 @@ learning C language
   - file:demo/assert.c
   - file:demo/signal.c
   - file:demo/setjmp.c
+* parse configure file
+  file:demo/air_config.c
+  file:demo/example.conf
