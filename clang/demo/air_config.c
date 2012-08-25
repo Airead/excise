@@ -14,7 +14,43 @@
 #define CONFIG_VALUE_SIZE 128
 #define CONFIG_ERROR_SIZE 256
 
+/**
+ * @brief state overview
+ *
+ * APSOK:
+ *     parse configure file ok. when reaching file end, and (kp == key && vp == value) (key value is complete) APSOK will return.
+ * APSSTART:
+ *     core state transmit routing. special char: '
+ * APSCOMMENT:
+ *     skip all char until receive '\n'
+ * APSSPACE:
+ *     skip all ' ' and '\t'.
+ * APSSTRING:
+ *     store all char until receive '"'
+ * APSKSTART:
+ *     speacial char ' ', '\t', ';' stand for key end;
+ * APSVSTART:
+ *     ' ', '\t', ',', ';' stand for value end; '"' stands for string start;
+ * APSVASTART:
+ *     value array start
+ * APSVAEND:
+ *     one value array is ready to add
+ * APSKVFIN:
+ *     one key-value pair is ready to add
+ * APSEEOF:
+ *     unexpected file end, the key-value pair is not complete;
+ * APSERROR:
+ *     some unkonwn error;
+ * APSESEMMI:
+ *     unexcept semmicolon error
+ * APSENEEDCOMMA:
+ *     except comma error
+ * APSECOMMA:
+ *     unexcept comma error
+ */
+
 enum air_parse_state {
+    APSOK,
     APSSTART,                   /* AIR PARSE STATE START */
     APSCOMMENT,
     APSSPACE,
@@ -24,10 +60,10 @@ enum air_parse_state {
     APSVASTART,                 /* VALUE ARRAY START */
     APSVAEND,
     APSKVFIN,                   /* KEY VALUE FINISH */
-    APSFINISH,
-    APSEOF,
+    APSEEOF,
     APSERROR,
     APSESEMMI,                  /* unexpect semicolon*/
+    APSENEEDCOMMA,
     APSECOMMA,                 /* unexpect comma */
 };
 enum air_value_type {
@@ -80,7 +116,9 @@ int air_config_handler(struct air_config_t *ach, FILE *in, int aps, char *error)
     char value[CONFIG_VALUE_SIZE], *vp;
     int ln;                     /* line number */
     int used;
+    int isarray;                /* 1 for array, 0 for noarray */
 
+    isarray = 0;
     ln = 1;
     kp = key;
     vp = value;
@@ -88,7 +126,6 @@ int air_config_handler(struct air_config_t *ach, FILE *in, int aps, char *error)
     memset(error, 0, CONFIG_ERROR_SIZE);
     used += snprintf(error, CONFIG_ERROR_SIZE, "line [%d], ", ln);
 
-nc:  /* next char */
     while ((ch = fgetc(in)) != EOF) {
         if (used < CONFIG_ERROR_SIZE - 1) {
             error[used++] = ch;
@@ -102,40 +139,47 @@ nc:  /* next char */
                 used = 0;
                 memset(error, 0, CONFIG_ERROR_SIZE);
                 used += snprintf(error, CONFIG_ERROR_SIZE, "line [%d], ", ln);
-                goto nc;
                 break;
             case ' ':
             case '\t':
                 aps = APSSPACE;
-                goto nc;
                 break;
             case '#':
                 aps = APSCOMMENT;
-                goto nc;
                 break;
             case '{':
+                isarray = 1;
                 aps = APSVASTART;
-                goto nc;
                 break;
             case '}':
+                isarray = 0;
+                if (value != vp) {
+                    aps = APSENEEDCOMMA;
+                    goto failed;
+                }
+                kp = key;
+                break;
             case ',':
+                if (isarray != 1) {
+                    aps = APSECOMMA;
+                    goto failed;
+                }
                 *vp = '\0';
                 if (key != kp && value != vp) {
+                    vp = value;
                     aps = APSVAEND;
-                    goto goon;
                 } else {
                     aps = APSECOMMA;
                     goto failed;
                 }
-                aps = APSVAEND;
-                goto goon;
                 break;
             case ';':
                 if (key != kp && value != vp) {
+                    kp = key;
+                    vp = value;
                     aps = APSKVFIN;
-                    goto nc;
                 } else if (key == kp && value == vp){
-                    goto nc;
+                    /* goto next char */
                 } else {
                     aps = APSESEMMI;
                     goto failed;
@@ -158,7 +202,6 @@ nc:  /* next char */
             switch (ch) {
             case ' ':
             case '\t':
-                goto nc;
                 break;
             default:
                 aps = APSSTART; 
@@ -174,7 +217,7 @@ nc:  /* next char */
                 break;
             default:
                 break;
-           }
+            }
             break;
         case APSKSTART:
             switch (ch) {
@@ -182,8 +225,12 @@ nc:  /* next char */
             case '\t':
                 *kp = '\0';
                 aps = APSSPACE;
-                goto nc;
+                goto goon;
                 break;
+            case ';':
+                aps = APSSTART;
+                *kp = '\0';
+                goto goon;
             default:
                 *kp++ = ch;
                 break;
@@ -191,7 +238,6 @@ nc:  /* next char */
             break;
         case APSVSTART:
             switch (ch) {
-            case '\n':
             case ' ':
             case '\t':
                 *vp = '\0';
@@ -204,7 +250,6 @@ nc:  /* next char */
                 goto goon;
             case '"':
                 aps = APSSTRING;
-                goto nc;
                 break;
             case '}':
             case ',':
@@ -216,12 +261,20 @@ nc:  /* next char */
                 break;
             }
             break;
+        case APSSTRING:         /* only can enter from APSVSTART */
+            switch (ch) {
+            case '"':
+                aps = APSVSTART; /* return to parse value routing */
+                break;
+            default:
+                *vp++ = ch;
+            }
+            break;
         case APSVASTART:
             switch (ch) {
             case ' ':
             case '\t':
                 aps = APSSPACE;
-                goto nc;
                 break;
             case '\n':
                 aps = APSSTART;
@@ -234,33 +287,24 @@ nc:  /* next char */
             break;
         case APSVAEND:
             air_config_add(ach, key, value);
-            vp = value;
             aps = APSVASTART;
-            if (ch == '}') {
-                kp = key;
-                aps = APSSTART;
-            }
-            goto nc;
-            break;
-        case APSSTRING:         /* only can enter from APSVSTART */
-            switch (ch) {
-            case '"':
-                aps = APSVSTART; /* return to parse value routing */
-                break;
-            default:
-                *vp++ = ch;
-            }
+            goto goon;          /* for line number */
             break;
         case APSKVFIN: 
             air_config_add(ach, key, value);
-            kp = key;
-            vp = value;
             aps = APSSTART;
-            goto goon;
+            goto goon;          /* for line number */
+            break;
         default:
             fprintf(stderr, "config handler error: never reach here\n");
             break;
         }
+    }
+
+    if (kp == key && vp == value) {
+        aps = APSOK;
+    } else {
+        aps = APSEEOF;
     }
 
 failed:
@@ -290,6 +334,8 @@ struct air_config_t *air_config_parse(char *file, char **error)
 
     ret = air_config_handler(ach, in, APSSTART, error_info);
     switch (ret) {
+    case APSOK:
+        break;
     case APSERROR:
         fprintf(stderr, "unknown error\n");
         goto failed;
@@ -302,7 +348,17 @@ struct air_config_t *air_config_parse(char *file, char **error)
         fprintf(stderr, "unexpect comma\n");
         goto failed;
         break;
+    case APSEEOF:
+        fprintf(stderr, "unexpect file end\n");
+        goto failed;
+        break;
+    case APSENEEDCOMMA:
+        fprintf(stderr, "expect comma\n");
+        goto failed;
+        break;
     default:
+        fprintf(stderr, "never reach here, state %d\n", ret);
+        goto failed;
         break;
     }
     
