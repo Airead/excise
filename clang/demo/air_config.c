@@ -177,7 +177,7 @@ failed:
     return -1;
 }
 
-int air_config_get(struct air_config_t *ach, char *key, char *value, int array)
+int air_config_catch(struct air_config_t *ach, char *key, char *value, int array)
 {
     struct air_config_t *tmp;
     struct air_config_t *acp;   /* air config pointer */
@@ -419,7 +419,7 @@ int air_config_handler(struct air_config_t *ach, FILE *in, int aps, char *error)
             }
             break;
         case APSVAEND:
-            ret = air_config_get(ach, key, value, isarray);
+            ret = air_config_catch(ach, key, value, isarray);
             if (ret == APSEDUP) {
                 aps = APSEDUP;
                 goto failed;
@@ -428,7 +428,7 @@ int air_config_handler(struct air_config_t *ach, FILE *in, int aps, char *error)
             goto goon;          /* for line number */
             break;
         case APSKVFIN: 
-            ret = air_config_get(ach, key, value, isarray);
+            ret = air_config_catch(ach, key, value, isarray);
             if (ret == APSEDUP) {
                 aps = APSEDUP;
                 goto failed;
@@ -545,11 +545,87 @@ void air_config_show_list(struct air_config_t *ach)
     }
 }
 
+/* just get (struct air_config_t) */
+int air_config_get(struct air_config_t *ach, char *key, struct air_config_t **result)
+{
+    struct air_config_t *acp;
+
+    acp = ach->next;
+    while (acp != NULL) {
+        if (strcmp(acp->key, key) == 0) {
+            break;
+        }
+        acp = acp->next;
+    }
+    
+    *result = acp;
+
+    return 0;
+}
+
+int air_config_get_string(struct air_config_t *ach, char *key, char **result)
+{
+    struct air_config_t *acp;
+
+    *result = NULL;
+    air_config_get(ach, key, &acp);
+    if (acp == NULL) {
+        fprintf(stderr, "no such key: %s\n", key);
+        goto failed;
+    }
+
+    if (acp->array == 1) {
+        fprintf(stderr, "the value of [%s] is array!\n", key);
+        goto failed;
+    }
+
+    *result = acp->value;
+
+    return 0;
+failed:
+    return -1;
+}
+
+int air_config_get_array(struct air_config_t *ach, char *key, struct air_config_value **result)
+{
+    struct air_config_t *acp;
+
+    if (air_config_get(ach, key, &acp) < 0) {
+        fprintf(stderr, "no such key: %s\n", key);
+        return -1;
+    }
+    
+    if (acp->array == 0) {
+        fprintf(stderr, "the value of [%s] is not array!\n", key);
+        return -1;
+    }
+
+    *result = config_valueh(acp)->next;
+    return 0;
+}
+
+int air_config_get_int(struct air_config_t *ach, char *key, int *result)
+{
+    char *str;
+    
+    if (air_config_get_string(ach, key, &str) < 0) {
+        return -1;
+    }
+
+    *result = strtol(str, NULL, 10);
+
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
     char *file;
     char *error;
+    char *value;
+    char *key;
     struct air_config_t *configh; /* config handler */
+    struct air_config_value *acvp;
+    int num_int;
 
     file = "example.conf";
     configh = air_config_parse(file, &error);
@@ -559,8 +635,31 @@ int main(int argc, char *argv[])
     }
 
     air_config_show_list(configh);
-    air_config_destroy(configh);
+
+    fprintf(stdout, "=================================\n");
+
+    key = "int";
+    air_config_get_int(configh, key, &num_int);
+    fprintf(stdout, "search %s, found %s: %d\n", key, key, num_int);
+
+    key = "uint";
+    air_config_get_string(configh, key, &value);
+    fprintf(stdout, "search %s, found %s: %s\n", key, key, value ? value: "null");
  
+    key = "unex";
+    air_config_get_string(configh, key, &value);
+    fprintf(stdout, "search %s, found %s: %s\n", key, key, value ? value: "null");
+
+    key = "string_array";
+    air_config_get_array(configh, key, &acvp);
+    while (acvp != NULL) {
+        value = acvp->value;
+        fprintf(stdout, "search %s, found %s: %s\n", key, key, value ? value: "null");
+        acvp = acvp->next;
+    }
+
+    air_config_destroy(configh);
+
     return 0;
 }
 
