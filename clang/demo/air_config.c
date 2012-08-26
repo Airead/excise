@@ -65,6 +65,7 @@ enum air_parse_state {
     APSESEMMI,                  /* unexpect semicolon*/
     APSENEEDCOMMA,
     APSECOMMA,                 /* unexpect comma */
+    APSEDUP,                   /* duplicate */
 };
 enum air_value_type {
     AVTINT,                     /* AIR VALUE INT */
@@ -73,39 +74,170 @@ enum air_value_type {
     AVTSTR,
 };
 
+struct air_config_value {
+    struct air_config_value *next;
+    char *value;
+};
+
 struct air_config_t {
     struct air_config_t *next;
     char *key;
     void *value;
     int type;
-    int isarray;                /* 1 for array, 0 for noarray */
+    int array;                /* 1 for array, 0 for noarray */
+    int num;
 };
 
 char error_info[CONFIG_ERROR_SIZE];
 
-void air_config_destroy(struct air_config_t *ach)
-{
-    
-}
+#define config_valueh(key) ((struct air_config_value *)(key->value))
 
-int air_config_get_state(int ch, int aps)
+void air_config_destroy_key(struct air_config_t *key)
 {
-    switch(aps) {
-    case APSSTART:
-        if (ch == ' ' || ch == '\t') {
-            return APSSPACE;
+    struct air_config_value *acvp, *wf;
+
+    if (key->key) free(key->key);
+    
+    if (key->array == 0) {
+        if (key->value) free(key->value);
+    } else {
+        if (key->value) {
+            acvp = config_valueh(key)->next;
+            while (acvp != NULL) {
+                wf = acvp;
+                acvp = acvp->next;
+                free(wf->value);
+                free(wf);
+            }
+            free(key->value);
         }
-    default:
-        fprintf(stderr, "config handler error: never reach here\n");
     }
 
-    return APSERROR;
+    free(key);
 }
 
-int air_config_add(struct air_config_t *ach, char *key, char *value)
+void air_config_destroy(struct air_config_t *ach)
 {
-    fprintf(stdout, "add %s: %s\n", key, value);
+    struct air_config_t *acp, *wd; /* will free */
+
+    fprintf(stdout, "destory list:\n");
+    acp = ach->next;
+    while (acp != NULL) {
+        wd = acp;
+        acp = acp->next;
+        air_config_destroy_key(wd);
+    }
+
+    free(ach);
+}
+
+int air_config_append(struct air_config_t *ach, struct air_config_t *node)
+{
+    struct air_config_t *acp;
+
+    ach->num++;
+
+    acp = ach;
+    while (acp->next != NULL) {
+        acp = acp->next;
+    }
+    
+    node->next = acp->next;
+    acp->next = node;
+
     return 0;
+}
+
+int air_config_append_value(struct air_config_t *key, char *value)
+{
+    struct air_config_value *tmp;
+    struct air_config_value *acvp;
+
+    key->num++;
+
+    tmp = malloc(sizeof(struct air_config_value));
+    if (tmp == NULL) {
+        fprintf(stderr, "malloc value failed: %s\n", strerror(errno));
+        goto failed;
+    }
+    memset(tmp, 0, sizeof(struct air_config_value));
+    
+    acvp = config_valueh(key);
+    while (acvp->next != NULL) {
+        acvp = acvp->next;
+    }
+
+    tmp->value = strdup(value);
+    
+    tmp->next = acvp->next;
+    acvp->next = tmp;
+    
+    return 0;
+failed:
+    return -1;
+}
+
+int air_config_get(struct air_config_t *ach, char *key, char *value, int array)
+{
+    struct air_config_t *tmp;
+    struct air_config_t *acp;   /* air config pointer */
+
+    fprintf(stdout, "get %s: %s\n", key, value);
+    acp = ach->next;
+    while (acp != NULL) {
+        if (strcmp(key, acp->key) == 0) {
+            break;
+        }
+        acp = acp->next;
+    }
+
+    if (acp == NULL) {
+        if (array == 0) {
+            tmp = malloc(sizeof(struct air_config_t));
+            if (tmp == NULL) {
+                fprintf(stderr, "config add malloc failed: %s\n", strerror(errno));
+                goto failed;
+            }
+            memset(tmp, 0, sizeof(struct air_config_t));
+
+            tmp->array = array;
+            tmp->key = strdup(key);
+            tmp->value = strdup(value);
+            tmp->num++;
+            air_config_append(ach, tmp);
+        } else {                /* array == 1 */
+            tmp = malloc(sizeof(struct air_config_t));
+            if (tmp == NULL) {
+                fprintf(stderr, "config add malloc failed: %s\n", strerror(errno));
+                goto failed;
+            }
+            memset(tmp, 0, sizeof(struct air_config_t));
+
+            tmp->array = array;
+            tmp->key = strdup(key);
+            tmp->value = malloc(sizeof(struct air_config_value));
+            if (tmp ->value == NULL) {
+                fprintf(stderr, "config_value add malloc failed: %s\n", strerror(errno));
+                goto failed;
+            }
+            memset(tmp->value, 0, sizeof(struct air_config_value));
+            air_config_append(ach, tmp);
+            air_config_append_value(tmp, value);
+        }
+    } else if (array == 0) {    /* array == 0 && acp != NULL */
+        goto dup;
+    } else {                    /* array == 1 && acp != NULL */
+        air_config_append_value(acp, value);
+    }
+
+    return APSOK;
+dup:
+    return APSEDUP;
+failed:
+    if (tmp) free(tmp);
+    if (tmp->key) free(tmp->key);
+    if (tmp->value) free(tmp->value);
+    return APSERROR;
 }
 
 /* aps stands for air_parse_state */
@@ -117,6 +249,7 @@ int air_config_handler(struct air_config_t *ach, FILE *in, int aps, char *error)
     int ln;                     /* line number */
     int used;
     int isarray;                /* 1 for array, 0 for noarray */
+    int ret;
 
     isarray = 0;
     ln = 1;
@@ -286,12 +419,20 @@ int air_config_handler(struct air_config_t *ach, FILE *in, int aps, char *error)
             }
             break;
         case APSVAEND:
-            air_config_add(ach, key, value);
+            ret = air_config_get(ach, key, value, isarray);
+            if (ret == APSEDUP) {
+                aps = APSEDUP;
+                goto failed;
+            }
             aps = APSVASTART;
             goto goon;          /* for line number */
             break;
         case APSKVFIN: 
-            air_config_add(ach, key, value);
+            ret = air_config_get(ach, key, value, isarray);
+            if (ret == APSEDUP) {
+                aps = APSEDUP;
+                goto failed;
+            }
             aps = APSSTART;
             goto goon;          /* for line number */
             break;
@@ -356,12 +497,17 @@ struct air_config_t *air_config_parse(char *file, char **error)
         fprintf(stderr, "expect comma\n");
         goto failed;
         break;
+    case APSEDUP:
+        fprintf(stderr, "duplicate value not in array\n");
+        goto failed;
+        break;
     default:
         fprintf(stderr, "never reach here, state %d\n", ret);
         goto failed;
         break;
     }
-    
+
+    fclose(in);
     *error = NULL;
     return ach;
 failed:
@@ -377,6 +523,28 @@ failed:
     return NULL;
 }
 
+void air_config_show_list(struct air_config_t *ach)
+{
+    struct air_config_t *acp;
+    struct air_config_value *acvp;
+
+    fprintf(stdout, "config list:\n");
+    acp = ach->next;
+    while (acp != NULL) {
+        if (acp->array == 0) {
+            fprintf(stdout, "%s: %s\n", acp->key, (char *)acp->value);
+        } else {
+            fprintf(stdout, "%s:\n", acp->key);
+            acvp = config_valueh(acp)->next;
+            while (acvp != NULL) {
+                fprintf(stdout, "    %s\n", acvp->value);
+                acvp = acvp->next;
+            }
+        }
+        acp = acp->next;
+    }
+}
+
 int main(int argc, char *argv[])
 {
     char *file;
@@ -389,7 +557,10 @@ int main(int argc, char *argv[])
         fprintf(stderr, "air_conifg_parse failed: %s\n", error);
         exit(1); 
     }
-    
+
+    air_config_show_list(configh);
+    air_config_destroy(configh);
+ 
     return 0;
 }
 
