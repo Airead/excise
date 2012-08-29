@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
     ssize_t rn;                 /* receive number */
 	struct sockaddr_in saddr;
 	char packet[4096];
+    int count;
 
 	if ((s = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) < 0) {
 		perror("error:");
@@ -67,14 +68,34 @@ int main(int argc, char *argv[])
 	memset(packet, 0, sizeof(packet));
 	socklen_t *len = (socklen_t *)sizeof(saddr);
 	int fromlen = sizeof(saddr);
+    int opt = 0;
 
+    count = 0;
 	while(1) {
 		if ((rn = recvfrom(s, (char *)&packet, sizeof(packet), 0,
                            (struct sockaddr *)&saddr, &fromlen)) < 0)
 			perror("packet receive error:");
+        if (rn == 0) {
+            printf("the peer has performed an orderly shutdown\n");
+            break;
+        }
 
+        printf("rn = %lu \n", rn);
+        printf("[%d]\n", count++);
         hex_print(packet, rn);
-		printf("\n");
+        printf("\n");
+
+        if (count == 16) {
+            if (setsockopt(s, SOL_SOCKET, SO_RCVBUF, &opt, sizeof(opt)) < 0) {
+                perror("setsocketopt failed");
+            } else {
+                fprintf(stdout, "setsocketopt successful\n");
+            }
+            // int shutdown(int sockfd, int how);
+            /* if (shutdown(s, SHUT_RD) < 0) {
+             *     perror("shutdown failed");
+             * } */
+        }
 	}
     
     return 0;

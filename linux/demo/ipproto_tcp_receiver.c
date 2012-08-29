@@ -24,8 +24,6 @@ int main(void)
 	socklen_t *len = (socklen_t *)sizeof(saddr);
 	int fromlen = sizeof(saddr);
 
-    sleep(10);
-
     count = 0;
 	while(1) {
 		if (recvfrom(s, (char *)&packet, sizeof(packet), 0,
@@ -33,14 +31,15 @@ int main(void)
 			perror("packet receive error:");
 
         printf("%d\n", count++);
-#if 0
+
+        printf("=================================\n");
 		int i = sizeof(struct iphdr);	/* print the payload */
 		while (i < sizeof(packet)) {
 			fprintf(stderr, "%c", packet[i]);
 			i++;
 		}
 		printf("\n");
-#endif
+
 	}
 	exit(EXIT_SUCCESS);
 }
