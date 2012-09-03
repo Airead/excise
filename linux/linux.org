@@ -26,3 +26,8 @@ learning some linux mechanism
 
 * time
   file:demo/curtime.c
+* net flow stat
+  file:demo/netflowstat/netflows.c
+  file:demo/netflowstat/netflowc.c
+  file:demo/netflowstat/netflow.h
+  file:demo/netflowstat/Makefile
