@@ -22,6 +22,7 @@ learning some linux mechanism
   file:demo/raw_print_pkt.c
   file:demo/raw_print_tcplen.c
   file:demo/raw_print_packet.c
+  file:demo/raw_print_tcp_opt.c
 
 * time
   file:demo/curtime.c
