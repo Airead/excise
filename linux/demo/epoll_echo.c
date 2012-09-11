@@ -10,10 +10,11 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <time.h>
 
 #define MAX_EVENTS 500
 
@@ -51,7 +52,7 @@ void event_add(int epollFd, int events, myevent_s *ev)
     struct epoll_event epv = {0, {0}};
     int op;
 
-    epv.data.ptrf = ev;
+    epv.data.ptr = ev;
     ev->events = events;
     epv.events = ev->events;
 
@@ -237,7 +238,7 @@ int main(int argc, char **argv)
         
         /* wait for events to happen */
         int fds = epoll_wait(g_epollFd, events, MAX_EVENTS, 1000);
-        if (fds < 0) 
+        if (fds < 0) {
             printf("epoll_wait error, exit\n");
             break;
         }
