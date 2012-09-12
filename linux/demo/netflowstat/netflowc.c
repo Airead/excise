@@ -58,12 +58,13 @@ int main(int argc, char *argv[])
         "Host: www.yfz.com\r\n"
         "Accept-Encoding: bula bula bulala\r\n"
         "some ip : 192.168.1.air, 172.16.56.bbb\r\n"
-        "SOME IP : 192.168.11.air, 172.16.55.sss\r\n"
+        "SOME IP : 192.168.11.air, 172.16.55.s4ss\r\n"
         "1234#@$%!3456436!@#$%#$%@#^$"
         "Accept-Encoding: bula bula bulala\r\n"
         "MOUNTIAN TOP, DAY AND NIGHT\r\n"
         "HELLO HELL0 A B C D\r\n\r\n\r\n\r\n";
     
+    srand(47);
 
     if (argc < 3) {
         fprintf(stderr, "usage: %s <ip_addr> <port>\n", argv[0]);
@@ -85,7 +86,7 @@ int main(int argc, char *argv[])
     }
     
     for (;;) {
-        write(fd, buf, sizeof(buf));
+        write(fd, buf, (unsigned int)rand() % sizeof(buf));
     }
 
     close(fd);

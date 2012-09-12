@@ -54,16 +54,16 @@ uint16_t tcp_parse_options(struct tcphdr *th)
         
 		switch (opcode) {
 		case TCPOPT_EOL:
-			return;
+			return -1;
 		case TCPOPT_NOP:	/* Ref: RFC 793 section 3.1 */
 			length--;
 			continue;
 		default:
             opsize = *ptr++;
 			if (opsize < 2) /* "silly options" */
-				return;
+				return -1;
 			if (opsize > length)
-				return;	/* don't parse partial options */
+				return -1;	/* don't parse partial options */
 			switch (opcode) {
 			case TCPOPT_MSS:
 				if (opsize == TCPOLEN_MSS) {
@@ -101,18 +101,15 @@ int main(int argc, char *argv[])
 	char packet[4096];
     int count;
     unsigned int tcplen;
-    unsigned int checklen;
-    unsigned int msslen;
     uint16_t in_mss;
-    int i;
 
     if (argc < 3) {
         fprintf(stderr, "usage: %s [num_mtu] [num_mss]\n", argv[0]);
         exit(1);
     }
 
-    checklen = strtoul(argv[1], NULL, 10);
-    msslen = strtoul(argv[2], NULL, 10);
+//    checklen = strtoul(argv[1], NULL, 10);
+//    msslen = strtoul(argv[2], NULL, 10);
 
 	if ((s = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_IP))) < 0) {
 		perror("error:");
@@ -120,9 +117,7 @@ int main(int argc, char *argv[])
 	}
 
 	memset(packet, 0, sizeof(packet));
-	socklen_t *len = (socklen_t *)sizeof(saddr);
-	int fromlen = sizeof(saddr);
-    int opt = 0;
+	socklen_t fromlen = sizeof(saddr);
 
     count = 0;
 	while(1) {

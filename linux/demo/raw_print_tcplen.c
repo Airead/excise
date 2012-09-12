@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
     ssize_t rn;                 /* receive number */
 	struct sockaddr_in saddr;
 	char packet[4096];
-    int count;
     unsigned int tcplen;
 
 	if ((s = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) < 0) {
@@ -32,11 +31,8 @@ int main(int argc, char *argv[])
 	}
 
 	memset(packet, 0, sizeof(packet));
-	socklen_t *len = (socklen_t *)sizeof(saddr);
-	int fromlen = sizeof(saddr);
-    int opt = 0;
+	socklen_t fromlen = sizeof(saddr);
 
-    count = 0;
 	while(1) {
 		if ((rn = recvfrom(s, (char *)&packet, sizeof(packet), 0,
                            (struct sockaddr *)&saddr, &fromlen)) < 0) {

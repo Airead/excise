@@ -22,7 +22,7 @@
 0020   01 f5 4b 22 00 58 00 02 00 00 00 03 00 00 50 14  ..K".X........P."
 #endif
 
-int hex_print(unsigned char *pdata, int plen)
+int hex_print(char *pdata, int plen)
 {
     int count;
     
@@ -50,6 +50,8 @@ int hex_print(unsigned char *pdata, int plen)
         fputc('\n', stdout);
         count += 16;
     }
+
+    return 0;
 }
 
 int main(int argc, char *argv[])
@@ -66,9 +68,8 @@ int main(int argc, char *argv[])
 	}
 
 	memset(packet, 0, sizeof(packet));
-	socklen_t *len = (socklen_t *)sizeof(saddr);
-	int fromlen = sizeof(saddr);
-    int opt = 0;
+	socklen_t fromlen = sizeof(saddr);
+    int opt;
 
     count = 0;
 	while(1) {

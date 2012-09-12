@@ -20,8 +20,7 @@ int main(void)
 	}
 
 	memset(packet, 0, sizeof(packet));
-	socklen_t *len = (socklen_t *)sizeof(saddr);
-	int fromlen = sizeof(saddr);
+	socklen_t fromlen = sizeof(saddr);
 
 	while(1) {
 		if (recvfrom(s, (char *)&packet, sizeof(packet), 0,
