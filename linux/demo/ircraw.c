@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
     int fd, ret;
     char *ip;
     unsigned short port;
+    char *nickname;
     ssize_t rn;
     char cmd[1024];
     char buf[MESSAGE_MAX + 1];
@@ -71,22 +72,23 @@ int main(int argc, char *argv[])
     struct timeval to;          /* timeout */
     fd_set readfds;
 
-    if (argc < 3) {
-        fprintf(stderr, "usage: %s <ip_addr> <port>\n", argv[0]);
+    if (argc < 4) {
+        fprintf(stderr, "usage: %s <ip_addr> <port> <nickname>\n", argv[0]);
         exit(1);
     }
 
     ip = argv[1];
     port = (unsigned short)strtol(argv[2], NULL, 10);
+    nickname = argv[3];
 
     if ((fd = get_connected_socket(ip, port)) < 0) {
         fprintf(stderr, "get connected socket failed: %s\n", strerror(errno));
         exit(1);
     }
     
-    snprintf(cmd, sizeof(cmd), "NICK aaiiread\r\n");
+    snprintf(cmd, sizeof(cmd), "NICK %s\r\n", nickname);
     write(fd, cmd, strlen(cmd));
-    snprintf(cmd, sizeof(cmd), "USER aaiiread localhost irc.freenode.net : aaiiread\r\n");
+    snprintf(cmd, sizeof(cmd), "USER %s localhost irc.freenode.net : %s\r\n", nickname, nickname);
     write(fd, cmd, strlen(cmd));
 
     FD_ZERO(&readfds);
