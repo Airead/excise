@@ -182,7 +182,10 @@ int main(int argc, char *argv[])
             write(STDOUT_FILENO, daddr_str, strlen(daddr_str));
             write(STDOUT_FILENO, " ", 1);
             write(STDOUT_FILENO, data, datalen);
-        } else if (data[0] == 'P' && data[1] == 'R') {
+        } else if (
+            (data[0] == 'P' && data[1] == 'R') || /* PRIVMSG */
+            (data[0] == 'N' && data[1] == 'i')    /* NickServ */
+            ) {
             write(STDOUT_FILENO, saddr_str, strlen(saddr_str));
             write(STDOUT_FILENO, " ", 1);
             write(STDOUT_FILENO, daddr_str, strlen(daddr_str));
