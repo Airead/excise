@@ -18,6 +18,8 @@
 #include <linux/ip.h>
 #include <linux/tcp.h>
 
+#define PKT_BUF 4096
+
 #if 0
 int set_promisc(char * interface, int sock)
 { 
@@ -115,7 +117,7 @@ int main(int argc, char *argv[])
     struct iphdr *iph;
     struct tcphdr *tcph;
 	struct sockaddr_in saddr;
-	char packet[4096];
+	char packet[PKT_BUF];
     char saddr_str[INET6_ADDRSTRLEN];
     char daddr_str[INET6_ADDRSTRLEN];
 
@@ -148,7 +150,7 @@ int main(int argc, char *argv[])
             printf("the peer has performed an orderly shutdown\n");
             break;
         }
-        
+
         ethh = (struct ethhdr *)packet;
         if (ethh->h_proto != htons(ETH_P_IP)) {
             continue;
@@ -158,7 +160,13 @@ int main(int argc, char *argv[])
         if (iph->protocol != IPPROTO_TCP) {
             continue;
         }
-        
+
+        /* the port of irc will always larger than 1024 */
+        tcph = (struct tcphdr *)((char *)iph + iph->ihl * 4);
+        if (ntohs(tcph->source) < 6660 || ntohs(tcph->dest) < 6660) {
+            continue;
+        }
+
         //const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);
         inet_ntop(AF_INET, &iph->saddr, saddr_str, INET6_ADDRSTRLEN);
         inet_ntop(AF_INET, &iph->daddr, daddr_str, INET6_ADDRSTRLEN);
@@ -180,7 +188,7 @@ int main(int argc, char *argv[])
             write(STDOUT_FILENO, daddr_str, strlen(daddr_str));
             write(STDOUT_FILENO, " ", 1);
             write(STDOUT_FILENO, data, datalen);
-       }
+        }
         memset(packet, 0, sizeof(packet));
     }
     return 0;
