@@ -16,9 +16,16 @@ learning some linux mechanism
 ** string generate
    file:demo/module/strgen/Makefile
    file:demo/module/strgen/strgen.c
+** process 
+   file:demo/module/process/Makefile
+   file:demo/module/process/process.c
+** file system
+   file:demo/module/fs/Makefile
+   file:demo/module/fs/fs.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c
+  file:demo/ircrecoder.c
 * SOCK_RAW
   file:demo/sock_raw.txt  #SOCK_RAW document
   file:demo/ipproto_raw_receiver.c
@@ -36,3 +43,5 @@ learning some linux mechanism
   file:demo/netflowstat/netflowc.c
   file:demo/netflowstat/netflow.h
   file:demo/netflowstat/Makefile
+* cpu affinity
+  file:demo/sched_setaffinity.c
