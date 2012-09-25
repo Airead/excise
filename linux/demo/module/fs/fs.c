@@ -9,7 +9,6 @@
 #include <linux/kernel.h>
 #include <linux/sched.h>
 #include <linux/fs.h>
-#include "ext4.h"
 
 static int fs_init_module(void)
 {

@@ -25,6 +25,7 @@ all: $(TARGETS)
 
 clean:
 	rm -f *~ a.out *.o $(TARGETS) core.*
+	make -C netflowstat clean;
 
 test:
 	@echo TARGETS: $(TARGETS)

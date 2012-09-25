@@ -126,7 +126,8 @@ int main(int argc, char *argv[])
         exit(1);
     }
     ifname = argv[1];
-    
+    printf("some day will use %s, now just for no warning\n", ifname);
+
 	if ((s = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_IP))) < 0) {
 		perror("error:");
 		exit(EXIT_FAILURE);

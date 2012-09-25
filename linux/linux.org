@@ -22,6 +22,12 @@ learning some linux mechanism
 ** file system
    file:demo/module/fs/Makefile
    file:demo/module/fs/fs.c
+** net device
+   file:demo/module/netdev/Makefile
+   file:demo/module/netdev/netdev.c
+** time
+   file:demo/module/time/Makefile
+   file:demo/module/time/time.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c
@@ -45,3 +51,11 @@ learning some linux mechanism
   file:demo/netflowstat/Makefile
 * cpu affinity
   file:demo/sched_setaffinity.c
+
+* rsa algorithm
+  file:demo/rsa.c
+* md5
+  file:demo/md5.c
+* ioctl
+** get mac addr
+   file:demo/getmac.c
