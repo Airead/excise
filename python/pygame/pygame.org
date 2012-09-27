@@ -1,0 +1,12 @@
+learning pygame
+* excerise
+  file:demo/version.py
+  file:demo/printimage.py
+  file:demo/events.py
+  file:demo/keyevents.py
+  file:demo/allcolors.py
+  file:demo/rgb.py
+  file:demo/blend.py
+  file:demo/draw.py
+* design bike
+  file:demo/debike.py

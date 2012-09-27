@@ -5,3 +5,5 @@ learning python basic
   file:demo/readfile1.py
 * python set
   file:demo/set1.py
+* python class
+  file:demo/classes.py
