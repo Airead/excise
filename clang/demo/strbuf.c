@@ -62,10 +62,17 @@ int strcb_write(struct strcb *scb, char *buf, int len)
     } else if (scb->start == scb->end && scb->count != 0) { /* buffer full */
         goto drop;
     } else {
-        if (scb->start == scb->end) { /* buffer empty */
+        if (scb->start == scb->end && scb->count == 0) { /* buffer empty */
+            if (scb->size - scb->end < len + 1) { /* spare buffer in the rear is not enough */
+                scb->address[scb->end] = -1;
+                memcpy(scb->address, buf, len);
+                scb->address[len] = '\0';
+                scb->end = len + 1;
+                goto out;
+            }
             goto store;
         }
-        if (scb->start - scb->end) { /* spare buffer in the middle is not enough */
+        if (scb->start - scb->end < len + 1) { /* spare buffer in the middle is not enough */
             goto drop;
         }
     }
@@ -85,7 +92,7 @@ drop:
 
 int strcb_read(struct strcb *scb, char **buf, int *len)
 {
-    if (scb->start == scb->end && scb->count != 0) { /* full */
+    if (scb->start == scb->end && scb->count == 0) { /* empty */
         return 0;
     }
 
@@ -119,6 +126,19 @@ int main(int argc, char *argv[])
     };
 
     strcb_init(&scb, 63);
+
+    for (i = 0; i < 10; i++) {
+        char *s = str[i % 4];
+        if (strcb_write(&scb, s, strlen(s)) < 0) {
+            fprintf(stderr, "[%d] drop %s, len: %lu\n", i, s, strlen(s) + 1);
+        }
+    }
+
+    while (strcb_read(&scb, &res, &len) > 0) {
+        fprintf(stdout, "%s, len: %d\n", res, len + 1);
+    }
+
+    fprintf(stdout, "=================================\n");
 
     for (i = 0; i < 10; i++) {
         char *s = str[i % 4];
