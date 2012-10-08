@@ -7,3 +7,10 @@ learning C language
 * parse configure file
   file:demo/air_config.c
   file:demo/example.conf
+* circular buffer example
+  - keep one slot open
+    file:demo/oneslotopen.c
+  - use a fill count
+    file:demo/afillcount.c
+  - string buffer
+    file:demo/strbuf.c
