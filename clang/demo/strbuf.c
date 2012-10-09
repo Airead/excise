@@ -31,7 +31,7 @@ int strcb_init(struct strcb *scb, int size)
     scb->end = 0;
     scb->count = 0;
 
-    return -1;
+    return 0;
 }
 
 int strcb_free(struct strcb *scb)

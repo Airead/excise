@@ -28,6 +28,9 @@ learning some linux mechanism
 ** time
    file:demo/module/time/Makefile
    file:demo/module/time/time.c
+** loop buufer
+   file:demo/module/loopbuf/Makefile
+   file:demo/module/loopbuf/loopbuf.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c
