@@ -29,12 +29,14 @@ int phi,M,n,e,d,C,FLAG;
 int check()
 {
     int i;
-    for(i=3;e%i==0 && phi%i==0;i+2)
+    for(i=3;e%i==0 && phi%i==0;i=+2)
     {
         FLAG = 1;
-        return;
+        return 0;
     }
     FLAG = 0;
+
+    return 0;
 }
 
 void encrypt()
@@ -57,7 +59,7 @@ void decrypt()
     printf("\n\tDecrypted keyword : %d\n",M);
 }
 
-void main()
+int main()
 {
     int p,q,s;
     printf("Enter Two Relatively Prime Numbers\t: ");
@@ -86,4 +88,6 @@ void main()
     printf("\n\nEnter the Cipher text\t: ");
     scanf("%d",&C);
     decrypt();
+
+    return 0;
 }

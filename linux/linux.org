@@ -4,6 +4,10 @@ learning some linux mechanism
    file:demo/getopt.c
 ** getaddinfo
    file:demo/getaddrinfo.c
+** inet_pton
+   file:demo/inet_pton.c
+* inotify
+  file:demo/inotify.c
 * epoll
   file:demo/epoll_echo.c
 * module
@@ -28,9 +32,12 @@ learning some linux mechanism
 ** time
    file:demo/module/time/Makefile
    file:demo/module/time/time.c
-** loop buufer
+** loop buffer
    file:demo/module/loopbuf/Makefile
    file:demo/module/loopbuf/loopbuf.c
+** connection flow data bytes
+   file:demo/module/connflow/Makefile
+   file:demo/module/connflow/connflow.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c
@@ -61,4 +68,5 @@ learning some linux mechanism
   file:demo/md5.c
 * ioctl
 ** get mac addr
-   file:demo/getmac.c
+   file:demo/getmac.c  SIOCGIFCONF
+   file:demo/getmac2.c SIOCGIFNAME
