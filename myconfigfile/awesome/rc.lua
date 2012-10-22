@@ -209,7 +209,7 @@ netwidget = widget({
        })
 
        wicked.register(netwidget, wicked.widgets.net,
-           ' <span color="white">NET</span>: ${wlan0 down} / ${wlan0 up} ')
+           ' <span color="white">NET</span>: ${eth0 down} / ${eth0 up} ')
 
 
 for s = 1, screen.count() do
@@ -456,7 +456,8 @@ r.run("xchat")
 r.run("thunderbird")
 r.run("nm-applet")
 r.run("gnome-sound-applet")
-r.run("gnome-settings-daemon")
+-- r.run("gnome-settings-daemon")
+r.run("workrave")
 -- }}}
 
 

@@ -15,4 +15,5 @@ table5={
    ["x"]={"xchat","Xchat"}, 
    ["d"]={"goldendict", "Goldendict"}, 
    ["w"]={"evince", "Evince"}, 
+   ["c"]={"zenity --calendar", "zenity"}, 
 }

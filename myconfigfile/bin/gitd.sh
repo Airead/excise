@@ -1,3 +1,5 @@
 #!/bin/sh
 
-git diff --color | less -R
+FILE=$@
+
+git diff --color $FILE | less -R
