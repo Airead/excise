@@ -8,3 +8,5 @@
 *.order
 .tmp_versions
 *.files
+*.svg
+*.log

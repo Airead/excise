@@ -1,0 +1,161 @@
+digraph G {
+//    rankdir=LR;
+    sNO
+    sSS
+    sSR
+    sES
+    sFW
+    sCW
+    sLA
+    sTW
+    sCL
+    sS2
+    sIG
+//    comment [ shape = record, label = "{ \
+//                                        state | \
+//                                        sNO: TCP_CONNTRACK_NONE \l | \
+//                                        sSS: TCP_CONNTRACK_SYN_SENT \l | \
+//                                        sSR: TCP_CONNTRACK_SYN_RECV \l | \
+//                                        sES: TCP_CONNTRACK_ESTABLISHED \l | \
+//                                        sFW: TCP_CONNTRACK_FIN_WAIT \l | \
+//                                        sCW: TCP_CONNTRACK_CLOSE_WAIT \l | \
+//                                        sLA: TCP_CONNTRACK_LAST_ACK \l | \
+//                                        sTW: TCP_CONNTRACK_TIME_WAIT \l | \
+//                                        sCL: TCP_CONNTRACK_CLOSE \l | \
+//                                        sS2: TCP_CONNTRACK_SYN_SENT2 \l | \
+//                                        sIG: TCP_CONNTRACK_IGNORE \l}" ]
+// ORIGIN
+//   syn
+    sNO -> sSS [ label = "o-syn" ]
+    sSS -> sSS [ label = "o-syn" ]
+    sS2 -> sS2 [ label = "o-syn" ]
+    sSR -> sIG [ label = "o-syn" ]
+    sES -> sIG [ label = "o-syn" ]
+    sFW -> sIG [ label = "o-syn" ]
+    sCW -> sIG [ label = "o-syn" ]
+    sLA -> sIG [ label = "o-syn" ]
+    sTW -> sSS [ label = "o-syn" ]
+    sCL -> sSS [ label = "o-syn" ]
+// synack
+    sNO -> sIV [ label = "o-synack" ]
+    sSS -> sIV [ label = "o-synack" ]
+    sS2 -> sSR [ label = "o-synack" ]
+    sSR -> sIG [ label = "o-synack" ]
+    sES -> sIG [ label = "o-synack" ]
+    sFW -> sIG [ label = "o-synack" ]
+    sCW -> sIG [ label = "o-synack" ]
+    sLA -> sIG [ label = "o-synack" ]
+    sTW -> sIG [ label = "o-synack" ]
+    sCL -> sIG [ label = "o-synack" ]
+// fin
+    sNO -> sIV [ label = "o-fin" ]
+    sSS -> sIV [ label = "o-fin" ]
+    sS2 -> sIV [ label = "o-fin" ]
+    sSR -> sFW [ label = "o-fin" ]
+    sES -> sFW [ label = "o-fin" ]
+    sFW -> sLA [ label = "o-fin" ]
+    sCW -> sLA [ label = "o-fin" ]
+    sLA -> sLA [ label = "o-fin" ]
+    sTW -> sTW [ label = "o-fin" ]
+    sCL -> sCL [ label = "o-fin" ]
+// ack
+    sNO -> sES [ label = "o-ack" ]
+    sSS -> sIV [ label = "o-ack" ]
+    sS2 -> sIV [ label = "o-ack" ]
+    sSR -> sES [ label = "o-ack" ]
+    sES -> sES [ label = "o-ack" ]
+    sFW -> sCW [ label = "o-ack" ]
+    sCW -> sCW [ label = "o-ack" ]
+    sLA -> sTW [ label = "o-ack" ]
+    sTW -> sTW [ label = "o-ack" ]
+    sCL -> sCL [ label = "o-ack" ]
+// rst
+    sNO -> sIV [ label = "o-rst" ]
+    sSS -> sCL [ label = "o-rst" ]
+    sS2 -> sCL [ label = "o-rst" ]
+    sSR -> sCL [ label = "o-rst" ]
+    sES -> sCL [ label = "o-rst" ]
+    sFW -> sCL [ label = "o-rst" ]
+    sCW -> sCL [ label = "o-rst" ]
+    sLA -> sCL [ label = "o-rst" ]
+    sTW -> sCL [ label = "o-rst" ]
+    sCL -> sCL [ label = "o-rst" ]
+// none
+    sNO -> sIV [ label = "o-none" ]
+    sSS -> sIV [ label = "o-none" ]
+    sS2 -> sIV [ label = "o-none" ]
+    sSR -> sIV [ label = "o-none" ]
+    sES -> sIV [ label = "o-none" ]
+    sFW -> sIV [ label = "o-none" ]
+    sCW -> sIV [ label = "o-none" ]
+    sLA -> sIV [ label = "o-none" ]
+    sTW -> sIV [ label = "o-none" ]
+    sCL -> sIV [ label = "o-none" ]
+// REPLAY
+// syn
+    sNO -> sIV [ label = "r-syn" ]
+    sSS -> sS2 [ label = "r-syn" ]
+    sS2 -> sS2 [ label = "r-syn" ]
+    sSR -> sIV [ label = "r-syn" ]
+    sES -> sIV [ label = "r-syn" ]
+    sFW -> sIV [ label = "r-syn" ]
+    sCW -> sIV [ label = "r-syn" ]
+    sLA -> sIV [ label = "r-syn" ]
+    sTW -> sIV [ label = "r-syn" ]
+    sCL -> sIV [ label = "r-syn" ]
+// synack
+    sNO -> sIV [ label = "r-synack" ]
+    sSS -> sSR [ label = "r-synack" ]
+    sS2 -> sSR [ label = "r-synack" ]
+    sSR -> sSR [ label = "r-synack" ]
+    sES -> sIG [ label = "r-synack" ]
+    sFW -> sIG [ label = "r-synack" ]
+    sCW -> sIG [ label = "r-synack" ]
+    sLA -> sIG [ label = "r-synack" ]
+    sTW -> sIG [ label = "r-synack" ]
+    sCL -> sIG [ label = "r-synack" ]
+// fin
+    sNO -> sIV [ label = "r-fin" ]
+    sSS -> sIV [ label = "r-fin" ]
+    sS2 -> sIV [ label = "r-fin" ]
+    sSR -> sFW [ label = "r-fin" ]
+    sES -> sFW [ label = "r-fin" ]
+    sFW -> sLA [ label = "r-fin" ]
+    sCW -> sLA [ label = "r-fin" ]
+    sLA -> sLA [ label = "r-fin" ]
+    sTW -> sTW [ label = "r-fin" ]
+    sCL -> sCL [ label = "r-fin" ]
+// ack
+    sNO -> sIV [ label = "r-ack" ]
+    sSS -> sIG [ label = "r-ack" ]
+    sS2 -> sIG [ label = "r-ack" ]
+    sSR -> sSR [ label = "r-ack" ]
+    sES -> sES [ label = "r-ack" ]
+    sFW -> sCW [ label = "r-ack" ]
+    sCW -> sCW [ label = "r-ack" ]
+    sLA -> sTW [ label = "r-ack" ]
+    sTW -> sTW [ label = "r-ack" ]
+    sCL -> sCL [ label = "r-ack" ]
+// rst
+    sNO -> sIV [ label = "r-rst" ]
+    sSS -> sCL [ label = "r-rst" ]
+    sS2 -> sCL [ label = "r-rst" ]
+    sSR -> sCL [ label = "r-rst" ]
+    sES -> sCL [ label = "r-rst" ]
+    sFW -> sCL [ label = "r-rst" ]
+    sCW -> sCL [ label = "r-rst" ]
+    sLA -> sCL [ label = "r-rst" ]
+    sTW -> sCL [ label = "r-rst" ]
+    sCL -> sCL [ label = "r-rst" ]
+// none
+    sNO -> sIV [ label = "r-none" ]
+    sSS -> sIV [ label = "r-none" ]
+    sS2 -> sIV [ label = "r-none" ]
+    sSR -> sIV [ label = "r-none" ]
+    sES -> sIV [ label = "r-none" ]
+    sFW -> sIV [ label = "r-none" ]
+    sCW -> sIV [ label = "r-none" ]
+    sLA -> sIV [ label = "r-none" ]
+    sTW -> sIV [ label = "r-none" ]
+    sCL -> sIV [ label = "r-none" ]
+}
