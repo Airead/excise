@@ -38,6 +38,9 @@ learning some linux mechanism
 ** connection flow data bytes
    file:demo/module/connflow/Makefile
    file:demo/module/connflow/connflow.c
+** linux kernel hash
+   file:demo/module/hash/Makefile
+   file:demo/module/hash/hash.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c
