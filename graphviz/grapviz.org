@@ -15,6 +15,7 @@ learning grapviz
    file:demo/gprof_e1.c
 * network environment
   file:demo/network_en.dot
+  file:demo/natubypass.dot
 * flow chart
   file:demo/raycaster.dot
   dot -Tpng raycaster.dot -o raycaster.png 

@@ -1,0 +1,21 @@
+digraph R {
+    node [ shape=record ];
+    
+    natu [ label= "<f0> natu| 49.6.10.60" ]    
+    testwin -> natu:f0
+    user -> natu:f0
+    natu:f0 -> tsort
+    tsort -> outnat1 [ label = "v144(default)"]
+    tsort -> outnat2 [ label = "v155(bypass)"]
+
+    comment2 [ label = "我们的程序运行在 tsort 上，\n\
+                       并且会自动调整策略路由\n\
+                       (方式：iptables 打 mark)"]
+    comment1 [ shape = record, label = "{ \
+                                        tsort: 只做路由不做nat，需要有两个出口 \l | \
+                                        testwin: windows 测试机 \l | \
+                                        natu: 用户方的 nat \l | \
+                                        outnat1: 出口 nat 1 \l | \
+                                        outnat2: 出口 nat 2 \l}" ]
+    comment2 -> comment1 [ arrowhead = "none" ]
+}
