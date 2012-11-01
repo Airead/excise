@@ -41,6 +41,13 @@ learning some linux mechanism
 ** linux kernel hash
    file:demo/module/hash/Makefile
    file:demo/module/hash/hash.c
+** slab
+   file:demo/module/slab/Makefile
+   file:demo/module/slab/slab.c
+** spinlock
+   file:demo/module/spinlock/Makefile
+   file:demo/module/spinlock/spinlock.c
+   file:demo/module/spinlock/spinlock2.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c
