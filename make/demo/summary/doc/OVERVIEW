@@ -1,0 +1,20 @@
+summary: a demo for autotools, and the first year's summary of my career
+=================================
+version 1.0 -- December 2012 (The end of the world?)
+
+About
+=================================
+summary is just a demo for autotools(autoconf, automake), also can print what I did at 2012.
+
+Content
+=================================
+
+Known Bugs
+=================================
+None yet. Report to fgh1987168@gmail.com
+
+REFERENCES
+=================================
+ - [Autotools Tutorial for Beginners](http://markuskimius.wikidot.com/programming:tut:autotools/)
+ - [A tutorial for porting to autoconf & automake](http://mij.oltrelinux.com/devel/autoconf-automake/)
+
