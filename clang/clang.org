@@ -14,3 +14,6 @@ learning C language
     file:demo/afillcount.c
   - string buffer
     file:demo/strbuf.c
+
+* operate string
+  file:demo/parse_iptablessave.c
