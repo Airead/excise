@@ -7,15 +7,23 @@
 
 #include "main.h"
 #include "do.h"
+#include "lib.h"
+
+static void analyze_person(struct person p, char *act)
+{
+    printf("name: %s\n", p.name);
+    printf("  %s: \n", act);
+    p.dowhat();
+}
 
 int main(int argc, char *argv[])
 {
     char *act;
     struct person airead;
 
-    if (argc < 2) {
+    if (argc < 2) { 
         fprintf(stderr, "usage: %s <action>\n", argv[0]);
-        fprintf(stderr, "    action: [learn, done, can, need]\n");
+        fprintf(stderr, "    action: [study, done, can, need]\n");
         exit(1);
     }
     act = argv[1];
@@ -23,9 +31,9 @@ int main(int argc, char *argv[])
     /* initialize airead */
     strcpy(airead.name, "airead");
 
-    if (strcmp("learn", act) == 0) {
-        fprintf(stdout, "learn: \n");
-        airead.dowhat = do_learn;
+    if (strcmp("study", act) == 0) {
+        fprintf(stdout, "study: \n");
+        airead.dowhat = do_studied;
     } else if (strcmp("done", act) == 0) {
         fprintf(stdout, "done: \n");
         airead.dowhat = do_done;
@@ -37,7 +45,11 @@ int main(int argc, char *argv[])
         airead.dowhat = do_need;
     } else {
         fprintf(stderr, "error! action should be in [learn, done, can, need]\n");
-    }    
+	exit(1);
+    }
+
+    analyze_person(airead, act);
+
     return 0;
 }
 

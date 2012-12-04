@@ -1,0 +1,4 @@
+learning make
+
+* a summary of my first year work in IT
+  project: demo/summary
