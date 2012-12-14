@@ -19,3 +19,5 @@ learning python basic
    file:demo/argParse.py
 ** logging
    file:demo/logginge.py
+** python-ping
+   file:demo/ping.py
