@@ -16,4 +16,5 @@ table5={
    ["d"]={"goldendict", "Goldendict"}, 
    ["w"]={"evince", "Evince"}, 
    ["c"]={"zenity --calendar", "zenity"}, 
+   ["t"]={"now.sh", "zenity"}, 
 }

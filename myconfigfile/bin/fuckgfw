@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ssh -qTfnN -D 7070 aireadfan@216.194.70.6

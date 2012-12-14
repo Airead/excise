@@ -468,7 +468,7 @@ mytimer:add_signal("timeout", function()
 
   -- tell awsetbg to randomly choose a wallpaper from your wallpaper directory
 --  os.execute("awsetbg -F -r /home/airead/share/wallpaper/girls &")
-  os.execute("awsetbg -F -r /home/airead/share/wallpaper/game/eva &")
+--  os.execute("awsetbg -F -r /home/airead/share/wallpaper/game/eva &")
 
 end)
 

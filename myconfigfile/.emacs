@@ -276,13 +276,6 @@ occurence of CHAR."
 (global-set-key (kbd "C-,") 'highlight-symbol-prev)
 (global-set-key (kbd "C-.") 'highlight-symbol-next)
 
-;;(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- ;;'(default ((t (:inherit nil :stipple nil :background "darkslategrey" :foreground "wheat" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 143 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
-
 ;;Highlight #if 0 to #endif
 (defun my-c-mode-font-lock-if0 (limit)
   (save-restriction
@@ -404,6 +397,7 @@ occurence of CHAR."
 (setq yas/trigger-key "C-;")
 (setq yas/root-directory "~/.emacs.d/snippets")
 (yas/load-directory yas/root-directory)
+(setq-default mode-require-final-newline nil)
 
 ;; bind-key
 (global-set-key (kbd "C-x r u") 'string-insert-rectangle)
@@ -412,12 +406,130 @@ occurence of CHAR."
 (autoload 'markdown-mode "markdown-mode.el"
    "Major mode for editing Markdown files" t)
 (setq auto-mode-alist
-   (cons '("\\.md" . markdown-mode) auto-mode-alist))
+   (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
 
 ;; default brower
 (setq browse-url-generic-program (executable-find "google-chrome")
       browse-url-browser-function 'browse-url-generic)
-(global-set-key (kbd "C-x p") 'browse-url-at-point)
+;;(global-set-key (kbd "C-x p") 'browse-url-at-point)
+
+;; pymacs
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+
+;; ropemacs
+(pymacs-load "ropemacs" "rope-")
+
+;; pylookup
+;; add pylookup to your loadpath, ex) "~/.lisp/addons/pylookup"
+(setq pylookup-dir "~/.emacs.d/pylookup")
+(add-to-list 'load-path pylookup-dir)
+;; load pylookup when compile time
+(eval-when-compile (require 'pylookup))
+
+;; set executable file and db file
+(setq pylookup-program (concat pylookup-dir "/pylookup.py"))
+(setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
+
+;; to speedup, just load it on demand
+(autoload 'pylookup-lookup "pylookup"
+  "Lookup SEARCH-TERM in the Python HTML indexes." t)
+(autoload 'pylookup-update "pylookup" 
+  "Run pylookup-update and create the database at `pylookup-db-file'." t)
+
+;; set font
+(add-to-list 'default-frame-alist '(font . "monaco"))
+
+;; flymake
+;;(autoload 'flymake-find-file-hook "flymake" "" t)
+;;(add-hook 'find-file-hook 'flymake-find-file-hook)
+;;(setq flymake-gui-warnings-enabled nil)
+;;(setq flymake-log-level 0)
+
+;; auto-complete for python
+;;(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                         
+;;; Auto-completion                                                                                            
+;;;  Integrates:                                                                                               
+;;;   1) Rope                                                                                                  
+;;;   2) Yasnippet                                                                                             
+;;;   all with AutoComplete.el                                                                                 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                         
+(defun prefix-list-elements (list prefix)
+  (let (value)
+    (nreverse
+     (dolist (element list value)
+      (setq value (cons (format "%s%s" prefix element) value))))))
+(defvar ac-source-rope
+  '((candidates
+     . (lambda ()
+         (prefix-list-elements (rope-completions) ac-target))))
+  "Source for Rope")
+(defun ac-python-find ()
+  "Python `ac-find-function'."
+  (require 'thingatpt)
+  (let ((symbol (car-safe (bounds-of-thing-at-point 'symbol))))
+    (if (null symbol)
+        (if (string= "." (buffer-substring (- (point) 1) (point)))
+            (point)
+          nil)
+      symbol)))
+(defun ac-python-candidate ()
+  "Python `ac-candidates-function'"
+  (let (candidates)
+    (dolist (source ac-sources)
+      (if (symbolp source)
+          (setq source (symbol-value source)))
+      (let* ((ac-limit (or (cdr-safe (assq 'limit source)) ac-limit))
+             (requires (cdr-safe (assq 'requires source)))
+             cand)
+        (if (or (null requires)
+                (>= (length ac-target) requires))
+            (setq cand
+                  (delq nil
+                        (mapcar (lambda (candidate)
+                                  (propertize candidate 'source source))
+                                (funcall (cdr (assq 'candidates source)))))))
+        (if (and (> ac-limit 1)
+                 (> (length cand) ac-limit))
+            (setcdr (nthcdr (1- ac-limit) cand) nil))
+        (setq candidates (append candidates cand))))
+    (delete-dups candidates)))
+(add-hook 'python-mode-hook
+          (lambda ()
+                 (auto-complete-mode 1)
+                 (set (make-local-variable 'ac-sources)
+                      (append ac-sources '(ac-source-rope) '(ac-source-yasnippet)))
+                 (set (make-local-variable 'ac-find-function) 'ac-python-find)
+                 (set (make-local-variable 'ac-candidate-function) 'ac-python-candidate)
+                 (set (make-local-variable 'ac-auto-start) nil)))
+
+;;Ryan's python specific tab completion                                                                        
+(defun ryan-python-tab ()
+  ; Try the following:                                                                                         
+  ; 1) Do a yasnippet expansion                                                                                
+  ; 2) Do a Rope code completion                                                                               
+  ; 3) Do an indent                                                                                            
+  (interactive)
+  (if (eql (ac-start) 0)
+      (indent-for-tab-command)))
+
+(defadvice ac-start (before advice-turn-on-auto-start activate)
+  (set (make-local-variable 'ac-auto-start) t))
+(defadvice ac-cleanup (after advice-turn-off-auto-start activate)
+  (set (make-local-variable 'ac-auto-start) nil))
+
+;; (define-key python-mode-map "\t" 'ryan-python-tab)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                         
+;;; End Auto Completion                                                                                        
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
