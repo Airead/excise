@@ -10,3 +10,12 @@ learning python basic
   file:demo/classes.py
 * python function
   file:demo/formatnum.py
+* python snippet
+  file:demo/enum.py
+* python module
+** ConfigParser
+   file:demo/configParser.py
+** argparse
+   file:demo/argParse.py
+** logging
+   file:demo/logginge.py
