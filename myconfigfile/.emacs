@@ -450,6 +450,13 @@ occurence of CHAR."
 ;;(setq flymake-gui-warnings-enabled nil)
 ;;(setq flymake-log-level 0)
 
+;; new python mode
+(add-to-list 'load-path "~/.emacs.d/extension/python.el")
+(require 'python)
+
+(global-set-key (kbd "<M-f7>") 'rope-goto-definition)
+(global-set-key (kbd "<M-f8>") 'rope-pop-mark)
+
 ;; auto-complete for python
 ;;(autoload 'python-mode "python-mode" "Python Mode." t)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
