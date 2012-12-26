@@ -6,8 +6,8 @@
 
 ;;session
 ;;(add-to-list 'load-path "/usr/share/emacs/extension/")
-(require 'session)
-  (add-hook 'after-init-hook 'session-initialize)
+;;(require 'session)
+;;  (add-hook 'after-init-hook 'session-initialize)
 
 (load "desktop") 
 (desktop-load-default) 
@@ -199,6 +199,8 @@ occurence of CHAR."
 
 (global-set-key (kbd "M-]") 'delete-blank-lines)
 
+
+
 (defun insert-author ()
   "Insert author and date"
   (interactive)
@@ -252,7 +254,13 @@ occurence of CHAR."
   (insert " */")
   (insert "\n")
  )
-(global-set-key (kbd "C-c d") 'insert-author)
+
+(defun insert-current-date ()
+  "insert current date"
+  (interactive)
+  (insert (format-time-string "%Y/%m/%d %T\n" (current-time))))
+(global-set-key (kbd "C-c d") 'insert-current-date)
+
 
 (defun insert-function-describe ()
   "Insert author and date"
@@ -544,7 +552,9 @@ occurence of CHAR."
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.40")
- '(session-use-package t nil (session)))
+ '(safe-local-variable-values (quote ((lexical-binding . t))))
+ '(session-use-package t nil (session))
+ '(text-mode-hook (quote (turn-on-flyspell turn-on-auto-fill text-mode-hook-identify))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.

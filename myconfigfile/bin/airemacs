@@ -1,0 +1,3 @@
+#!/bin/bash
+
+emacs -Q -l /home/airead/study/git-proj/airemacs.d/.emacs

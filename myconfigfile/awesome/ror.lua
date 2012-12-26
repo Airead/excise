@@ -10,7 +10,7 @@
 
 module("ror")
 table5={
-   ["e"]={"emacs","Emacs"}, 
+   ["e"]={"emacs -Q -l /home/airead/study/git-proj/airemacs.d/.emacs","Emacs"}, 
    ["g"]={"google-chrome","Google-chrome"}, 
    ["x"]={"xchat","Xchat"}, 
    ["d"]={"goldendict", "Goldendict"}, 
