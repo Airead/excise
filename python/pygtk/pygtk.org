@@ -55,7 +55,7 @@ Learning pygtk
 ** Blocking an event handler
    file:demo/block.py
 
-* PyGTK中的部件
+* 06 PyGTK中的部件
 ** Lable
    file:demo/label.py
 ** CheckButton
@@ -65,7 +65,7 @@ Learning pygtk
 ** Image
    file:demo/image.py
 
-* PyGTK中的部件II
+* 07 PyGTK中的部件II
 ** Entry
    file:demo/entry.py
 ** HScale
@@ -80,3 +80,5 @@ Learning pygtk
    file:demo/iconview.py
 ** ListView
    file:demo/listview.py
+* example: callgraph
+  file:demo/callgraph/callgraph.py

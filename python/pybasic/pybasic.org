@@ -21,3 +21,4 @@ learning python basic
    file:demo/logginge.py
 ** python-ping
    file:demo/ping.py
+   file:demo/ping_example.py
