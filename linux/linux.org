@@ -6,10 +6,18 @@ learning some linux mechanism
    file:demo/getaddrinfo.c
 ** inet_pton
    file:demo/inet_pton.c
+** read
+   file:demo/read.c
+** sigaction
+   file:demo/sigaction.c
+** dup2
+   file:demo/dup2.c
 * inotify
   file:demo/inotify.c
 * epoll
   file:demo/epoll_echo.c
+* poll
+  file:demo/pool.c
 * module
 ** hello world
    file:demo/module/hello/Makefile
@@ -51,6 +59,14 @@ learning some linux mechanism
 ** virtual address to physical address
    file:demo/module/va2pa/Makefile
    file:demo/module/va2pa/va2pa.c
+** relay
+   file:demo/module/relay/Makefile
+   file:demo/module/relay/relay.c
+   file:demo/module/relay/poll.c
+** netfilter nf_hook_ops
+   file:demo/module/netfilter/Makefile
+   file:demo/module/netfilter/skb_dev.c
+   file:demo/module/netfilter/conntrack_state.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c
