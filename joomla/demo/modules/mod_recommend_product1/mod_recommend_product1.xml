@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.6.0" client="site" method="install">
+  <name>recommend product1</name> 
+  <author>Airead Fan</author> 
+  <creationDate>2012</creationDate> 
+  <copyright>All rights reserved by Airead Fan.</copyright> 
+  <license>GPL 2.0</license> 
+  <authorEmail>fgh1987168@gmail.com</authorEmail> 
+  <authorUrl>www.aireadfun.com</authorUrl> 
+  <version>1.0.0</version> 
+  <description>recomment product1</description>
+  <!-- Listing of all files that should be installed for the module to function -->
+  <files>
+    <!-- The "module" attribute signifies that this is the main controller file -->
+    <filename module="mod_recommend_product1">mod_recommend_product1.php</filename>
+    <filename>index.html</filename>
+    <filename>helper.php</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+  </files>
+  
+  <!-- <languages> -->
+  <!--   <language tag="en-GB">en-GB.mod_recommend_product1.ini</language> -->
+  <!-- </languages> -->
+
+  <!-- Optional parameters -->
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+        <field 
+            name="height"
+            type="text" 
+            default="69" 
+            label="height"
+            description="rect height">
+        </field>
+        <field 
+            name="width"
+            type="text" 
+            default="140" 
+            label="width"
+            description="rect width">
+        </field>
+        <field 
+            name="link"
+            type="text" 
+            default="" 
+            label="link"
+            description="link">
+        </field>
+        <field 
+            name="suffix"
+            type="text" 
+            default="" 
+            label="suffix"
+            description="suffix">
+        </field>
+        <field 
+            name="is_background"
+            type="text" 
+            default="0"
+            label="is_background"
+            description="is_background">
+        </field>
+      </fieldset>
+    </fields>                   <!-- end paramter-->
+  </config>
+</extension>
