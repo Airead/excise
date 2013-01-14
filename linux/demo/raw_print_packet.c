@@ -19,7 +19,7 @@
 
 int main(int argc, char *argv[])
 {
-    int s;
+    int i, s;
     struct ethhdr *ethh;
     struct iphdr *iph;
     ssize_t rn;                 /* receive number */
@@ -46,6 +46,11 @@ int main(int argc, char *argv[])
         }
         
         ethh = (struct ethhdr *)packet;
+        fprintf(stdout, "dest mac:");
+        for (i = 0; i < ETH_ALEN; i++) {
+            fprintf(stdout, "%02x:", ethh->h_dest[i]);
+        }
+        fprintf(stdout, "\n");
         if (ethh->h_proto != htons(ETH_P_IP)) {
             continue;
         }

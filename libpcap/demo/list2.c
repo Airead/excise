@@ -3,7 +3,9 @@
 
 #include <pcap.h>
 #include <string.h>
+#include <errno.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define MAXBYTES2CAPTURE 2048
 
@@ -31,7 +33,7 @@ void processPacket(u_char *arg, const struct pcap_pkthdr * pkthdr,
 
 int main()
 {
-    int i = 0, count = 0;
+    int count = 0;
     pcap_t *descr = NULL;
     char errbuf[PCAP_ERRBUF_SIZE], *device = NULL;
     
@@ -39,7 +41,10 @@ int main()
 
     /* Get the name of the first device suitable for capture */
     device = pcap_lookupdev(errbuf);
-
+    if (device == NULL) {
+        fprintf(stderr, "get device failed: %s\n", strerror(errno));
+        exit(1);
+    }
     printf("Opening device %s\n", device);
 
     /* Open device in promiscuous mode */

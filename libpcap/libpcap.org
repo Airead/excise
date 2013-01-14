@@ -1,6 +1,7 @@
 learning libpcap
 
 * programming with libpcap
-  file:demo/list2.cx
+  file:demo/list2.c
   file:demo/arpsniffer.c
+  file:demo/listethhdr.c
 * 

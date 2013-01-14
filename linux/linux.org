@@ -12,6 +12,8 @@ learning some linux mechanism
    file:demo/sigaction.c
 ** dup2
    file:demo/dup2.c
+** setitimer
+   file:demo/setitimer.c
 * inotify
   file:demo/inotify.c
 * epoll
@@ -80,6 +82,7 @@ learning some linux mechanism
   file:demo/raw_print_tcplen.c
   file:demo/raw_print_packet.c
   file:demo/raw_print_tcp_opt.c
+  file:demo/raw_print_ethhdr.c
 
 * time
   file:demo/curtime.c

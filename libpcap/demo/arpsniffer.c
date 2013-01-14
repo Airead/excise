@@ -4,6 +4,7 @@
 #include <pcap.h>
 #include <stdlib.h>
 #include <string.h>
+#include <arpa/inet.h>
 
 /* ARP Header, (assuming Ethernet + IPV4 */
 #define ARP_REQUEST 1           /* ARP Request */
@@ -26,7 +27,7 @@ typedef struct arphdr {
 int main(int argc, char *argv[])
 {
     int i = 0;
-    bpf_u_int32 netaddr = 0, mask = 0; /* To Store network address and netmask */
+    bpf_u_int32 mask = 0; /* To Store network address and netmask */
     struct bpf_program filter;         /* Place to store the BPF filter program */
     char errbuf[PCAP_ERRBUF_SIZE];     /* Error buff */
     pcap_t *descr = NULL;              /* Network interface handler */
