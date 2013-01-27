@@ -16,6 +16,7 @@
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
 #include <linux/if_ether.h>
+#include <linux/icmp.h>
 
 int main(int argc, char *argv[])
 {

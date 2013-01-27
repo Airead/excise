@@ -19,7 +19,8 @@ learning grapviz
   file:demo/test63netcard.dot
 * flow chart
   file:demo/raycaster.dot
-  dot -Tpng raycaster.dot -o raycaster.png 
+  dot -Tpng raycaster.dot -o raycaster.png
+  file:demo/flowchart_ex1.dot
 * big example
   file:demo/bige.dot
 * struct

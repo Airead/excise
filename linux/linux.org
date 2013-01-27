@@ -2,6 +2,8 @@ learning some linux mechanism
 * util
 ** getopt
    file:demo/getopt.c
+** getopt_long
+   file:demo/getopt_long.c
 ** getaddinfo
    file:demo/getaddrinfo.c
 ** inet_pton
@@ -14,6 +16,10 @@ learning some linux mechanism
    file:demo/dup2.c
 ** setitimer
    file:demo/setitimer.c
+** random
+   file:demo/random.c
+* select
+  file:demo/select.c
 * inotify
   file:demo/inotify.c
 * epoll
@@ -83,6 +89,12 @@ learning some linux mechanism
   file:demo/raw_print_packet.c
   file:demo/raw_print_tcp_opt.c
   file:demo/raw_print_ethhdr.c
+  file:demo/icmp_rcv.c
+  file:demo/icmp_send.c
+  file:demo/icmp_reply.c
+  file:demo/icmp_reply_all.c
+  file:demo/icmp_rcv_all.c
+  file:demo/myping.c
 
 * time
   file:demo/curtime.c

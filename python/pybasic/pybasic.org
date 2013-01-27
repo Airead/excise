@@ -22,3 +22,5 @@ learning python basic
 ** python-ping
    file:demo/ping.py
    file:demo/ping_example.py
+* argv
+  file:demo/argv.py
