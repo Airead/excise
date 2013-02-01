@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <google/cmockery.h>
+#include "cmockery/cmockery.h"
 #include "database.h"
 
 extern DatabaseConnection* connect_to_customer_database();

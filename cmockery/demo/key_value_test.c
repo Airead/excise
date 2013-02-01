@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <setjmp.h>
 #include <string.h>
-#include <google/cmockery.h>
+#include "cmockery/cmockery.h"
 
 /*
  * This is duplicated here from the module setup_teardown.c to reduce the number

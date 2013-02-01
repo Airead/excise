@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <google/cmockery.h>
+#include "cmockery/cmockery.h"
 
 extern void leak_memory();
 extern void buffer_overflow();

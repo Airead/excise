@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <google/cmockery.h>
+#include "cmockery/cmockery.h"
 
 /* Ensure add() adds two intergers correctly. */
 void test_add(void **state)

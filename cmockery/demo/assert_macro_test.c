@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include <google/cmockery.h>
+#include "cmockery/cmockery.h"
 
 extern const char * get_status_code_string(const unsigned int status_code);
 extern unsigned int string_to_status_code(const char *const status_code_string);

@@ -16,7 +16,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include "google/cmockery.h"
+#include "cmockery/cmockery.h"
 #include <stdio.h>
 
 #ifdef _WIN32
