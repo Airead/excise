@@ -11,9 +11,9 @@ JModelLegacy::addIncludePath($com_path . '/models', 'ContentModel');
 //Add database instance
 $db = JFactory::getDBO();
 
-function getProducts($suffix) {
+function getProductsView($suffix) {
   $db = JFactory::getDBO();
-  $query = "SELECT id FROM #__categories where title='recommend product".$suffix."'";
+  $query = "SELECT id FROM #__categories where title='product'";
   //Run it
   $db->setQuery($query);
 

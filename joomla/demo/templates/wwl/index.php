@@ -64,14 +64,15 @@ $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/template.
     <?php endif; ?>
     <div id="container">
       <jdoc:include type="component" />
-      <?php if ($showContents): ?>
       <div id="contents">
+        <jdoc:include type="modules" name="wwl-product-view" />
+        <?php if ($showContents): ?>
         <jdoc:include type="modules" name="wwl-whoweare" />
         <div class="rproduct_title"><img src="templates/wwl/images/Recommend_Products.jpg" width="229" height="36" alt="Recommend_Products" border="0"></div>
         <jdoc:include type="modules" name="wwl-recommend1" />
         <jdoc:include type="modules" name="wwl-recommend2" />
-      </div>
       <?php endif; ?>
+      </div>
       <jdoc:include type="modules" name="wwl-product-list" />
       <br class="clear">
     </div>
