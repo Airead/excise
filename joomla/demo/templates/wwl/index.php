@@ -64,6 +64,7 @@ $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/template.
     <?php endif; ?>
     <div id="container">
       <jdoc:include type="component" />
+      <jdoc:include type="modules" name="wwl-product-list" />
       <div id="contents">
         <jdoc:include type="modules" name="wwl-product-view" />
         <?php if ($showContents): ?>
@@ -73,7 +74,6 @@ $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/template.
         <jdoc:include type="modules" name="wwl-recommend2" />
       <?php endif; ?>
       </div>
-      <jdoc:include type="modules" name="wwl-product-list" />
       <br class="clear">
     </div>
 
