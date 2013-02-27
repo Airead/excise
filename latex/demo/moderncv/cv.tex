@@ -1,0 +1,86 @@
+\documentclass[11pt,a4paper]{moderncv}
+
+\usepackage{fontspec,xunicode,xltxtra}
+
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmainfont[Numbers=OldStyle,Mapping=tex-text]{Times New Roman}
+\setsansfont[Mapping=tex-text]{Arial}
+\setmonofont{Courier New}
+
+\usepackage[BoldFont,SlantFont,CJKchecksingle,CJKnumber]{xeCJK}
+\setCJKmainfont[BoldFont={文泉驿等宽微米黑},ItalicFont={文泉驿等宽微米黑}]{文泉驿等宽微米黑}
+\setCJKsansfont{文泉驿等宽微米黑}
+\setCJKmonofont{文泉驿等宽微米黑}
+\punctstyle{hangmobanjiao}
+\defaultfontfeatures{Mapping=tex-text}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\usepackage{xcolor}
+\linespread{1.2}
+
+\moderncvtheme[blue]{classic}
+
+\usepackage[scale=0.95]{geometry}
+\AtBeginDocument{\recomputelengths}
+
+\setCJKfamilyfont{name}{文泉驿等宽微米黑}
+\newcommand\name{\CJKfamily{name}}
+
+\firstname{\name{张三}}
+\familyname{}
+\title{个人简历}
+\address{详细住址}{邮编：xxx}
+\mobile{手机}
+\phone{座机}
+\email{邮箱}
+\homepage{网站}
+\photo[95pt]{picture.jpg}
+\quote{\textit{求职意向：……}}
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\section{基本信息}
+\cvcomputer{姓\qquad 名：}{张三}{性\qquad 别：}{男}
+\cvcomputer{民\qquad 族：}{汉族}{出\qquad 生：}{xxxx年xx月xx日}
+
+\section{教育背景}
+\cventry{年 -- 年}{学位}{院校}{城市}{成绩}{说明}
+\cventry{年 -- 年}{学位}{院校}{城市}{成绩}{说明}
+
+\section{科研经历}
+\cvline{年 -- 年}{简要描述}
+\cvline{}{$\bullet$ 详细描述子课题}
+\cvline{}{$\bullet$ 详细描述子课题}
+
+\section{个人技能}
+\cvline{专业技能}{$\bullet$ 主要技能}
+\cvline{}{$\bullet$ 次要技能}
+\smallskip
+\cvline{英语水平}{$\bullet$ 主要技能}
+\cvline{}{$\bullet$ 等级考试}
+
+\section{获奖情况}
+\cvlistitem[$\bullet$]{xx年获奖}
+\cvlistitem[$\bullet$]{xx年获荣誉称号}
+
+\section{个人爱好}
+\cvlistitem[$\bullet$]{主要爱好}
+\cvlistitem[$\bullet$]{次要爱好}
+
+\section{自我评价}
+\cvline{学习}{简要说明}
+\cvline{工作}{简要说明}
+\cvline{生活}{简要说明}
+
+\begin{thebibliography}{99}
+\bibitem{1}\textbf{Zhang San}, Li Si, Wang Wu. (Year). Title. \textit{Journal}, \ldots.
+\bibitem{2}\textbf{Zhang San}, Li Si, Wang Wu. (Year). Title. \textit{Journal}, \ldots.
+\end{thebibliography}
+
+\end{document}
+
