@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper]{moderncv}
+
+\usepackage{fontspec,xunicode,xltxtra}
+
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmainfont[Numbers=OldStyle,Mapping=tex-text]{Times New Roman}
+\setsansfont[Mapping=tex-text]{Arial}
+\setmonofont{Courier New}
+
+\usepackage[BoldFont,SlantFont,CJKchecksingle,CJKnumber]{xeCJK}
+\setCJKmainfont[BoldFont={文泉驿等宽微米黑},ItalicFont={文泉驿等宽微米黑}]{文泉驿等宽微米黑}
+\setCJKsansfont{文泉驿等宽微米黑}
+\setCJKmonofont{文泉驿等宽微米黑}
+\punctstyle{hangmobanjiao}
+\defaultfontfeatures{Mapping=tex-text}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\usepackage{xcolor}
+\linespread{1.1}
+
+\moderncvtheme[blue]{classic}
+
+\usepackage[scale=0.95]{geometry}
+\AtBeginDocument{\recomputelengths}
+
+\setCJKfamilyfont{name}{文泉驿等宽微米黑}
+\newcommand\name{\CJKfamily{name}}
+
+\firstname{\name{范人豪}}
+\familyname{}
+\title{个人简历}
+\address{院校：河南科技大学\quad统计学}{毕业时间：2010年\quad\quad\quad\quad\quad\quad}
+\mobile{手机：13522650089\quad\quad\quad\quad\quad\quad}
+\phone{github: https://github.com/Airead}
+\email{邮箱：fgh1987168@gmail.com\quad}
+\homepage{网站：http://www.aireadfun.com}
+\photo[95pt]{me_zhengjian.jpg}
+%\quote{\textit{求职意向：……}}
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\section{基本信息}
+\cvcomputer{姓\qquad 名：}{范人豪}{性\qquad 别：}{男}
+\cvcomputer{民\qquad 族：}{汉族}{出\qquad 生：}{1987年10月27日}
+
+\section{自我介绍}
+\cvline{}{\quad\quad我对编程有浓厚的兴趣，具有很强的自学能力，对技术有追求极致的热情，具有
+良好的英文文档阅读能力，对开源世界有极大的热情。在Ubuntu上使用awesome窗口管理器提高工作效率，用emacs进行日常开发，利用org-mode进行gtd时间管理，通过git管理各种源码。}
+
+\section{个人技能}
+\cvline{专业技能}{1. 熟悉 linux 操作系统}
+\cvline{}{2. 精通 C 语言}
+\cvline{}{3. 熟悉 shell/python/elisp/autotools}
+\cvline{}{4. 熟练使用 git}
+\cvline{}{5. linux 多进程，网络开发}
+\cvline{}{6. 熟悉 tcp/ip 协议}
+\cvline{}{7. 了解 linux kernel network 部分}
+\smallskip
+\cvline{英语水平}{四级}
+
+\section{工作经验}
+\cventry{2012/04 -- 2013/02}{北京云方舟科技有限公司}{研发部}{linux 研发工程师}{}{}
+\cvline{职责}{
+1. 研发 linux 服务器应用软件，如 icmporxy, 它可以代理 ping 服务；\newline
+2. 利用 linux kernel 中的 netfilter(conntrack) 框架对网络数据包进行深度分析及修改；\newline
+3. 根据不同的策略(协议/流量/pps)对GB级高速数据流进行分拣。\newline}
+
+\cventry{2011/12 -- 2012/04}{北京积木恒硕科技有限公司}{研发部}{linux C 研发工程师}{}{}
+\cvline{职责}{
+基于DBus编写 Webpad 操作系统网络模块，使 js 代码可以通过 Websocket 控制底层无线网络设备，负责网络模块的测试及调优工作。}
+
+\cventry{2010/12 -- 2011/06}{中集凌宇汽车有限公司}{信息管理部}{数据分析专员}{}{}
+\cvline{职责}{
+通过Excel VBA脚本进行数据挖掘及分析，主要是针对物料、成本、价格等的分析}
+\end{document}
+
