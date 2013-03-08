@@ -1,6 +1,7 @@
 *~
 *.[oa]
 *.out
+*.debug
 *.cmd
 *.symvers
 *.ko

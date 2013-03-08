@@ -39,7 +39,7 @@ Introduction to Algorithms Second Edition
 *** 2.3-7
     请给出一个运行时间为O(nlgn)的算法，使之能在给定一个由n个整数构成的集合S和另一个整数x时，判断出S中是否存在有两个其和等于x的元素。
     file:excise/2.3-7.txt
-   
+
 * 第六章 堆排序
 ** 6.2 保持堆的性质
 *** 6.2-2 
@@ -63,3 +63,14 @@ Introduction to Algorithms Second Edition
     HEAP－DELEETE(A, i)操作将结点i中的项从堆A中删去。对含n个元素的最大堆，请给出时间为O(lgn)的 HEAP-DELETE 的实现。
 *** 6.5.8
     请给出一个时间为O(nlgk)、用来将k个已排序链表合并为一个排序链表的算法。此处n为所有输入链表中元素的总数。（提示：用一个最小堆来做k路合并）
+
+* 第三十二章 字符串匹配
+** 32.2 Rabin-Karp 算法
+*** 32.2-1
+    如果取模 q=11, 那么当 Rabin-Karp 匹配算法在文本 T=3141592653589793 中搜寻模式 P=26 时，会遇到多少个伪命中点？
+    file:excise/31.2-2.txt
+    file:excise/31.2-2.R
+* 算法面试题
+* hackerrank
+  file:demo/hackerrank/string_similarity/string_similarity.org
+  file:demo/hackerrank/substring_diff/substring_diff.org

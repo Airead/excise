@@ -1,0 +1,31 @@
+M(S1, S2, I, J, L)                                   O(n)
+    count <- 0
+    x <- 0
+    while I + x < length[S1] and J + x < length[S2]
+          and S1[I + x] != S2[J + x]
+        count <- count + 1
+        x <- x + 1
+    return count
+
+
+SUB_MAXL(S1, S2, I, J, K)                            O(n^2)
+    submaxl <- 0
+    n <- 1
+    while n <= MIN(length[S1] - I, length[S2] - J) + 1
+        if M(S1, S2, I, J, n) > K                  
+            break
+        if submaxl < n
+            submaxl <- n
+        n <- n + 1
+    return submaxl
+
+
+MAXL(S1, S2, K)                                      O(n^4)
+    maxl <- 0
+    for i <- 1 to length[S1]
+        for j <- 1 to length[S2]
+            tmpmaxl <- SUB_MAXL(S1, S2, i, j, K) 
+            if maxl < tmpmaxl
+                maxl = tmpmaxl
+    retrun maxl
+    

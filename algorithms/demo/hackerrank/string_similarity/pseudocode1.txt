@@ -1,0 +1,16 @@
+GET_SIMILARITY(LONG, SHORT)               O(n)
+    similarity <- 0
+    i <- 1
+    while i < length[SHORT]
+        if LONG[i] = SHORT[i]
+            similarity <- similarity + 1
+    return similarity
+
+
+STR_SIMILARITY_SUM(A)                     O(n^2)
+    sum <- 0
+    i <- 0
+    while i < length[A]
+        sum += GET_SIMILARITY(A, A + i)
+        i <- i + 1
+    return sum
