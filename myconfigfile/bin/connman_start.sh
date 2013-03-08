@@ -1,1 +1,0 @@
-/home/airead/work/pad_service/trunk/src/network/network_connman/connman_start.sh
