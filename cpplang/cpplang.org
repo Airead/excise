@@ -1,0 +1,17 @@
+learning c plus plus
+* exercise
+** 第二章 开始学习 C++
+*** 1. 编写一个 C++ 程序，它显示您的姓名和地址
+    file:ex/2.7.1.cc
+*** 2. 编写一个 C++ 程序，它要求用户输入一个以 long 为单位的距离，然后将它转换为码（一 long 等于220码）
+    file:ex/2.7.2.cc
+*** no title
+    file:ex/2.7.3.cc
+    file:ex/2.7.4.cc
+    file:ex/2.7.5.cc
+    file:ex/2.7.6.cc
+    file:ex/2.7.7.cc
+** 第三章 处理数据
+*** no ttile
+    file:ex/3.7.1.cc
+    file:ex/3.7.2.cc
