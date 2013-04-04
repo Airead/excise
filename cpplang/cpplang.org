@@ -29,3 +29,14 @@ learning c plus plus
     file:ex/4.13.7.cc
     file:ex/4.13.8.cc
     file:ex/4.13.9.cc
+** 第五章
+*** no title
+    file:ex/5.9.1.cc
+    file:ex/5.9.3.cc
+    file:ex/5.9.4.cc
+    file:ex/5.9.5.cc
+    file:ex/5.9.6.cc
+    file:ex/5.9.7.cc
+    file:ex/5.9.8.cc
+    file:ex/5.9.9.cc
+    file:ex/5.9.10.cc
