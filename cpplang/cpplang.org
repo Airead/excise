@@ -18,7 +18,7 @@ learning c plus plus
     file:ex/3.7.3.cc
     file:ex/3.7.4.cc
     file:ex/3.7.5.cc
-** 第四章
+** 第四章 复合类型
 *** no title
     file:ex/4.13.1.cc
     file:ex/4.13.2.cc
@@ -29,7 +29,7 @@ learning c plus plus
     file:ex/4.13.7.cc
     file:ex/4.13.8.cc
     file:ex/4.13.9.cc
-** 第五章
+** 第五章 循环和关系表达式
 *** no title
     file:ex/5.9.1.cc
     file:ex/5.9.3.cc
@@ -40,3 +40,9 @@ learning c plus plus
     file:ex/5.9.8.cc
     file:ex/5.9.9.cc
     file:ex/5.9.10.cc
+** 第六章 分支语句和逻辑运算符
+*** no title
+    file:ex/6.11.1.cc
+    file:ex/6.11.2.cc
+    file:ex/6.11.3.cc
+    file:ex/6.11.8.cc
