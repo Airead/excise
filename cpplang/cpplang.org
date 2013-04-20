@@ -46,3 +46,15 @@ learning c plus plus
     file:ex/6.11.2.cc
     file:ex/6.11.3.cc
     file:ex/6.11.8.cc
+** 第七章 函数——C++的编程模块
+*** no title
+    file:ex/7.13.1.cc
+    file:ex/7.13.2.cc
+    file:ex/7.13.3.cc
+    file:ex/7.13.5.cc
+    file:ex/7.13.6.cc
+    file:ex/7.13.7.cc
+    file:ex/list7.15.cc
+    file:ex/7.13.8.a.cc
+    file:ex/7.13.8.b.cc
+    file:ex/7.13.10.cc

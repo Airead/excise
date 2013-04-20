@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
 {
     using namespace std;
     
-    char choice, *ret;
+    char choice;
+    const char *ret;
 
     cout << "Please enter one of the following choices: " << endl;
     cout << "c) carnivore           p) pianist" << endl;
