@@ -58,3 +58,13 @@ learning c plus plus
     file:ex/7.13.8.a.cc
     file:ex/7.13.8.b.cc
     file:ex/7.13.10.cc
+** 第八章 函数探幽
+*** no title
+    file:ex/8.8.1.cc
+    file:ex/8.8.2.cc
+    file:ex/8.8.3.cc
+    file:ex/8.8.4.cc
+    file:ex/8.8.5.cc
+    file:ex/8.8.6.cc
+    file:ex/list8.14.cc
+    file:ex/8.8.7.cc
