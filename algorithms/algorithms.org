@@ -64,6 +64,16 @@ Introduction to Algorithms Second Edition
 *** 6.5.8
     请给出一个时间为O(nlgk)、用来将k个已排序链表合并为一个排序链表的算法。此处n为所有输入链表中元素的总数。（提示：用一个最小堆来做k路合并）
 
+* 第十一章 散列表
+** 11.1 直接寻址表
+*** 11.1-1
+    考虑由一个长度为m的直接寻址表T表示的动态集合S。给出一个查找S的最大元素的算法过程。所给的过程在最坏的情况下的运行时间是什么？
+    file:excise/11.1-1.txt
+*** 11.1-2
+    位向量(bit vector)是一种仅包含0和1的数组。长度为m的位向量所占空间要
+    比包含m个指针的数组少得多。请说明如何用一个位向量来表示一个包含不同
+    元素（无卫星数据）的动态集合。字典操作的运行时间应是O(1)。
+    file:excise/11.1-2.txt
 * 第三十二章 字符串匹配
 ** 32.2 Rabin-Karp 算法
 *** 32.2-1
@@ -74,3 +84,7 @@ Introduction to Algorithms Second Edition
 * hackerrank
   file:demo/hackerrank/string_similarity/string_similarity.org
   file:demo/hackerrank/substring_diff/substring_diff.org
+  file:demo/hackerrank/botclean_partially_observable/bpo.org
+  file:demo/hackerrank/botclean/botclean.org
+  file:demo/hackerrank/bot_saves_princess/bsp.org
+  file:demo/hackerrank/bot_saves_princess2/bsp2.org

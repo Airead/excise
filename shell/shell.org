@@ -1,3 +1,17 @@
 * learning shell
 ** getopts
    file:demo/getopts.sh
+
+** string
+*** find diff
+    file:demo/str_find_diff.txt
+    file content:
+    package: version msg(opt)
+    """
+    Working: 1.1.1.1
+    Repository: 1.1.1.1 aaaaa
+    Working: 1.1.1.1
+    Repository: 1.1.1.2 bbbbb
+    """
+    if version number is different between w and r, print msg(aaaaa or bbbbb)
+    file:demo/str_find_diff.sh

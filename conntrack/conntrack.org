@@ -63,10 +63,25 @@ learning conntrack
 *** nf_conntrack_l3proto_register(&nf_conntrack_l3proto_ipv4);
 *** int nf_register_hooks(struct nf_hook_ops *reg, unsigned int n)
 *** nf_conntrack_ipv4_compat_init();
-* nf_conntrack_in
+** registered four hook function
+*** ipv4_conntrack_in() at NF_INET_PRE_ROUTING
+**** nf_conntrack_in(dev_net(in), PF_INET, hooknum, skb);
+*** ipv4_conntrack_local() at NF_INET_LOCAL_OUT
+**** nf_conntrack_in(dev_net(out), PF_INET, hooknum, skb);
+*** ipv4_conntrack_confirm() at NF_INET_POST_ROUTING
+**** call skb->ct->help->helper()
+**** adjust seqs for loopback traffic only in outgoing direction
+**** nf_conntrack_confirm(skb)
+*** ipv4_conntrack_confirm() at NF_INET_LOCAL_IN
+* nf_conntrack_in (net/netfilter/nf_conntrack_core.c)
 ** l3proto->get_l4proto()
 ** l4proto = __nf_ct_l4proto_find(pf, protonum);
 ** l4proto->error(net, skb, dataoff, &ctinfo, pf, hooknum);
 ** ct = resolve_normal_ct(net, skb, dataoff, pf, protonum,
 ** l4proto->packet(ct, skb, dataoff, ctinfo, pf, hooknum);
 ** nf_conntrack_event_cache(IPCT_STATUS, ct);
+* nf_conntrack_confirm(struct sk_buff *skb)
+** nf_ct_is_untracked()
+** nf_ct_is_confirmed()
+** __nf_conntrack_confirm()
+** nf_ct_deliver_cached_events(ct);

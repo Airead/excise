@@ -17,6 +17,10 @@ learning grapviz
   file:demo/network_en.dot
   file:demo/natubypass.dot
   file:demo/test63netcard.dot
+  file:demo/natwithnetns.dot
+  file:demo/arus.dot
+  file:demo/common_nat.dot
+  file:demo/ipfrq.dot
 * flow chart
   file:demo/raycaster.dot
   dot -Tpng raycaster.dot -o raycaster.png

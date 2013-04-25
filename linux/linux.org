@@ -75,6 +75,13 @@ learning some linux mechanism
    file:demo/module/netfilter/Makefile
    file:demo/module/netfilter/skb_dev.c
    file:demo/module/netfilter/conntrack_state.c
+** MYSNAT
+   file:demo/module/MYSNAT/Makefile
+   file:demo/module/MYSNAT/ipt_MYSNAT.c
+   file:demo/module/MYSNAT/libipt_MYSNAT.c
+** kernel socket
+   file:demo/module/ksocket/Makefile
+   file:demo/module/ksocket/ksocket.c
 * irc client
   file:demo/ircraw.c
   file:demo/ircsniper.c

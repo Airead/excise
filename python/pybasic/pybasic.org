@@ -3,13 +3,18 @@ learning python basic
 * python file io
   file:demo/writefile1.py
   file:demo/readfile1.py
+  file:demo/readcontent.py
   file:demo/netflow.py
+* python loop
+  file:demo/for.py
 * python set
   file:demo/set1.py
 * python class
   file:demo/classes.py
 * python function
   file:demo/formatnum.py
+* python string
+  file:demo/split.py
 * python snippet
   file:demo/enum.py
 * python module
@@ -22,5 +27,12 @@ learning python basic
 ** python-ping
    file:demo/ping.py
    file:demo/ping_example.py
+** urllib
+   file:demo/gethtml.py
+** json
+   file:demo/jsonex.py
 * argv
   file:demo/argv.py
+* python app
+** get china city id in weather.com.cn
+   file:demo/getcityid.py

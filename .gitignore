@@ -1,4 +1,9 @@
 *~
+*ropeproject*
+*.png
+*.pdf
+*.so
+*.pyc
 *.[oa]
 *.out
 *.debug

@@ -312,7 +312,7 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
 --    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey,           }, "r", function() awful.util.spawn( "dmenu_run" ) end)
+    awful.key({ modkey,           }, "r", function() awful.util.spawn( "kupfer" ) end)
 )
 
 clientkeys = awful.util.table.join(
