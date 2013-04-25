@@ -1,0 +1,4 @@
+learning lcut
+
+* example
+  file:demo/justrun.c

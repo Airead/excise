@@ -1,0 +1,18 @@
+digraph R {
+        rankdir=LR
+        splines=ortho
+        node [ shape=record ];
+        edge [ arrowhead=none ]
+        client7 [ label= "client7 | <eth0> eth0:192.168.87.27 | <eth1> eth1:192.168.7.27" ]
+        client8 [ label= "client8 | <eth0> eth0:192.168.87.28 | <eth1> eth1:192.168.8.28" ]
+        note [ shape=note, label = "note: eth0 is manager interface" ]
+        nat [ label= "nat | <eth0> eth0:192.168.87.11 |{ <eth1> eth1:192.168.7.1 \
+                | <eth3> eth3:192.168.17.1 }|{ <eth2> eth2:192.168.8.1 | <eth4> eth4:192.168.18.1}" ]
+        out1 [ label = "out1 | <eth0> eth0:192.168.87.37 | <eth1> eth1:192.168.27.31 | <eth2> eth2:inet1" ]
+        out2 [ label = "out2 | <eth0> eth0:192.168.87.38 | <eth1> eth1:192.168.28.31 | <eth2> eth2:inet2" ]
+        
+        client7:eth1 -> nat:eth1
+        client8:eth1 -> nat:eth2
+        nat:eth3 -> out1:eth1
+        nat:eth4 -> out2:eth1
+}

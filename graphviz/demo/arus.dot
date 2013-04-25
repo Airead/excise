@@ -1,0 +1,20 @@
+digraph R {
+        rankdir=LR
+        splines=ortho
+        node [ shape=record ];
+        edge [ arrowhead=none ]
+        natu [ label= "natu | <eth0> eth0:192.168.1.150 | <eth1v11> eth1.11:192.168.11.1 \
+              | <eth1v12> eth1.12:192.168.12.1 | <eth1v13> eth1.13:192.168.13.1" ]
+        sort [ label= "sort | <eth0> eth0:192.168.1.91 | <eth1v11> eth1.11:192.168.11.2 \
+              | <eth1v12> eth1.12:192.168.12.2 | <eth1v13> eth1.13:192.168.13.2 | <eth2> eth2:192.168.22.1" ]
+        note [ shape=note, label = "note: eth0 is manager interface" ]
+        out2 [ label = "out2 | <eth0> eth0:192.168.1.151 | <eth1> eth1:192.168.22.2 | <eth2> eth2:inet2" ]
+        inet [ shape=egg, label="Internet"]
+
+        natu:eth1v11 -> sort:eth1v11
+        natu:eth1v12 -> sort:eth1v12
+        natu:eth1v13 -> sort:eth1v13
+
+        sort:eth2 -> out2:eth1
+        out2:eth2 -> inet
+}

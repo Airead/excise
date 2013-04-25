@@ -1,0 +1,3 @@
+learning R language
+* 去除异常值
+  file:demo/except_case1.txt

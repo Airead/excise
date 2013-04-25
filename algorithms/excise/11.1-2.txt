@@ -1,0 +1,24 @@
+The array can be viewed as a subset of the domain (e.g. {0, 1, 2, ..., n−1}), where a 1 bit indicates a number in the set and a 0 bit a number not in the set.
+
+DIRECT-ADDRESS-SEARCH(T, k)
+    return T[k]
+
+DIRECT-ADDRESS-INSERT(T, x)
+    T[x.key] = 1
+
+DIRECT-ADDRESS-DELETE(T, x)
+    T[x.key] = 0
+
+    
+假设有一个动态集合S，里面包含32个整数，分别是 S={x | 0<=x<=31}. 那么这个集合可以使用一个32位无符号整型来保存。如果第i(0<=i<=31)位为0，则i不属于S；否则如果第i位为1，刚i属于S
+
+T[k]为位向量第k位的值
+
+DIRECT-ADDRESS-SEARCH(T, k)
+    return T[k]
+
+DIRECT-ADDRESS-INSERT(T, x)
+    T[x] = 1
+
+DIRECT-ADDRESS-DELETE(T, x)
+    T[x] = 0

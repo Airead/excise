@@ -1,0 +1,13 @@
+digraph R {
+        rankdir=LR
+        splines=ortho
+        node [ shape=record ];
+        edge [ arrowhead=none ]
+        natu [ label= "natu | <eth0> eth0:192.168.1.150 | <eth1> eth1:192.168.22.150" ]
+        note [ shape=note, label = "note: eth0 is manager interface" ]
+        out2 [ label = "out2 | <eth0> eth0:192.168.1.151 | <eth1> eth1:192.168.22.2 | <eth2> eth2:inet2" ]
+        inet [ shape=egg, label="Internet"]
+
+        natu:eth1 -> out2:eth1
+        out2:eth2 -> inet
+}

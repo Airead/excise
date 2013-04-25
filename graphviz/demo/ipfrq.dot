@@ -1,0 +1,19 @@
+digraph R {
+        rankdir=LR
+        splines=ortho
+        node [ shape=record ];
+        edge [ arrowhead=none ]
+        natu [ label= "natu | <eth0> eth0:192.168.1.51 | <eth1> eth1: 192.168.51.1" ]
+        sort [ label= "sort | run ipfrq | <eth0> eth0:192.168.1.52 | <eth1v11> eth1.11:192.168.11.2 \
+              | <eth1v12> eth1.12:192.168.12.2 | <eth2> eth2:192.168.51.2" ]
+        note [ shape=note, label = "note: eth0 is manager interface" ]
+        out2 [ label = "out2 | <eth0> eth0:192.168.1.53 | <eth1v11> eth1.11:192.168.11.1 \
+              | <eth1v12> eth1.12:192.168.12.1 | <eth2> eth2:inet2" ]
+        inet [ shape=egg, label="Internet"]
+
+        natu:eth1 -> sort:eth2
+
+        sort:eth1v11 -> out2:eth1v11
+        sort:eth1v12 -> out2:eth1v12
+        out2:eth2 -> inet
+}
