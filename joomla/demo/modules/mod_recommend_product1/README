@@ -1,0 +1,4 @@
+1. install mod_recommend_product1
+2. in module-manage:
+    - new one module, set parameters (140x69, suffix 1, back 0)
+    - new another module, set parameters (0x0, suffix 2, back 1)
