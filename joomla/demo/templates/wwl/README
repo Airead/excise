@@ -1,0 +1,22 @@
+footer memo:
+
+    <div id="footer">
+      <div id="foots">
+        <div id="foot_logo"></div>
+        <div id="copyright">
+	  <ul>
+            <li><a href="about.html">About Us</a>|</li>
+            <li><a href="privacy-policy.html">Privacy Policy</a>|</li>
+            <li><a href="terms-of-use.html">Terms of Use</a>|</li>
+            <li><a href="faq.html">FAQ</a>|</li>
+            <li><a href="enquiry.html">Enquiry</a>|</li>
+            <li><a href="sitemap.html">Site Map</a>|</li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+            <br class="clear">
+          </ul>
+          <div class="copyrights">© 2012-2013 Shanghai Atpack Machinery Co., Ltd All Rights Reserved.</div>
+          <div class="links">Links: <a href="http://blog.atpackcn.com" title="Warren Wang" target="_blank">Warren Wang</a>,</div>
+        </div>
+        <br class="clear">
+      </div>
+    </div>

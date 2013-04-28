@@ -81,23 +81,7 @@ $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/template.
       <div id="foots">
         <div id="foot_logo"></div>
         <div id="copyright">
-	  <ul>
-            <li><a href="about.html">About Us</a>|</li>
-            <li><a href="privacy-policy.html">Privacy Policy</a>|</li>
-            <li><a href="terms-of-use.html">Terms of Use</a>|</li>
-            <li><a href="faq.html">FAQ</a>|</li>
-            <li><a href="enquiry.html">Enquiry</a>|</li>
-            <li><a href="sitemap.html">Site Map</a>|</li>
-            <li><a href="contact-us.html">Contact Us</a></li>
-            <br class="clear">
-          </ul>
-          <div class="copyrights">© 1992-2009 <a href="index.html">Anyang Gemco Energy Machinery Co., Ltd.</a> All Rights Reserved.</div>
-          <div class="links">Links: <a href="http://www.driedfruits.com.cn" title="Dried Fruits" target="_blank">Dried Fruits</a>,
-            <a href="http://www.oilmillplant.com" title="Solvent Extraction Plant" target="_blank">Solvent Extraction</a>,
-            <a href="http://www.oilseedspress.com" title="Oil Press" target="_blank">Oil Press</a>,
-            <a href="http://www.biodiesel-machine.com" title="Biomass Briquette Press" target="_blank">Biomass Briquette Press</a>,
-            <a href="http://www.chinarollforming.com" title="Roll Forming Machine" target="_blank">Roll Forming Machine</a>,
-          </div>
+          <jdoc:include type="modules" name="wwl-footer" />
         </div>
         <br class="clear">
       </div>
