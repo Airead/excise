@@ -31,6 +31,10 @@ learning python basic
    file:demo/gethtml.py
 ** json
    file:demo/jsonex.py
+** socket
+   file:demo/sendudp.py
+   file:demo/udpclient.py
+   file:demo/udpserver.py
 * argv
   file:demo/argv.py
 * python app
