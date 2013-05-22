@@ -1,5 +1,7 @@
 learning python basic
 
+* attr
+  file:demo/attr.py
 * python file io
   file:demo/writefile1.py
   file:demo/readfile1.py
@@ -35,8 +37,18 @@ learning python basic
    file:demo/sendudp.py
    file:demo/udpclient.py
    file:demo/udpserver.py
+** multiprocessing
+   file:demo/mutip.py
+   file:demo/mutipool.py
+   file:demo/mutipoolx.py
+** os
+   file:demo/dirs.py
+* image
+  file:demo/pgmagick_image.py
 * argv
   file:demo/argv.py
 * python app
 ** get china city id in weather.com.cn
    file:demo/getcityid.py
+* Flask
+** file:demo/flask/hello.py
