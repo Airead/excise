@@ -68,3 +68,11 @@ learning c plus plus
     file:ex/8.8.6.cc
     file:ex/list8.14.cc
     file:ex/8.8.7.cc
+
+* GraphicsMagick++
+  file:demo/crop.cpp
+  file:demo/zoom.cpp
+  file:demo/draw.cpp
+  file:demo/grayscale.cpp
+  file:demo/grayscale2.cpp
+  file:demo/strip.cpp

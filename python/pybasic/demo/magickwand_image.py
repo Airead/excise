@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 import sys
-from pgmagick.api import Image
+from magickwand.image import Image
+
 
 def print_all_property():
     origin_img = Image('test.jpg')
-    print "%dx%d" % (origin_img.width, origin_img.height)
+    print origin_img.size
 
 
 if __name__ == '__main__':

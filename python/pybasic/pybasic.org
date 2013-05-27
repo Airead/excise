@@ -45,6 +45,7 @@ learning python basic
    file:demo/dirs.py
 * image
   file:demo/pgmagick_image.py
+  file:demo/magickwand_image.py
 * argv
   file:demo/argv.py
 * python app
