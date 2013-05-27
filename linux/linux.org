@@ -121,3 +121,7 @@ learning some linux mechanism
 ** get mac addr
    file:demo/getmac.c  SIOCGIFCONF
    file:demo/getmac2.c SIOCGIFNAME
+
+* socket
+*** tcp client
+    file:demo/tcpclient.c

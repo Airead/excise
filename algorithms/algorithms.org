@@ -81,6 +81,9 @@ Introduction to Algorithms Second Edition
     file:excise/31.2-2.txt
     file:excise/31.2-2.R
 * 算法面试题
+* tree code
+** standard tree
+   file:datastruct/bintree.c
 * hackerrank
   file:demo/hackerrank/string_similarity/string_similarity.org
   file:demo/hackerrank/substring_diff/substring_diff.org

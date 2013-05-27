@@ -75,3 +75,11 @@ learning c plus plus
     - file:ex/golf.h
     file:ex/9.6.2.cc
     - file:ex/list9.9.cc
+
+* GraphicsMagick++
+  file:demo/crop.cpp
+  file:demo/zoom.cpp
+  file:demo/draw.cpp
+  file:demo/grayscale.cpp
+  file:demo/grayscale2.cpp
+  file:demo/strip.cpp
