@@ -51,5 +51,12 @@ learning python basic
 * python app
 ** get china city id in weather.com.cn
    file:demo/getcityid.py
+** mark on fly
+   file:demo/test_input.txt
+   file:demo/flymark.py
+   file:demo/util.py
+   file:demo/simple_markup.py
 * Flask
 ** file:demo/flask/hello.py
+* Gui
+  file:demo/hellogui.py

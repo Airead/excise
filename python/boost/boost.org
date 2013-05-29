@@ -1,0 +1,9 @@
+learning boost python
+
+* boost
+** tutorial
+   file:demo/tutorial/hello.cpp
+   file:demo/tutorial/hello.py
+   file:demo/tutorial/Jamroot
+** hello world
+   file:demo/hello.cpp
