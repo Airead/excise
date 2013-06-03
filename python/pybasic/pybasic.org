@@ -46,6 +46,12 @@ learning python basic
 * image
   file:demo/pgmagick_image.py
   file:demo/magickwand_image.py
+* extension
+** helloworld
+   file:demo/helloworld/hello.c
+   file:demo/helloworld/setup.py
+** withargs
+   file:demo/withargs/withargs.c
 * argv
   file:demo/argv.py
 * python app
