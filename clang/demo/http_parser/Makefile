@@ -1,8 +1,8 @@
 CC = gcc
 
-CFLAGS = -g -Wall -DHTTP_PARSER_STRICT=1
+CFLAGS = -g -Wall
 
-BIN = hello_http_parser.out
+BIN = hello_http_parser.out parse_request.out parse_response.out
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
