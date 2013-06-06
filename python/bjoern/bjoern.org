@@ -1,0 +1,4 @@
+study bjoern
+* bjoern
+** get each environ in bjoern
+   file:demo/print_environ.py
