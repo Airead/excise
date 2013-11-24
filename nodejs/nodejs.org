@@ -1,6 +1,15 @@
 learning nodejs
 
-* hello world
-  file:demo/helloworld.js
-* http server
-  file:demo/httpserver.js
+* example
+** hello world
+   file:demo/helloworld.js
+** http server
+   file:demo/httpserver.js
+** read file
+   file:demo/readfile.js
+** package
+   file:demo/somepackage/index.js
+   file:demo/getpackage.js
+   file:demo/somepackage/package.json
+** debug
+   file:demo/debug1.js
