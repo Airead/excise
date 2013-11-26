@@ -1,0 +1,1165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"
+			"http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+<title>Project 13</title>
+<style type="text/css">
+body {margin: 0; padding: 0; color: black;
+  background: white url(blue.gif) 80% 0 repeat-y;}
+h1, h2, h3, h4, h5, p, pre, table, div {margin-right: 22%;
+  margin-left: 8%;}
+div.listing pre {margin: 0;}
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+h1, h2, h3, h4 {font-variant: small-caps;}
+h3, h4, h5 {margin-top: 1.25em; margin-bottom: 0;}
+h1 {font-size: 300%; border-bottom: 2px solid white;
+  margin: 0.5em 0 0.5em 0; padding: 0 0 0.125em 10%;}
+h2 {font-size: 200%; margin: 0 0 0.66em 10%;}
+h3 {font-size: 150%;}
+h4 {font-size: 110%;}
+h5 {font-size: 100%;}
+p {margin-top: 0.5em; margin-bottom: 1em; line-height: 1.2em;}
+code, pre {font-family: "Courier New", Courier, monospace;}
+code {color: #006;}
+pre {margin-left: 10%; font-size: 80%;}
+pre b {color: maroon; font-weight: normal;}
+div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}
+div#masthead blockquote {font-size: 90%; font-style: italic;
+  margin: 2em 22% 0.5em 10%;}
+div#attrib {font-size: 90%; font-style: italic;
+  text-align: right; font-variant: small-caps;}
+div#previews {float: right; width: 33%; margin: 0; text-align: center;}
+div#previews img {width: 80%; margin-top: 1em;}
+ul li {list-style: outside square url(diamond.gif);
+  margin-bottom: 0.5em;}
+div.note {float: right; clear: right; border-width: 0;
+  width: 18%; margin: 0 1% 0 0; padding: 0;
+  text-align: right; font: 80% Arial, Verdana, Helvetica, sans-serif;
+  background: transparent url(blue.gif) 50% 15px repeat-x;
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}
+div.note h5, div.note p {text-align: left;
+  margin-left: 1em; margin-right: 0;}
+div.note img {height: 30px; width: 30px; margin: 0;}
+div.note h5 {margin: -5px 30px 0 1em; padding: 0;
+  font-variant: normal;}
+div.web p {margin: -10px 30px 0 1em;}
+div.note code, div.caption code {font-size: 100%;}
+div.web {color: #399;}
+div.tip {color: #006;}
+div.warn, div.warn code {color: maroon;}
+hr {clear: both; visibility: hidden;}
+div.figure {float: left; width: 67%; margin: 0; padding: 0;
+  text-align: right;}
+div.caption {float: right; width: 30%; margin: 0 1% 0 0;
+  padding: 0 0 0 40%;
+  border-top: 1px solid #006;
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%; padding-left: 10%;}
+div.caption h5 {margin: 0 0.5em 0 0; padding: 0.33em 7px 0 0.5em;
+  color: black; letter-spacing: 1px;
+  background: #9BD url(captioncurve.gif) bottom right no-repeat;}
+div.caption p {font: italic 80% Arial, Verdana, Helvetica, sans-serif;
+  color: #555; margin: 0; padding: 0.25em 0.5em;}
+</style>
+</head>
+<body>
+<div id="previews">
+<img src="13CSS03.jpg" alt="preview 1">
+<img src="13CSS10.jpg" alt="preview 2">
+<img src="13CSS15.jpg" alt="preview 3">
+</div>
+<div id="masthead">
+<h1>13</h1>
+<h2><cite>Eric Meyer on CSS</cite> in CSS</h2>
+<blockquote>Self-plagiarism is style.</blockquote>
+<div id="attrib">&mdash;Alfred Hitchcock</div>
+</div>
+<p>
+Design ideas often are sparked by things we see in the real world. A billboard ad, a magazine article, or a book's layout can be the source of inspiration. As this book was being written and designed, an idea came to me: What if I created a project that did its best to re-create the look of the book itself? Doing so would require an array of skills and techniques, making it an excellent way to bring together everything discussed elsewhere in the book. It would present a unique challenge: to take a design I had not created myself and see how closely I could reproduce it.
+</p>
+<p>
+When the book's final design arrived, I knew it was a challenge I had to accept. Therefore, this project will be devoted to re-creating the design of the book itself and translating it into HTML and CSS. This will not be a completely realized goal, and what we do not do (and the reasons why we don't) should be as instructive as what we do.
+</p>
+<h3>Project Goals</h3>
+<p>
+Given that we're going to be re-creating the visual layout of the book you're reading right now, the primary goal in a sense is to give you a sense of d&egrave;j&aacute; vu when working through the project. On a more practical level, the goals are twofold:
+</p>
+<ul>
+<li>Use CSS and HTML to simulate the book's layout as closely as possible.</li>
+<li>Identify the things that can't be precisely re-created or that don't work on the Web as they do in print and create sensible alternatives.</li>
+</ul>
+<p>
+These are broad generalizations, of course, but with this project, every piece will almost be its own mini project, so it's difficult to articulate specific goals. We'll just have to dive in and see where things take us&mdash;so let's get to it!
+</p>
+<h3>Preparation</h3>
+<div class="note web">
+<img src="web-icon.gif" alt="Web">
+<p>
+See the introduction for instructions on how to download the files 
+from the Web site.
+</p>
+</div>
+<p>
+Download the files for Project 13 from this book's Web site. If you're planning to play along at home, load the file <code>ch13proj.html</code> into the editing program of your choice. This is the file you'll be editing, saving, and reloading as the project progresses.
+</p>
+<h3>Laying the Groundwork</h3>
+<p>
+Flipping through the book will bring one fact immediately to your eye: There are effectively two columns on every page, the main text and the sidebar. In print, the sidebar is always on the outer edge of the page, opposite the spine of the book. We could make the sidebar flip from side to side every few paragraphs, but that would be really annoying. We'll put the sidebar on the right side of the design.
+</p>
+<p>
+In doing so, however, we're going to have to figure out how to get the notes and figure captions to their proper locations. The obvious choice might be to position them, but that contains a hidden danger: If two sidebar elements are too close together, they could vertically overlap each other with no way to prevent it. If we float them, we can make sure they don't overlap by using the property <code>clear</code>. This approach is more robust for our purposes, but it brings its own problems to the party, as we'll see very soon.
+</p>
+<p>
+Beyond that, it's a matter of making sure the content itself is properly 
+structured so that it can be styled.  Paragraphs should be contained in 
+the <code>p</code> element, titles in <code>h3</code> and 
+<code>h4</code> elements, sidebar notes in appropriately 
+<code>class</code>ed <code>div</code>s, and so on.  Instead of trying to 
+figure all that out ahead of time, we'll just look at each piece, figure 
+out how it should be structured, and then style it.
+</p>
+<h3>Styling the Document</h3>
+<p>
+Because our goal is to reproduce the book's layout, we can use it as a point of comparison as we work through the project. There are many ways to attack this problem, but we'll start by addressing the fundamental basis of the book's design: the two-column layout it uses to put notes and captions into a sidebar.
+</p>
+<h4>The Sidebar</h4>
+<p>
+In setting up the sidebar, we really only need to ensure that there's a border separating sidebarit from the main content and that the notes and captions actually make it into the sidebar. This turns out to be a lot trickier than one might have hoped.
+</p>
+<p>
+We could wrap all of the content in a <code>div</code> and then give the sidebar elements a negative right margin to pull the floats into the sidebar. That would let us set a right border on the content <code>div</code>, thus ensuring that the border would be as tall as the main content itself. The floats, with their negative margin, would be placed just outside the border. Unfortunately, taking that approach trips across a number of bugs in Internet Explorer for Windows that exist through IE6. These bugs are bad enough that they lead to a near-complete breakdown of the layout in IE/Win, and working around the bugs causes a similar breakdown in almost any other browser.
+</p>
+<p>
+We could break the content up into multiple <code>div</code>s with <code>class</code> values like <code>main</code> and <code>sidebar</code>. This would avoid most of IE/Win's bugs and would make it a lot easier to work around the rest. That's an awful lot of structural hacking, though, so let's not do that either.
+</p>
+<p>
+Here's a thought: How about giving the various "top-level" elements in the document a wide right margin to open up the space? That way, we can avoid adding a <code>div</code> for the sole purpose of creating the columns and can also avoid IE/Win's flaws. It's important to make sure we get all of the elements that are children of the <code>body</code> element, but fortunately, the content lends itself fairly well to such an effort. Creating the first rules in our style sheet has the result shown in Figure 13.1.
+</p>
+<pre>
+&lt;head&gt;
+&lt;title&gt;Project 13&lt;/title&gt;
+<b>&lt;style type="text/css"&gt;
+body {margin: 0; padding: 0; color: black;
+  background: white;}
+h1, h2, h3, h4, h5, p, pre, table, div {margin-right: 22%;
+  margin-left: 8%; padding: 0;}
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+div.listing pre {margin: 0;}
+&lt;/style&gt;</b>
+&lt;/head&gt;
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS01.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.1</h5>
+<p>
+Applying margins to elements within the body to create a column effect.
+</p>
+</div>
+<hr>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Extra Indentation</h5>
+<p>
+The masthead is indented further than the rest of the text because it's all enclosed in a <code>div</code>. Thus the elements inside the masthead <code>div</code> get offset by both the left margin on the <code>div</code> and their own left margins. We'll fix that in the next section.
+</p>
+</div>
+<p>
+This results in a content column that's 70% of the width of the <code>body</code> element. It's not really a column, of course, but it creates the illusion of one. The reason for using the value <code>22%</code> for the right margin will become clear in just a bit. The list margins are made a little bit wider than other elements because we want them to be indented a bit as compared to the normal text flow. The rule for <code>div.listing pre</code> has been inserted to avoid problems in IE/Win as we move forward. (It's a rule we would have written anyway, but including it now will prevent confusion as we work on the project.)
+</p>
+<p>
+Now all we need to do is figure out how to draw a line between the main column and the sidebar. We could try to draw a right border on every element to which we just gave a <code>22%</code> right margin, but then we'd have to enforce vertical separation with padding, and it would start to get messy. Furthermore, not all elements touch the separator line. If the line is created from the borders of content elements, they all effectively touch it.
+</p>
+<p>
+Instead, let's borrow a trick from the old days of Web design and rework it a bit. Remember single-pixel GIF tricks? We're going to use one here by taking a 1-pixel GIF that's the appropriate shade of blue and applying it to the background of the <code>body</code> element. If we position it correctly and then only tile it vertically, we'll get a separator line, as shown in Figure 13.2.
+</p>
+<pre>
+&lt;style type="text/css"&gt;
+body {margin: 0; padding: 0; color: black;
+  background: white <b>url(blue.gif) 80% 0 repeat-y;</b>}
+h1, h2, h3, h4, h5, p, pre, table, <code>div</code> {margin-right: 22%;
+  margin-left: 8%; padding: 0;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS02.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.2</h5>
+<p>
+A simple background image on the body creates the separation between "columns."
+</p>
+</div>
+<hr>
+<p>
+Remember setting all those right margins to be <code>22%</code>? Because the right margins are all <code>22%</code> and the line has been placed at 20% of the distance from the right edge of the <code>body</code> element, there's a 2% space between the element edges and the line. Thus, we've created the slight distance between the content and the separator line.
+</p>
+<h4>The Masthead</h4>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Delayed Images</h5>
+<p>The three preview images that also appear on the project's first page are not part of the masthead, nor are they even present in the current project file. We'll get to them in the next section.
+</p>
+</div>
+<p>
+With the content column set up, let's turn to the masthead: the light blue box that leads off every project with the number, title, and epigram for that project. If we look at the markup for the masthead, we find this:
+</p>
+<pre>
+&lt;div id="masthead"&gt;
+&lt;h1&gt;13&lt;/h1&gt;
+&lt;h2&gt;&lt;cite&gt;Eric Meyer on CSS&lt;/cite&gt; in CSS&lt;/h2&gt;
+&lt;blockquote&gt;Self-plagiarism is style.&lt;/blockquote&gt;
+&lt;div id="attrib"&gt;&amp;mdash;Alfred Hitchcock&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>
+Thanks to the <code>div</code> that encloses the masthead's content, creating the blue box is fairly simple. We want the masthead to fill the entire space between the left edge of the <code>body</code> and the separator line, and we can do this with margins. The border is simple as well: Set up a 1-pixel border on the right and bottom edges of the masthead. Finally, to keep the content from getting too close to the top or bottom of the masthead, we'll give the <code>div</code> some padding.
+</p>
+<pre>
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+<b>div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}</b>
+&lt;/style&gt;
+</pre>
+<div class="note warn">
+<img src="warn-icon.gif" alt="Tip">
+<h5>Different-Size Caps</h5>
+<p>IE5 for Windows will render <code>small-caps</code> text in all uppercase letters. This is technically permitted in CSS1, but it might not be a desirable effect. We'll keep using <code>small-caps</code> text in this project, but exercise caution in your own projects.
+</p>
+</div>
+<p>
+To style the epigram, all we need is a few styles. The quotation, enclosed in a <code>blockquote</code>, should be slightly smaller than normal and italicized. The attribution should be the same, plus it needs to be over to the right and set in a small-caps font, as illustrated in Figure 13.3.
+</p>
+<pre>
+div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}
+<b>div#masthead blockquote {font-size: 90%; font-style: italic;}
+div#attrib {font-size: 90%; font-style: italic;
+  text-align: right; font-variant: small-caps;}</b>
+&lt;/style&gt;
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS03.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.3</h5>
+<p>
+Laying down the basics of the masthead with some borders and a background.
+</p>
+</div>
+<hr>
+<p>
+Things are shaping up pretty well except for the left edge of the content, where things are a bit ragged. It would be nice to have everything line up, but this would require giving them all the same left margin. Let's start out with the blockquote and its left margin along with the rest of its sides.
+</p>
+<pre>
+div#masthead blockquote {font-size: 90%; font-style: italic;
+  <b>margin: 2em 22% 0.5em 10%;</b>}
+</pre>
+<p>
+The top and bottom margins just help keep it separate from the other masthead content, of course. The right margin is large enough to make sure a long quotation doesn't get too close to the separator line, and the left margin will line up the quotation with the main content. Let's make similar changes to the <code>h1</code> and <code>h2</code> elements and set their font sizes.
+</p>
+<pre>
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+<b>h1 {font-size: 300%; margin: 0.5em 0 0.5em 10%;}
+h2 {font-size: 200%; margin: 0 0 0.66em 10%;}</b>
+div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}
+</pre>
+<p>
+At first glance this seems fine, but there's a small mistake lurking in our styles. To reveal it, we need only give the <code>h1</code> a bottom border:
+</p>
+<pre>
+h1 {font-size: 300%; <b>border-bottom: 2px solid white;</b>
+  margin: 0.5em 0 0.5em 10%;}
+</pre>
+<p>
+The problem is that the border stretches from the separator line to just to the left of the number 13 instead of continuing on to the left edge of the browser window. To fix this, we'll need to eliminate the h1's left margin and compensate with left padding.
+</p>
+<pre>
+h1 {font-size: 300%; border-bottom: 2px solid white;
+  margin: 0.5em 0 0.5em <b>0</b>; <b>padding: 0 0 0.125em 10%;</b>}
+</pre>
+<p>
+Finally, we should change the font of the title to look a little more like what we have in print. Using the exact same font isn't really a possibility, but we could roughly approximate the feel of the print version by using <code>small-caps</code>. Because all of the titles and headings (except for <code>h5</code> elements) in the book look the same, we'll set them all to be <code>small-caps</code> in our project. The result can be seen in Figure 13.4.
+</p>
+<pre>
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+<b>h1, h2, h3, h4 {font-variant: small-caps;}</b>
+h1 {font-size: 300%; border-bottom: 2px solid white;
+  margin: 0.5em 0 0.5em 0; padding: 0 0 0.125em 10%;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS04.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.4</h5>
+<p>
+The masthead is finished with nicely styled content.
+</p>
+</div>
+<hr>
+
+<h5 class="aside"><span>Matching Fonts in CSS</span></h5>
+<div class="aside">
+<p>
+Even though it's easy to change the font of an element using CSS, it's hard to change to any but the most common fonts. This is because a Web browser is completely dependent on the fonts installed on the user's machine. You can specify that an element should be displayed using the font New Century Schoolbook, as follows:
+</p>
+<pre>
+p {font-family: "New Century Schoolbook", serif;}
+</pre>
+<p>
+This will work fine on any computer that has the font installed. If the font isn't available, however, the user's default font will be used instead. This is why we aren't trying to precisely reproduce the title font used in the book.
+</p>
+<p>
+Obviously, this dilemma could be solved if the author could specify a font to be downloaded and used in a Web page. At the height of the browser wars, Netscape and Microsoft each invented its own method for font downloading, and neither one supported the other. When CSS2 was released, it provided font description and downloading features that matched neither Microsoft nor Netscape's mechanisms. For the time being, cross-browser downloadable fonts remain solidly in the realm of wishful thinking.
+</p>
+</div>
+<h4>Placing the Previews</h4>
+<p>
+There's one last thing to do here at the top of the document and that's drop in the three preview images that appear on the first page of each project. These previews are reproductions of figures that appear elsewhere in the project. Here, we'll just point to the images we want and place them appropriately.
+</p>
+<p>
+It's important to put the images at the correct spot in the markup, however. Because we want them to start out next to the masthead and we need to float them over to the side, we need to insert the images before the masthead itself.
+</p>
+<pre>
+&lt;body&gt;
+<b>&lt;div id="previews"&gt;
+&lt;img src="13CSS03.jpg" alt="preview 1"&gt;
+&lt;img src="13CSS10.jpg" alt="preview 2"&gt;
+&lt;img src="13CSS15.jpg" alt="preview 3"&gt;
+&lt;/div&gt;</b>
+&lt;div id="masthead"&gt;
+&lt;h1&gt;13&lt;/h1&gt;
+</pre>
+<p>
+Now all we have to do is float the <code>div</code> and size the images.
+</p>
+<pre>
+div#attrib {font-size: 90%; font-style: italic;
+  text-align: right; font-variant: small-caps;}
+<b>div#previews {float: right; width: 33%; margin: 0; text-align: center;}
+div#previews img {width: 80%; margin-top: 1em;}</b>
+&lt;/style&gt;
+</pre>
+<p>
+You might note that the <code>div</code> is wider than the <code>20%</code> margins set for the main content. That's because, as in the print version, we want the preview images to stick out of the sidebar. We've made the images <code>80%</code> of the width of their containing <code>div</code>, and the <code>text-align</code> value will center them in the <code>div</code>. This will push them away from the edge of the <code>body</code> (see Figure 13.5).
+</p>
+<hr>
+<div class="figure">
+<img src="13CSS05.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.5</h5>
+<p>
+Re-creating the preview images with a few changes that make life easier.
+</p>
+</div>
+<hr>
+<p>
+This isn't exactly the same as the print version, of course. We're still missing the rounded-corner boxes that surround the images and the dark blue background for the sidebar. We could attempt to re-create these effects, but we won't. Why not? For the boxes, it would take a great deal of effort and structural hacking to make them look right, and it just isn't worth the effort for so small a part of the design. The dark blue background, on the other hand, is being omitted because it would look fairly strange to have the dark blue suddenly stop just below the images and leave an empty sidebar below it. So we're going to skip re-creating those effects and move on to the main content.
+</p>
+<h4>Title Spacing</h4>
+<p>
+As soon as we hit the first heading, "Project Goals," we can see that the spacing is off as compared to the print version. It needs to be moved down closer to the text following and further away from the paragraph before it. The same is true of all <code>h3</code>, <code>h4</code>, and <code>h5</code> elements, so we'll style them all together.
+</p>
+<pre>
+h1, h2, h3, h4 {font-variant: small-caps;}
+<b>h3, h4, h5 {margin-top: 1.25em; margin-bottom: 0;}</b>
+h1 {font-size: 300%; border-bottom: 2px solid white;
+  margin: 0.5em 0 0.5em 0; padding: 0 0 0.125em 10%;}
+</pre>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Interparagraph Spacing</h5>
+<p>
+Although we've reduced the top margin on paragraphs, two paragraphs in a row will still be about <code>1em</code> apart because the default bottom margin for paragraphs is still in effect. Because vertically adjacent margins collapse and the distance between element borders is always the greater of the two margins, the <code>1em</code> bottom margin will preserve traditional interparagraph spacing.
+</p>
+</div>
+<p>
+That in itself isn't enough, though. If we want the titles to get close to the following text, we also need to reduce the top margin on paragraphs. While we're at it, we'll also set a slightly larger <code>line-height</code>.
+</p>
+<pre>
+h2 {font-size: 200%; margin: 0 0 0.66em 10%;}
+<b>p {margin-top: 0.5em; margin-bottom: 1em; line-height: 1.2em;}</b>
+div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}
+</pre>
+<p>
+We also ought to increase the size of the <code>h3</code> element, which is bigger in print as compared to the normal text size (see Figure 13.6).
+</p>
+<pre>
+h2 {font-size: 200%; margin: 0 0 0.66em 10%;}
+<b>h3 {font-size: 150%;}</b>
+p {margin-top: 0.5em; margin-bottom: 1em; line-height: 1.2em;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS06.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.6</h5>
+<p>
+Touching up the paragraphs and setting the title spacing to match the book.
+</p>
+</div>
+<hr>
+<p>
+Since we've started sizing heading elements, let's fill in sizes for the rest of them. That way, we won't have to worry about it later on.
+</p>
+<pre>
+h3 {font-size: 150%;}
+<b>h4 {font-size: 110%;}
+h5 {font-size: 100%;}</b>
+p {margin-top: 0.5em; margin-bottom: 1em; line-height: 1.2em;}
+</pre>
+<p>
+With that accomplished, let's figure out how to liven up our bulleted lists.
+</p>
+<h4>Bulleted Lists</h4>
+<p>
+Just a little bit into the "Project Goals" section, we find an unordered list. In this book, such lists have small blue diamonds for bullets instead of the usual block dot. So long as we have an appropriately sized graphic file that shows a blue diamond on a white background, we can make use of it.
+</p>
+<pre>
+div#previews img {width: 80%; margin-top: 1em;}
+<b>ul li {list-style: outside square url(diamond.gif);}</b>
+&lt;/style&gt;
+</pre>
+<p>
+It's also the case that such lists are separated a little bit from each other. We could fiddle around with the <code>line-height</code> of the list items, but there is a better way: increasing either the margin or the padding of the list items. The only real difference between the two is that if we ever wanted to set background colors on the lists, with an increased margin, the backgrounds would touch and create one big block of color. We won't be doing that, however, because it's not how lists look in this book, so we'll increase the bottom margin of the <code>li</code> elements. This has the result shown in Figure 13.7.
+</p>
+<pre>
+ul li {list-style: outside square url(diamond.gif);
+  <b>margin-bottom: 0.5em;</b>}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS07.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.7</h5>
+<p>
+Using images to replace boring bullets with dazzling diamonds.
+</p>
+</div>
+<hr>
+<h4>Sidebar Notes</h4>
+<p>
+Moving into the "Preparation" section, we find our first second-column note. This is one of the green Web site notes, and it is unusual compared to the blue notes and red warnings for one reason: Web notes don't have titles. Here's the markup for the Web note:
+</p>
+<pre>
+&lt;div class="note web"&gt;
+&lt;img src="web-icon.gif" alt="Web"&gt;
+&lt;p&gt;
+See the introduction for instructions on how to download the files 
+from the Web site.
+&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<p>
+Here's the markup for one of the blue notes:
+</p>
+<pre>
+&lt;div class="note tip"&gt;
+&lt;img src="tip-icon.gif" alt="Tip"&gt;
+&lt;h5&gt;Delayed Images&lt;/h5&gt;
+&lt;p&gt;
+The three "preview" images that also appear on the project's first page 
+are not a part of the masthead, nor are they even present in the current 
+project file.  We'll get to them in the next section. 
+&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<p>
+Structurally speaking, the only difference between the two is the <code>h5</code> element. Of much greater importance are the <code>class</code> values for these two notes. We can see that both have the word note, and a quick search through the HTML shows that all sidebar notes share this value. Then comes another word that describes the kind of note (the possibilities being <code>web</code>, <code>tip</code>, and <code>warn</code>).
+</p>
+<p>
+Thus, any styles that are common to all notes can be written into one rule, and the styles specific to each type will go into its own rules. We want to float the notes into the sidebar, but we also want to make sure that any note will appear below another note and not to its left. If we throw in a <code>width</code> and some margins, we have the start depicted in Figure 13.8.
+</p>
+<pre>
+ul li {list-style: outside square url(diamond.gif);
+  margin-bottom: 0.5em;}
+<b>div.note {float: right; clear: right; border-width: 0;
+  width: 19%; margin: 0 1% 0 0; padding: 0;}</b>
+&lt;/style&gt;
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS08.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.8</h5>
+<p>
+The first steps toward styling second-column notes to match the print version.
+</p>
+</div>
+<hr>
+<p>
+It turns out that Explorer for Windows has a bit of trouble with the styles we've just added; it thinks for some reason that <code>19%</code> plus <code>1%</code> equals more than <code>20%</code>. So we'll use the <code>voice-family</code> trick to give IE/Win the value it needs while still delivering the correct number to other, more robust browsers.
+</p>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Hacking voice-family</h5>
+<p>
+For a discussion of the <code>voice-family</code> trick and other ways to use browser bugs to your advantage, see Appendix B, "Tricking Browsers and Hiding Styles."
+</p>
+</div>
+<pre>
+div.note {float: right; clear: right; border-width: 0;
+  width: <b>18%</b>; margin: 0 1% 0 0; padding: 0;
+  <b>voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;</b>}
+</pre>
+<p>
+Obviously, we're going to want to move the icon over to the right. Because images are inline content just like text, we could right-align it using <code>text-align</code>. However, we want the title and paragraph text to be left-justified.
+</p>
+<pre>
+div.note {float: right; clear: right; border-width: 0;
+  width: 18%; margin: 0 1% 0 0; padding: 0;
+  <b>text-align: right;</b>
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}
+<b>div.note h5, div.note p {text-align: left;}</b>
+&lt;/style&gt;
+</pre>
+<p>
+We still need to make the text smaller than normal and set it in a sans-serif font like the one used in the book. It's easiest to do this on the <code>div</code> itself.
+</p>
+<pre>
+div.note {float: right; clear: right; border-width: 0;
+  width: 18%; margin: 0 1% 0 0; padding: 0;
+  text-align: right; <b>font: 80% Arial, Verdana, Helvetica, sans-serif;</b>
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}
+</pre>
+<p>
+Now let's turn our attention back to the actual contents of the notes. The image element lacks the attributes <code>height</code> and <code>width</code>, so we need to supply those values through CSS. Also, we want to make sure the text in the notes stands a little bit away from the sidebar's border and runs over to the right edge of the note's <code>div</code>. This yields the following:
+</p>
+<pre>
+div.note h5, div.note p {text-align: left; <b>margin-left: 1em; margin-right: 0;</b>}
+<b>div.note img {height: 30px; width: 30px; margin: 0;}</b>
+&lt;/style&gt;
+</pre>
+<p>
+Finally, we need to connect the icon to the separator line with a dark blue horizontal line. Why not reuse the trick employed to create the separator line itself? We know the icon is <code>30px</code> tall and is in the top-right corner of the note. Therefore, we can draw a line in the background of the <code>div</code> that's <code>15px</code> from the top of the <code>div</code> by repeating the single-pixel file in the horizontal direction, as shown in Figure 13.9.
+</p>
+<pre>
+div.note {float: right; clear: right; border-width: 0;
+  width: 18%; margin: 0 1% 0 0; padding: 0;
+  text-align: right; font: 80% Arial, Verdana, Helvetica, sans-serif;
+  <b>background: transparent url(blue.gif) 50% 15px repeat-x;</b>
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS09.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.9</h5>
+<p>
+With only a very few styles, we've gotten close to reproducing the note's original look.
+</p>
+</div>
+<hr>
+<p>
+Now all we need to do is set the color for the text and pull the text upward so that it's closer to the line we just drew. We shouldn't assign the same <code>color</code> value to all notes, though; remember that each type of note has different-colored text. This is where the second word in each note's <code>class</code> comes in handy.
+</p>
+<pre>
+div.note img {height: 30px; width: 30px; margin: 0;}
+<b>div.web {color: #399;}
+div.tip {color: #006;}
+div.warn, div.warn code {color: maroon;}</b>
+&lt;/style&gt;
+</pre>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Inheriting Styles</h5>
+<p>
+Another way to get warning code text to match its parent would be to use the value inherit in a new rule: div.warn code {color: inherit;}.  This value is fairly well supported by browsers, and we didn't use it solely because it wasn't any more efficient than the method we chose.
+</p>
+</div>
+<p>
+We've added in a selector to color any code text in a warning the same as the text that surrounds it.  This overrides an earlier rule that made all code elements dark blue.
+</p>
+<p>
+As for moving the text upward a bit, that calls for some caution. We can just set a negative top margin to accomplish this, but we don't want text to overlap the icons. Therefore, we need to make sure that whatever element comes first in the various types of notes has a right margin that leaves space for the icon. In Web notes, the first element is always a paragraph.
+</p>
+<pre>
+div.note img {height: 30px; width: 30px; margin: 0;}
+<b>div.web p {margin: -10px 30px 0 1em;}</b>
+div.web {color: #399;}
+</pre>
+<p>
+The right margin of <code>30px</code>, being the exact width of the icon, should prevent any overlap between text and image. We need to apply similar styles to the first element of blue notes and red warnings, always an <code>h5</code>. These note titles are not in small-caps text, so let's get rid of that styling and make them normal again.
+</p>
+<pre>
+div.note img {height: 30px; width: 30px; margin: 0;}
+div.note h5 {margin: -5px 30px 0 1em; padding: 0;
+  <b>font-variant: normal;</b>}
+div.web p {margin: -10px 30px 0 1em;}
+</pre>
+<p>
+The <code>padding: 0;</code> set for the note titles is mostly for insurance because one never knows when a browser might decide to use padding instead of margins to open up space around heading elements.
+</p>
+<p>
+We also need to make sure any <code>code</code> text within the notes is legible.  In many browsers, <code>code</code> text is smaller than normal text.  In the context of the notes, we want it to be about the same size as the paragraph text, as illustrated in Figure 13.10.
+</p>
+<pre>
+div.web p {margin: -10px 30px 0 1em;}
+<b>div.note code {font-size: 100%;}</b>
+div.web {color: #399;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS10.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.10</h5>
+<p>
+A blue note that mirrors the printed version closely.
+</p>
+</div>
+<hr>
+<p>
+Of course, the lines won't break in exactly the same places in the Web version as they do in print, and this can make notes taller or shorter than they are on the page. Even so, the resemblance is close enough to move on to making code, changed or otherwise, stand out.
+</p>
+<h4>Code Blocks and Fragments</h4>
+<p>
+In the section titled "Laying the Groundwork," we find that some text has been enclosed in <code>code</code> elements. Consider, for example, the third paragraph:
+</p>
+<pre>
+&lt;p&gt;
+Beyond that, it's a matter of making sure the content itself is properly 
+structured so that it can be styled.  Paragraphs should be contained in 
+the &lt;code&gt;p&lt;/code&gt; element, titles in &lt;code&gt;h3&lt;/code&gt; and 
+&lt;code&gt;h4&lt;/code&gt; elements, sidebar notes in appropriately 
+&lt;code&gt;class&lt;/code&gt;ed &lt;code&gt;div&lt;/code&gt;s, and so on.  Instead of trying to 
+figure all that out ahead of time, we'll just look at each piece, figure 
+out how it should be structured, and then style it.
+&lt;/p&gt;
+</pre>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Fighting <code>code</code> Spread</h5>
+<p>
+Depending on the monospace font that gets used by the browser, the <code>code</code> elements might look a bit spread out. One way to fix this would be with a negative value for <code>letter-spacing</code>.
+</p>
+</div>
+<p>
+In the book, such pieces of code are set in a monospace font and are colored dark blue. That's incredibly simple to reproduce, of course, but let's wait a moment. Blocks of code are set in the same monospace font as the <code>code</code> elements, but they aren't blue. Looking at the source, we find that these blocks are <code>pre</code> elements. So we'll write the following:
+</p>
+<pre>
+p {margin-top: 0.5em; margin-bottom: 1em; line-height: 1.2em;}
+<b>code, pre {font-family: "Courier New", Courier, monospace;}
+code {color: #006;}</b>
+div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}
+</pre>
+<p>
+In the book, code blocks often have portions that are dark red, indicating changes that are being made to the project. Let's take a closer look at one of the code blocks from the HTML document.
+</p>
+<pre>
+&lt;pre&gt;
+ul li {list-style: outside square url(diamond.gif);
+  &lt;b&gt;margin-bottom: 0.5em;&lt;/b&gt;}
+&lt;/pre&gt;
+</pre>
+<p>
+It's interesting that changes are marked using a <code>b</code> element, which is the deprecated boldface element. In the book, the changes are dark red and not boldfaced. Rather than try something complicated like replacing the <code>b</code> elements with <code>span</code>s, let's just work with what we have. In addition, let's make sure the <code>code</code> block text is indented a bit as compared to normal text and is smaller as well (see Figure 13.11).
+</p>
+<pre>
+code {color: #006;}
+<b>pre {margin-left: 10%; font-size: 80%;}
+pre b {color: maroon; font-weight: normal;}</b>
+div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS11.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.11</h5>
+<p>
+Code fragments and code blocks stand out better thanks to their new styles.
+</p>
+</div>
+<hr>
+<h4>Figures</h4>
+<p>
+Now, at long last, we come to one of the most challenging parts of this project: figures and their captions. Handling the layout of these structures will require not only CSS but a little bit of added HTML as well.
+</p>
+<p>
+First let's examine the markup we already have for figures, using the figure from earlier in the project.
+</p>
+<pre>
+&lt;div class="figure"&gt;
+&lt;img src="13CSS04.jpg" height="300" width="400" alt="figure"&gt;
+&lt;/div&gt;
+&lt;div class="caption"&gt;
+&lt;h5&gt;Figure 13.4&lt;/h5&gt;
+&lt;p&gt;
+The masthead is finished with nicely styled content.
+&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+<p>
+Although there are many ways in which a figure and its caption could be structured, this one is actually very useful. Because the figure is in one <code>div</code> and the caption is in another, we can easily float them next to each other, sending the picture to the left and the caption to the right. Let's do the figure first.
+</p>
+<pre>
+div.warn, div.warn code {color: maroon;}
+<b>div.figure {float: left; width: 75%; margin: 0; padding: 0;}</b>
+&lt;/style&gt;
+</pre>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Why We Float</h5>
+<p>
+Although it might seem like we can just let the caption flow into the space to the right of the figure itself, doing so would have severe drawbacks in this situation, as we'll see shortly.
+</p>
+</div>
+<p>
+In doing this, we leave enough room for the caption to go into the sidebar plus 5% more. (This avoids some problems in IE/Win.) Let's now float the caption to the right, using the same basic declarations as we did with the notes. Our progress to date is shown in Figure 13.12.
+</p>
+<pre>
+div.figure {float: left; width: 75%; margin: 0; padding: 0;}
+<b>div.caption {float: right; width: 18%; padding: 0 1% 0 0; margin: 0;
+voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}</b>
+&lt;/style&gt;
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS12.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.12</h5>
+<p>
+The figure and its caption have been floated, but there's still much work to be done.
+</p>
+</div>
+<hr>
+<p>
+The figure is out of alignment, but let's worry about that after the caption is styled. The simplest part is the actual caption text, which is contained in a <code>p</code> element. Re-creating its appearance is a snap.
+</p>
+<pre>
+div.caption {float: right; width: 18%; padding: 0 1% 0 0; margin: 0;
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}
+<b>div.caption p {font: italic 80% Arial, Verdana, Helvetica, sans-serif;
+  color: #555;}</b>
+&lt;/style&gt;
+</pre>
+<p>
+Re-creating the top border of the caption might seem simple because we have to set a top border on the <code>div</code> itself. What makes it a little bit trickier is the way in which the line sticks into the main column. We'll set the border and see how close we get to the look we want.
+</p>
+<pre>
+div.caption {float: right; width: 18%; margin: 0 1% 0 0; padding: 0;
+  <b>border-top: 1px solid #006;</b>
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}
+</pre>
+<p>
+That gets us a top border that stops at the separator line. If we hadn't floated the caption, the line would have gone all the way across the page to the left side of the screen, thanks to the way floats affect backgrounds and borders. By floating the caption, we avoided that problem.
+</p>
+<p>
+To extend the line to the left, we'll have to add some left-side padding. In the course of doing so, we need to adjust the first <code>width</code> value so that IE/Win doesn't mess things up too much. Unfortunately, it thinks that any padding on a floated element is calculated with respect to the size of the float, so if we said <code>25%</code> left padding, it would make the content very skinny. It would also be far too much padding for browsers that calculate padding correctly. A great deal of trial and error leads us to the following combination of values (illustrated in Figure 13.13).
+</p>
+<pre>
+div.caption {float: right; width: <b>30%</b>; margin: 0 1% 0 0;
+  padding: <b>0 0 0 40%</b>;
+  border-top: 1px solid #006;
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%; <b>padding-left: 10%;</b>}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS13.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.13</h5>
+<p>
+Extending the caption's top border into the main column with some padding.
+</p>
+</div>
+<hr>
+<p>
+Whoops! The caption has suddenly dropped below the figure. This is because the padding has made the caption wide enough that its element box overlaps the box created by the floated figure's <code>div</code>. Floats are not allowed to overlap, so the second one (the caption) is placed below the first. We can avoid this simply by reducing the <code>width</code> of the figure's <code>div</code>. Technically, we could use <code>70%</code> because the caption totals a width of <code>30%</code>, but let's make sure they don't overlap by dropping the value lower.
+</p>
+<pre>
+div.figure {float: left; width: <b>67%</b>; margin: 0; padding: 0;}
+</pre>
+<p>
+This brings the caption back up where it's supposed to be, but some of the following paragraph comes up along with it! That's because, before, the figure <code>div</code> was wide enough that there was no room for following content to flow next to it. Thanks to the demands of our caption styles, that's no longer true.
+</p>
+<p>
+This development points out a related problem. Suppose a note comes just before a figure, and the bottom of the note is lower than the top of the figure. The figure's caption would float down below the end of the note, which would look a little odd. There isn't any way to say in CSS that two floated elements have to line up with each other, but we can add a little bit of HTML that will serve the same purpose.
+</p>
+<pre>
+<b>&lt;hr&gt;</b>
+&lt;div class="figure"&gt;
+&lt;img src="13CSS04.jpg" height="300" width="400"&gt;
+&lt;/div&gt;
+&lt;div class="caption"&gt;
+&lt;h5&gt;Figure 13.4&lt;/h5&gt;
+&lt;p&gt;
+The masthead is finished with nicely styled content.
+&lt;/p&gt;
+&lt;/div&gt;
+<b>&lt;hr&gt;</b>
+</pre>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Hidden Elements</h5>
+<p>
+The difference between <code>visibility: hidden</code> and <code>display: none</code> is that the former simply makes elements invisible while allowing them to affect the layout of the document. The latter completely removes an element from the layout, preventing it from having any layout effects.
+</p>
+</div>
+<p>
+Just adding an <code>hr</code> element before every figure and after every caption is enough for our needs. We'll just set such elements to <code>clear: both</code> and prevent them from appearing (see Figure 13.14).
+</p>
+<pre>
+div.warn, div.warn code {color: maroon;}
+<b>hr {clear: both; visibility: hidden;}</b>
+div.figure {float: left; width: 67%; margin: 0; padding: 0;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS14.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.14</h5>
+<p>
+Invisible <code>hr</code> elements keep the figures and captions lined up and standing alone.
+</p>
+</div>
+<hr>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Rounding Off Corners</h5>
+<p>
+For a detailed exploration of using background images to round off corners, see Project 10, "Sneaking Out of The Box."
+</p>
+</div>
+<p>
+Now all we need to do is style the caption's label (for example, "Figure 13.4"). A quick glance at the book tells us that the label needs to line up with the sidebar's separator line, look like a blue tab, and not stretch all the way to the end of the caption's top border. Creating the tab look requires inserting a small background graphic into the bottom-right corner of the <code>h5</code> element and setting a background color. Let's also spread out the letters just a touch.
+</p>
+<pre>
+div.caption {float: right; width: 30%; margin: 0 1% 0 0;
+  padding: 0 0 0 40%;
+  border-top: 1px solid #006;
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%; padding-left: 10%;}
+<b>div.caption h5 {letter-spacing: 1px; color: black;
+  background: #9BD url(captioncurve.gif) bottom right no-repeat;}</b>
+div.caption p {font: italic 80% Arial, Verdana, Helvetica, sans-serif;
+  color: #555;}
+</pre>
+<p>
+With a little padding and margins, we'll be there. To make the label text line up with the paragraph, we need to figure out the paragraph's margins. The rule that sets the margins for the caption's paragraph is as follows:
+</p>
+<pre>
+h1, h2, h3, h4, h5, p, pre, table, <code>div</code> {margin-right: 22%;
+  margin-left: 8%;}
+</pre>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Circle Gets the Boot</h5>
+<p>
+As for the small circle placed on every caption label, we aren't going to reproduce that effect in this project. It would certainly be possible to do so, but as with the boxes around the preview images, the effort would be too great for so small an aspect of the design.
+</p>
+</div>
+<p>
+Although these work okay for the paragraphs, they won't do for the caption label. We need to set new margins for the <code>h5</code> element, and to keep things consistent, we'll apply similar margins to the paragraphs. At the same time, we'll make the label into small-caps text because that's what appears in the book's design.
+</p>
+<pre>
+div.caption h5 {<b>margin: 0 1em 0 0; padding: 0.33em 10px 0 1em;</b>
+  color: black; letter-spacing: 1px; <b>font-variant: small-caps;</b>
+  background: #9BD url(captioncurve.gif) bottom right no-repeat;}
+div.caption p {font: italic 80% Arial, Verdana, Helvetica, sans-serif;
+  color: #555; <b>margin: 0; padding: 0.25em 1em;</b>}
+</pre>
+<p>
+As with the sidebar notes, we need to make sure that any code text within our captions is the same size as its surrounding text.  We'll do this by adding a selector to the rule that already exists for the note text.
+</p>
+<pre>
+div.note code, <b>div.caption code</b> {font-size: 100%;}
+</pre>
+<p>
+The last thing we need to do is get the figure over toward the center of the text. Unfortunately, due to all the workarounds we had to use, it isn't possible to just center the image and have that work. Recall that the <code>div</code> enclosing the figure is now only <code>67%</code> of the <code>width</code> of the <code>body</code> element. Instead, we'll right-align the figure, putting its right edge against the right edge of the <code>div</code> (see Figure 13.15).
+</p>
+<pre>
+div.figure {float: left; width: 67%; margin: 0; padding: 0;
+  <b>text-align: right;</b>}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS15.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.15</h5>
+<p>
+The finishing touches for styling figures and captions.
+</p>
+</div>
+<hr>
+<p>
+It isn't perfect, but it will work fairly well in most browsers, and it ensures a small but noticeable separation between the figure and the caption's top border, just like in the book.
+</p>
+<h4>Code Listings and Tables</h4>
+<p>
+To wrap up our project, we'll look at two very different structures that end up having very similar styles: <code>code</code> listings and tables. Listing 13.1 provides an example of what we need to re-create.
+</p>
+<div class="listing">
+<h5><span>Listing 13.1</span>&mdash;A Sample Listing</h5>
+<pre>
+div.web {color: #399;}
+div.tip {color: #006;}
+div.warn, div.warn code {color: maroon;}
+</pre>
+</div>
+<p>
+Just in glancing at the printed version of the listing, the markup necessary to re-create it is almost obvious, except perhaps for the heading. Let's put it into an <code>h5</code> element and wrap a <code>span</code> around the listing number itself. This leads to:
+</p>
+<pre>
+&lt;h5&gt;&lt;span&gt;Listing 13.1&lt;/span&gt;&mdash;An example listing&lt;/h5&gt;
+</pre>
+<p>
+Now we can color the listing numbers and give the span a right margin to push the listing title away from the number.
+</p>
+<pre>
+h5 {font-size: 100%;}
+<b>h5 span {color: #006; margin-right: 0.5em;}</b>
+p {margin-top: 0.5em; margin-bottom: 1em; line-height: 1.2em;}
+</pre>
+<p>
+There is one fly in our ointment: The <code>h5</code> element has a left margin of <code>22%</code>, and it's contained inside a <code>div</code> that also has a <code>22%</code> left margin. We need to change that to prevent the <code>h5</code> from being massively indented, so we'll replace the left margin of the <code>h5</code>.
+</p>
+<pre>
+div.listing pre {border: 1px solid #006; border-width: 1px 0;
+  padding: 0.5em 1em; margin: 0.125em 0 1.5em;}
+<b>div.listing h5 {margin-left: 0.5em;}</b>
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+</pre>
+<p>
+As for the listed code, having it in a <code>pre</code> element makes the most sense. In fact, we already have a <code>div.listing pre</code> rule that had to be added at the beginning of the project to avoid problems in IE5/Windows. We'll just rewrite it to add the top and bottom borders and to massage the margins and padding a bit (see Figure 13.16).
+</p>
+<pre>
+div.listing pre {<b>border: 1px solid #006; border-width: 1px 0;</b>
+  padding: 0.5em 1em; margin: 0.125em 0 1.5em;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS16.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.16</h5>
+<p>
+Styling the listings is a matter of a just a few simple rules.
+</p>
+</div>
+<hr>
+<p>
+Tables are very similar to listings in that they have top and bottom borders and a title just above the top border. There are a few differences, though, as Table 13.1 illustrates.
+</p>
+<h5><span>Table 13.1</span>&mdash;A Sample Table</h5>
+<table cellspacing="0">
+<tr>
+<th>Column 1</th><th>Column 2</th><th>Column 3</th>
+</tr>
+<tr>
+<td>This</td><td>is</td><td>an</td>
+</tr>
+<tr>
+<td>example</td><td>table</td><td>K?</td>
+</tr>
+</table>
+<p>
+The title is the same as with a listing, and because we're dealing with a table, the markup will involve a <code>table</code>.
+</p>
+<pre>
+&lt;h5&gt;&lt;span&gt;Table 13.1&lt;/span&gt; An example table&lt;/h5&gt;
+&lt;table cellspacing="0"&gt;
+&lt;tr&gt;
+&lt;th&gt;Column 1&lt;/th&gt;&lt;th&gt;Column 2&lt;/th&gt;&lt;th&gt;Column 3&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;This&lt;/td&gt;&lt;td&gt;is&lt;/td&gt;&lt;td&gt;an&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;example-&lt;/td&gt;&lt;td&gt;table&lt;/td&gt;&lt;td&gt;K?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+<div class="note tip">
+<img src="tip-icon.gif" alt="Tip">
+<h5>Giving Width to Tables</h5>
+<p>
+In many browsers, tables by default are made only as wide as they need to be to display their contents. That's why we've explicitly given our <code>table</code>s a <code>width</code>: to override default browser behavior.
+</p>
+</div>
+<p>
+You might be tempted to add a <code>class</code> to the <code>table</code>, but there's no reason to do so. The only <code>table</code> elements in our design will be the ones that enclose tables like Table 13.1. So we'll give them top and bottom borders, reduce the font size slightly, tack on a bottom margin to keep other text away, and declare a <code>width</code>.
+</p>
+<pre>
+div.listing h5 {margin-left: 0.5em;}
+<b>table {border: 1px solid #006; border-width: 2px 0;
+  font-size: 90%; margin-bottom: 1.5em; width: 70%;}</b>
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+</pre>
+<p>
+The column headings are all that remain to be styled. The rule we add will have to set the color and left alignment of the text as well as draw a border underneath it.
+</p>
+<pre>
+table {border: 1px solid #006; border-width: 2px 0;
+  font-size: 90%; margin-bottom: 1.5em; width: 70%;}
+<b>th {color: #006; border-bottom: 1px solid #006; text-align: left;}</b>
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+</pre>
+<p>
+As a last touch, we'll give our table cells a little bit of padding so that their contents will be less likely to jam up next to each other. The results are shown in Figure 13.17.
+</p>
+<pre>
+th {color: #006; border-bottom: 1px solid #006; text-align: left;}
+<b>th, td {padding: 0.125em 0.66em;}</b>
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+</pre>
+<hr>
+<div class="figure">
+<img src="13CSS17.jpg" height="300" width="400" alt="figure">
+</div>
+<div class="caption">
+<h5>Figure 13.17</h5>
+<p>
+Re-creating table layout is as simple as writing three new rules.
+</p>
+</div>
+<hr>
+<h3>Postproject Analysis</h3>
+<p>
+Obviously, although we've gotten close to reproducing the look of the book with CSS, a few things were left out. The inability to download fonts is one of the basic design limitations of the Web, although in a way it's a blessing in disguise. Because designers can't count on a certain font being used, they're encouraged to think in terms of more flexible design principles.
+</p>
+<p>
+The other big stumbling block in doing such a design is, as always, browser limitations. In this particular project, Internet Explorer for Windows was the big problem, but depending on the project you're attempting, any browser could end up playing that role. Fortunately, browsers are advanced enough that it's usually possible to create a minimal workaround that doesn't mess up other browsers.
+</p>
+<p>
+We also left out five different design aspects:
+</p>
+<ul>
+<li>The running head at the top of each project wasn't even attempted. Page numbers are irrelevant on the Web, and it was not necessary to include the project number beyond that found in the masthead and the <code>title</code> element.</li>
+<li>The boxes and dark background behind the preview images were omitted due to the difficulty in re-creating them and because they don't work as well in a Web browser.</li>
+<li>The omission of the small circles on each caption label was due almost entirely to the amount of effort that re-creating them would have required.</li>
+<li>The "Branching Out" section and the blue aside boxes (for example, "Matching Fonts in CSS" in this project) were cut from the project chiefly for length.</li>
+</ul>
+<p>
+All told, however, there was very little we had to leave out and a great deal we were able to re-create. The final style sheet we've created is provided in Listing 13.2.
+</p>
+<div class="listing">
+<h5><span>Listing 13.2</span>&mdash;The Complete Style Sheet</h5>
+<pre>
+&lt;style type="text/css"&gt;
+body {margin: 0; padding: 0; color: black;
+  background: white url(blue.gif) 80% 0 repeat-y;}
+h1, h2, h3, h4, h5, p, pre, table, div {margin-right: 22%;
+  margin-left: 8%;}
+div.listing pre {border: 1px solid #006; border-width: 1px 0;
+  padding: 0.5em 1em; margin: 0.125em 0 1.5em;}
+div.listing h5 {margin-left: 0.5em;}
+table {border: 1px solid #006; border-width: 2px 0;
+  font-size: 90%; margin-bottom: 1.5em; width: 70%;}
+th {color: #006; border-bottom: 1px solid #006; text-align: left;}
+th, td {padding: 0.125em 0.66em;}
+ul, ol {margin-right: 25%; margin-left: 13%; padding: 0;}
+h1, h2, h3, h4 {font-variant: small-caps;}
+h3, h4, h5 {margin-top: 1.25em; margin-bottom: 0;}
+h1 {font-size: 300%; border-bottom: 2px solid white;
+  margin: 0.5em 0 0.5em 0; padding: 0 0 0.125em 10%;}
+h2 {font-size: 200%; margin: 0 0 0.66em 10%;}
+h3 {font-size: 150%;}
+h4 {font-size: 110%;}
+h5 {font-size: 100%;}
+h5 span {color: #006; margin-right: 0.5em;}
+p {margin-top: 0.5em; margin-bottom: 1em; line-height: 1.2em;}
+code, pre {font-family: "Courier New", Courier, monospace;}
+code {color: #006;}
+pre {margin-left: 10%; font-size: 80%;}
+pre b {color: maroon; font-weight: normal;}
+div#masthead {margin: 0 20% 2.5em 0; padding: 2em 0 1.5em 0;
+  border: 1px solid #006; border-width: 0 1px 1px 0;
+  background: #BDF;}
+div#masthead blockquote {font-size: 90%; font-style: italic;
+  margin: 2em 22% 0.5em 10%;}
+div#attrib {font-size: 90%; font-style: italic;
+  text-align: right; font-variant: small-caps;}
+div#previews {float: right; width: 33%; margin: 0; text-align: center;}
+div#previews img {width: 80%; margin-top: 1em;}
+ul li {list-style: outside square url(diamond.gif);
+  margin-bottom: 0.5em;}
+div.note {float: right; clear: right; border-width: 0;
+  width: 18%; margin: 0 1% 0 0; padding: 0;
+  text-align: right; font: 80% Arial, Verdana, Helvetica, sans-serif;
+  background: transparent url(blue.gif) 50% 15px repeat-x;
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%;}
+div.note h5, div.note p {text-align: left;
+  margin-left: 1em; margin-right: 0;}
+div.note img {height: 30px; width: 30px; margin: 0;}
+div.note h5 {margin: -5px 30px 0 1em; padding: 0;
+  font-variant: normal;}
+div.web p {margin: -10px 30px 0 1em;}
+div.note code, div.caption code {font-size: 100%;}
+div.web {color: #399;}
+div.tip {color: #006;}
+div.warn, div.warn code {color: maroon;}
+hr {clear: both; visibility: hidden;}
+div.figure {float: left; width: 67%; margin: 0; padding: 0;
+  text-align: right;}
+div.caption {float: right; width: 30%; margin: 0 1% 0 0;
+  padding: 0 0 0 40%;
+  border-top: 1px solid #006;
+  voice-family: "\"}\""; voice-family:inherit;
+  width: 19%; padding-left: 10%;}
+div.caption h5 {margin: 0 0.5em 0 0; padding: 0.33em 7px 0 0.5em;
+  color: black; letter-spacing: 1px;
+  background: #9BD url(captioncurve.gif) bottom right no-repeat;}
+div.caption p {font: italic 80% Arial, Verdana, Helvetica, sans-serif;
+  color: #555; margin: 0; padding: 0.25em 0.5em;}
+&lt;/style&gt;
+</pre>
+</div>
+<h3>Branching Out</h3>
+<p>
+There isn't as much room for change when you're trying to re-create a book's design, but here are a few suggestions for things to try anyway.
+</p>
+<ol class="branching">
+<li>
+<img src="13CSS18.jpg" height="200" width="266" alt="branch">
+Reduce the amount of vertical space the masthead consumes without making it look significantly different than in the printed version.  Don't worry about making the borders line up with the preview images, since because they won't line up in most cases anyway.
+<hr>
+</li>
+<li>
+<img src="13CSS19.jpg" height="200" width="266" alt="branch">
+Write styles that will come close to recreating the look of the "Branching Out" section.  Remember the compromises we made for the preview images next to the masthead, and take a similar approach with the layout of this section.
+<hr>
+</li>
+<li>
+<img src="13CSS20.jpg" height="200" width="266" alt="branch">
+Write styles to re-create blue "aside" boxes, which are <code>div</code>s with a <code>class</code> of <code>aside</code>.  It will require two images to carry off the full effect, with both of them used in the heading of the aside.  While you won't be able to put both in the background of the heading, try to find creative ways to manipulate the HTML so that both images can be placed using CSS and not involving an <code>img</code> element in the HTML.
+<hr>
+</li>
+</ol>
+</body>
+</html>
