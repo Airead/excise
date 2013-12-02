@@ -17,24 +17,25 @@ h2 {
 p {
     margin-left: 10%;
     margin-right: 10%;
-}
-
-p.lead-para:first-letter {
-    font-size: 133%;
-    font-weight: bold;
+    text-align: justify;
+    line-height: 1.33em;
 }
 
 p#summary {
-    font-style: italic;
+    border: 2px solid #008000;
+    border-right-width: 2em;
+    padding: 0.5em 0.5em 0.5em 1em;
+    background: #FFE;
 }
 
 div.release {
     font-variant: small-caps;
-    border: 1px solid black;
     margin-right: 10px;
     padding: 0.125em 0;
     text-align: center;
-    border-width: 1px 15px 1px 0;
+    border: 1px solid black;
+    border-right-width: 15px;
+    border-left-width: 0;
 }
 
 div#contact-info {
@@ -55,13 +56,13 @@ div#contact-info:first-line {
 }
 
 div#footer {
-    text-align: center;
+    text-align: right;
     margin-top: 2.5em;
     border-top: 1px solid gray;
     color: #aaa;
     font-size: 85%;
+    font-style: italic;
     padding-top: 0.33em;
-    letter-spacing: 1px;
 }
 
 div#footer a:link {
@@ -76,10 +77,25 @@ a.stockinfo {
     font-weight: bold;
     font-style: normal;
     color: blue;
-    background: white;
+    background: #FFE;
 }
 
 a.stockinfo:hover {
     background: blue;
     color: white;
+}
+
+h1 {
+    font-size: 250%;
+    margin-top: -2.5em;
+    margin-right: 5em;
+    padding-left: 0.33em;
+    text-indent: -0.25em;
+}
+
+h2 {
+    font-size: 150%;
+    font-style: italic;
+    text-align: center;
+    margin: 0 10%;
 }
