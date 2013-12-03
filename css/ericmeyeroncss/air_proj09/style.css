@@ -15,15 +15,16 @@ h1 {
     font-size: 200%;
     text-transform: lowercase;
     letter-spacing: 3px;
-    margin: 0.66em 0 0.33em 3%;
-    padding: 0;
+    margin: 0;
+    padding: 0.66em 0 0.33em 16%;
+    background: rgb(85%, 85%, 70%);
 }
 
 h3 {
     font-size: 133%;
     margin: 0;
-    padding: 0;
-    border-bottom: 1px solid black;
+    padding: 0 0 0 0.5em;
+    background: rgb(85%, 85%, 70%);
 }
 
 h4 {
@@ -34,28 +35,80 @@ h4 {
     color: rgb(50%, 50%, 35%);
 }
 
+h1, h3, h4 {
+    line-height: 1em;
+}
+
+div#sitenav {
+    position: absolute;
+    top: 2.33em;
+    left: 0;
+    width: 12.5%;
+    font-size: 11px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+div#sitenav a {
+    display: block;
+    padding: 4px 8px;
+    margin: 0;
+    text-decoration: none;
+    text-align: right;
+    border-top: 1px solid gray;
+}
+
+div#sitenav a:hover {
+    background: #FB9;
+}
+
+div#sitenav h4 {
+    background: rgb(33%, 33%, 33%);
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0.25em 0 0.125em 0;
+}
+
 p {
     line-height: 1.66;
-    margin: 0.5em 0 1em 3em;
+    margin: 0.5em 3em 1em 3em;
+    text-align: justify;
 }
 
 div#entry {
-    margin: 0 33% 1em 7%;
+    margin: 0 20% 1em 20%;
     padding: 0;
 }
 
+/*div#sidebar {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*float: right;*/
+    /*width: 25%;*/
+/*}*/
+
 div#sidebar {
+    position: absolute;
+    top: 4em;
+    left: 80%;
+    width: 20%;
+    font-size: 11px;
+}
+
+div#sidebar h4 {
+    background: rgb(70%, 70%, 55%);
+    color: black;
     margin: 0;
-    padding: 0;
-    float: right;
-    width: 25%;
+    padding: 0.25em 0 0 0.5em;
+    border-width: 0;
 }
 
 div#sidebar a {
     display: block;
     padding: 8px 0 2px 10px;
     margin: 0;
-    border-left: 1px solid rgb(50%, 50%, 35%);
+    border-left: 1px solid rgb(70%, 70%, 55%);
 }
 
 div#sidebar a:hover {
@@ -66,6 +119,6 @@ div#sidebar a:hover {
 /*div#entry {*/
     /*background-color: rgb(95%, 85%, 85%);*/
 /*}*/
-/*div#sidebar {*/
+/*div#sidebar{*/
     /*background-color: rgb(85%, 85%, 95%);*/
 /*}*/
