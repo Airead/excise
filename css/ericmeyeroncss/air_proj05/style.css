@@ -1,0 +1,94 @@
+body {
+    background-color: rgb(100%, 98%, 96%);
+    color: black;
+}
+
+td {
+    border-width: 0;
+    padding: 0;
+}
+
+td#banner {
+    border-bottom: 2px solid rgb(60%, 50%, 40%);
+}
+
+td#banner h1 {
+    color: rgb(40%, 30%, 20%);
+    margin: 0;
+    padding: 0.25em 0 0.125em 0;
+    font: bold 150% sans-serif;
+    letter-spacing: 0.5em;
+}
+
+td#main {
+    background-color: transparent;
+    color: black;
+    padding: 1em;
+    font: 95% Times, serif;
+}
+
+td#main h2 {
+    font: bold 125% sans-serif;
+    margin: 0.5em 1em;
+    padding: 0;
+    border-bottom: 1px solid rgb(80%, 75%, 70%);
+}
+
+td#main p {
+    margin: 1em 2.5em;
+}
+
+td#sidelinks {
+    vertical-align: top;
+}
+
+td#footer {
+    background-color: transparent;
+    color: rgb(70%, 60%, 50%);
+    border-top: 1px solid rgb(60%, 50%, 40%);
+    text-align: right;
+    font-size: 85%;
+    padding-top: 0.33em;
+    font-style: italic;
+}
+
+td#sidelinks a {
+    display: block;
+    text-decoration: none;
+    margin: 0 3px 0 0;
+    padding: 1px 10px 1px 5px;
+    font: bold 100% Arial, Verdana, sans-serif;
+    border-right: 1px solid rgb(60%, 50%, 40%);
+    color: rgb(30%, 30%, 60%);
+    background: transparent;
+}
+
+td#sidelinks a:visited {
+    color: rgb(55%, 55%, 60%);
+}
+
+td#sidelinks h4 {
+    background-color: transparent;
+    color: rgb(30%, 20%, 10%);
+    margin: 0 3px 0 0;
+    padding: 1em 0 0;
+    font: bold 100% Arial, Verdana, sans-serif;
+    border-right: 1px solid rgb(60%, 50%, 40%);
+    border-bottom: 2px solid rgb(50%, 40%, 30%);
+}
+
+td#sidelinks a:hover {
+    background-color: rgb(100%, 70%, 70%);
+    border-right: 7px solid rgb(80%, 30%, 20%);
+    margin-right: 0;
+    color: rgb(50%, 0%, 0%);
+}
+
+td#sidelinks a#comment {
+    background-color: rgb(100%, 92%, 90%);
+    color: black;
+    border: 1px solid rgb(60%, 50%, 40%);
+    border-right-width: 4px;
+    padding-right: 7px;
+    margin-right: 3px;
+}

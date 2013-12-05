@@ -1,0 +1,87 @@
+body {
+    background-color: rgb(100%, 98%, 96%);
+    color: black;
+}
+
+td {
+    border-width: 0;
+    padding: 0;
+}
+
+td#banner {
+    border-bottom: 2px solid rgb(60%, 50%, 40%);
+}
+
+td#banner h1 {
+    color: rgb(40%, 30%, 20%);
+    margin: 0;
+    padding: 0.25em 0 0.125em 0;
+    font: bold 150% sans-serif;
+    letter-spacing: 0.5em;
+}
+
+td#main {
+    background-color: transparent;
+    color: black;
+    padding: 1em;
+    font: 95% Times, serif;
+}
+
+td#main h2 {
+    font: bold 125% sans-serif;
+    margin: 0.5em 1em;
+    padding: 0;
+    border-bottom: 1px solid rgb(80%, 75%, 70%);
+}
+
+td#main p {
+    margin: 1em 2.5em;
+}
+
+td#sidelinks {
+    vertical-align: top;
+}
+
+td#footer {
+    background-color: transparent;
+    color: rgb(70%, 60%, 50%);
+    border-top: 1px solid rgb(60%, 50%, 40%);
+    text-align: right;
+    font-size: 85%;
+    padding-top: 0.33em;
+    font-style: italic;
+}
+
+td#sidelinks a {
+    display: block;
+    text-decoration: none;
+    border: 1px solid rgb(80%, 75%, 70%);
+    border-top-color: rgb(90%, 85, 80%);
+    border-left-color: rgb(90%, 85%, 80%);
+    background: rgb(92%, 91%, 90%) url(link-base.gif) 3px 50% no-repeat;
+    color: navy;
+    padding: 2px 10px 1px 20px;
+}
+
+td#sidelinks h4 {
+    padding: 0.33em 0.25em 0;
+    border: 0 solid silver;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    background: rgb(96%, 95%, 94%);
+}
+
+td#sidelinks a, td#sidelinks h4 {
+    margin: 0;
+    font: bold 100% Arial;
+}
+
+td#sidelinks a:hover {
+    background-image: url(link-hover.gif);
+}
+
+td#sidelinks a#comment {
+    background-image: url(link-now.gif);
+    background-color: rgb(90%, 93%, 87%);
+    color: black;
+}
