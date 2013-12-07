@@ -1,0 +1,86 @@
+/*table {*/
+    /*border: 1px solid red;*/
+/*}*/
+
+/*th {*/
+    /*border: 1px dotted red;*/
+/*}*/
+
+/*td {*/
+    /*border: 1px dotted gray;*/
+/*}*/
+
+table#calendar a {
+    text-decoration: none;
+}
+
+tr#days th {
+    color: #CCE;
+    background-color: #224;
+    font-weight: bold;
+    text-align: center;
+    padding: 1px 0.33em;
+}
+
+tr#title th {
+    background: #AAC;
+    color: black;
+    border: 1px solid #224;
+    font-size: 120%;
+}
+
+td {
+    color: #777;
+    text-align: right;
+    border: 1px solid #BBB;
+    border-right-color: #EEE;
+    border-bottom-color: #EEE;
+}
+
+td a {
+    font-weight: bold;
+    display: block;
+    margin: 0;
+}
+
+table#calendar a:link {
+    color: navy;
+}
+
+table#calendar a:visited {
+    color: purple;
+}
+
+table#calendar a:hover {
+    background: #FF0;
+}
+
+td.sat {
+    border-right: 1px solid #BBB;
+}
+
+td.sat, td.sun {
+    background: #FDD;
+}
+
+
+tr#lastweek td {
+    border-bottom: 2px solid #AAB;
+}
+
+td.holiday {
+    background: #FAA;
+    border-color: #BBB #FCC #FCC #BBB;
+}
+
+td#jul16 {
+    background: yellow;
+    border: 1px solid black;
+}
+
+td.jun, td.aug {
+    background: #AAB;
+    color: #889;
+    border: 1px solid #AAB;
+    border-right-color: #99A;
+}

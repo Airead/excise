@@ -1,0 +1,128 @@
+/*table {*/
+    /*border: 1px solid red;*/
+/*}*/
+
+/*th {*/
+    /*border: 1px dotted red;*/
+/*}*/
+
+/*td {*/
+    /*border: 1px dotted gray;*/
+/*}*/
+
+table#calendar a {
+    text-decoration: none;
+}
+
+tr#days th {
+    color: #CCE;
+    background-color: #224;
+    font-weight: bold;
+    text-align: center;
+    padding: 1px 0.33em;
+}
+
+tr#title th {
+    background: #AAC;
+    color: black;
+    border: 1px solid #224;
+    font-size: 120%;
+}
+
+table#calendar td {
+    /*color: #777;*/
+    /*text-align: right;*/
+    vertical-align: top;
+    padding: 0;
+    border: 0 solid gray;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+td a {
+    font-weight: bold;
+    display: block;
+    margin: 0;
+}
+
+table#calendar a:link {
+    color: navy;
+}
+
+table#calendar a:visited {
+    color: purple;
+}
+
+table#calendar a:hover {
+    background: #FF0;
+}
+
+td.sat {
+    border-right: 1px solid #BBB;
+}
+
+td.sat, td.sun {
+    background: #FDD;
+}
+
+
+tr#lastweek td {
+    border-bottom: 2px solid #AAB;
+}
+
+td.holiday {
+    background: #FAA;
+    border-color: #BBB #FCC #FCC #BBB;
+}
+
+td#jul16 {
+    background: yellow;
+    border: 1px solid black;
+}
+
+div.event {
+    margin: 0.5em;
+}
+
+div.event span {
+    display: block;
+}
+
+span.time {
+    font-weight: bold;
+}
+
+span.loc {
+    color: #555;
+    font-style: italic;
+}
+
+div.date {
+    float: right;
+    text-align: center;
+    border: 0 solid gray;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    padding: 0.125em 0.25em 0 0.25em;
+    margin: 0;
+    background: #F3F3F3;
+}
+
+td.sat div.date, td.sun div.date {
+    border-width: 0;
+    color: gray;
+    background: transparent;
+}
+
+div.jun dev.date, td.aug div.date {
+    border-width: 0;
+    color: gray;
+    background: transparent;
+}
+
+td.jun, td.aug {
+    background: #AAB;
+    color: #889;
+    border: 1px solid #AAB;
+    border-right-color: #99A;
+}
