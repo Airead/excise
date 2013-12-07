@@ -13,3 +13,17 @@ learning nodejs
    file:demo/somepackage/package.json
 ** debug
    file:demo/debug1.js
+** util
+   file:demo/util_inherits.js
+   file:demo/util_inspect.js
+** event
+   file:demo/event_begin.js
+   file:demo/event_error.js
+** fs
+   file:demo/fs_readfile.js
+   file:demo/fs_open_read.js
+** http
+   file:demo/httpserver.js
+   file:demo/httpserverrequestget.js
+   file:demo/httpserverrequestpost.js
+   file:demo/httprequest.js
