@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <script src="lib/jquery-1.10.2.min.js"></script>
+    <script src="checkbox.js"></script>
+    <title>JS获取复选框被选中的值</title>
 </head>
 <body>
-
+<form id="box">
+    <label for="checkAll">全选</label><input id="checkAll" type="checkbox" />
+    <input type="checkbox" name="test" value="0"/>0
+    <input type="checkbox" name="test" value="1"/>1
+    <input type="checkbox" name="test" value="2"/>2
+    <input type="checkbox" name="test" value="3"/>3
+    <input type="checkbox" name="test" value="4"/>4
+    <input type="checkbox" name="test" value="5"/>5
+    <input type="checkbox" name="test" value="6"/>6
+    <input type="checkbox" name="test" value="7"/>7
+    <input type="button" onclick="showChecked()" value="提  交"/>
+</form>
 </body>
 </html>

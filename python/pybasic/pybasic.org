@@ -66,3 +66,8 @@ learning python basic
 ** file:demo/flask/hello.py
 * Gui
   file:demo/hellogui.py
+* Crontab
+  file:demo/read_crontab.py
+* parse hostname
+  file:demo/parse_hostname.py
+  
