@@ -40,9 +40,8 @@ h1, h3, h4 {
 }
 
 div#sitenav {
-    position: absolute;
-    top: 2.33em;
-    left: 0;
+    float: left;
+    margin-top: 2.33em;
     width: 12.5%;
     font-size: 11px;
     background-color: white;
@@ -89,11 +88,10 @@ div#entry {
 /*}*/
 
 div#sidebar {
-    position: absolute;
-    top: 4em;
-    left: 80%;
-    width: 20%;
-    font-size: 11px;
+    margin: 0
+    padding: 0;
+    float: right;
+    width: 25%;
 }
 
 div#sidebar h4 {
