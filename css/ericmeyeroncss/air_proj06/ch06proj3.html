@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"
+			"http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+<title>Springfield Events Calendar - July 2002</title>
+<style type="text/css">
+table#calendar {background: white url(fwork.gif) center no-repeat;}
+table#calendar a {text-decoration: none;}
+tr#days th {width: 18%;}
+tr#days th.sat, tr#days th.sun {width: 5%;}
+table#calendar tr#days th {color: #CCE; background-color: #224;
+   font-weight: bold; text-align: center;
+   padding: 1px 0.33em;}
+table#calendar tr#title th {background: #AAC; color: black;
+   border: 1px solid #242; font-size: 120%;}
+table#calendar td {vertical-align: top; padding: 0;
+   border: 0px solid gray; border-width: 0 0 1px 1px;}
+table#calendar td.sat {border-right: 1px solid gray;}
+table#calendar a {font-weight: bold; display: block; margin: 0;}
+table#calendar a:link {color: navy;}
+table#calendar a:visited {color: purple;}
+table#calendar a:hover {background: #FF6;}
+table#calendar td.sat, table#calendar td.sun {background: #FDD;}
+table#calendar td.jun, table#calendar td.aug {
+   background: #AAB; color: #889;}
+table#calendar tr#lastweek td {border-bottom: 2px solid #AAB;}
+table#calendar td.holiday {background: #FAA;}
+table#calendar td#jul16 {background-color: yellow;}
+td#jul16 div.date {color: #C33; font-weight: bold; background: #FFC;}
+div.event {margin: 0.5em;}
+div.event span {display: block;}
+div.holiday {font-style: italic;}
+span.time {font-weight: bold;}
+span.loc {color: #555; font-style: italic;}
+div.date {float: right; text-align: center;
+   border: 1px solid gray; border-width: 0 0 1px 1px;
+   padding: 0.125em 0.25em 0 0.25em; margin: 0; 
+   background: #F3F3F3;}
+td.sat div.date, td.sun div.date {border-width: 0;
+   color: gray; background: transparent;}
+td.jun div.date, td.aug div.date {border-width: 0;
+   color: gray; background: transparent;}
+</style>
+<style type="text/css" media="screen">
+table#calendar tr#days th {color: #DDD; background: #333;}
+table#calendar tr#title th {background: #BBB; color: black;
+   border-color: #333;}
+</style>
+</head>
+<body>
+
+<table cellspacing="0" width="100%" id="calendar">
+<tr id="title">
+<th id="lastmonth"><a href="jun2002.html">&laquo;</a></th>
+<th colspan="5" id="thismonth">July 2002</th>
+<th id="nextmonth"><a href="aug2002.html">&raquo;</a></th>
+</tr>
+<tr id="days">
+<th class="sun">Sun</th>
+<th class="mon">Mon</th>
+<th class="tue">Tue</th>
+<th class="wed">Wed</th>
+<th class="thu">Thu</th>
+<th class="fri">Fri</th>
+<th class="sat">Sat</th>
+</tr>
+<tr id="firstweek">
+<td class="jun sun" id="jun30">
+<div class="date">30</div>
+</td>
+<td class="jul mon" id="jul01">
+<div class="date">1</div>
+<div class="event recur"><span class="time">2:00pm</span> <span class="title">Children's Hour</span> <span class="loc">Main Street Public Library</span></div>
+</td>
+<td class="jul tue" id="jul02">
+<div class="date">2</div>
+</td>
+<td class="jul wed" id="jul03">
+<div class="date">3</div>
+<div class="event recur"><span class="time">7:00pm</span> <span class="title">Beginner's T'ai Chi</span> <span class="loc">Civic Center</span></div>
+</td>
+<td class="jul thu holiday" id="jul04">
+<div class="date">4</div>
+<div class="event"><span class="time">10:00am</span> <span class="title">4th of July Parade</span> <span class="loc">Main Street</span></div>
+<div class="event"><span class="time">9:30pm</span> <span class="title">Fireworks!</span> <span class="loc">Meadowlands Park</span></div>
+<div class="holiday">Independence Day (U.S.)</div>
+</td>
+<td class="jul fri" id="jul05">
+<div class="date">5</div>
+<div class="event"><span class="time">1:00pm</span> <span class="title">Annual community picnic</span> <span class="loc">Fairview Park Pavilion</span></div>
+</td>
+<td class="jul sat" id="jul06">
+<div class="date">6</div>
+</td>
+</tr>
+<tr>
+<td class="jul sun" id="jul07">
+<div class="date">7</div>
+</td>
+<td class="jul mon" id="jul08">
+<div class="date">8</div>
+<div class="event recur"><span class="time">2:00pm</span> <span class="title">Children's Hour</span> <span class="loc">Main Street Public Library</span></div>
+</td>
+<td class="jul tue" id="jul09">
+<div class="date">9</div>
+</td>
+<td class="jul wed" id="jul10">
+<div class="date">10</div>
+<div class="event recur"><span class="time">7:30pm</span> <span class="title">Advanced T'ai Chi</span> <span class="loc">Civic Center</span></div>
+<div class="event recur"><span class="time">8:00pm</span> <span class="title">Basic CPR</span> <span class="loc">Civic Center</span></div>
+</td>
+<td class="jul thu" id="jul11">
+<div class="date">11</div>
+<div class="event"><span class="time">9:30am</span> <span class="title">"Ride the Parks" Fundraiser</span> <span class="loc">Fairview Park</span></div>
+</td>
+<td class="jul fri" id="jul12">
+<div class="date">12</div>
+</td>
+<td class="jul sat" id="jul13">
+<div class="date">13</div>
+</td>
+</tr>
+<tr>
+<td class="jul sun" id="jul14">
+<div class="date">14</div>
+</td>
+<td class="jul mon" id="jul15">
+<div class="date">15</div>
+<div class="event recur"><span class="time">2:00pm</span> <span class="title">Children's Hour</span> <span class="loc">Main Street Public Library</span></div>
+<div class="event"><span class="time">6:00pm</span> <span class="title">City Council Open Forum</span> <span class="loc">Council Chambers</span></div>
+</td>
+<td class="jul tue" id="jul16">
+<div class="date">16</div>
+</td>
+<td class="jul wed" id="jul17">
+<div class="date">17</div>
+<div class="event recur"><span class="time">7:00pm</span> <span class="title">Beginner's T'ai Chi</span> <span class="loc">Civic Center</span></div>
+</td>
+<td class="jul thu" id="jul18">
+<div class="date">18</div>
+</td>
+<td class="jul fri" id="jul19">
+<div class="date">19</div>
+<div class="event recur"><span class="time">10:30pm</span> <span class="title">Stargazing Symposium</span> <span class="loc">Meadowlands Park</span></div>
+</td>
+<td class="jul sat" id="jul20">
+<div class="date">20</div>
+</td>
+</tr>
+<tr>
+<td class="jul sun" id="jul21">
+<div class="date">21</div>
+</td>
+<td class="jul mon" id="jul22">
+<div class="date">22</div>
+<div class="event recur"><span class="time">2:00pm</span> <span class="title">Children's Hour</span> <span class="loc">Main Street Public Library</span></div>
+</td>
+<td class="jul tue" id="jul23">
+<div class="date">23</div>
+<div class="event"><span class="time">8:00pm</span> <span class="title">The Bear Facts: All About Our Ursine Friends</span> <span class="loc">Main Street Public Library</span></div>
+</td>
+<td class="jul wed" id="jul24">
+<div class="date">24</div>
+<div class="event recur"><span class="time">7:30pm</span> <span class="title">Advanced T'ai Chi</span> <span class="loc">Civic Center</span></div>
+</td>
+<td class="jul thu" id="jul25">
+<div class="date">25</div>
+<div class="event"><span class="time">12:00n</span> <span class="title">Picnic and Nature Hike For Kids</span> <span class="loc">Fairview Park Pavilion</span></div>
+</td>
+<td class="jul fri" id="jul26">
+<div class="date">26</div>
+</td>
+<td class="jul sat" id="jul27">
+<div class="date">27</div>
+</td>
+</tr>
+<tr id="lastweek">
+<td class="jul sun" id="jul28">
+<div class="date">28</div>
+</td>
+<td class="jul mon" id="jul29">
+<div class="date">29</div>
+<div class="event recur"><span class="time">2:00pm</span> <span class="title">Children's Hour</span> <span class="loc">Main Street Public Library</span></div>
+</td>
+<td class="jul tue" id="jul30">
+<div class="date">30</div>
+</td>
+<td class="jul wed" id="jul31">
+<div class="date">31</div>
+<div class="event recur"><span class="time">7:00pm</span> <span class="title">Beginner's T'ai Chi</span> <span class="loc">Civic Center</span></div>
+</td>
+<td class="aug thu" id="aug01">
+<div class="date">1</div>
+</td>
+<td class="aug fri" id="aug02">
+<div class="date">2</div>
+</td>
+<td class="aug sat" id="aug03">
+<div class="date">3</div>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

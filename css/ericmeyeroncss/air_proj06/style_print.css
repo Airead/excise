@@ -1,0 +1,62 @@
+td {
+    vertical-align: top;
+}
+
+td.pagetop {
+    border: 1px solid black;
+    border-right-width: 0;
+    border-left-width: 0;
+    padding: 10px 0;
+}
+
+td.main {
+    font: 12pt Times, serif;
+    line-height: 16pt;
+}
+
+h1 {
+    font: bold 200% Times, serif;
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    border-bottom: 4px double black;
+}
+
+p {
+    margin: 0;
+    text-indent: 2.5em;
+    text-align: justify;
+}
+
+td.main a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+td.leftside *, td.rightside * {
+    display: none;
+}
+
+td.leftside, td.rightside {
+    width: 2em;
+}
+
+div.credit {
+    text-align: right;
+}
+
+div.url {
+    font-family: Courier, monospace;
+    text-align: right;
+}
+
+div.abstract {
+    font-style: italic;
+    margin: 1em 0.33em;
+}
+
+td.footer div {
+    margin-top: 24pt;
+    font-size: 9pt;
+    border-top: 2px solid gray;
+    text-align: right;
+}
