@@ -1,0 +1,3 @@
+[submodule "libs/jquery/jquery-plugin-treeview"]
+	path = libs/jquery/jquery-plugin-treeview
+	url = https://github.com/jzaefferer/jquery-treeview.git

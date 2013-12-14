@@ -18,3 +18,4 @@
 *.log
 .idea
 jquery/learning_jquery/code/
+nodejs/node_modules/
