@@ -15,6 +15,10 @@ $(document).ready(function () {
         /// that object's properties are visible as variables.
         /// </param>
         /// <returns type="string" />
+        if (!str) {
+            alert('str is ' + str);
+        }
+
         var err = "";
         try {
             var func = _tmplCache[str];
@@ -40,7 +44,7 @@ $(document).ready(function () {
                             .split("#>").join("p.push('")
                         + "');}return p.join('');";
 
-                //alert(strFunc);
+                alert(strFunc);
                 func = new Function("obj", strFunc);
                 _tmplCache[str] = func;
             }
@@ -50,20 +54,5 @@ $(document).ready(function () {
         }
         return "< # ERROR: " + err.htmlEncode() + " # >";
     };
-
-    var $item = $('#ItemTemplate');
-    var html;
-    for (var i=0; i < 3; i++) {
-        var data = {
-            name: 'Airead - ' + i.toString(),
-            address: {
-                street: 'Fan - ' + (i + 10).toString(),
-                city: 'Beijing'
-            }
-        };
-        html = $.parseTemplate($item.html(), data);
-        $('body').append(html);
-    }
-
 });
 

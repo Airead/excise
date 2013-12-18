@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>template table</title>
+    <script type="text/javascript" src="../lib/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="tmpl.js"></script>
+    <script type="text/javascript" src="table_tmpl.js"></script>
+</head>
+<body>
+<script type="text/html" id="common-table-template">
+    <table>
+        <thead>
+            <tr>
+            <#
+                var hlength = headers.length;
+                for (var hi = 0; hi < hlength; hi++) {
+                    var head = headers[hi];
+            #>
+                <td><#= head #></td>
+            <#  } #>
+            </tr>
+        </thead>
+        <tbody>
+        <#
+            var rlen = rows.length;
+            for (var ri = 0; ri < rlen; ri++) {
+                var row = rows[ri];
+        #>
+            <tr>
+        <#
+                for (var fi = 0; fi < row.length; fi++) {
+                    var val = row[fi];
+        #>
+                    <td><#= val #></td>
+        <#
+                }
+        #>
+            </tr>
+        <#  } #>
+        </tbody>
+    </table>
+</script>
+</body>
+</html>
+
