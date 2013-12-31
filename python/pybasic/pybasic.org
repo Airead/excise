@@ -43,6 +43,11 @@ learning python basic
    file:demo/mutipoolx.py
 ** os
    file:demo/dirs.py
+** trackback
+   file:demo/airtraceback/traceback_example.py
+   file:demo/airtraceback/traceback_print_exc.py
+   file:demo/airtraceback/traceback_print_exception.py
+   file:demo/airtraceback/traceback_format_exceptioin.py
 * image
   file:demo/pgmagick_image.py
   file:demo/magickwand_image.py

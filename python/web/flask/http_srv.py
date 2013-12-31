@@ -21,6 +21,11 @@ def post_dump():
     return json_str
 
 
+@app.route('/sdkcom/auth/getToken.lg', methods=['POST'])
+def get_token():
+    return post_dump()
+
+
 def main():
     host = '127.0.0.1'
     port = 5000

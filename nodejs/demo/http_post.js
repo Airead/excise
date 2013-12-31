@@ -9,7 +9,7 @@ var content=qs.stringify(post_data);
 
 console.log(process.argv);
 if (process.argv.length < 5) {
-    console.log('usage: node ', process.argv[1], ' <host> <port> <path>')
+    console.log('usage: node ', process.argv[1], ' <host> <port> <path>');
     return;
 }
 var host = process.argv[2];
