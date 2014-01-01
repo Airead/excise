@@ -5,3 +5,4 @@ learning python Tk
   file:demo/frame_ex.py
   file:demo/label_ex.py
   file:demo/button_ex.py
+  file:demo/panewindow_ex.py
