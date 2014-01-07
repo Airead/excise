@@ -18,8 +18,14 @@ if (cluster.isMaster) {
 
 } else if (cluster.isWorker) {
     console.log('[worker] ' + "start worker ..." + cluster.worker.id);
-    http.createServer(function (req, res) {
+    var server = http.createServer(function (req, res) {
         console.log('worker' + cluster.worker.id);
         res.end('worker' + cluster.worker.id + ',PID:' + process.pid);
-    }).listen(3000);
+        this.emit('error', new Error('hello error'));
+    }).listen(8000);
+
+//    server.on('error', function (err) {
+//        console.log('[worker ' + process.pid + '] \n', err);
+//        process.exit(0);
+//    });
 }

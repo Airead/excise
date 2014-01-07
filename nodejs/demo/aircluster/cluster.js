@@ -58,8 +58,13 @@ if (cluster.isMaster) {
         process.send('[worker] worker' + cluster.worker.id + ' received!');
     });
 
-    http.createServer(function (req, res) {
+    var server = http.createServer(function (req, res) {
         res.writeHead(200, {'Content-Type': 'text/html'});
+        this.emit('error', new Error());
         res.end('worker' + cluster.worker.id + ', PID:' + process.pid);
     }).listen(3000);
+
+//    server.on('error', function (err) {
+//        console.log('catch error: ', err);
+//    });
 }
