@@ -26,4 +26,8 @@ db.once('open', function () {
         }
         console.log('message total: ', messages.length);
     });
+
+    messageDoc.findOne({date: 1}, function (err, d) {
+        console.log('d: ', d);
+    });
 });

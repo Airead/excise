@@ -1,0 +1,135 @@
+body {
+    font-family: arial, serif;
+    font-size: 11px;
+}
+
+.clear {
+    clear: both
+}
+
+#nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#nav li {
+    float: left;
+    display: block;
+    width: 100px;
+    background: #ccc;
+    z-index: 500;
+    margin: 0 1px;
+}
+
+#nav li a {
+    padding: 8px 5px 0 5px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    color: #333;
+}
+
+#nav li a:hover {
+    color: #fff;
+}
+
+#nav ul {
+    margin: 0 0 0 -1px;
+    padding: 0;
+    list-style: none;
+}
+
+#nav ul li {
+    border-top: 1px solid #fff;
+}
+
+#nav ul a {
+    color: #666;
+}
+
+#nav ul a:hover {
+    text-decoration: underline;
+}
+
+/*
+
+
+*/
+
+body {
+    font-family: arial;
+    font-size: 11px;
+}
+
+.clear {
+    clear: both
+}
+
+/* remove the list style */
+#nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* make the LI display inline */
+/* it's position relative so that position absolute */
+/* can be used in submenu */
+#nav li {
+    float: left;
+    display: block;
+    width: 100px;
+    background: #ccc;
+    position: relative;
+    z-index: 500;
+    margin: 0 1px;
+}
+
+/* this is the parent menu */
+#nav li a {
+    display: block;
+    padding: 8px 5px 0 5px;
+    font-weight: 700;
+    height: 23px;
+    text-decoration: none;
+    text-align: center;
+    color: #333;
+}
+
+#nav li a:hover {
+    color: #fff;
+}
+
+/* you can make a different style for default selected value */
+#nav a.selected {
+    color: #f00;
+}
+
+/* submenu, it's hidden by default */
+#nav ul {
+    position: absolute;
+    left: 0;
+    display: none;
+    margin: 0 0 0 -1px;
+    padding: 0;
+    list-style: none;
+}
+
+#nav ul li {
+    width: 100px;
+    float: left;
+    border-top: 1px solid #fff;
+}
+
+/* display block will make the link fill the whole area of LI */
+#nav ul a {
+    display: block;
+    height: 15px;
+    padding: 8px 5px;
+    color: #666;
+}
+
+#nav ul a:hover {
+    text-decoration: underline;
+}
