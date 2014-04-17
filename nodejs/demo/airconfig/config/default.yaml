@@ -1,0 +1,4 @@
+Customer:
+  dbHost: localhost
+  dbPort: 5984
+  dbName: customers
