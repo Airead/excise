@@ -26,6 +26,6 @@ if (cluster.isMaster) {
 } else {
     http.createServer(function(req, res) {
         res.writeHead(200);
-        res.end('hello world\n');
-    }).listen(0);
+        res.end('hello world\n' + process.pid);
+    }).listen(8899);
 }

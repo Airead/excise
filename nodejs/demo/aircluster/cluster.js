@@ -60,8 +60,9 @@ if (cluster.isMaster) {
 
     var server = http.createServer(function (req, res) {
         res.writeHead(200, {'Content-Type': 'text/html'});
-        this.emit('error', new Error());
+//        this.emit('error', new Error());
         res.end('worker' + cluster.worker.id + ', PID:' + process.pid);
+        process.send('---receive: ' + req.url);
     }).listen(3000);
 
 //    server.on('error', function (err) {

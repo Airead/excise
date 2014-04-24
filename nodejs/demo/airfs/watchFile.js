@@ -5,7 +5,7 @@
 console.log('watchFile loaded!');
 
 function test(str) {
-    console.log(str + ': stest2f25');
+    console.log(str + ': stest2fd3');
 }
 
 exports.test = test;
