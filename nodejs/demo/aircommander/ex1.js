@@ -13,6 +13,7 @@ program
     .option('-P, --pineapple', 'Add pineapple')
     .option('-b, --bbq', 'Add bbq sauce')
     .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
+    .option('-n, --number [v]', 'get a number', 2);
 
 program
     .command('setup')
@@ -28,5 +29,6 @@ console.log('program.peppers: ', program.peppers);
 if (program.peppers) console.log('  - peppers');
 if (program.pineapple) console.log('  - pineapple');
 if (program.bbq) console.log('  - bbq');
+console.dir(program.number);
 console.log('  - %s cheese', program.cheese);
 console.log('program args: ', program.args);

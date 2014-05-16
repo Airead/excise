@@ -1,0 +1,6 @@
+package com.chrisdew.buftest
+
+message BufTest {
+    optional float num = 1;
+    optional bytes payload = 2;
+}
