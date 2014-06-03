@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html ng-app="mainApp" ng-controller="TestCtl">
 <head>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <script src="../../js/jquery.js"></script>
     <script src="../../js/angular.js"></script>
     <script src="table.js"></script>
-        <script src="test.js"></script>
+    <script src="test.js"></script>
     <title>Table</title>
 </head>
 <body>
-<h1>title: {{ title }}</h1>
 <div>
-    <my-table></my-table>
+    <h1>Option</h1>
+    <ul>
+        <li>selectionMode: {{ selectionMode }}</li>
+        <li>isGlobalSearchActivated: {{ isGlobalSearchActivated }}</li>
+        <li>displaySelectionCheckbox: {{ displaySelectionCheckbox }}</li>
+        <li>isPaginationEnabled: {{ isPaginationEnabled }}</li>
+        <li>itemsByPage: {{ itemsByPage }}</li>
+        <li>maxSize: {{ maxSize }}</li>
+    </ul>
 </div>
+
+<div>
+    <h1>title: {{ title }}</h1>
+    <my-table class="table table-border" columns="columns"></my-table>
+</div>
+
 </body>
 </html>
