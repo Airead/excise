@@ -33,6 +33,13 @@
         };
     });
 
+    tableModule.directive('smartTableGlobalSearch', function () {
+        return {
+            restrict: 'C',
+            require: '^myTable',
+        }
+    });
+
     tableModule.controller('TableCtrl', [
         '$scope',
         function ($scope) {

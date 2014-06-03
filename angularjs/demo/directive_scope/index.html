@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <script src="../../js/angular.js"></script>
+    <script src="testScope.js"></script>
+    <title>test scope</title>
+</head>
+<body ng-controller="ParentCtl">
+ParnetCtl name:
+<input ng-model="name" type="text">
+<test-scope equal-name="name" at-name="{{ name }}" quote-name="name = 'Hello ' + name"></test-scope>
+</body>
+</html>
