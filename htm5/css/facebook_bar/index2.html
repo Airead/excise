@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet/less" type="text/css" href="style.css">
+    <title></title>
+    <style>
+        /* general styles */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background-color: #e9eaed;
+            height: 100%;
+        }
+
+        body {
+            color: #333333;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        #nav_v2 {
+            display: none;
+        }
+
+        /* top level elements */
+        #nav, #nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav {
+            background: rgb(78, 105, 162) linear-gradient(to bottom, rgba(78, 105, 162, 1) 0%, rgba(59, 88, 152, 1) 100%);
+            height: 22px;
+            padding: 10px 0 10px 5px;
+            position: relative;
+        }
+
+        #nav > li {
+            float: left;
+            height: 22px;
+            padding-right: 6px;
+            position: relative;
+            text-align: left;
+        }
+
+        #nav > li > a {
+            border: 1px solid transparent;
+            color: #ffffff;
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            height: 27px;
+            line-height: 27px;
+            margin: -3px 0 0 -1px;
+            padding: 0 1px 0 11px;
+            text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+        }
+
+        #nav > li:hover > a {
+            background: #425691;
+            border-radius: 2px;
+            color: #ffffff;
+            margin-right: -8px;
+            padding: 0 9px 0 11px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #nav > li.subs:hover > a {
+            background-color: #ffffff;
+            border: 1px solid rgba(100, 100, 100, 0.4);
+            border-bottom-width: 0;
+            border-radius: 2px 2px 0 0;
+            color: #000;
+            text-shadow: 0 0 transparent;
+            z-index: 2;
+        }
+
+        #nav > li + li:after {
+            background-color: yellowgreen;
+            content: "";
+            height: 17px;
+            left: 1px;
+            position: absolute;
+            top: 2px;
+            width: 1px;
+        }
+
+        #nav ul {
+            background-color: #ffffff;
+            border: 1px solid rgba(100, 100, 100, 0.25);
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+            position: absolute;
+            left: -1px;
+            margin-top: 2px;
+            min-width: 200px;
+            padding: 6px 0;
+            top: 100%;
+            z-index: 1;
+            display: none;
+        }
+
+        #nav li:hover ul {
+            display: block;
+        }
+
+        #nav ul li a {
+            border-bottom: 1px solid transparent;
+            border-top: 1px solid transparent;
+            color: #232b37;
+            display: block;
+            font-size: 12px;
+            line-height: 20px;
+            padding: 0 22px;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #nav ul li a:hover {
+            background-color: #6d84b4;
+            border-bottom: 1px solid #3b5998;
+            border-top: 1px solid #3b5998;
+            color: #ffffff;
+        }
+
+        @media (max-width: 980px) {
+            #nav {
+                height: auto;
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                width: 100%;
+            }
+
+            #nav li {
+                position: relative;
+                display: inline;
+                float: left;
+                height: auto;
+                /*line-height: 40px;*/
+                margin: 0;
+                padding: 0;
+                width: 100%;
+            }
+
+            #nav li:after {
+                display: none;
+            }
+
+            #nav > li > a {
+                border-bottom: 1px solid green;
+                height: 40px;
+                line-height: 40px;
+                margin: 0;
+            }
+
+            #nav > li:hover > a {
+                margin: 0;
+                border-width: 1px;
+            }
+
+            #nav > li.subs:hover > a {
+                border-radius: 0;
+                border-width: 1px;
+            }
+
+            #nav ul {
+                display: none;
+                position: relative;
+                border: 0;
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                top: 0;
+            }
+
+            #nav li:hover ul {
+                display: none;
+            }
+
+            #nav ul li a {
+                height: 40px;
+                line-height: 40px;
+            }
+
+            #nav #s1:target + li > a, #nav #s2:target + li > a {
+                background-color: #ffffff;
+                border: 0;
+                color: #000000;
+                text-shadow: 0 0 transparent;
+            }
+
+            #nav #s1:target + li ul,
+            #nav #s2:target + li ul {
+                display: block;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<ul id="nav">
+    <li><a href="#">Home</a></li>
+    <span id="s1"></span>
+    <li class="subs"><a href="#s1">Menu 1</a>
+        <ul>
+            <li><a href="#">Submenu A</a></li>
+            <li><a href="#">Submenu B</a></li>
+            <li><a href="#">Submenu C</a></li>
+            <li><a href="#">Submenu D</a></li>
+            <li><a href="#">Submenu E</a></li>
+            <li><a href="#">Submenu F</a></li>
+        </ul>
+    </li>
+    <span id="s2"></span>
+    <li class="subs"><a href="#s2">Menu 2</a>
+        <ul>
+            <li><a href="#">Submenu G</a></li>
+            <li><a href="#">Submenu H</a></li>
+            <li><a href="#">Submenu I</a></li>
+            <li><a href="#">Submenu J</a></li>
+            <li><a href="#">Submenu K</a></li>
+            <li><a href="#">Submenu L</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Menu 3</a></li>
+    <li><a href="#">Menu 4</a></li>
+    <li><a href="#">Menu 5</a></li>
+    <li><a href="http://www.script-tutorials.com/facebook-like-menu-responsive/">Back to Responsive menu tutorial</a></li>
+</ul>
+
+</body>
+</html>

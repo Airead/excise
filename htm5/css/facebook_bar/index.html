@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet/less" type="text/css" href="style.css">
+    <title></title>
+    <style>
+        /* general styles */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background-color: #e9eaed;
+            height: 100%;
+        }
+
+        body {
+            color: #333333;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        #nav_v2 {
+            display: none;
+        }
+
+        /* top level elements */
+        #nav, #nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav {
+            background: rgb(78, 105, 162) linear-gradient(to bottom, rgba(78, 105, 162, 1) 0%, rgba(59, 88, 152, 1) 100%);
+            height: 22px;
+            padding: 10px 0 10px 5px;
+            position: relative;
+        }
+
+        #nav > li {
+            float: left;
+            height: 22px;
+            padding-right: 6px;
+            position: relative;
+            text-align: left;
+        }
+
+        #nav > li > a {
+            border: 1px solid transparent;
+            color: #ffffff;
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            height: 27px;
+            line-height: 27px;
+            margin: -3px 0 0 -1px;
+            padding: 0 1px 0 11px;
+            text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+        }
+
+        #nav > li:hover > a {
+            background: #425691;
+            border-radius: 2px;
+            color: #ffffff;
+            margin-right: -8px;
+            padding: 0 9px 0 11px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #nav > li.subs:hover > a {
+            background-color: #ffffff;
+            border: 1px solid rgba(100, 100, 100, 0.4);
+            border-bottom-width: 0;
+            border-radius: 2px 2px 0 0;
+            color: #000;
+            text-shadow: 0 0 transparent;
+            z-index: 2;
+        }
+
+        #nav > li + li:after {
+            background-color: yellowgreen;
+            content: "";
+            height: 17px;
+            left: 1px;
+            position: absolute;
+            top: 2px;
+            width: 1px;
+        }
+
+        #nav ul {
+            background-color: #ffffff;
+            border: 1px solid rgba(100, 100, 100, 0.25);
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+            position: absolute;
+            left: -1px;
+            margin-top: 2px;
+            min-width: 200px;
+            padding: 6px 0;
+            top: 100%;
+            z-index: 1;
+            display: none;
+        }
+
+        #nav li:hover ul {
+            display: block;
+        }
+
+        #nav ul li a {
+            border-bottom: 1px solid transparent;
+            border-top: 1px solid transparent;
+            color: #232b37;
+            display: block;
+            font-size: 12px;
+            line-height: 20px;
+            padding: 0 22px;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #nav ul li a:hover {
+            background-color: #6d84b4;
+            border-bottom: 1px solid #3b5998;
+            border-top: 1px solid #3b5998;
+            color: #ffffff;
+        }
+
+        @media (max-width: 980px) {
+            #nav {
+                display: none;
+            }
+
+            #nav_v2 {
+                display: block;
+                background: rgb(78, 105, 162);
+                border: 1px solid #3A4B7B;
+                color: #ffffff;
+                cursor: pointer;
+                margin-bottom: 30px;
+                padding: 6px;
+                width: 100%;
+            }
+
+            #nav_v2 select {
+                color: #ffffff;
+                cursor: pointer;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<ul id="nav">
+    <li><a href="#">Home</a></li>
+    <li class="subs"><a href="#s1">Menu 1</a>
+        <ul>
+            <li><a href="#">Submenu A</a></li>
+            <li><a href="#">Submenu B</a></li>
+            <li><a href="#">Submenu C</a></li>
+            <li><a href="#">Submenu D</a></li>
+        </ul>
+    </li>
+    <li class="subs"><a href="#s2">Menu 2</a>
+        <ul>
+            <li><a href="#">Submenu E</a></li>
+            <li><a href="#">Submenu F</a></li>
+            <li><a href="#">Submenu G</a></li>
+            <li><a href="#">Submenu H</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Menu 3</a></li>
+    <li><a href="#">Menu 4</a></li>
+    <li><a href="#">Menu 5</a></li>
+    <li><a href="http://www.script-tutorials.com/facebook-like-menu-responsive/">Back to Responsive menu tutorial</a>
+    </li>
+</ul>
+
+
+<select id="nav_v2" onchange="window.location.href = this.options[this.selectedIndex].value">
+    <option selected="selected" value="">Choise Page...</option>
+    <option value="#">Submenu 1</option>
+    <option value="#">Submenu A</option>
+    <option value="#">Submenu B</option>
+    <option value="#">Submenu C</option>
+    <option value="#">Submenu D</option>
+    <option value="#">Submenu 2</option>
+    <option value="#">Submenu E</option>
+    <option value="#">Submenu F</option>
+    <option value="#">Submenu G</option>
+    <option value="#">Submenu H</option>
+    <option value="#">Submenu 3</option>
+    <option value="#">Submenu 4</option>
+    <option value="#">Submenu 5</option>
+    <option value="http://www.script-tutorials.com/facebook-like-menu-responsive/">Back to Responsive menu tutorial
+    </option>
+</select>
+
+</body>
+</html>
