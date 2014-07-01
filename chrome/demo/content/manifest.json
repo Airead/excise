@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+
+    "name": "my google",
+    "description": "This extension demonstrates a browser action with kittens.",
+    "version": "1.2",
+
+    "content_scripts": [
+        {
+            "matches": ["https://www.google.com.hk/*"],
+            "js": ["jquery.js", "test.js"],
+            "run_at": "document_end"
+        }
+    ]
+}

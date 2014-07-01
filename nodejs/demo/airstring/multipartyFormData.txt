@@ -1,0 +1,33 @@
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="uid"
+
+5886385
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="orderID"
+
+014061906314046969
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="productName"
+
+暴走草帽团-100钻石
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="productPrice"
+
+10.00
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="productDesc"
+
+4691403173891033
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="orderTime"
+
+1403173982
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="tradeSign"
+
+245d8c0aubtlFfAAYFBQ4JDlNSBFQBVQZSCFcB
+------WebKitFormBoundaryG5OEq0gemMks8Bgo
+Content-Disposition: form-data; name="tradeState"
+
+success
+------WebKitFormBoundaryG5OEq0gemMks8Bgo--
