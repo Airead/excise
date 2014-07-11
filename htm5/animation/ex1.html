@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <style>
+        @-webkit-keyframes myfirst {
+            0% {
+                background: red;
+                left: 0;
+            }
+            50% {
+                background: #ffff00;
+                left: 1024px;
+            }
+            100% {
+                background: red;
+                left: 0;
+            }
+        }
+
+        .move {
+            position: absolute;
+            height: 768px;
+            width: 1024px;
+            background: #808080;
+            -webkit-animation: myfirst 1s;
+        }
+
+        .stage {
+            position: absolute;
+            height: 768px;
+            width: 1024px;
+            background: #808080;
+        }
+    </style>
+    <title>example 1</title>
+</head>
+<body>
+<div class="move"></div>
+
+<script src="../jquery.js"></script>
+<script>
+    $('div').click(function () {
+        console.log('click');
+        var $this = $(this);
+        $this.removeClass('move');
+        setTimeout(function () {
+            $this.addClass('move');
+        }, 0);
+    });
+</script>
+</body>
+</html>
