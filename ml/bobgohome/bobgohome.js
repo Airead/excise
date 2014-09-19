@@ -407,11 +407,13 @@ GaBob.prototype.updateFitnessScores = function () {
         gen.fitness = this.bobsMap.testRoute(path);
 
         this.totalFitnessScore += gen.fitness;
-
+        console.log('updateFitnessScores: %s, fitness %s, totalFitnessScore', 
+            i, gen.fitness, this.totalFitnessScore);
         if (gen.fitness > this.bestFitnessScore) {
             this.bestFitnessScore = gen.fitness;
             this.fittestGenome = i;
             this.bobsMemory = this.bobsMap.memory;
+            console.log('bobsMemory: ', this.bobsMemory);
 
             if (gen.fitness === 1) {
                 console.log('success path is ', path);
