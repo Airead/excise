@@ -30,8 +30,10 @@ function main() {
 
     document.body.appendChild(renderer.view);
 
-    var gaBob = new GaBob();
-    GaBob.show(stage);
+    var gaBob = new GaBob(CROSSOVER_RATE, MUTATION_RATE, POP_SIZE, CHROMO_LENGTH, GENE_LENGTH);
+    gameInfo.gaBob = gaBob;
+    gaBob.render();
+    gaBob.show(stage);
 
     registerKeyEvent();
 
@@ -46,27 +48,39 @@ function main() {
 
 function loop(gameInfo) {
     var char = keyCode;
+    var result = {};
     keyCode = null;
+
+    var gaBob = gameInfo.gaBob;
 
     switch (char) {
     case ' ':
         console.log('into space process');
-        gameInfo.map.memoryRender();
+        if (!gaBob.busy) {
+            gaBob.run();
+        }
+        gaBob.busy = !gaBob.busy;
         break;
     case 'T':
         console.log('into test route Path');
-        var path = gameInfo.map.genTestPath();
-        var fit = gameInfo.map.testRoute(path);
-        gameInfo.map.memoryRender();
-        var result = {
+        var path = gaBob.bobsMap.genTestPath();
+        var fit = gaBob.bobsMap.testRoute(path);
+        gaBob.bobsMap.memoryRender();
+        result = {
             testPath: path,
             fit: fit,
-            map: gameInfo.map
+            map: gaBob.bobsMap
         };
         console.log('get result', result);
         break;
     case 'D':
         debugger;
+        break;
+    case 'N':
+        console.log('one epoch');
+        gaBob.epoch();
+        gaBob.render();
+        console.log('gaBob', gaBob);
         break;
     }
 }
@@ -276,7 +290,7 @@ function GaBob(crossRat, mutRat, popSize, numBits, geneLen) {
     this.geneLength = geneLen;
     this.busy = false;
 
-    this.bobsBrain = null;
+    this.bobsMemory = null;
     this.bobsMap = new BobsMap();
 
     this.genomes = [];
@@ -285,10 +299,13 @@ function GaBob(crossRat, mutRat, popSize, numBits, geneLen) {
 }
 
 GaBob.prototype.createStartPopulation = function () {
+    console.log('gabob createStartPopulation');
+
     this.genomes = [];
     for (var i = 0; i < this.popSize; i++) {
         this.genomes.push(new Genome(this.chromoLength));
     }
+    console.log('get genomes', this.genomes);
 
     this.generation = 0;
     this.fittestGenome = 0;
@@ -297,6 +314,7 @@ GaBob.prototype.createStartPopulation = function () {
 };
 
 GaBob.prototype.run = function () {
+    console.log('gaBob run');
     this.createStartPopulation();
 
     this.busy = true;
@@ -343,7 +361,7 @@ GaBob.prototype.crossover = function (mum, dad, baby1, baby2) {
     var cp = Math.floor(Math.random() * this.chromoLength);
 
     baby1.bits = mum.bits.slice(0, cp).concat(dad.bits.slice(cp));
-    baby2.bits = data.bits.slice(0, cp).concat(mum.bits.slice(cp));
+    baby2.bits = dad.bits.slice(0, cp).concat(mum.bits.slice(cp));
 };
 
 GaBob.prototype.epoch = function () {
@@ -351,7 +369,7 @@ GaBob.prototype.epoch = function () {
 
     // Now to create a new population
     var newBabies = 0;
-    var babyGenomes;
+    var babyGenomes = [];
 
     while (newBabies < this.popSize) {
         var mum = this.rouletteWheelSelection();
@@ -360,11 +378,14 @@ GaBob.prototype.epoch = function () {
         var baby1 = new Genome();
         var baby2 = new Genome();
 
-        this.crossover(mum, data, baby1, baby2);
+        this.crossover(mum, dad, baby1, baby2);
 
         // operator - mutate
         this.mutate(baby1.bits);
         this.mutate(baby2.bits);
+
+        babyGenomes.push(baby1);
+        babyGenomes.push(baby2);
 
         newBabies += 2;
     }
@@ -374,30 +395,29 @@ GaBob.prototype.epoch = function () {
 };
 
 GaBob.prototype.updateFitnessScores = function () {
+    console.log('gaBob updateFitnessScores');
+
     this.fittestGenome = 0;
     this.bestFitnessScore = 0;
     this.totalFitnessScore = 0;
 
-    var tmpMaps = new BobsMap();
-
     for (var i = 0; i < this.popSize; i++) {
         var gen = this.genomes[i];
         var path = this.decode(gen.bits);
-        gen.fitness = this.bobsMap.TestRoute(path);
+        gen.fitness = this.bobsMap.testRoute(path);
 
         this.totalFitnessScore += gen.fitness;
 
         if (gen.fitness > this.bestFitnessScore) {
             this.bestFitnessScore = gen.fitness;
             this.fittestGenome = i;
-            this.bobsBrain = tmpMaps;
+            this.bobsMemory = this.bobsMap.memory;
 
             if (gen.fitness === 1) {
+                console.log('success path is ', path);
                 this.busy = false;
             }
         }
-
-        tmpMaps.memory = tmpMaps.getCleanMemory();
     }  // next genome
 };
 
@@ -416,7 +436,7 @@ GaBob.prototype.decode = function (bits) {
 GaBob.prototype.render = function () {
     var start;
     this.bobsMap.render();
-    this.bobsBrain.memoryRender();
+    this.bobsMap.memoryRender();
 
     var s = "Generation: " + this.generation;
 
@@ -429,8 +449,8 @@ GaBob.prototype.render = function () {
     }
 };
 
-GaBob.prototype.show = function () {
-    this.bobsMap.show();
+GaBob.prototype.show = function (stage) {
+    this.bobsMap.show(stage);
 };
 
 // GaBob end here
