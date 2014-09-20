@@ -408,7 +408,7 @@ GaBob.prototype.updateFitnessScores = function () {
 
         this.totalFitnessScore += gen.fitness;
         console.log('updateFitnessScores: %s, fitness %s, totalFitnessScore', 
-            i, gen.fitness, this.totalFitnessScore);
+            i, gen.fitness, this.totalFitnessScore, path);
         if (gen.fitness > this.bestFitnessScore) {
             this.bestFitnessScore = gen.fitness;
             this.fittestGenome = i;
@@ -429,8 +429,8 @@ GaBob.prototype.decode = function (bits) {
     var dirs = "nsew"; // North, South, East, West
 
     for (var i = 0; i < bits.length; i+=this.geneLength) {
-        var gene = bits.slice(i, this.geneLength);
-        path.push(dirs[parseInt(gene, 2)]);
+        var gene = bits.slice(i, i + this.geneLength);
+        path.push(dirs[parseInt(gene.join(''), 2)]);
     }
     return path;
 };
