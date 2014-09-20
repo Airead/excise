@@ -79,6 +79,12 @@ function loop(gameInfo) {
     case 'D':
         debugger;
         break;
+    case 'R':
+        console.log('reset gaBob');
+        gaBob.createStartPopulation();
+        gaBob.bobsMemory = gaBob.bobsMap.getCleanMemory();
+        gaBob.render();
+        break;
     case 'N':
         console.log('one epoch');
         gaBob.epoch();
@@ -300,6 +306,15 @@ function GaBob(crossRat, mutRat, popSize, numBits, geneLen) {
     this.bobsMemory = null;
     this.bobsMap = new BobsMap();
 
+    this.startText = new PIXI.Text("");
+    this.titleText = new PIXI.Text("");
+
+    var style = {
+        font: 'bold 15px Arial'
+    };
+    this.startText.setStyle(style);
+    this.titleText.setStyle(style);
+
     this.genomes = [];
 
     this.createStartPopulation();
@@ -448,22 +463,29 @@ GaBob.prototype.decode = function (bits) {
 };
 
 GaBob.prototype.render = function () {
-    var start;
     this.bobsMap.render();
     this.bobsMap.memoryRender(this.bobsMemory);
 
     var s = "Generation: " + this.generation;
+    this.titleText.setText(s);
+
+    this.titleText.position.x = this.bobsMap.border / 5;
+    this.titleText.position.y = 0;
 
     if (!this.busy) {
-        start = "Press Return to start a new run";
+        this.startText.setText("Press Space to start a new run");
     } else {
-        start = "Space to stop";
+        this.startText.setText("Space to stop");
         this.epoch();
     }
+    this.startText.position.x = parseInt((WINDOW_WIDTH - this.startText.width) / 2);
+    this.startText.position.y = WINDOW_HEIGHT - this.bobsMap.border;
 };
 
 GaBob.prototype.show = function (stage) {
     this.bobsMap.show(stage);
+    stage.addChild(this.startText);
+    stage.addChild(this.titleText);
 };
 
 // GaBob end here
