@@ -53,13 +53,16 @@ function loop(gameInfo) {
 
     var gaBob = gameInfo.gaBob;
 
+    gaBob.render();
+
     switch (char) {
     case ' ':
         console.log('into space process');
         if (!gaBob.busy) {
             gaBob.run();
+        } else {
+            gaBob.stop();
         }
-        gaBob.busy = !gaBob.busy;
         break;
     case 'T':
         console.log('into test route Path');
@@ -180,8 +183,10 @@ BobsMap.prototype.getCleanMemory = function () {
     return mem;
 };
 
-BobsMap.prototype.memoryRender = function () {
+BobsMap.prototype.memoryRender = function (memory) {
     var y, x;
+
+    var usedMemory = memory || this.memory;
 
     this.memoryGraphics.clear();
     for (y = 0; y < MAP_HEIGHT; y++) {
@@ -196,7 +201,7 @@ BobsMap.prototype.memoryRender = function () {
                 height: this.blockSizeY
             };
 
-            if (this.memory[y][x] == 1) {
+            if (usedMemory[y][x] == 1) {
                 this.drawRectWithColor(this.memoryGraphics, rectInfo, COLOR.gray);
             }
         }
@@ -258,7 +263,9 @@ BobsMap.prototype.testRoute = function (path) {
     var diffX = Math.abs(posX - this.endX);
     var diffY = Math.abs(posY - this.endY);
 
-    return 1 / (diffX + diffY + 1);
+    var fitness = 1 / (diffX + diffY + 1.0);
+
+    return fitness;
 };
 
 // BobsMap end here
@@ -319,6 +326,11 @@ GaBob.prototype.run = function () {
 
     this.busy = true;
 };
+
+GaBob.prototype.stop = function () {
+    console.log('gaBob stop');
+    this.busy = false;
+}
 
 GaBob.prototype.rouletteWheelSelection = function () {
     var slice = Math.random() * this.totalFitnessScore;
@@ -395,7 +407,7 @@ GaBob.prototype.epoch = function () {
 };
 
 GaBob.prototype.updateFitnessScores = function () {
-    console.log('gaBob updateFitnessScores');
+    // console.log('gaBob updateFitnessScores');
 
     this.fittestGenome = 0;
     this.bestFitnessScore = 0;
@@ -407,16 +419,16 @@ GaBob.prototype.updateFitnessScores = function () {
         gen.fitness = this.bobsMap.testRoute(path);
 
         this.totalFitnessScore += gen.fitness;
-        console.log('updateFitnessScores: %s, fitness %s, totalFitnessScore', 
-            i, gen.fitness, this.totalFitnessScore, path);
+        // console.log('updateFitnessScores: %s, fitness %s, totalFitnessScore', 
+        //    i, gen.fitness, this.totalFitnessScore, path);
         if (gen.fitness > this.bestFitnessScore) {
             this.bestFitnessScore = gen.fitness;
             this.fittestGenome = i;
             this.bobsMemory = this.bobsMap.memory;
-            console.log('bobsMemory: ', this.bobsMemory);
+            // console.log('bobsMemory: ', this.bobsMemory);
 
             if (gen.fitness === 1) {
-                console.log('success path is ', path);
+                console.log('success path is ', path, gen);
                 this.busy = false;
             }
         }
@@ -438,16 +450,15 @@ GaBob.prototype.decode = function (bits) {
 GaBob.prototype.render = function () {
     var start;
     this.bobsMap.render();
-    this.bobsMap.memoryRender();
+    this.bobsMap.memoryRender(this.bobsMemory);
 
     var s = "Generation: " + this.generation;
 
     if (!this.busy) {
         start = "Press Return to start a new run";
-        console.log(start);
     } else {
         start = "Space to stop";
-        console.log(start);
+        this.epoch();
     }
 };
 
