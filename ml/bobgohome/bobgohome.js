@@ -378,7 +378,7 @@ GaBob.prototype.mutate = function (bits) {
 GaBob.prototype.crossover = function (mum, dad, baby1, baby2) {
     var i;
 
-    if (Math.random() > this.crossoverRate || mum == dad) {
+    if (Math.random() > this.crossoverRate || mum == dad) {  // no crossover
         baby1.bits = mum.bits.slice(0);
         baby2.bits = dad.bits.slice(0);
         return;
