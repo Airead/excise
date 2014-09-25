@@ -23,3 +23,5 @@ ios/
 bootstrap/bootstrap-3.0.0/*
 /.DS_Store
 .tern-port
+.RData
+.Rhistory

@@ -79,7 +79,7 @@ class Tongcheng58Spider(scrapy.Spider):
         item['addr'] = addr
         item['desc'] = desc
         item['time'] = time
-
+        item['insertdate'] = datetime.now()
         self.mongo_save(item)
 
         return item

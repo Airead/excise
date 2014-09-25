@@ -32,3 +32,4 @@ class HouseItem(scrapy.Item):
     addr = scrapy.Field()
     desc = scrapy.Field()
     time = scrapy.Field()
+    insertdate = scrapy.Field()

@@ -1,0 +1,1 @@
+setwd("~/study/git-proj/excise/airscrapy/demo/tutorial/rscript")
