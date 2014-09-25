@@ -37,6 +37,7 @@ loc_2 <- vector('character', count)
 loc_3 <- vector('character', count)
 time <- vector('character', count)
 desc <- vector('character', count)
+insertdate <- vector('integer', count)
 
 getValue <- function (bson, key, default) {
   val <- mongo.bson.value(b, key)
@@ -64,9 +65,11 @@ while (mongo.cursor.next(cursor)) {
   # cat(loc_1[i], loc_2[i], loc_3[i])
   time[i] <- getValue(b, 'time', 0)
   desc[i] <- getValue(b, 'desc', 0)
+  insertdate[i] <- getValue(b, 'insertdate', 0)
   
   i <- i+1
 }
+insertdate <- as.POSIXlt(insertdate - 8 * 60 * 60, origin='1970-01-01 00:00:00')
 results <- as.data.frame(list(id=id, 
                               addr=addr,
                               title=title,
@@ -79,7 +82,28 @@ results <- as.data.frame(list(id=id,
                               loc_2=loc_2,
                               loc_3=loc_3,
                               time=time,
-                              desc=desc))
+                              desc=desc,
+                              insertdate=insertdate))
 
+results$price <- as.integer(as.character(results$price))
+
+tmp_room <- strsplit(as.character(results$overview), '__')
+room <- vector('character', length(tmp_room))
+i <- 1;
+while (i < length(tmp_room)) {
+  room[i] <- tmp_room[[i]][1]
+  i <- i + 1
+}
 
 write.csv(results, 'raw_58_house.csv', row.names=F)
+
+cleanDf <- data.frame(list(id=results$id,
+                           addr=addr,
+                           room=room,
+                           price=results$price,
+                           county=results$loc_1,
+                           town=results$loc_2,
+                           time=results$time,
+                           insertdate=results$insertdate))
+write.csv(cleanDf, 'clean_58_house.csv', row.names=F)
+

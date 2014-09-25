@@ -23,13 +23,16 @@ class Tongcheng58Spider(scrapy.Spider):
     allowed_domains = ["58.com"]
     start_urls = (
         'http://bj.58.com/zufang/0/',
+        'http://bj.58.com/changping/zufang/0/j3/'
     )
 
     base_url = 'http://bj.58.com'
 
     def parse(self, response):
         self.log("xpath %s" % response.xpath('//a[@class="next"]/@href').extract())
-        next_link = ''.join([Tongcheng58Spider.base_url, response.xpath('//a[@class="next"]/@href').extract()[0]])
+        next_link = response.xpath('//a[@class="next"]/@href').extract()
+        if len(next_link) == 1:
+            next_link = ''.join([Tongcheng58Spider.base_url, next_link[0]])
         # inspect_response(response, self)
 
         detail_links = response.xpath('//h1/a[contains(@href, "shtml")]/@href').extract()
@@ -41,8 +44,9 @@ class Tongcheng58Spider(scrapy.Spider):
                 continue
             yield scrapy.Request(link, callback=self.parse_detail)
 
-        self.log('parse url: %s' % next_link)
-        yield scrapy.Request(next_link)
+        if next_link:
+            self.log('parse url: %s' % next_link)
+            yield scrapy.Request(next_link)
 
     def parse_detail(self, response):
         self.log('parser detail %s, time %s:' % (response.url, datetime.now()))
@@ -52,7 +56,12 @@ class Tongcheng58Spider(scrapy.Spider):
 
         item = HouseItem()
 
-        agent = response.xpath('//h1/@title').extract()[0]
+        agent = ''
+        try:
+            agent = response.xpath('//h1/@title').extract()[0]
+        except IndexError:
+            pass
+
         title = response.xpath('//h1/text()').extract()[0]
 
         price_type = response.xpath('(//ul/li/div[@class="su_con"])[1]/span/text()').extract()
