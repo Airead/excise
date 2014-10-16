@@ -1,6 +1,7 @@
 setwd("~/study/git-proj/excise/airscrapy/demo/tutorial/rscript")
 
 df <- read.csv('clean_58_house.csv')
+df$insertdate <- as.POSIXct(df$insertdate)
 
 limitDate = '2014-09-01'
 
@@ -58,7 +59,11 @@ showBar <- function (df) {
 }
 
 changpingRoom3Df <- myFilter(analysis(df, '3室', '昌平'))
+changpingRoom3Df <- changpingRoom3Df[with(changpingRoom3Df, rev(order(insertdate))),]
+
 changpingRoom2Df <- myFilter(analysis(df, '2室', '昌平'))
+changpingRoom2Df <- changpingRoom2Df[with(changpingRoom2Df, rev(order(insertdate))),]
+
 haidianRoom3Df <- myFilter(analysis(df, '3室', '海淀'))
 showBar(changpingRoom3Df)
 showBox(changpingRoom3Df)

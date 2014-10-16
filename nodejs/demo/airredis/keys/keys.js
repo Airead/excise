@@ -5,7 +5,7 @@ var redis = require('redis');
 
 client = redis.createClient();
 
-var key = 'inTimeCost'
+var key = 'inTimeCost';
 
 var funcs = [
     function test_keys(cb) {

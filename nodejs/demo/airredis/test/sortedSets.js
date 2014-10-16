@@ -15,7 +15,7 @@ describe('Sorted Sets', function () {
     before(function (done) {
         client = redis.createClient();
         client.on('ready', function () {
-            done()
+            done();
         });
 
         client.on("error", function (err) {
@@ -25,7 +25,7 @@ describe('Sorted Sets', function () {
 
     after(function (done) {
         client.on('end', function () {
-            done()
+            done();
         });
         client.quit();
     });
@@ -36,7 +36,29 @@ describe('Sorted Sets', function () {
                 assert(!err);
                 assert(isType(replies, 'Array'));
                 assert(replies.length === 0);
-                done()
+                done();
+            });
+        });
+    });
+
+    describe('ZADD', function () {
+        it('add record', function (done) {
+            client.zadd(key, 10, 'mem', function (err, replies) {
+                console.log('add record', err, replies);
+                assert(!err);
+                done();
+            });
+        });
+    });
+
+    describe('ZRANGE', function () {
+        it('list record', function (done) {
+            client.zrange(key, -1, 0, 'withscores',function (err, replies) {
+                assert(!err);
+                assert(isType(replies, 'Array'));
+                assert(replies.length === 2);
+                console.log(replies);
+                done();
             });
         });
     });
@@ -46,7 +68,7 @@ describe('Sorted Sets', function () {
             client.zscore(key, 'noexist', function (err, replies) {
                 assert(!err);
                 assert(isType(replies, 'Null'));
-                done()
+                done();
             });
         });
     })

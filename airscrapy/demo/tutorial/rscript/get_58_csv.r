@@ -104,6 +104,7 @@ cleanDf <- data.frame(list(id=results$id,
                            county=results$loc_1,
                            town=results$loc_2,
                            time=results$time,
-                           insertdate=results$insertdate))
+                           insertdate=results$insertdate,
+                           desc=results$desc))
 write.csv(cleanDf, 'clean_58_house.csv', row.names=F)
 

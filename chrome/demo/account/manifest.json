@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    
+    "name": "Account Detect",
+    "description": "This extension will detect your account",
+    "version": "1.0",
+    
+    "permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["jquery.js", "account.js"],
+            "run_at": "document_end"
+        }
+    ]
+}
