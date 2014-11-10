@@ -145,6 +145,7 @@
              padding: 10px 14px;
              height: 200px;
              position: relative;
+             box-sizing: content-box;
          }
 
          .main-box .data-show .operate {
@@ -199,6 +200,12 @@
          .data-module {
              float: left;
              width: 50%;
+         }
+
+         .main-box .data-show .content-data-show {
+             display: block;
+             height: 100%;
+             overflow: hidden;
          }
         </style>
     </head>
@@ -383,7 +390,6 @@
                                     </div>
                                 </div>
                                 <div class="content-data-show">
-                                    
                                 </div>
                             </div>
                         </div>
@@ -391,5 +397,24 @@
                 </div>
             </div>
         </div>
+
+        <script src="jquery-1.11.1.min.js"></script>
+        <script src="highcharts.src.js"></script>
+        <script>
+         $(function () { 
+             $('.content-data-show').highcharts({
+                 chart: {
+                     type: 'bar'
+                 },
+                 series: [{
+                     name: 'Jane',
+                     data: [1, 0]
+                 }, {
+                     name: 'John',
+                     data: [5, 7]
+                 }]
+             });
+         });
+        </script>
     </body>
 </html>
