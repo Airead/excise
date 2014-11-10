@@ -1,0 +1,395 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <link href="bootstrap.css" rel="stylesheet">
+        <style>
+         body {
+             background: rgb(238, 240, 243);
+             color: rgb(138, 142, 148);
+         }
+         
+         .main-box {
+             backgroud: rgb(245, 246, 248);
+             color: rgb(102, 111, 123);
+             display: block;
+             overflow: hidden;
+             zoom: 1;
+             border-top: 1px solid rgb(255,255,255);
+             border-radius: 4px;
+             box-shadow: rgb(206, 211, 217) 0px 1px 1px;
+             padding: 0px;
+             height: 354px;
+             width: 97%;
+             margin: 0px 1.5% 20px;
+         }
+
+         .main-box .title {
+             display: block;
+             zoom: 1;
+             overflow: hidden;
+             padding: 0px 10px;
+             border-bottom: 1px solid rgb(220, 225, 231);
+         }
+
+         .main-box .title h5 {
+             color: rgb(98, 109, 125);
+             font-weight: normal;
+             font-size: 12px;
+             margin: 0;
+             padding: 8px 0px;
+             float: left;
+         }
+
+         .main-box .title .operate {
+             float: right;
+             display: block;
+             padding: 6px 0px;
+         }
+
+         .main-box .title .operate em {
+             display: block;
+             float: left;
+             zoom: 1;
+             overflow: hidden;
+             width: 40px;
+             height: 20px;
+             cursor: pointer;
+         }
+
+         .main-datas {
+             display: block;
+             zoom: 1;
+             background: rgb(255,255,255);
+             border-bottom: 1px solid rgb(220, 225, 231);
+             padding-left: 20px;
+             height: 98px;
+         }
+
+         .col-box {
+             margin: 1% 0 1% 1.5%;
+             float: left
+         }
+
+         .col-box:first-child {
+             margin-left: 0;
+         }
+
+         .main-datas .col-box {
+             margin-top: 0;
+             margin-bottom: 0;
+         }
+
+         .column2 .cols {
+             width: 49.25%;
+         }
+
+         .data-content {
+             padding-top: 10px;
+             border-right: 1px solid rgb(230, 233, 238);
+             height: 88px;
+         }
+
+         .main-box .main-datas .data-title {
+             display: block;
+             font-size: 12px;
+             font-weight: normal;
+             padding-bottom: 3px;
+         }
+
+         .main-box .main-datas .datas {
+             display: block;
+             clear: both;
+             zoom: 1;
+             overflow: hidden;
+             margin-right: 10px;
+         }
+
+         .main-box .main-datas .datas .numbers {
+             display: block;
+             float: left;
+             padding: 4px 5% 0 0;
+         }
+
+         .main-box .main-datas .datas .bold {
+             font-weight: normal;
+             display: block;
+             font-size: 32px;
+             color: rgb(83, 91, 104);
+         }
+
+         .main-box .main-datas .datas .data-name {
+             font-size: 12px;
+             display: block;
+             clear: both;
+         }
+
+         .main-box .main-datas .datas .up {
+             padding: 21px 0 0 14px;
+             display: block;
+             background: url(./icons.png) no-repeat -266px -328px;
+         }
+
+         .main-box .main-datas .datas .decline {
+             padding: 21px 0 0 14px;
+             display: block;
+             background: url('./icons.png') no-repeat -190px -328px;
+         }
+
+         .main-box .data-show {
+             clear: both;
+             display: block;
+             background: rgb(247, 248, 249);
+             box-shadow: 0 1px 0 rgb(238, 240, 243) inset;
+             padding: 10px 14px;
+             height: 200px;
+             position: relative;
+         }
+
+         .main-box .data-show .operate {
+             position: absolute;
+             left: 18px;
+             top: 12px;
+             font-size: 12px;
+             z-index: 1;
+         }
+
+         .main-box .data-show .operate .choose-time, .main-box .data-show .operate .choose-form {
+             float: left;
+             display: block;
+             padding-right: 30px;
+         }
+
+         .main-box .data-show .operate span.on-choose {
+             color: rgb(87, 167, 255);
+         }
+
+         .main-box .data-show .operate .choose-form span {
+             display: block;
+             float: left;
+             text-indent: -9999px;
+             width: 15px;
+             height: 15px;
+             margin-right: 10px;
+             padding: 0;
+             cursor: pointer;
+         }
+         
+         .main-box .data-show .operate span.line {
+             background: url(./icons.png) no-repeat -191px -262px;
+         }
+
+         .main-box .data-show .operate span.column.on-choose {
+             background: url(./icons.png) no-repeat -227px -302px;
+         }
+
+         .main-box .data-show .operate span.table {
+             background: url(./icons.png) no-repeat -263px -262px;
+         }
+
+         .data-box {
+             clear: both;
+             display: block;
+             width: 98.4%;
+             zoom: 1;
+             overflow: hidden;
+         }
+
+         .data-module {
+             float: left;
+             width: 50%;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="main-content">
+            <div class="main-box">
+                <div class="title">
+                    <h5>活跃 & 收入</h5>
+                    <div class="operate">
+                        <em>下载</em>
+                    </div>
+                </div>
+                
+                <div class="ga-spinner"></div>
+
+                <div>
+                    <div class="main-datas column2">
+                        <div class="col-box cols">
+                            <div class="data-content">
+                                <span class="data-title">活跃玩家</span>
+                                <div class="datas">
+                                    <div class="numbers">
+                                        <span class="bold">26,456</span>
+                                        <span class="data-name">日均</span>
+                                    </div>
+                                    <div class="numbers">
+                                        <span class="decline">3.9%</span>
+                                        <span class="data-name">环比</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-box cols">
+                            <div class="data-content">
+                                <span class="data-title">收入</span>
+                                <div class="datas">
+                                    <div class="numbers">
+                                        <span class="bold">773</span>
+                                        <span class="data-name">日均</span>
+                                    </div>
+                                    <div class="numbers">
+                                        <span class="up">10.5%</span>
+                                        <span class="data-name">环比</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-show">
+                        <div class="operate">
+                            <div class="choose-time">
+                                粒度：<span class="on-choose">日</span>
+                            </div>
+                            <div class="choose-form">
+                                <span class="line"></span>
+                                <span class="column on-choose"></span>
+                                <span class="table"></span>
+                            </div>
+                        </div>
+                        <div class="content-data-show">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-box">
+                <!-- 新增和转化 -->
+                <div class="data-module">
+                    <div class="main-box">
+                        <div class="title">
+                            <h5>新增和转化</h5>
+                            <div class="operate">
+                                <em>下载</em>
+                            </div>
+                        </div>
+                        
+                        <div class="ga-spinner"></div>
+                        <div>
+                            <div class="main-datas column2">
+                                <div class="col-box cols">
+                                    <div class="data-content">
+                                        <span class="data-title">新增激活</span>
+                                        <div class="datas">
+                                            <div class="numbers">
+                                                <span class="bold">4,876</span>
+                                                <span class="data-name">日均</span>
+                                            </div>
+                                            <div class="numbers">
+                                                <span class="decline">42.5%</span>
+                                                <span class="data-name">环比</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-box cols">
+                                    <div class="data-content">
+                                        <span class="data-title">注册转化率</span>
+                                        <div class="datas">
+                                            <div class="numbers">
+                                                <span class="bold">98.7%</span>
+                                                <span class="data-name">日均</span>
+                                            </div>
+                                            <div class="numbers">
+                                                <span class="decline">0.2%</span>
+                                                <span class="data-name">环比</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="data-show">
+                                <div class="operate">
+                                    <div class="choose-time">
+                                        粒度：<span class="on-choose">日</span>
+                                    </div>
+                                    <div class="choose-form">
+                                        <span class="line"></span>
+                                        <span class="column on-choose"></span>
+                                        <span class="table"></span>
+                                    </div>
+                                </div>
+                                <div class="content-data-show">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 游戏次数和时长 -->
+                <div class="data-module">
+                    <div class="main-box">
+                        <div class="title">
+                            <h5>游戏次数和时长</h5>
+                            <div class="operate">
+                                <em>下载</em>
+                            </div>
+                        </div>
+                        
+                        <div class="ga-spinner"></div>
+                        <div>
+                            <div class="main-datas column2">
+                                <div class="col-box cols">
+                                    <div class="data-content">
+                                        <span class="data-title">游戏次数</span>
+                                        <div class="datas">
+                                            <div class="numbers">
+                                                <span class="bold">80,775</span>
+                                                <span class="data-name">日均</span>
+                                            </div>
+                                            <div class="numbers">
+                                                <span class="decline">3.2%</span>
+                                                <span class="data-name">环比</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-box cols">
+                                    <div class="data-content">
+                                        <span class="data-title">游戏时长</span>
+                                        <div class="datas">
+                                            <div class="numbers">
+                                                <span class="bold">1,189,055</span>
+                                                <span class="data-name">日均</span>
+                                            </div>
+                                            <div class="numbers">
+                                                <span class="up">3.9%</span>
+                                                <span class="data-name">环比</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="data-show">
+                                <div class="operate">
+                                    <div class="choose-time">
+                                        粒度：<span class="on-choose">日</span>
+                                    </div>
+                                    <div class="choose-form">
+                                        <span class="line"></span>
+                                        <span class="column on-choose"></span>
+                                        <span class="table"></span>
+                                    </div>
+                                </div>
+                                <div class="content-data-show">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
