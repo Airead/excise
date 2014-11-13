@@ -10,6 +10,7 @@ ZSH_THEME="robbyrussell"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias nw="/Applications/node-webkit.app/Contents/MacOS/node-webkit"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -45,7 +46,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extras)
+plugins=(git git-extras grunt)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -156,3 +157,13 @@ source $HOME/bin/z.sh
 # This setting is for the new UTF-8 terminal support
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/study/go
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"  # This loads RVM into a shell session.
+
+export ARCHFLAGS='-Wno-error=unused-command-line-argument-hard-error-in-future'

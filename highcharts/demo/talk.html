@@ -88,7 +88,7 @@
          .data-content {
              padding-top: 10px;
              border-right: 1px solid rgb(230, 233, 238);
-             height: 88px;
+             height: 98px;
          }
 
          .main-box .main-datas .data-title {
@@ -193,6 +193,7 @@
              clear: both;
              display: block;
              width: 98.4%;
+             margin: 0 0.8%;
              zoom: 1;
              overflow: hidden;
          }
@@ -404,7 +405,9 @@
          $(function () { 
              $('.content-data-show').highcharts({
                  chart: {
-                     type: 'bar'
+                     type: 'bar',
+                     marginTop: '30',
+                     backgroundColor: 'rgb(245, 246, 248)'
                  },
                  series: [{
                      name: 'Jane',
@@ -412,7 +415,20 @@
                  }, {
                      name: 'John',
                      data: [5, 7]
-                 }]
+                 }],
+                 title: {
+                     text: ""
+                 },
+                 credits: {
+                     enabled: false
+                 },
+                 legend: {
+                     align: 'right',
+                     verticalAlign: 'top',
+                     floating: true,
+                     y: -14,
+                     borderWidth: 0
+                 }
              });
          });
         </script>
