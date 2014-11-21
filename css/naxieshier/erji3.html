@@ -1,0 +1,131 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>实例分解——二级菜单导航</title>
+    <style type="text/css">
+     body {
+	 font:normal 12px/1.5em "宋体", Verdana,Lucida, Arial, Helvetica, sans-serif;
+     } /* 设置页面中所有文字的样式 */
+     ul {
+         /* width:400px;
+	    margin:0;
+	    padding:0;
+	    list-style:none;
+	    border-right:1px solid #CCCCCC; */
+         width: 400px;
+         margin: 0;
+         padding: 0;
+         list-style: none;
+         border-right: 1px solid #ccc;
+     } /* 将无序列表ul的宽度设置为400px，并且去除内补丁和外补丁以及默认的列表修饰符，最后再添加边框 */
+     
+     ul:after {
+         display:block;
+	 font-size:0;
+	 line-height:0;
+	 clear:both;
+	 content:""; */
+     } /* 清除无序列表的浮动，使其具有自适应高度的能力 */
+     
+     #nav li {
+         /* position:relative;
+	    float:left;
+	    width:100px;
+	    height:30px; */
+         position: relative;
+         float: left;
+         width: 100px;
+         height: 30px;
+     } /* 设置列表li标签浮动，并且固定宽度以及高度的属性值 */
+     
+     #nav li ul {
+         /* display:none;
+	    position:absolute;
+	    left:0;
+	    top:30px;
+	    width:100%; */
+         display: none;
+         position: absolute;
+         width: 100%;
+         left: 0;
+         top: 30px;
+     } /* 将列表li标签内的无序列表设置为绝对定位，相对于其父级顶部30px，靠左0px，并且暂时先隐藏不可见 */
+     
+     ul li a {
+         /* display:block;
+	    height:28px;
+	    overflow:hidden;
+	    line-height:30px;
+	    text-align:center;
+	    text-decoration:none;
+	    color:#777777;
+	    border:1px solid #CCCCCC;
+	    border-right:0 none;
+	    background:#FFFFFF; */
+         display: block;
+         height: 28px;
+         line-height: 30px;
+         text-align: center;
+         text-decoration: none;
+         color: #777;
+         border: 1px solid #CCC;
+         border-right: 0 none;
+         backgournd: #FFF;
+     } /* 设置列表li标签内的锚点a标签为块并设置基本样式属性，最终显示的文字效果 */
+     ul li li {
+         /* margin-top:-1px; */
+         margin-top: -1px;
+     } /* 将列表li标签内的子级中的列表li标签外补丁设置为-1px，上移一个像素覆盖底边框 */
+     #nav li:hover ul, #nav li.over ul {
+         /* display: block; */
+         display: block;
+     } /* 触发列表li标签的鼠标经过时显示其子级的无序列表ul标签中的内容，以及类名为over下的子级ul */
+
+    </style>
+    <script type="text/javascript">
+     <!--
+     startList = function() {
+	 if (document.all&&document.getElementById) {
+	     navRoot = document.getElementById("nav");
+	     for (i=0; i<navRoot.childNodes.length; i++) {
+		 node = navRoot.childNodes[i];
+		 if (node.nodeName=="LI") {
+		     node.onmouseover=function() {
+			 this.className+=" over";
+				}
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+window.onload=startList;
+-->
+</script>
+</head>
+
+<body data-feedly-mini="yes">
+<ul id="nav">
+	<li><a href="#">首页</a></li>
+	<li><a href="#">关于我们</a>
+		<ul>
+			<li><a href="#">我们的故事</a></li>
+			<li><a href="#">我们的团队</a></li>
+		</ul>
+	</li>
+	<li><a href="#">我们的服务</a>
+		<ul>
+			<li><a href="#">网页设计</a></li>
+			<li><a href="#">页面制作</a></li>
+			<li><a href="#">程序开发</a></li>
+		</ul>
+	</li>
+	<li><a href="#">联系我们</a>
+		<ul>
+			<li><a href="#">团队主力</a></li>
+			<li><a href="#">团队成员</a></li>
+		</ul>
+	</li>
+</ul>
+
+
+</body></html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         #header, #footer {
+             width: 960px;
+             height: 30px;
+             background-color: #e8e8e8;
+         }
+         #container {
+             width: 960px;
+             overflow: hidden;
+         }
+         .mainBox {
+             float: left;
+             width: 650px;
+             background-color: #333333;
+         }
+         .sideBox {
+             float: right;
+             width: 280px;
+             background-color: #AAAAAA;
+         }
+         .mainBox, .sideBox {
+             padding: 0 5px;
+             color: #F00;
+         }
+         #container:after {
+             display: block;
+             clear: both;
+             content: "";
+         }
+        </style>
+    </head>
+    <body>
+        <div id="header">头部信息</div>
+        <div id="container">
+            <div class="mainBox" id="mainBox">
+		<p>主要内容区域</p>
+		<p>增加文字看看效果</p>
+		<p>两列等高的页面结构布局方式</p>
+		<p>可以算是一种“障眼法”</p>
+		<p>让浏览者在视觉上感觉到页面中的两列是相同高度的即可</p>
+            </div>
+            <div class="sideBox" id="sideBox">
+                侧边栏
+            </div>
+        </div>
+        <div id="footer">底部信息</div>
+
+        <script>
+         var mh = document.getElementById('mainBox');
+         var sh = document.getElementById('sideBox');
+         if (mh.clientHeight < sh.clientHeight) {
+             mh.style.height = sh.clientHeight + 'px';
+         } else {
+             sh.style.height = mh.clientHeight + 'px';
+         }
+        </script>
+    </body>
+</html>

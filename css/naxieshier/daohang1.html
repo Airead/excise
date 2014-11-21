@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         .site_nav {
+             width: 430px;
+         }
+         
+         .site_nav h1 {
+             display: none;
+         }
+
+         #nav ul, #nav li {
+             list-style: none;
+             padding: 0;
+             margin: 0;
+         }
+
+         #nav li {
+             float: left;
+             width: 100px;
+             height: 22px;
+         }
+
+         #nav li + li {
+             margin-left: 5px;
+         }
+
+         #nav li a {
+             display: block;
+             height: 100%;
+             text-align: center;
+             text-decoration: none;
+             font: normal 12px/22px simsun;
+             color: #ffffff;
+             background-color: #333333;
+         }
+
+         #nav li a:hover {
+             text-decoration: none;
+             color: #000000;
+             background-color: #e8e8e8;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="site_nav">
+            <h1>站点导航</h1>
+            <map id="nav">
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">个人介绍</a></li>
+                    <li><a href="#">作品展示</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </map>
+        </div>
+    </body>
+</html>

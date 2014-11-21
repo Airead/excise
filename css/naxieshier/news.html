@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <title>实例分解——新闻内容页</title>
+        <style>
+         * {
+             margin: 0;
+             padding: 0;
+         }
+
+         .news-box {
+             margin: auto;
+             width: 580px;
+             padding: 10px;
+             font: normal 14px/1.5em simsun;
+             color: #000000;
+             border: 1px solid #333;
+             background-color: #f6fafd;
+         }
+
+         .news-box h2 {
+             display: none;
+         }
+
+         .news-box h1 {
+             height: 20px;
+             padding: 5px 0;
+             line-height: 26px;
+             overflow: hidden;
+             font-size: 20px;
+         }
+
+         .news-box .info {
+             height: 20px;
+             margin-bottom: 15px;
+             font-size: 12px;
+         }
+
+         .news-box .summary {
+             padding: 5px;
+             margin-bottom: 10px;
+             text-indent: 2em;
+             border: 1px solid #DCDDDD;
+             background-color: #Ffffff;
+         }
+
+         .news-box .content p {
+             margin-bottom: 10px;
+             line-height: 22px;
+             text-indent: 2em;
+         }
+
+         .news-box .comments {
+             height: 30px;
+             padding: 0 5px;
+             line-height: 30px;
+             border-top: 1px dashed #AFAFB0;
+             border-bottom: 1px dashed #AFAFB0;
+             background-color: #fff;
+         }
+
+         a {
+             color: #1e50a2;
+         }
+         a:hover {
+             color: #BA2636;
+         }
+         a.comments_num {
+             color: #BA2636;
+         }
+         .comments a em {
+             font-style: normal;
+         }
+        </style>
+    </head>
+
+    <body>
+        <div class="news-box">
+            <!-- 新闻标题 S -->
+            <h1>浙江温州将公务员酒后驾车列入年度考核</h1>
+            <!-- 新闻标题 E -->
+            <!-- 新闻相关信息 S -->
+            <div class="info">
+                <span class="date">2009-05-23 19:05:37</span> <span class="from">来源:<a href="#">新华网</a></span> <a href="#" class="comments_num">跟贴 23 条</a> <a href="#">手机看新闻</a>
+            </div>
+            <!-- 新闻相关信息 E -->
+            <!-- 新闻摘要 S -->
+            <div class="summary">
+                <h2>新闻摘要：</h2>
+                <p>核心提示：浙江温州日前规定，公务员酒后驾车等交通安全违法行为将列入年度考核。纪委给予交通违法人相应处分、诫勉谈话或通报批评。</p>
+            </div>
+            <!-- 新闻摘要 E -->
+            <!-- 新闻内容 S -->
+            <div class="content">
+                <h2>新闻内容：</h2>
+                <p><strong>新华网5月23日电</strong> 浙江省温州市纪委、组织部、公安局、监察局日前联合作出规定：机关、事业单位工作人员严重道路交通安全违法行为，向当事人所在单位抄告，并列入干部年度考核的依据之一。</p>
+                <p>温州市纪委认定的严重道路交通安全违法行为主要有：无驾驶证驾驶机动车辆，发生道路交通事故后逃逸、故意破坏现场或者冒名顶替，饮酒后或醉酒驾驶机动车辆，因抗拒或阻碍道路交通管理而受到行政处罚，因交通安全违法行为受到行政拘留处罚。</p>
+                <p>省略部分内容，信息来源于网络！<span class="editor">(本文来源：<a href="#">新华网</a> 作者：张和平)</span></p>
+            </div>
+            <!-- 新闻内容 E -->
+            <!-- 新闻评论 S -->
+            <div class="comments"><a href="#">【已有<em>23</em>位网友发表了看法，点击查看。】</a></div>
+            <!-- 新闻评论 E -->
+        </div>
+    </body>
+</html>
+
+

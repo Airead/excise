@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         body {
+             font: normal 12px/1.5em sumsun;
+             margin: 10px;
+         }
+
+         ul {
+             width: 600px;
+             list-style: none;
+             margin: 0;
+             padding: 0;
+         }
+
+         #nav li {
+             width: 150px;
+             position: relative;
+         }
+
+         #nav > li {
+             float: left;
+         }
+
+         #nav > li a {
+             border: 1px solid #CCC;
+         }
+
+         #nav > li + li a {
+             border-left: 0 none;
+         }
+
+         #nav > li ul li a {
+             margin: 0 0 0 -1px;
+             border: 1px solid #CCC;
+             border-top: 0 none;
+         }
+
+         #nav li ul {
+             display: none;
+             position: absolute;
+             left: 0
+             top: 0;
+         }
+
+         ul li a {
+             display: block;
+             height: 20px;
+             line-height: 20px;
+             padding: 5px;
+             text-decoration: none;
+             color: #777777;
+             background: #FFF;
+         }
+
+         #nav li:hover ul, #nav li.over ul {
+             display: block;
+         }
+        </style>
+    </head>
+    <body>
+        <ul id="nav">
+	    <li><a href="#">首页</a></li>
+	    <li><a href="#">关于我们</a>
+		<ul>
+		    <li><a href="#">我们的故事</a></li>
+		    <li><a href="#">我们的团队</a></li>
+		</ul>
+	    </li>
+	    <li><a href="#">我们的服务</a>
+		<ul>
+		    <li><a href="#">网页设计</a></li>
+		    <li><a href="#">页面制作</a></li>
+		    <li><a href="#">程序开发</a></li>
+		</ul>
+	    </li>
+	    <li><a href="#">联系我们</a>
+		<ul>
+		    <li><a href="#">团队主力</a></li>
+		    <li><a href="#">团队成员</a></li>
+		</ul>
+	    </li>
+        </ul>
+    </body>
+</html>
