@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         * {
+             margin: 0;
+             padding: 0;
+         }
+
+         #photo {
+             position: relative;
+             width: 748px;
+             height: 590px;
+             margin: 0 auto;
+             background: #333333;
+         }
+
+         h1 {
+             position: absolute;
+             bottom: 10px;
+             right: 10px;
+             width: 100px;
+             height: 20px;
+             text-align: right;
+             font: normal 12px/1.5em simsun;
+             color: #FFf;
+         }
+
+         ul {
+             float: right;
+             width: 148px;
+             height: 590px;
+             list-style: none;
+         }
+
+         li {
+             float: left;
+             width: 54px;
+             height: 54px;
+             margin: 10px;
+             overflow: hidden;
+         }
+
+         li a {
+             display: block;
+             width: 50px;
+             height: 50px;
+             overflow: hidden;
+             border: 2px solid #CCC;
+         }
+
+         li a:hover img {
+             position: absolute;
+             top: 10px;
+             left: 10px;
+             margin: 0;
+             border: 2px solid #fff;
+         }
+
+         img {
+             display: block;
+             border: 0 none;
+             margin: -150px 0 0 -80px;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="photo">
+            <h1>简易css相册</h1>
+            <ul>
+                <li><a href="#"><img src="1.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="2.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="3.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="4.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="5.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="6.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="7.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="8.jpg" alt="" /></a></li>
+                <li><a href="#"><img src="9.jpg" alt="" /></a></li>
+            </ul>
+        </div>
+    </body>
+</html>

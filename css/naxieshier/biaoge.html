@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         table {
+             width: 300px;
+             border: 1px solid #000000;
+             font: normal 12px/1.5em sumsun;
+         }
+
+         caption {
+             text-align: left;
+         }
+
+         th {
+             color: #F4f4f4;
+             background-color: #999999;
+         }
+
+         td {
+             text-align: center;
+             background-color: #E8e8e8;
+         }
+
+         tfoot td {
+             text-align: right;
+             background-color: #FFFFFF;
+         }
+
+         tr > td {
+             color: #000000;
+         }
+
+         tr > td + td {
+             color: #FF0000;
+         }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table>
+                <caption>表头信息</caption>
+                <colgroup span="4"></colgroup>
+                <colgroup span="2"></colgroup>
+                <thead>
+                    <tr>
+                        <th>表格标题</th>
+                        <th>表格标题</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">显示表格底部的统计行</td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>表格内容单元格A</td>
+                        <td>表格内容单元格B</td>
+                    </tr>
+                    <tr>
+                        <td>表格内容单元格C</td>
+                        <td>表格内容单元格D</td>
+                    </tr>
+                    <tr>
+                        <td>表格内容单元格E</td>
+                        <td>表格内容单元格F</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

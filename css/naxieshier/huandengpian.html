@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         * {
+             margin: 0;
+             padding: 0;
+             font: normal 12px/1.5em simsun;
+         }
+
+         .wrapper {
+             margin: 100px auto 0;
+             width: 200px;
+             height: 200px;
+             border: 1px solid #333333;
+             background: #CCCCCC;
+         }    
+
+         .content {
+             width: 180px;
+             height: 160px;
+             margin: 10px auto 0;
+             border: 1px solid #999999;
+             background: #FFFFFF;
+             overflow: hidden;
+         }
+
+         .box {
+             float: left;
+             width: 160px;
+             height: 150px;
+             margin-bottom: 10px;
+             padding: 10px;
+             overflow: auto;
+         }
+
+         .pager {
+             width: 180px;
+             height: 20px;
+             margin: 5px auto;
+             text-align: right;
+         }
+
+         .pager a {
+             padding: 2px 4px;
+             text-decoration: none;
+             color: #ffffff;
+             background: #ff0000;
+         }
+
+         .pager a:hover {
+             color: #000;
+             background: #fff;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content">
+                <div class="box" id="a1">
+                    <h2>幻灯片的简单模拟</h2>
+                    <p>第一屏</p>
+                </div>
+                <div class="box" id="a2">
+                    <p>第二屏</p>
+                </div>
+                <div class="box" id="a3">
+                    <p>第三屏</p>
+                </div>
+                <div class="box" id="a4">
+                    <p>第四屏</p>
+                </div>
+                <div class="box" id="a5">
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                    <p>第五屏</p>
+                </div>
+            </div>
+            <div class="pager">
+                <a href="#a1">1</a>
+                <a href="#a2">2</a>
+                <a href="#a3">3</a>
+                <a href="#a4">4</a>
+                <a href="#a5">5</a>
+            </div>
+        </div>
+    </body>
+</html>

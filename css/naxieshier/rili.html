@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         body {
+             margin: 8px;
+         }
+         table {
+             width: 175px;
+             border-collapse: collapse;
+             border: 1px solid #DCDCDC;
+             text-align: center;
+             font: normal 12px/1.5em Arial;
+         }
+
+         caption {
+             height: 24px;
+             text-align: left;
+             color: #F32600;
+         }
+
+         td, th {
+             width: 25px;
+             height: 20px;
+             border: 1px solid #DCDCDC;
+         }
+
+         th {
+             color: #000000;
+             background-color: #EEEEEE;
+         }
+
+         td.current {
+             font-weight: bold;
+             color: #FFFFFF;
+             background-color: #999999;
+         }
+
+         td:nth-child(1), td:nth-child(7) {
+             color: #B3222B;
+             background: #F8f8f8;
+         }
+
+         td.last_month, td.next_month {
+             color: #DFDFDF;
+         }
+
+        </style>
+    </head>
+    <body>
+        <table>
+	    <caption>今天是2009年7月1日</caption>
+	    <colgroup span="7">
+		<col span="1" class="day_off" />
+		<col span="5" />
+		<col span="1" class="day_off" />
+	    </colgroup>
+	    <thead>
+		<tr>
+		    <th>日</th>
+		    <th>一</th>
+		    <th>二</th>
+		    <th>三</th>
+		    <th>四</th>
+		    <th>五</th>
+		    <th>六</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		<tr>
+		    <td class="last_month">28</td>
+		    <td class="last_month">29</td>
+		    <td class="last_month">30</td>
+		    <td class="current">1</td>
+		    <td>2</td>
+		    <td>3</td>
+		    <td>4</td>
+		</tr>
+		<tr>
+		    <td>5</td>
+		    <td>6</td>
+		    <td>7</td>
+		    <td>8</td>
+		    <td>9</td>
+		    <td>10</td>
+		    <td>11</td>
+		</tr>
+		<tr>
+		    <td>12</td>
+		    <td>13</td>
+		    <td>14</td>
+		    <td>15</td>
+		    <td>16</td>
+		    <td>17</td>
+		    <td>18</td>
+		</tr>
+		<tr>
+		    <td>19</td>
+		    <td>20</td>
+		    <td>21</td>
+		    <td>22</td>
+		    <td>23</td>
+		    <td>24</td>
+		    <td>25</td>
+		</tr>
+		<tr>
+		    <td>26</td>
+		    <td>27</td>
+		    <td>28</td>
+		    <td>29</td>
+		    <td>30</td>
+		    <td>31</td>
+		    <td class="next_month">1</td>
+		</tr>
+	    </tbody>
+        </table>
+    </body>
+</html>

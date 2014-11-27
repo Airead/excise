@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         body {
+             margin: 8px;
+         }
+         #tab {
+             position: relative;
+             width: 570px;
+         }
+
+         #tab * {
+             margin: 0;
+             padding: 0;
+             list-style: none;
+         }
+
+         #tab div {
+             display: none;
+         }
+
+         #tab div {
+             position: absolute;
+             top: 26px;
+             left: 0;
+             width: 564px;
+             border: solid #D4d3d3;
+             border-width: 0 1px 1px;
+         }
+
+         #tab .block {
+             display: block;
+             padding-bottom: 10px;
+         }
+         #tab h3 {
+             float: left;
+             width: 114px;
+             height: 26px;
+             margin: 0 -1px 0 0;
+             line-height: 26px;
+             font-size: 14px;
+             font-weight: normal;
+             text-align: center;
+             color: #00007F;
+             background: #eeeeee url(tab_bg.gif) no-repeat;
+             cursor: pointer;
+         }
+
+         #tab .up {
+             background: #FFFFFF url(tab_up_bg.gif) no-repeat;
+         }
+
+         #tab ul {
+             margin: 15px 0 0;
+             padding: 0;
+         }
+
+         #tab li {
+             float: left;
+             width: 48%;
+             height: 22px;
+             margin: 0 1%;
+             line-height: 22px;
+             text-indent: 10px;
+             border-bottom: 1px dashed #DEDEDE;
+         }
+
+         #tab li a {
+             font-size: 12px;
+             text-decoration: none;
+             text-indent: 10px;
+             color: #333333;
+         }
+
+         #tab li a:hover {
+             text-decoration: underline;
+             color: #FF0000;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="tab">
+	    <h3 class="up" onclick="go_to(1);">选择一</h3>
+	    <div class="block">
+		<ul>
+		    <li><a href="#">1张钰和于连的同源悲剧1张钰和于连的同源悲剧 </a></li>
+		    <li><a href="#">从人大代表侯建军终审 </a></li>
+		    <li><a href="#">车辆交付问题 </a></li>
+		    <li><a href="#">贻误申请执行期限损失贻误申请执行期限损失 </a></li>
+		    <li><a href="#">民警特权扣车,油变成 </a></li>
+		    <li><a href="#">地下室及公摊面积不收 </a></li>
+		    <li><a href="#">当前医疗广告存在的问当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问新医 </a></li>
+		    <li><a href="#">新医改要注意的几个问 </a></li>
+		</ul>
+	    </div>
+	    
+	    <h3 onclick="go_to(2);">选择二</h3>
+	    <div>
+		<ul>
+		    <li><a href="#">2张钰和于连的同源悲剧车辆交付问题 </a></li>
+		    <li><a href="#">从人大代表侯建军终审 </a></li>
+		    <li><a href="#">车辆交付问题 </a></li>
+		    <li><a href="#">贻误申请执行期限损失 </a></li>
+		    <li><a href="#">民警特权扣车,油变成 </a></li>
+		    <li><a href="#">地下室及公摊面积不收地下室及公摊面积不收 </a></li>
+		    <li><a href="#">当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问 </a></li>
+		    <li><a href="#">张钰和于连的同源悲剧张钰和于 </a></li>
+		    <li><a href="#">当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问 </a></li>
+		</ul>
+	    </div>
+	    
+	    <h3 onclick="go_to(3);">选择三</h3>
+	    <div>
+		<ul>
+		    <li><a href="#">3张钰和于连的同源悲剧3张钰和于连的同源悲剧 </a></li>
+		    <li><a href="#">从人大代表侯建军终审 </a></li>
+		    <li><a href="#">车辆交付问题 </a></li>
+		    <li><a href="#">贻误申请执行期限损失贻误申请 </a></li>
+		    <li><a href="#">民警特权扣车,油变成 </a></li>
+		    <li><a href="#">地下室及公摊面积不收 </a></li>
+		    <li><a href="#">当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问新医改要注意的 </a></li>
+		    <li><a href="#">张钰和于连的同源悲剧 </a></li>
+		    <li><a href="#">当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问 </a></li>
+		</ul>
+	    </div>
+	    
+	    <h3 onclick="go_to(4);">选择四</h3>
+	    <div>
+		<ul>
+		    <li><a href="#">4张钰和于连的同源悲剧 </a></li>
+		    <li><a href="#">从人大代表侯建军终审从人大代表侯建 </a></li>
+		    <li><a href="#">车辆交付问题 </a></li>
+		    <li><a href="#">贻误申请执行期限损失 </a></li>
+		    <li><a href="#">民警特权扣车,油变成民警特权扣车 </a></li>
+		    <li><a href="#">地下室及公摊面积不收 </a></li>
+		    <li><a href="#">当前医疗广告存在的问当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问 </a></li>
+		    <li><a href="#">地下室及公摊面积不收 </a></li>
+		    <li><a href="#">当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问 </a></li>
+		</ul>
+	    </div>
+	    
+	    <h3 onclick="go_to(5);">选择五</h3>
+	    <div>
+		<ul>
+		    <li><a href="#">5张钰和于连的同源悲剧 </a></li>
+		    <li><a href="#">从人大代表侯建军终审车辆交付问题 </a></li>
+		    <li><a href="#">车辆交付问题 </a></li>
+		    <li><a href="#">贻误申请执行期限损失贻误申请执 </a></li>
+		    <li><a href="#">民警特权扣车,油变成 </a></li>
+		    <li><a href="#">车辆交付问题 </a></li>
+		    <li><a href="#">贻误申请执行期限损失 </a></li>
+		    <li><a href="#">民警特权扣车,油变成 </a></li>
+		    <li><a href="#">地下室及公摊面积不收地下室及公摊面积不收 </a></li>
+		    <li><a href="#">当前医疗广告存在的问 </a></li>
+		    <li><a href="#">新医改要注意的几个问车辆交付问题 </a></li>
+		</ul>
+	    </div>
+	    
+        </div>
+        <script type="text/javascript">
+         var h = document.getElementById("tab").getElementsByTagName("h3");
+         var d = document.getElementById("tab").getElementsByTagName("div");
+
+         function go_to(ao) {
+             for (var i = 0; i < h.length; i++) {
+                 if (ao - 1 == i) {
+                     h[i].className += ' up';
+                     d[i].className += ' block';
+                 } else {
+                     h[i].className = '';
+                     d[i].className = '';
+                 }
+             }
+         }
+	</script>
+    </body>
+</html>

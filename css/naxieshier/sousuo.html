@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         .search_box * {
+             margin: 0;
+             padding: 0;
+             list-style: none;
+             font: normal 12px/1.5em sumsun;
+         }
+         
+         .search_box {
+             position: relative;
+             width: 360px;
+         }
+
+         .search_box h3, .search_tips h4 {
+             display: none;
+         }
+
+         .search_box select {
+             float: left;
+             width: 60px;
+         }
+
+         .search_box input {
+             float: left;
+             width: 196px;
+             height: 14px;
+             padding: 1px 2px;
+             margin: 0 5px;
+             border: 1px solid #619FCF;
+         }
+
+         .search_box button {
+             float: left;
+             width: 59px;
+             height: 18px;
+             text-indent: -9999px;
+             border: 0 none;
+             background: url(btn_search.gif) no-repeat 0 0;
+             cursor: pointer;
+         }
+
+         .search_tips {
+             position: absolute;
+             top: 17px;
+             left: 65px;
+             width: 190px;
+             padding: 5px 5px 0;
+             border: 1px solid #619fcf;
+         }
+
+         .search_tips li {
+             height: 22px;
+             line-height: 22px;
+         }
+
+         .search_tips li a {
+             float: left;
+             text-decoration: none;
+             color: #333333;
+         }
+
+         .search_tips li a:hover {
+             color: #FF0000;
+         }
+
+         .search_tips li span {
+             float: right;
+             color: #CCCCCC;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="search_box">
+            <h3>站内搜索</h3>
+            <div class="content">
+                <form method="post" action="">
+                    <select>
+                        <option value="">影视</option>
+                        <option value="">日志</option>
+                        <option value="">相册</option>
+                    </select>
+                    <input type="text" value="请输入关键字" />
+                    <button type="submit">搜索</button>
+                    <div class="search_tips">
+                        <h4>搜索提示</h4>
+                        <ul>
+                            <li><a href="#">柯南 538 集</a><span>共有 589 个项目</span></li>
+                            <li><a href="#">柯南剧场版</a><span>共有 58393 个项目</span></li>
+                            <li><a href="#">柯南全集</a><span>共有 158393 个项目</span></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

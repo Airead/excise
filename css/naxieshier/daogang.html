@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         #nav * {
+             margin: 0;
+             padding: 0;
+         }
+
+         #nav div {
+             width: 754px;
+             height: 1000px;
+             overflow: hidden;
+             padding-left: 21px;
+             background: #CCC url(bg_nav1.png) no-repeat 0 0;
+         }
+
+         #nav div a {
+             float: left;
+             width: 92px;
+             height: 31px;
+             overflow: hidden;
+             text-indent: -9999px;
+             background: url(bg_nav1.png) no-repeat 1000px 1000px;
+         }
+
+         #nav div a:hover {
+             color: red;
+             position: relative;
+             width: 120px;
+         }
+
+         #nav div a.index:hover {
+             margin-left: -10px;
+             background-position: -11px -31px;
+         }
+
+         #nav div a.intro:hover {
+             margin-left: -10px;
+             background-position: -103px -62px;
+         }
+
+         #nav div a.honor:hover {
+             margin-left: -11px;
+             background-position: -194px -93px;
+         }
+
+         #nav div a.flow:hover {
+             margin-left: -12px;
+             background-position: -285px -124px;
+         }
+         #nav div a.product:hover {
+             margin-left: -15px;
+             background-position: -374px -155px;
+         }
+         #nav div a.sale:hover {
+             margin-left: -14px;
+             background-position: -467px -186px;
+         }
+         #nav div a.buy:hover {
+             margin-left: -15px;
+             background-position: -558px -217px;
+         }
+         #nav div a.contact:hover {
+             margin-left: -16px;
+             background-position: -649px -248px;
+         }
+
+        </style>
+    </head>
+    <body>
+        <map id="nav">
+            <div>
+                <a href="#" class="index">首页</a>
+                <a href="#" class="intro">公司简介</a>
+                <a href="#" class="honor">企业荣誉</a>
+                <a href="#" class="flow">工艺流程</a>
+                <a href="#" class="product">产品展示</a>
+                <a href="#" class="sale">销售网络</a>
+                <a href="#" class="buy">网上订购</a>
+                <a href="#" class="contact">联系我们</a>
+            </div>
+        </map>
+    </body>
+</html>

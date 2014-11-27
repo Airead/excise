@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         .user_login * {
+             margin: 0;
+             padding: 0;
+             font: normal 12px/1.5em sumsun;
+         }
+         
+         .user_login {
+             width: 210px;
+             padding: 1px;
+             border: 1px solid #DBDBD0;
+             background-color: #ffffff;
+         }
+
+         .user_login h3 {
+             height: 24px;
+             line-height: 24px;
+             font-weight: bold;
+             text-align: center;
+             background-color: #EEEEE8;
+         }
+
+         .user_login .content {
+             padding: 5px;
+         }
+
+         .user_login .frm_cont {
+             margin-bottom: 5px;
+         }
+
+         .user_login .frm_cont label {
+             cursor: pointer;
+         }
+
+         .user_login .userName input, .user_login .userPsw input, .user_login .validate input {
+             width: 146px;
+             height: 17px;
+             /* padding: 3px 2px 0; */
+             border: 1px solid #A9A98D;
+         }
+
+         .user_login .validate input {
+             width: 36px;
+             text-align: center;
+             margin-right: 5px;
+         }
+
+         .user_login .keepLogin {
+             padding-left: 48px;
+         }
+
+         .user_login .keepLogin input {
+             margin-right: 5px;
+         }
+
+         .user_login .btns {
+             text-align: center;
+         }
+
+         .user_login .btns a {
+             text-decoration: none;
+             color: #000000;
+         }
+
+         .user_login .btns button {
+             height: 21px;
+             cursor: pointer;
+         }
+
+         .user_login .btns button {
+             border: 1px solid #A9A98D;
+             background: url(bg_btn.gif) repeat-x 0 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="user_login">
+            <h3>用户登陆</h3>
+            <div class="content">
+                <form method="post" action="">
+                    <div class="frm_cont userName">
+                        <label for="userName">用户名：</label>
+                        <input type="text" id="userName" />
+                    </div>
+                    <div class="frm_cont userPsw">
+                        <label for="userPsw">密　码：</label>
+                        <input type="password" id="userPsw" />
+                    </div>
+                    <div class="frm_cont validate">
+                        <label for="validate">验证码：</label>
+                        <input type="text" id="validate" />
+                        <img src="getcode.jpg" alt="验证码: 3731" />
+                    </div>
+                    <div class="frm_cont keepLogin">
+                        <input type="checkbox" id="keepLogin" />
+                        <lable for="keepLogin">记住我的登陆信息</lable>
+                    </div>
+                    <div class="btns">
+                        <button type="submit" class="btn_login">登陆</button>
+                        <button class="btn_login"><a href="#">用户注册</a></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

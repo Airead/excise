@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         .feedback {
+             width: 398px;
+             padding:1px;
+             border: 1px solid #E8E8E8;
+             background-color: #FFFFFF;
+         }
+
+         .feedback * {
+             margin: 0;
+             padding: 0;
+             font: normal 12px/1.5em sumsun;
+         }
+
+         .feedback h3 {
+             height: 24px;
+             line-height: 24px;
+             font-weight: bold;
+             font-size: 13px;
+             text-indent: 12px;
+             color: #FFFFFF;
+             background-color: #999999;
+         }
+
+         .feedback .content {
+             padding: 10px;
+         }
+
+         .feedback fieldset {
+             padding-left: 12px;
+             margin-top: 10px;
+             border: 0 none;
+             border-top: 1px solid #999999;
+         }
+
+         .feedback legend {
+             padding: 0 5px;
+             color: #333333;
+         }
+
+         .feedback .frm_cont {
+             margin-top: 8px;
+         }
+
+         .feedback label {
+             float: left;
+             width: 80px;
+             height: 22px;
+             line-height: 24px;
+             text-align: right;
+             color: #ABABAB;
+             cursor: pointer;
+         }
+
+         .feedback .base_info input {
+             width: 100px;
+             height: 17px;
+             padding: 3px 2px 0;
+             border: 1px solid #DEDEDE;
+         }
+
+         .feedback .email input {
+             width: 150px;
+         }
+
+         .feedback .url input {
+             width: 240px;
+         }
+
+         .feedback .up_file input {
+             width: auto;
+             height: auto;
+         }
+
+         .feedback .tips {
+             padding: 5px 0 0 80px;
+             color: #ff3260;
+         }
+
+         .feedback textarea {
+             width: 240px;
+             height: 66px;
+             padding-left: 2px;
+             line-height: 22px;
+             border: 1px solid #DEDEDE;
+         }
+
+         .feedback .btns {
+             padding: 5px 0;
+             text-align: center;
+         }
+
+         .feedback .btns button {
+             heigth: 22px;
+             margin: 0 5px;
+             letter-spacing: 3px;
+             padding-left: 3px;
+             cursor: pointer;
+         }
+
+         .up_file input {
+             color: #FF0000;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="feedback">
+            <h3>反馈表单</h3>
+            <div class="content">
+                <form method="post" action="">
+                    <fieldset class="base_info">
+                        <legend>用户信息</legend>
+                        <div class="frm_cont userName">
+                            <label for="userName">用户名：</label>
+                            <input type="text" value="" id="userName" />
+                        </div>
+                        <div class="frm_cont email">
+                            <label for="email">电子邮件：</label>
+                            <input type="text" value="@" id="email" />
+                        </div>
+                        <div class="frm_cont url">
+                            <label for="url">网址：</label>
+                            <input type="text" value="http://" id="url" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="feedback_content">
+                        <legend>反馈内容</legend>
+                        <div class="frm_cont up_file">
+                            <label for="up_file">相关图片：</label>
+                            <input type="file" id="up_file" />
+                            <p class="tips">本系统只支持上传 .jpg、.gif、.png 图片</p>
+                        </div>
+                        <div class="frm_cont msg">
+                            <label for="msg">内容：</label>
+                            <textarea rows="4" cols="40" id="msg">12345</textarea>
+                            <p class="tips">请输入留言内容!</p>
+                        </div>
+                    </fieldset>
+                    <div class="btns">
+                        <button type="submit">提交</button>
+                       <button type="reset">重置</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
