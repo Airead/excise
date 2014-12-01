@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <style>
+         .float_left, .float_right {
+             width: 100%;
+             height: 100px;
+             margin-bottom: 10px;
+         }
+
+         .float_left div, .float_right div {
+             width: 80px;
+             height: 80px;
+             padding: 10px;
+             border: 1px dashed #999;
+         }
+
+         .float_left div {
+             float: left;
+             background-color: #f8f8f8;
+         }
+
+         .float_right div {
+             float: right;
+             background-color: #dcdcdc;
+         }
+
+        </style>
+    </head>
+    <body>
+        <div class="float_left">
+            <div>float_left box_1</div>
+            <div>float_left box_2</div>
+            <div>float_left box_3</div>
+        </div>
+        <div class="float_right">
+            <div>float_right box_1</div>
+            <div>float_right box_2</div>
+            <div>float_right box_3</div>
+        </div>
+    </body>
+</html>
