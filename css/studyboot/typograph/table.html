@@ -4,74 +4,45 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <style>
-    body {
-        padding: 0 15px;
-        font-size: 14px;
-        line-height: 1.42857143;
-        font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
-    }
-    table {
-        border-spacing: 0;
-        border-collapse: collapse;
-    }
-    caption {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        color: #777;
-        text-align: left;
-    }
-    th {
-        text-align: left;
-    }
-    .table {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-    .table > thead tr th,
-    .table > thead tr td,
-    .table > tbody tr th,
-    .table > tbody tr td {
-        border-top: 1px solid #ddd;
-        padding: 8px;
-        line-height: 1.428571429;
-        vertical-align: top;
-    }
-    .table > thead > tr > th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #ddd;
-        border-top: 0;
-    }
-    .table > tbody + tbody {
-        border-top: 2px solid #ddd;
-    }
-    .table-striped > tbody > tr:nth-child(odd) {
-        background: #f9f9f9;
-    }
-    .table-bordered {
-        border: 1px solid #ddd;
-    }
-    .table-bordered > thead > tr > th,
-    .table-bordered > tbody > tr > td {
-        border: 1px solid #ddd;
-    }
-    .table-bordered > thead > tr > th {
-        border-bottom-width: 2px;
-    }
-    .table-condensed > thead > tr > th {
-        padding: 5px;
-    }
-    .table-condensed > tbody > tr > td {
-        padding: 5px;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="myboot.css">
 </head>
-
 <body>
     <div class="box">
-        <table class="table">
-            <caption>Optional table caption.</caption>
+        <table class="table table-hover">
+            <caption>table-hover</caption>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="box">
+        <table class="table table-condensed">
+            <caption>table-condensed</caption>
             <thead>
                 <tr>
                     <th>#</th>
@@ -104,7 +75,7 @@
     </div>
     <div class="box">
         <table class="table table-bordered">
-            <caption>Optional table caption.</caption>
+            <caption>table-bordered</caption>
             <thead>
                 <tr>
                     <th>#</th>
@@ -141,7 +112,7 @@
     </div>
     <div class="box">
         <table class="table">
-            <caption>Optional table caption.</caption>
+            <caption>raw table</caption>
             <thead>
                 <tr>
                     <th>#</th>
@@ -194,7 +165,7 @@
     </div>
     <div class="box">
         <table class="table table-striped">
-            <caption>Optional table caption.</caption>
+            <caption>table-striped</caption>
             <thead>
                 <tr>
                     <th>#</th>
@@ -226,5 +197,4 @@
         </table>
     </div>
 </body>
-
 </html>
