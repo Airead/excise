@@ -26,3 +26,4 @@ bootstrap/bootstrap-3.0.0/*
 .tern-port
 .RData
 .Rhistory
+clickenv

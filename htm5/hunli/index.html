@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+    <title>请帖</title>
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .background {
+        margin-bottom: 30px;
+        background-image: url(images/background.png);
+    }
+    .content {
+        position: relative;
+        margin: 30px 0;
+        padding-bottom: 30px;
+        width: 100%;
+        background-image: url(images/layer.png);
+        text-align: center;
+        overflow: hidden;
+    }
+    .layer {
+        display: block;
+        height: 100%;
+    }
+    .pic {
+        width: 100%;
+        height: 338px;
+        overflow: hidden;
+        margin: 62px auto 0;
+        background-image: url(images/pic.png);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .save-the-date img {
+        display: block;
+        margin: auto;
+        margin-top: -13px;
+    }
+    .name {
+        margin-top: 16px;
+        font-size: 2.3em;
+        font-weight: bold;
+    }
+    .we-are {
+        margin-top: 9px;
+        font-size: 1em;
+        font-family: monospace;
+        letter-spacing: 4px;
+    }
+    .addr {
+        margin-top: 36px;
+    }
+    .addr a {
+        color: #333;
+    }
+    .addr a:visited {
+        color: #333;
+    }
+    .addr a:hover {
+        color: #784424;
+    }
+    @media (max-width: 700px) {
+    	.content {
+    		margin: 15px 0 0 0;
+       	}
+        .background {
+            position: relative;
+            margin: 15px 0;
+            padding-bottom: 30px;
+            width: 100%;
+            background-image: url(images/layer.png);
+            text-align: center;
+            overflow: hidden;
+        }
+        .pic {
+        	margin:0 ;
+        }
+    }
+    </style>
+</head>
+
+<body class="background">
+    <div class="content">
+        <div class="layer">
+            <div class="pic">
+            </div>
+            <div class="save-the-date">
+                <img src="images/save.png">
+            </div>
+            <h2 class="name">范人豪 & 李文静</h2>
+            <h3 class="we-are">WE ARE GETTING MARRIED</h3>
+            <h4 class="addr"><a href="http://j.map.baidu.com/g6kXs" target="_blank">2015/5/1 | 洛阳市 | 伊川县 | 兴华宴宾楼</a></h4>
+        </div>
+    </div>
+</body>
+
+</html>
