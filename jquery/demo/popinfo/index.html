@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../lib/jquery-1.10.2.min.js"></script>
+    <title></title>
+    <style>
+    .pop-info {
+        position: absolute;
+        background: #eee;
+        width: 400px;
+        height: 300px;
+        overflow: auto;
+        border: 1px solid #999;
+        border-radius: 4px;
+    }
+    </style>
+</head>
+
+<body>
+    <script>
+    $(document).ready(function() {
+        $w = $(window);
+        $d = $(document);
+        $test = $('<div><pre></pre></div>').addClass('pop-info');
+        $test.prependTo('body');
+        $w.mousemove(function(e) {
+            console.log('mousemove');
+            var msg = [
+                ['document (w,h)', $d.width(), $d.height()].join(' '), ['window (w,h)', $w.width(), $w.height()].join(' '), ['screen (x, y)', e.screenX, e.screenY].join(' '), ['client (x, y)', e.clientX, e.clientY].join(' '), ['scroll (x, y)', $w.scrollLeft(), $w.scrollTop()].join(' ')
+            ].join('\n');
+            $test.children('pre').html(msg);
+            var left = e.clientX + $w.scrollLeft();
+            var top = e.clientY + $w.scrollTop();
+
+            if (left + $test.width() > $w.width() + $w.scrollLeft()) {
+                left -= $test.width();
+            }
+
+            if (top + $test.height() > $w.height() + $w.scrollTop()) {
+                top -= $test.height();
+            }
+            console.log('left, top', left, top);
+            $test.css({
+                top: top,
+                left: left
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>
