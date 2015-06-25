@@ -1,0 +1,7 @@
+simpleClick.py
+airclick.egg-info/PKG-INFO
+airclick.egg-info/SOURCES.txt
+airclick.egg-info/dependency_links.txt
+airclick.egg-info/entry_points.txt
+airclick.egg-info/requires.txt
+airclick.egg-info/top_level.txt

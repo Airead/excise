@@ -1,0 +1,64 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+	font-size: 14px;
+}
+
+.box {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+.star {
+	cursor: pointer;
+	color: #333;
+	padding: 10px 18px;
+	font-weight: 400;
+	border: 1px solid #aaa;
+	border-radius: 6px;
+	background: #fff;
+	font-size: 18px;
+}
+
+.star:hover {
+	background: #ddd;
+}
+
+.star:focus {
+	background: #ddd;
+}
+
+
+.star.sm1 {
+	font-size: 14px;
+	padding: 7px 15px;
+}
+
+.star.sm2 {
+	font-size: 11px;
+	padding: 5px 10px;
+}
+
+.star.sm3 {
+	font-size: 7px;
+	padding: 2px 6px;
+}
+
+.dropdown {
+
+}
+
+.dropdown .dropdown-menu {
+	list-style: none;
+	margin: 2px 0 0;
+	padding: 0;
+	border: 1px solid #aaa;
+	padding: 8px 24px;
+}
+
+.dropdown .dropdown-menu a {
+	text-decoration: none;
+	color: #333;
+}

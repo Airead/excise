@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <script src="../../js/angular.js"></script>
+        <title></title>
+    </head>
+    <body>
+        <div class="content" ng-controller="mainCtl">
+            {{name}}
+        </div>
+        <script>
+         var module = angular.module('app', []);
+
+         module.provider('myData', function () {
+             this.httpget = null;
+             
+             this.$get = ['$http', function ($http) {
+                 this.httpget = $http;
+
+                 return {$http: $http};
+             }];
+         });
+
+         module.config([
+             'myDataProvider',
+             function (myDataProvider) {
+                 console.log('myDataProvider', myDataProvider);
+                 var $http = myDataProvider.$http
+
+                 console.log('$http', $http);
+             }
+         ]);
+         
+         module.controller('mainCtl', [
+             '$scope',
+             function ($scope) {
+                 $scope.name = 'provider';
+             }
+         ]);
+        </script>
+    </body>
+</html>
