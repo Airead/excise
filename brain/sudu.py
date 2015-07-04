@@ -33,7 +33,8 @@ def filter(content):
 @click.argument('file_path')
 @click.option('--interval', '-i', default=1.0)
 @click.option('--length', '-l', default=5)
-def cli(file_path, interval, length):
+@click.option('--flash', is_flag=True, default=False)
+def cli(file_path, interval, length, flash):
     stdscr = curses.initscr()
 
     curses.noecho()
@@ -52,6 +53,10 @@ def cli(file_path, interval, length):
     while True:
         msg = get_msg(content, length)
         show(win, msg)
+        if flash:
+            time.sleep(0.2)
+            win.erase()
+            win.refresh()
         time.sleep(interval)
 
     curses.endwin()
