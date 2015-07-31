@@ -54,7 +54,7 @@ def cli(file_path, interval, length, flash):
         msg = get_msg(content, length)
         show(win, msg)
         if flash:
-            time.sleep(0.2)
+            time.sleep(0.5)
             win.erase()
             win.refresh()
         time.sleep(interval)
