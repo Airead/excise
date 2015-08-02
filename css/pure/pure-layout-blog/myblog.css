@@ -1,0 +1,60 @@
+* {
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(61, 146, 201);
+}
+
+a:hover,
+a:focus {
+	text-decoration: underline;
+}
+
+h3 {
+	font-weight: 100;
+}
+
+#layout {
+	padding: 0;
+}
+
+.sidebar {
+	background: rgb(61, 79, 93);
+	color: #fff;
+}
+
+.brand-title,
+.brand-tagline {
+	margin: 0;
+}
+
+.brand-title {
+	text-transform: uppercase;
+}
+.brand-tagline {
+	font-weight: 300;
+	color: rgb(176, 202, 219);
+}
+
+.nav-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.nav-item {
+	display: inline-block;
+	zoom: 1;
+}
+
+.nav-item a {
+	background: transparent;
+	border: 2px solid rgb(176, 202, 219);
+	color: #fff;
+	margin-top: 1em;
+	letter-spacing: : 0.05em;
+	text-transform: uppercase;
+	font-size: 85%;
+}

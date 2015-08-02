@@ -1,0 +1,22 @@
+{
+  "name": "testpure",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Airead/excise",
+  "authors": [
+    "Airead Fan <fanrenhao@crazyhornets.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pure": "~0.6.0"
+  }
+}
