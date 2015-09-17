@@ -18,15 +18,14 @@
 3. 熟练掌握 nodejs 服务端开发
 4. 熟悉 MongoDB, redis
 5. 熟悉 AngularJS, Bootstrap, Pure.css
-6. 熟练掌握 linux 网络，多进程开发
-7. 熟悉 tcp/ip 协议
+6. 了解 tcp/ip, HTTP 协议
 
 
 自我介绍
 =================================
-四年开发经验，使用 C, Python, Node.js 作为主要开发语言，熟悉MongoDB, Redis。
-熟悉Html, css 等前端技术。深度依赖 git。熟悉 linux 操作系统。对代码质量有严格的自我要求，测试驱动开发。
-具有极强的学习能力，对技术有追求极致的热情，具备良好的团队合作精神。
+4年开发经验，熟练掌握 javascript，2年Node.js开发经验，能熟练的使用Node.js搭建
+大型服务端框架，熟练掌握 MongoDB, redis 非关系型数据库。能够熟练使用 Angular.js
+和 Bootstrap 搭建前端页面。使用 git 版本控制工具。对代码质量有严格的自我要求。
 
 
 工作经验
