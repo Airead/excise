@@ -19,7 +19,7 @@
 *.log
 .idea
 jquery/learning_jquery/code/
-nodejs/node_modules/
+node_modules
 ios/
 bootstrap/bootstrap-3.0.0/*
 /.DS_Store
@@ -27,3 +27,4 @@ bootstrap/bootstrap-3.0.0/*
 .RData
 .Rhistory
 clickenv
+bower_components
