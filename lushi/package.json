@@ -10,6 +10,7 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "request": "~2.67.0",
-    "async": "~1.5.0"
+    "async": "~1.5.0",
+    "csv": "~0.4.6"
   }
 }
