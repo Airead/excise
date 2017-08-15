@@ -4,7 +4,7 @@
 - 性 别: 男
 - 出生年月: 1987年10月
 - 毕业院校: 2010年6月毕业于河南科技大学，本科，学士学位
-- 手 机: 13522650089
+- 手 机: xxxxxxxxxxx
 - E-mail: fgh1987168@gmail.com
 
 - github: https://github.com/Airead
