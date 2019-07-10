@@ -41,7 +41,7 @@ def cli(file_path, interval, length, flash):
     curses.nocbreak()
     curses.curs_set(0)
 
-    x, y = 0, 0
+    x, y = 7, 6
     height, width = 50, 100
     win = curses.newwin(height, width, y, x)
 

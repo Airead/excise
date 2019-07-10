@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rsync -arv ../hunli atpackcn@atpackcn.com:www/airead/extra/
+rsync -arv ../hunli airead@123.56.101.172:www/
